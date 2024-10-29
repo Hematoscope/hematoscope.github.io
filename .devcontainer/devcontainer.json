@@ -1,0 +1,27 @@
+{
+  "name": "Hematoscope Web",
+  "build": { "dockerfile": "Dockerfile", "context": ".." },
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_aliases,target=/home/vscode/.bash_aliases,readonly,type=bind",
+    "source=devcontainer-bashhistory,target=/commandhistory"
+  ],
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "usernamehw.errorlens",
+        "github.vscode-github-actions",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "styled-components.vscode-styled-components",
+        "dbaeumer.vscode-eslint",
+        "tamasfe.even-better-toml",
+        "redhat.vscode-yaml",
+        "DavidAnson.vscode-markdownlint",
+        "astro-build.astro-vscode",
+        "phoenisx.cssvar"
+      ]
+    }
+  }
+}
