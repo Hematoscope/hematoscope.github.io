@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 1 999;
+}
+
+:root {
+    /* Color variables */
+    --primary-1: #0D083F;
+    --primary-2: #484566;
+    --highlight: #6C61EB;
+
+    --accent-1: #FFDEEC;
+    --accent-2: #DEF0FF;
+    --accent-3: #FFE8DE;
+    --accent-4: #D1FFE2;
+    --accent-5: #A9FFD5;
+    --accent-6: #F5E4FF;
+
+    --background: #FFFFFF;
+    --footer-background: var(--primary-2);
+
+    --text-color-heading: var(--primary-1);
+    --text-color-body: var(--primary-2);
+
+    --text-size-heading-1: 4rem;
+    --text-size-heading-2: 3rem;
+    --text-size-heading-3: 1.5rem;
+    --text-size-ingress: 1.5rem;
+    --text-size-body: 1.125rem;
+    --text-size-link: 1.125rem;
+    --text-size-label: 1.125rem;
+    --text-size-navlink: 1rem;
+
+    /* Sizing variables */
+    --element-border-radius: 1.5rem;
+    --small-border-radius: 0.5rem;
+    --button-border-radius: 999px;
+
+    --element-padding: 2rem;
+    --column-width: 1200px;
+
+    /* Default styles */
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-color-heading);
+    font-weight: 800;
+    line-height: 1;
+}
+
+h1 {
+    font-size: var(--text-size-heading-1);
+}
+
+h2 {
+    font-size: var(--text-size-heading-2);
+}
+
+h3 {
+    font-size: var(--text-size-heading-3);
+}
+
+p {
+    color: var(--text-color-body);
+    font-size: var(--text-size-body);
+}
