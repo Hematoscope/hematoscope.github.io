@@ -1,0 +1,208 @@
+---
+import logo from "~public/icons/logo.svg?raw";
+import HighlightLinkButton from "./HighlightLinkButton.astro";
+---
+
+<header>
+    <div class="header-contents">
+        <a href="/" class="logo-link">
+            <Fragment set:html={logo} />
+            Hematoscope
+        </a>
+
+        <button
+            id="menuButton"
+            aria-expanded="false"
+            aria-controls="navigation"
+        >
+            Menu
+
+            <svg width="1.25em" height="1.25em" viewBox="0 0 24 24">
+                <g id="menuOpenIcon">
+                    <path d="M3 12H21"></path>
+                    <path d="M3 6H21"></path>
+                    <path d="M3 18H21"></path>
+                </g>
+                <g id="menuCloseIcon">
+                    <path d="M18 6L6 18"></path>
+                    <path d="M6 6L18 18"></path>
+                </g>
+            </svg>
+        </button>
+
+        <nav id="navigation">
+            <ul role="list">
+                <li><a href="/application">Application</a></li>
+                <li><a href="/certifications">Certifications</a></li>
+                <li><a href="/research">Research</a></li>
+                <li><a href="/documentation">Documentation</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+
+            <HighlightLinkButton
+                class="demo-button"
+                href="https://demo.hematoscope.app"
+            >
+                Demo
+            </HighlightLinkButton>
+        </nav>
+    </div>
+</header>
+
+<script>
+    const navButton = document.getElementById("menuButton")!;
+    const disclosure = document.getElementById("navigation")!;
+    const listItems = disclosure.querySelectorAll("li a");
+
+    function openNavigation() {
+        navButton.setAttribute("aria-expanded", "true");
+    }
+
+    function closeNavigation() {
+        navButton.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleNavigation() {
+        const open = navButton.getAttribute("aria-expanded");
+        open === "false" ? openNavigation() : closeNavigation();
+    }
+
+    navButton.addEventListener("click", toggleNavigation);
+
+    // add event to the last item in the nav list to move focus back to the nav button
+    listItems[listItems.length - 1]!.addEventListener("blur", () =>
+        navButton.focus(),
+    );
+
+    // Close the disclosure if a user presses the escape key
+    window.addEventListener("keyup", (e) => {
+        if (e.key === "Escape") {
+            navButton.focus();
+            closeNavigation();
+        }
+    });
+</script>
+
+<style>
+    a {
+        color: var(--text-color-heading);
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    header {
+        position: sticky;
+        top: -1px; /* helps avoid content bleeding in from above navbar */
+        grid-column: main;
+        display: grid;
+        grid-template-columns: subgrid;
+        background: rgb(from var(--background) r g b / 0.3);
+        backdrop-filter: blur(25px);
+    }
+    .header-contents {
+        grid-column: content;
+        display: grid;
+        grid-template-areas:
+            "logo menu"
+            "dropdown dropdown";
+        grid-template-rows: 5rem auto;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo-link {
+        grid-area: logo;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        font-size: var(--text-size-link);
+    }
+
+    /* Nav links */
+    nav {
+        grid-area: menu;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+    }
+    ul {
+        display: flex;
+        gap: 1.5em;
+    }
+    li > a {
+        display: block;
+        padding: 0.5em 1em;
+    }
+    li > a:hover {
+        text-decoration: underline;
+    }
+    li:first-child::marker {
+        content: "";
+    }
+    li::marker {
+        content: "  /  ";
+    }
+
+    .visible {
+        display: unset;
+    }
+    #menuButton {
+        grid-area: menu;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+
+        font-weight: 600;
+        font-size: var(--text-size-label);
+
+        padding: 0.75rem 1.25rem 0.75rem 1.5rem;
+        border-radius: var(--button-border-radius);
+        border: 1px solid var(--primary-1);
+        background-color: transparent;
+
+        cursor: pointer;
+    }
+    #menuButton svg {
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+    button[aria-expanded="true"] #menuOpenIcon {
+        display: none;
+    }
+    button[aria-expanded="false"] #menuCloseIcon {
+        display: none;
+    }
+    @media screen and (width >= 68em) {
+        #menuButton {
+            display: none;
+        }
+    }
+    @media screen and (width < 68em) {
+        header:has(button[aria-expanded="true"]) {
+            padding-block-end: 2rem;
+        }
+        button[aria-expanded="false"] + nav {
+            display: none;
+        }
+        nav {
+            grid-area: dropdown;
+            justify-content: space-between;
+            padding-inline-start: 2.5em;
+        }
+        ul {
+            flex-direction: column;
+            list-style-position: inside;
+            gap: 0.5em;
+        }
+        li > a {
+            display: inline-block;
+        }
+        li:first-child::marker {
+            content: "  /  ";
+        }
+        .demo-button {
+            align-self: flex-end;
+        }
+    }
+</style>
