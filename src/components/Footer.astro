@@ -1,0 +1,73 @@
+---
+import Icon from "~src/components/Icon.astro";
+---
+
+<footer>
+    <div class="contents">
+        <p>
+            <strong>Hematoscope App</strong><br />
+            © Hematoscope oy<br />
+            All rights reserved
+        </p>
+
+        <ul role="list">
+            <li>
+                <a href="/" aria-label="Hematoscope in Github">
+                    <Icon name="github" />
+                </a>
+            </li>
+            <li>
+                <a href="/" aria-label="Hematoscope in Facebook">
+                    <Icon name="facebook" />
+                </a>
+            </li>
+            <li>
+                <a href="/" aria-label="Hematoscope email">
+                    <Icon name="email" />
+                </a>
+            </li>
+            <li>
+                <a href="/" aria-label="Hematoscope in LinkedIn">
+                    <Icon name="linkedin" />
+                </a>
+            </li>
+        </ul>
+
+        <a href="/">Privacy policy</a>
+    </div>
+</footer>
+
+<style>
+    footer {
+        grid-column: full;
+        display: grid;
+        grid-template-columns: subgrid;
+        background-color: var(--footer-background);
+        min-height: 16rem;
+    }
+    .contents {
+        grid-column: content;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    p,
+    a {
+        color: var(--background);
+    }
+    ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+    }
+
+    @media screen and (width < 50em) {
+        .contents {
+            flex-direction: column;
+            padding-block: calc(2 * var(--element-padding));
+            gap: var(--element-padding);
+        }
+    }
+</style>

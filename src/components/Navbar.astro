@@ -1,12 +1,12 @@
 ---
-import logo from "~public/icons/logo.svg?raw";
-import HighlightLinkButton from "./HighlightLinkButton.astro";
+import LinkButton from "~src/components/LinkButton.astro";
+import Icon from "~src/components/Icon.astro";
 ---
 
 <header>
     <div class="header-contents">
         <a href="/" class="logo-link">
-            <Fragment set:html={logo} />
+            <Icon name="logo" />
             Hematoscope
         </a>
 
@@ -39,12 +39,13 @@ import HighlightLinkButton from "./HighlightLinkButton.astro";
                 <li><a href="/contact">Contact</a></li>
             </ul>
 
-            <HighlightLinkButton
+            <LinkButton
                 class="demo-button"
                 href="https://demo.hematoscope.app"
+                variant="highlight"
             >
                 Demo
-            </HighlightLinkButton>
+            </LinkButton>
         </nav>
     </div>
 </header>
@@ -93,11 +94,12 @@ import HighlightLinkButton from "./HighlightLinkButton.astro";
     header {
         position: sticky;
         top: -1px; /* helps avoid content bleeding in from above navbar */
-        grid-column: main;
+        grid-column: full;
         display: grid;
         grid-template-columns: subgrid;
         background: rgb(from var(--background) r g b / 0.3);
         backdrop-filter: blur(25px);
+        z-index: 1;
     }
     .header-contents {
         grid-column: content;

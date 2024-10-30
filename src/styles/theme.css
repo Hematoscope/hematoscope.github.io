@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/inter.woff') format('woff');
+    src: url('inter.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -26,6 +26,9 @@
     --text-color-heading: var(--primary-1);
     --text-color-body: var(--primary-2);
 
+    --shadow-lg: 0px 24px 48px rgba(0, 0, 0, 0.1);
+
+    /* Text sizes */
     --text-size-heading-1: 4rem;
     --text-size-heading-2: 3rem;
     --text-size-heading-3: 1.5rem;
@@ -37,18 +40,47 @@
 
     /* Sizing variables */
     --element-border-radius: 1.5rem;
+    --medium-border-radius: 0.75rem;
     --small-border-radius: 0.5rem;
     --button-border-radius: 999px;
 
     --element-padding: 2rem;
-    --column-width: 1200px;
+    --column-width: 1400px;
 
     /* Default styles */
     font-family: 'Inter', sans-serif;
+
+
 }
+
+/* Update root sizes with small enough screens */
+@media screen and (width < 70em) {
+    :root {
+        --text-size-heading-1: 3rem;
+        --text-size-heading-2: 2rem;
+        --text-size-heading-3: 1.5rem;
+        --text-size-ingress: 1.25rem;
+
+        --shadow-lg: 0px 16px 32px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media screen and (width < 50em) {
+    :root {
+        --text-size-heading-1: 2rem;
+        --text-size-heading-2: 1.75rem;
+        --element-padding: 1rem;
+        --element-border-radius: 1rem;
+
+        --shadow-lg: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    }
+}
+
 
 body {
     background-color: var(--background);
+    row-gap: var(--element-padding);
+    overflow-x: hidden;
 }
 
 h1,

@@ -6,7 +6,8 @@ export default [
   ...eslintPluginAstro.configs['jsx-a11y-strict'],
   {
     rules: {
-      "astro/jsx-a11y/no-redundant-roles": "off"
+      "astro/jsx-a11y/no-redundant-roles": "off",
+      "astro/jsx-a11y/media-has-caption": "off",
     }
   }
 ];

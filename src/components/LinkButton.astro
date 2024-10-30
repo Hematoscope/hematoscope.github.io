@@ -1,0 +1,84 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+    href: string;
+    variant?: "highlight" | "default" | "default-arrow";
+}
+const { variant = "default", ...props } = Astro.props;
+---
+
+<a class:list={[props.class, "link-button", ...variant.split("-")]} {...props}>
+    <slot />
+    {
+        variant === "default-arrow" && (
+            <svg width="1em" height="1em" viewBox="0 0 17 16">
+                <path d="M8.875 1.25L15.625 8L8.875 14.75M14.6875 8H1" />
+            </svg>
+        )
+    }
+</a>
+
+<style>
+    .link-button {
+        font-weight: 600;
+        font-size: var(--text-size-label);
+        text-decoration: none;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--button-border-radius);
+    }
+
+    /* Highlight variant styles */
+    .highlight {
+        color: var(--background);
+        background-color: var(--highlight);
+
+        transition: box-shadow 0.5s;
+        --shadow-height: 18px;
+        --shadow-distance: 4px;
+        box-shadow: 0px var(--shadow-distance) var(--shadow-height)
+            rgb(from var(--highlight) r g b / 0.5);
+    }
+    .highlight:hover {
+        --shadow-height: 32px;
+        --shadow-distance: 8px;
+    }
+    .highlight:active {
+        transition: box-shadow 0.1s;
+        --shadow-height: 12px;
+        --shadow-distance: 2px;
+    }
+
+    /* Default variant styles */
+    .default {
+        color: var(--text-color-heading);
+        border: 1px solid var(--primary-1);
+    }
+
+    /* Icon variant styles */
+    svg {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+
+        transition: transform 0.1s ease-in-out;
+        transform: translateX(var(--translate));
+    }
+    .arrow {
+        padding: 0.75rem 1.25rem 0.75rem 1.5rem;
+        --translate: 0px;
+    }
+    .arrow:hover {
+        --translate: 3px;
+    }
+    .arrow:active {
+        --translate: -1px;
+    }
+</style>

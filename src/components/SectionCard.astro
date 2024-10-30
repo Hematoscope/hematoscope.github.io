@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+    accent?: "1" | "2" | "3" | "4" | "5" | "6";
+}
+const { accent = "1", ...props } = Astro.props;
+---
+
+<div
+    style={{ "--bg": `var(--accent-${accent})` }}
+    class:list={[props.class, "section-card"]}
+    {...props}
+>
+    <slot />
+</div>
+
+<style>
+    .section-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: var(--element-padding);
+
+        border-radius: var(--element-border-radius);
+        padding: var(--element-padding);
+        background-color: var(--bg);
+    }
+    :global(.section-card > h2) {
+        text-align: start;
+    }
+</style>
