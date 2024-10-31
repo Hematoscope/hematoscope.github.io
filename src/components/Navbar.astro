@@ -48,7 +48,7 @@ const links = [
                             <a
                                 href={link.href}
                                 aria-current={
-                                    currentPath === link.href && "page"
+                                    currentPath.includes(link.href) && "page"
                                 }
                             >
                                 {link.name}
