@@ -5,6 +5,9 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_aliases,target=/home/vscode/.bash_aliases,readonly,type=bind",
     "source=devcontainer-bashhistory,target=/commandhistory"
   ],
+  "features": {
+    "ghcr.io/va-h/devcontainers-features/difftastic:1": {}
+  },
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
