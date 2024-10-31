@@ -13,7 +13,7 @@ const bg = `var(--accent-${accent})`;
 ---
 
 <article>
-    <Image src={image} alt={alt} widths={WIDTHS} height="200" />
+    <Image src={image} alt={alt} widths={WIDTHS} height="200" width="300" />
     <div class="content">
         <slot />
     </div>
@@ -28,7 +28,7 @@ const bg = `var(--accent-${accent})`;
         background-color: var(--bg);
         border-radius: var(--element-border-radius);
 
-        --outline-width: 8px;
+        --outline-width: calc(0.25 * var(--element-padding));
     }
     img {
         border-radius: var(--element-border-radius);
