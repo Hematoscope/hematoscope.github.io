@@ -72,7 +72,6 @@ const { variant, ...props } = Astro.props;
     .pair {
         display: grid;
         gap: var(--element-padding);
-        grid-template-rows: min-content;
         grid-template-columns: repeat(
             auto-fit,
             minmax(min(calc(0.35 * var(--column-width)), 100%), 1fr)
