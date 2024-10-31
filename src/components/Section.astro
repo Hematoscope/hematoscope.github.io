@@ -46,6 +46,8 @@ const { variant, ...props } = Astro.props;
 
         opacity: 0.2;
         filter: blur(8px);
+        /* Fix blur perf issue on safari. Ref: https://graffino.com/til/how-to-fix-filter-blur-performance-issue-in-safari */
+        transform: translate3d(0, 0, 0);
     }
 
     .gradient::before {
