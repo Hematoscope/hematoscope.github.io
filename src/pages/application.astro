@@ -7,6 +7,7 @@ import screenshot1 from "~src/assets/images/application/screenshot-1.png";
 import screenshot2 from "~src/assets/images/application/screenshot-2.png";
 import screenshot3 from "~src/assets/images/application/screenshot-3.png";
 
+import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
@@ -29,7 +30,7 @@ import CallToAction from "~src/components/CallToAction.astro";
         <Image
             src={cells}
             alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by the Hematoscope application."
-            widths={[240, 540, 720, 1200]}
+            widths={WIDTHS}
             height="500"
         />
     </Section>
@@ -81,7 +82,7 @@ import CallToAction from "~src/components/CallToAction.astro";
         <Image
             src={twoDoctors}
             alt="A doctor microscoping a pathological sample while another doctor is observing and taking notes"
-            widths={[240, 540, 720, 1200]}
+            widths={WIDTHS}
             height="300"
         />
         <SectionCard accent="1">
@@ -106,19 +107,19 @@ import CallToAction from "~src/components/CallToAction.astro";
         <Image
             src={screenshot1}
             alt="Illustrative screenshot of the Hematoscope Application displaying individual cells."
-            widths={[240, 540, 720, 1200]}
+            widths={WIDTHS}
             height="300"
         />
         <Image
             src={screenshot2}
             alt="Illustrative screenshot of the Hematoscope Application displaying a labeled cell in a 100 times magnified microscope image."
-            widths={[240, 540, 720, 1200]}
+            widths={WIDTHS}
             height="300"
         />
         <Image
             src={screenshot3}
             alt="Illustrative screenshot of the Hematoscope Application displaying a 10 times magnified image of a sample."
-            widths={[240, 540, 720, 1200]}
+            widths={WIDTHS}
             height="300"
         />
     </Section>
@@ -146,7 +147,7 @@ import CallToAction from "~src/components/CallToAction.astro";
         <Image
             src={doctorWriting}
             alt="A doctor is being shown a paper, from which she is writing notes on a computer."
-            widths={[240, 540, 720, 1200]}
+            widths={WIDTHS}
             height="300"
         />
     </Section>

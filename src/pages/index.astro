@@ -6,6 +6,7 @@ import gallery1 from "~src/assets/images/home/gallery-1.jpg";
 import gallery2 from "~src/assets/images/home/gallery-2.jpg";
 import gallery3 from "~src/assets/images/home/gallery-3.jpg";
 
+import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import GlassFrame from "~src/components/GlassFrame.astro";
@@ -39,7 +40,7 @@ import CallToAction from "~src/components/CallToAction.astro";
 		<Image
 			src={microscopeDoctor}
 			alt="Doctor looking at a bone marrow sample through a microscope."
-			widths={[240, 540, 720, 1200]}
+			widths={WIDTHS}
 			height="300"
 		/>
 		<SectionCard accent="1">
@@ -65,13 +66,25 @@ import CallToAction from "~src/components/CallToAction.astro";
 
 		<ol class="scroller">
 			<GlassFrame tag="li" class="scroller-img">
-				<Image src={gallery1} alt="" />
+				<Image
+					src={gallery1}
+					alt="A screenshot of the application showing a 100 times magnified microscope image and labeled cells."
+					widths={WIDTHS}
+				/>
 			</GlassFrame>
 			<GlassFrame tag="li" class="scroller-img">
-				<Image src={gallery2} alt="" />
+				<Image
+					src={gallery2}
+					alt="A screenshot of the application showing a 10 times magnified whole-slide image with a center mask drawn on top of it."
+					widths={WIDTHS}
+				/>
 			</GlassFrame>
 			<GlassFrame tag="li" class="scroller-img">
-				<Image src={gallery3} alt="" />
+				<Image
+					src={gallery3}
+					alt="A screenshot of the application showing a view listing all white blood cells classified as blasts by the algorithms."
+					widths={WIDTHS}
+				/>
 			</GlassFrame>
 		</ol>
 	</Section>
@@ -123,7 +136,7 @@ import CallToAction from "~src/components/CallToAction.astro";
 		<Image
 			src={microscope}
 			alt="Close-up of a microscope scanning a pathological slide."
-			widths={[240, 540, 720, 1200]}
+			widths={WIDTHS}
 			height="300"
 		/>
 	</Section>
