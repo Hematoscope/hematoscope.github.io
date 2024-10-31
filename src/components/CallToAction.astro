@@ -1,0 +1,35 @@
+---
+import Section from "~src/components/Section.astro";
+import LinkButton from "~src/components/LinkButton.astro";
+
+interface Props {
+    title: string;
+}
+const { title } = Astro.props;
+---
+
+<Section variant="blank" class="call-to-action">
+    <div class="text">
+        <h2>{title}</h2>
+        <p>
+            Try the demo to get a feel for the application, or contact us and we
+            can discuss how to best integrate it into your systems.
+        </p>
+    </div>
+    <div class="buttons">
+        <LinkButton href="/" variant="highlight">Try the demo</LinkButton>
+        <LinkButton href="/">Contact us</LinkButton>
+    </div>
+</Section>
+
+<style>
+    .call-to-action {
+        gap: var(--element-padding);
+    }
+    .buttons {
+        display: flex;
+        gap: var(--element-padding);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+</style>

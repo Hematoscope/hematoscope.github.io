@@ -1,17 +1,18 @@
 ---
 import { Image } from "astro:assets";
-import microscopeDoctor from "~src/assets/images/microscope-doctor.jpg";
-import microscope from "~src/assets/images/microscope.jpg";
-import gallery1 from "~src/assets/images/gallery-1.jpg";
-import gallery2 from "~src/assets/images/gallery-2.jpg";
-import gallery3 from "~src/assets/images/gallery-3.jpg";
+import microscopeDoctor from "~src/assets/images/home/microscope-doctor.jpg";
+import microscope from "~src/assets/images/home/microscope.jpg";
+import gallery1 from "~src/assets/images/home/gallery-1.jpg";
+import gallery2 from "~src/assets/images/home/gallery-2.jpg";
+import gallery3 from "~src/assets/images/home/gallery-3.jpg";
 
 import Section from "~src/components/Section.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import GlassFrame from "~src/components/GlassFrame.astro";
 import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
-import AlgorithmCard from "~src/components/AlgorithmCard.astro";
+import HighlightCard from "~src/components/HighlightCard.astro";
+import CallToAction from "~src/components/CallToAction.astro";
 ---
 
 <Layout title="Hematoscope App">
@@ -41,7 +42,7 @@ import AlgorithmCard from "~src/components/AlgorithmCard.astro";
 			widths={[240, 540, 720, 1200]}
 			height="300"
 		/>
-		<SectionCard>
+		<SectionCard accent="1">
 			<h2>Repeatable results. Automated analysis.</h2>
 			<p>
 				Automate the tedious analysis, saving time and enabling the
@@ -85,24 +86,24 @@ import AlgorithmCard from "~src/components/AlgorithmCard.astro";
 			</p>
 		</div>
 		<ul class="algorithms">
-			<AlgorithmCard
+			<HighlightCard
 				description="Distinct algorithms for analysis:"
 				highlight="11"
-				icon="neuralnet"
+				icon="highlights/neuralnet"
 				accent="1"
 				linkHref="/"
 			/>
-			<AlgorithmCard
+			<HighlightCard
 				description="Average accuracy for the algorithms:"
 				highlight="93.4%"
-				icon="accuracy"
+				icon="highlights/accuracy"
 				accent="2"
 				linkHref="/"
 			/>
-			<AlgorithmCard
+			<HighlightCard
 				description="Peer-reviewed publications"
 				highlight="7"
-				icon="research"
+				icon="highlights/research"
 				accent="3"
 				linkHref="/"
 			/>
@@ -127,19 +128,7 @@ import AlgorithmCard from "~src/components/AlgorithmCard.astro";
 		/>
 	</Section>
 
-	<Section variant="blank" class="call-to-action">
-		<div class="text">
-			<h2>See for yourself</h2>
-			<p>
-				Try the demo to get a feel for the application, or contact us
-				and we can discuss how to best integrate it into your systems.
-			</p>
-		</div>
-		<div class="buttons">
-			<LinkButton href="/" variant="highlight">Try the demo</LinkButton>
-			<LinkButton href="/">Contact us</LinkButton>
-		</div>
-	</Section>
+	<CallToAction title="See for Yourself" />
 </Layout>
 
 <style>
@@ -149,15 +138,6 @@ import AlgorithmCard from "~src/components/AlgorithmCard.astro";
 
 	.hero {
 		padding-block: calc(2 * var(--element-padding));
-	}
-	.text {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1rem;
-	}
-	.text > p {
-		max-width: 45ch;
 	}
 
 	.gallery {
@@ -219,17 +199,6 @@ import AlgorithmCard from "~src/components/AlgorithmCard.astro";
 	.algorithms {
 		display: flex;
 		gap: calc(2 * var(--element-padding));
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-
-	.call-to-action {
-		padding-block: calc(2 * var(--element-padding));
-		gap: var(--element-padding);
-	}
-	.buttons {
-		display: flex;
-		gap: var(--element-padding);
 		flex-wrap: wrap;
 		justify-content: center;
 	}

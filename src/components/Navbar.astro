@@ -1,6 +1,16 @@
 ---
 import LinkButton from "~src/components/LinkButton.astro";
 import Icon from "~src/components/Icon.astro";
+
+const currentPath = Astro.url.pathname;
+
+const links = [
+    { name: "Application", href: "/application" },
+    { name: "Certifications", href: "/certifications" },
+    { name: "Research", href: "/research" },
+    { name: "Documentation", href: "/documentation" },
+    { name: "Contact", href: "/contact" },
+];
 ---
 
 <header>
@@ -32,11 +42,20 @@ import Icon from "~src/components/Icon.astro";
 
         <nav id="navigation">
             <ul role="list">
-                <li><a href="/application">Application</a></li>
-                <li><a href="/certifications">Certifications</a></li>
-                <li><a href="/research">Research</a></li>
-                <li><a href="/documentation">Documentation</a></li>
-                <li><a href="/contact">Contact</a></li>
+                {
+                    links.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                aria-current={
+                                    currentPath === link.href && "page"
+                                }
+                            >
+                                {link.name}
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
 
             <LinkButton
@@ -89,6 +108,10 @@ import Icon from "~src/components/Icon.astro";
         color: var(--text-color-heading);
         text-decoration: none;
         font-weight: bold;
+    }
+    a[aria-current="page"] {
+        border-radius: var(--small-border-radius);
+        background-color: var(--accent-2);
     }
 
     header {

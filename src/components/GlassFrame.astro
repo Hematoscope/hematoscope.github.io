@@ -17,14 +17,14 @@ const Tag = tag;
         max-width: 70rem;
         background: rgba(255, 255, 255, 0.3);
 
-        border: 1px solid #f7f7f7;
+        border: var(--glass-border-outer);
         box-shadow: var(--shadow-lg);
         backdrop-filter: blur(25px);
         border-radius: var(--element-border-radius);
         padding: calc(0.5 * var(--element-padding));
     }
     :global(.glass-wrapper > *) {
-        border: 1px solid #e2e2e2;
+        border: var(--glass-border-inner);
         border-radius: calc(0.5 * var(--element-border-radius));
     }
 </style>

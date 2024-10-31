@@ -28,6 +28,11 @@ const { variant, ...props } = Astro.props;
         text-align: center;
     }
 
+    .blank {
+        padding-block: calc(2 * var(--element-padding));
+        padding-inline: unset;
+    }
+
     .cells::after {
         content: "";
         position: absolute;

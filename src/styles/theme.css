@@ -28,6 +28,9 @@
 
     --shadow-lg: 0px 24px 48px rgba(0, 0, 0, 0.1);
 
+    --glass-border-outer: 1px solid #f7f7f7;
+    --glass-border-inner: 1px solid #e2e2e2;
+
     /* Text sizes */
     --text-size-heading-1: 4rem;
     --text-size-heading-2: 3rem;
@@ -104,9 +107,21 @@ h2 {
 
 h3 {
     font-size: var(--text-size-heading-3);
+    font-weight: 600;
 }
 
 p {
     color: var(--text-color-body);
     font-size: var(--text-size-body);
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.text>p {
+    max-width: 45ch;
 }
