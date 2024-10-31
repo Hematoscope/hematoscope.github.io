@@ -154,6 +154,10 @@ const links = [
     ul {
         display: flex;
         gap: 1.5em;
+        list-style: none;
+    }
+    li {
+        position: relative;
     }
     li > a {
         display: block;
@@ -162,11 +166,16 @@ const links = [
     li > a:hover {
         text-decoration: underline;
     }
-    li:first-child::marker {
+    li:first-child:before {
         content: "";
     }
-    li::marker {
-        content: "  /  ";
+    li:before {
+        content: "/";
+        position: absolute;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        left: -1em;
     }
 
     .visible {
@@ -214,7 +223,7 @@ const links = [
         nav {
             grid-area: dropdown;
             justify-content: space-between;
-            padding-inline-start: 2.5em;
+            padding-inline-start: 3.5em;
         }
         ul {
             flex-direction: column;
@@ -224,8 +233,8 @@ const links = [
         li > a {
             display: inline-block;
         }
-        li:first-child::marker {
-            content: "  /  ";
+        li:first-child::before {
+            content: "/";
         }
         .demo-button {
             align-self: flex-end;
