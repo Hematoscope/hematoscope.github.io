@@ -27,6 +27,7 @@ import CallToAction from "~src/components/CallToAction.astro";
 		</div>
 		<GlassFrame>
 			<video
+				width="1200"
 				autoplay
 				loop
 				aria-label="Demonstration of Hematoscope App's features"
@@ -151,6 +152,10 @@ import CallToAction from "~src/components/CallToAction.astro";
 
 	.hero {
 		padding-block: calc(2 * var(--element-padding));
+	}
+
+	video {
+		aspect-ratio: 16 / 8.8;
 	}
 
 	.gallery {
