@@ -172,12 +172,13 @@ import CallToAction from "~src/components/CallToAction.astro";
         min-width: 10rem;
     }
     .screenshots {
-        padding: unset;
+        padding: unset !important;
         flex-direction: row;
         gap: var(--element-padding);
     }
     :global(.screenshots > *) {
         flex-grow: 1;
+        width: 30%;
         height: auto;
         border-radius: var(--element-border-radius);
         border: var(--glass-border-inner);
