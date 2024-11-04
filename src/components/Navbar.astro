@@ -70,16 +70,19 @@ const links = [
 </header>
 
 <script>
+    const header = document.querySelector("header")!;
     const navButton = document.getElementById("menuButton")!;
     const disclosure = document.getElementById("navigation")!;
     const listItems = disclosure.querySelectorAll("li a");
 
     function openNavigation() {
         navButton.setAttribute("aria-expanded", "true");
+        header.classList.add("shadow");
     }
 
     function closeNavigation() {
         navButton.setAttribute("aria-expanded", "false");
+        if (window.scrollY === 0) header.classList.remove("shadow");
     }
 
     function toggleNavigation() {
@@ -99,6 +102,13 @@ const links = [
         if (e.key === "Escape") {
             navButton.focus();
             closeNavigation();
+        }
+    });
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 5) {
+            header.classList.add("shadow");
+        } else if (window.scrollY <= 5) {
+            header.classList.remove("shadow");
         }
     });
 </script>
@@ -124,6 +134,10 @@ const links = [
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
         z-index: 1;
+    }
+    :global(.shadow) {
+        transition: box-shadow 200ms ease-out;
+        box-shadow: var(--shadow-sm);
     }
     .header-contents {
         grid-column: content;

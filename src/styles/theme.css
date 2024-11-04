@@ -27,6 +27,7 @@
     --text-color-body: var(--primary-2);
 
     --shadow-lg: 0px 24px 48px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0px 4px 12px rgba(0, 0, 0, 0.2);
 
     --glass-border-outer: 1px solid #f7f7f7;
     --glass-border-inner: 1px solid #e2e2e2;
