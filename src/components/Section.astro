@@ -72,18 +72,18 @@ const { variant, ...props } = Astro.props;
     }
 
     .pair {
-        display: grid;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
         gap: var(--element-padding);
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(min(calc(0.35 * var(--column-width)), 100%), 1fr)
-        );
-        align-items: unset;
         padding: unset;
+    }
+    :global(.pair > *) {
+        flex: 400px;
     }
     :global(.pair img) {
         border-radius: var(--element-border-radius);
-        width: 100%;
-        height: 100%;
+        height: auto;
+        aspect-ratio: 2 / 1;
     }
 </style>
