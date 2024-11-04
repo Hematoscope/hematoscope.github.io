@@ -116,7 +116,7 @@ const links = [
 
     header {
         position: sticky;
-        top: -1px; /* helps avoid content bleeding in from above navbar */
+        top: 0px;
         grid-column: full;
         display: grid;
         grid-template-columns: subgrid;
@@ -217,6 +217,8 @@ const links = [
     @media screen and (width < 68em) {
         header:has(button[aria-expanded="true"]) {
             padding-block-end: 2rem;
+            /* 14.5rem is a semi-magic variable based on the navbar popup's height */
+            margin-block-end: calc(-14.5rem - 2rem);
         }
         button[aria-expanded="false"] + nav {
             display: none;
