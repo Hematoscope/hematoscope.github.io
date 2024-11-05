@@ -28,5 +28,9 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
     && chown -R ${CONTAINER_USER} /commandhistory \
     && echo "$SNIPPET" >> "/home/${CONTAINER_USER}/.bashrc"
 
+RUN npx playwright install-deps
+
 USER $CONTAINER_USER
+
+RUN npx playwright install
 
