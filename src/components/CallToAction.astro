@@ -1,6 +1,7 @@
 ---
 import Section from "~src/components/Section.astro";
 import LinkButton from "~src/components/LinkButton.astro";
+import H from "./HeadingLink.astro";
 
 interface Props {
     title: string;
@@ -10,7 +11,7 @@ const { title } = Astro.props;
 
 <Section variant="blank" class="call-to-action">
     <div class="text">
-        <h2>{title}</h2>
+        <H level="2">{title}</H>
         <p>
             Try the demo to get a feel for the application, or contact us and we
             can discuss how to best integrate it into your systems.

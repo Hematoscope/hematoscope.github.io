@@ -8,6 +8,7 @@ import pills from "~src/assets/images/research/pills.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
+import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
 import TextCard from "~src/components/TextCard.astro";
@@ -43,17 +44,17 @@ import TextCard from "~src/components/TextCard.astro";
     </Section>
 
     <Section variant="blank">
-        <h2>Selected publications</h2>
+        <H level="2">Selected publications</H>
         <div class="publications">
             <TextCard
                 image={neural}
                 alt="3D illustration of a neural network"
                 accent="2"
             >
-                <h3>
+                <H level="3">
                     The multimodality cell segmentation challenge: toward
                     universal solutions
-                </h3>
+                </H>
                 <p>
                     Jan Moritz Middeke, Jan-Niklas Eckardt, Wangkai Li, Zhaoyang
                     Li, Xiaochen Cai, Bizhe Bai, Noah F. Greenwald, David Van
@@ -67,7 +68,7 @@ import TextCard from "~src/components/TextCard.astro";
                 alt="Stylized 3D illustration of a head outlined by furry lines"
                 accent="3"
             >
-                <h3>Toward an anatomy of human hematopoiesis</h3>
+                <H level="3">Toward an anatomy of human hematopoiesis</H>
                 <p>Oscar Brück</p>
                 <p>Blood / 28 Dec 2023</p>
             </TextCard>
@@ -76,11 +77,11 @@ import TextCard from "~src/components/TextCard.astro";
                 alt="3D illustration of a neural network"
                 accent="1"
             >
-                <h3>
+                <H level="3">
                     Real-world evidence of multiple myeloma treated from 2013 to
                     2019 in the Hospital District of Helsinki and Uusimaa,
                     Finland
-                </h3>
+                </H>
                 <p>
                     Johanna Vikkula, Kristiina Uusi-Rauva, Tuuli Ranki, Iiro
                     Toppila, Maria Aalto-Setälä, Katariina Pousar, Lotta
@@ -93,10 +94,10 @@ import TextCard from "~src/components/TextCard.astro";
                 alt="3D illustration of a neural network"
                 accent="4"
             >
-                <h3>
+                <H level="3">
                     Computational textural mapping harmonises sampling variation
                     and reveals multidimensional histopathological fingerprints
-                </h3>
+                </H>
                 <p>Otso Brummer, Petri Pölönen, Satu Mustjoki, Oscar Brück</p>
                 <p>British Journal of Cancer / 30 Jun 2023</p>
             </TextCard>

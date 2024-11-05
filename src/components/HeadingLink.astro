@@ -1,0 +1,71 @@
+---
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"h1">, "id"> {
+    level: "2" | "3" | "4";
+}
+const { level, ...props } = Astro.props;
+const Tag: HTMLTag = `h${level}`;
+const contents = await Astro.slots.render("default");
+
+const slug = contents
+    .replace(/^\s+|\s+$/g, "") // trim leading/trailing white space
+    .toLowerCase() // convert string to lowercase
+    .replace(/[^a-z0-9 -]/g, "") // remove any non-alphanumeric characters
+    .replace(/\s+/g, "-") // replace spaces with hyphens
+    .replace(/-+/g, "-"); // remove consecutive hyphens
+---
+
+<Tag class:list={[props.class]} id={slug} {...props}>
+    <a href={`#${slug}`}>
+        <span>
+            <slot />
+        </span>
+    </a>
+</Tag>
+
+<style>
+    h2,
+    h3,
+    h4 {
+        scroll-margin-top: 8rem;
+    }
+
+    span {
+        position: relative;
+    }
+
+    span::after {
+        content: "";
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        right: -1em;
+        margin-top: 0.25em;
+        width: 0.6em;
+        height: 0.6em;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>')
+            no-repeat center;
+        background-size: contain;
+        pointer-events: none;
+    }
+
+    span:hover::after {
+        animation: fadeIn 0.3s forwards 1s;
+    }
+
+    /* Keyframes for fade-in animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 0.5;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
