@@ -28,4 +28,9 @@ const Tag = tag;
         border: var(--glass-border-inner);
         border-radius: calc(0.5 * var(--element-border-radius));
     }
+    @media screen and (width < 40em) {
+        .glass-wrapper {
+            padding: calc(0.4 * var(--element-padding));
+        }
+    }
 </style>

@@ -168,12 +168,13 @@ import CallToAction from "~src/components/CallToAction.astro";
 	}
 	.scroller {
 		display: flex;
+		--animation-multiplier: 1;
 		gap: calc(3 * var(--element-padding));
 		padding-inline: calc(5 * var(--element-padding));
 		padding-block-end: calc(2 * var(--element-padding));
 		list-style: none;
 
-		overflow: scroll;
+		overflow-x: scroll;
 		scrollbar-color: transparent transparent; /* thumb and track color */
 		scrollbar-width: 0px;
 		scroll-behavior: smooth;
@@ -206,11 +207,19 @@ import CallToAction from "~src/components/CallToAction.astro";
 		}
 		20%,
 		45% {
-			transform: translateX(-95%);
+			transform: translateX(
+				calc(
+					-95% - var(--animation-multiplier) * var(--element-padding)
+				)
+			);
 		}
 		55%,
 		80% {
-			transform: translateX(-190%);
+			transform: translateX(
+				calc(
+					-190% - 2 * var(--animation-multiplier) * var(--element-padding)
+				)
+			);
 		}
 	}
 
@@ -219,5 +228,18 @@ import CallToAction from "~src/components/CallToAction.astro";
 		gap: calc(2 * var(--element-padding));
 		flex-wrap: wrap;
 		justify-content: center;
+	}
+
+	@media screen and (width < 40em) {
+		.scroller {
+			display: flex;
+			gap: calc(var(--element-padding));
+			--animation-multiplier: 2;
+			padding-inline: calc(2 * var(--element-padding));
+			padding-block-end: calc(2 * var(--element-padding));
+		}
+		.scroller-img {
+			min-width: 100%;
+		}
 	}
 </style>
