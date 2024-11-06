@@ -10,6 +10,7 @@
     "editor.formatOnPaste": true
   },
   "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode",
     "editor.tabSize": 4
   },
   "eslint.validate": [
@@ -19,11 +20,14 @@
     "typescript", // Enable .ts
     "typescriptreact" // Enable .tsx
   ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "cssVariables.lookupFiles": [
     "**/*.css",
     "**/*.scss",
     "**/*.sass",
     "**/*.less",
-    "**/*.astro",
+    "**/*.astro"
   ]
 }
