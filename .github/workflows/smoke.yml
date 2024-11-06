@@ -1,14 +1,14 @@
 name: Run Smoke Tests
 
 on:
-  deployment_status:
+  deployment:
 
 jobs:
   smoke-test:
-    name: Smoke Tests against ${{github.event.deployment_status.environment}}
+    name: Smoke Tests against ${{github.event.deployment.environment}}
     timeout-minutes: 5
     runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success' && contains(github.event.deployment_status.environment, 'Production')
+    if: contains(github.event.deployment.environment, 'Production')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,4 +23,4 @@ jobs:
       - name: Run smoke tests
         run: npm run test:smoke
         env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment.url }}
