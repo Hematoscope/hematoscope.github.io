@@ -21,176 +21,172 @@ const url = Astro.url;
 ---
 
 <Layout title="Research | Hematoscope">
-    <Section variant="pair">
-        <Image
-            src={doctorLaptop}
-            alt="A doctor typing on her laptop with a stethoscope hanging around her neck."
-            widths={WIDTHS}
-            height="300"
+  <Section variant="pair">
+    <Image
+      src={doctorLaptop}
+      alt="A doctor typing on her laptop with a stethoscope hanging around her neck."
+      widths={WIDTHS}
+      height="300"
+    />
+    <SectionCard gradient>
+      <h1>Ready to Transform Your Diagnostics?</h1>
+      <p>
+        Get in touch with us today to see how our AI-driven solutions can
+        elevate your practice!
+      </p>
+      <form action="https://api.staticforms.xyz/submit" method="post">
+        <input
+          type="hidden"
+          name="accessKey"
+          value="da6aad0a-f620-4a72-8e1b-13dada412f45"
         />
-        <SectionCard gradient>
-            <h1>Ready to Transform Your Diagnostics?</h1>
-            <p>
-                Get in touch with us today to see how our AI-driven solutions
-                can elevate your practice!
-            </p>
-            <form action="https://api.staticforms.xyz/submit" method="post">
-                <input
-                    type="hidden"
-                    name="accessKey"
-                    value="da6aad0a-f620-4a72-8e1b-13dada412f45"
-                />
-                <input
-                    type="hidden"
-                    name="redirectTo"
-                    value={`${url}?success`}
-                />
-                <Input label="Name" name="name" required />
-                <Input
-                    label="Email"
-                    name="email"
-                    type="email"
-                    inputmode="email"
-                    required
-                />
-                <Input label="Title" name="title" />
-                <Input label="Institution" name="institution" />
-                <Textarea label="Message" name="message" required />
-                <button>Submit</button>
-            </form>
-        </SectionCard>
-    </Section>
+        <input type="hidden" name="redirectTo" value={`${url}?success`} />
+        <Input label="Name" name="name" required />
+        <Input
+          label="Email"
+          name="email"
+          type="email"
+          inputmode="email"
+          required
+        />
+        <Input label="Title" name="title" />
+        <Input label="Institution" name="institution" />
+        <Textarea label="Message" name="message" required />
+        <button>Submit</button>
+      </form>
+    </SectionCard>
+  </Section>
 
-    <Section variant="blank">
-        <div class="text">
-            <H level="2">Meet the team</H>
-            <p>
-                Our multidisciplinary team brings together experts in AI,
-                medical diagnostics, and software development, working
-                collaboratively to create innovative solutions that bridge
-                technology and healthcare for better patient outcomes.
-            </p>
-        </div>
-        <div class="team">
-            <TeamMember
-                photo={oscar}
-                name="Oscar Brück / MD, PhD"
-                title="Chief Executive Officer"
-                email="first.last@email.com"
-            />
-            <TeamMember
-                photo={sanna}
-                name="Sanna Siitonen / MD, PhD"
-                title="Chief Medical Officer"
-                email="first.last@email.com"
-            />
-            <TeamMember
-                photo={mikko}
-                name="Mikko Purhonen / M.Sc."
-                title="Chief Algorithm Officer"
-                email="first.last@email.com"
-            />
-            <TeamMember
-                photo={julia}
-                name="Julia Prihu / M.Sc."
-                title="Chief Certification Officer"
-                email="first.last@email.com"
-            />
-            <TeamMember
-                photo={joonas}
-                name="Joonas Palosuo / M.Sc."
-                title="Chief Application Officer"
-                email="first.last@email.com"
-            />
-            <TeamMember
-                photo={stas}
-                name="Stas Tatun / M.Sc."
-                title="Chief Deeplearning Officer"
-                email="first.last@email.com"
-            />
-        </div>
-    </Section>
+  <Section variant="blank">
+    <div class="text">
+      <H level="2">Meet the team</H>
+      <p>
+        Our multidisciplinary team brings together experts in AI, medical
+        diagnostics, and software development, working collaboratively to create
+        innovative solutions that bridge technology and healthcare for better
+        patient outcomes.
+      </p>
+    </div>
+    <div class="team">
+      <TeamMember
+        photo={oscar}
+        name="Oscar Brück / MD, PhD"
+        title="Chief Executive Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={sanna}
+        name="Sanna Siitonen / MD, PhD"
+        title="Chief Medical Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={mikko}
+        name="Mikko Purhonen / M.Sc."
+        title="Chief Algorithm Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={julia}
+        name="Julia Prihu / M.Sc."
+        title="Chief Certification Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={joonas}
+        name="Joonas Palosuo / M.Sc."
+        title="Chief Application Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={stas}
+        name="Stas Tatun / M.Sc."
+        title="Chief Deeplearning Officer"
+        email="first.last@email.com"
+      />
+    </div>
+  </Section>
 </Layout>
 
 <script>
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    if ("success" in params) {
-        document.querySelector("title")!.innerHTML =
-            "Thank you for contacting us! | Hematoscope";
-        const element = document.createElement("p");
-        element.innerHTML =
-            "Thank you for contacting us! We will reach back to you shortly.";
-        element.classList.add("note");
-        document.querySelector("div:has(h1)")!.appendChild(element);
-    }
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+  if ("success" in params) {
+    document.querySelector("title")!.innerHTML =
+      "Thank you for contacting us! | Hematoscope";
+    const element = document.createElement("p");
+    element.innerHTML =
+      "Thank you for contacting us! We will reach back to you shortly.";
+    element.classList.add("note");
+    document.querySelector("div:has(h1)")!.appendChild(element);
+  }
 </script>
 
 <style>
-    form {
-        display: flex;
-        flex-wrap: wrap;
-        gap: calc(0.75 * var(--element-padding));
-        justify-items: flex-start;
-    }
-    :global(div:has(> input)) {
-        flex: 1 0 40%;
-    }
-    :global(div:has(> textarea)) {
-        min-width: 100%;
-    }
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(0.75 * var(--element-padding));
+    justify-items: flex-start;
+  }
+  :global(div:has(> input)) {
+    flex: 1 0 40%;
+  }
+  :global(div:has(> textarea)) {
+    min-width: 100%;
+  }
 
-    /* Highlight variant styles */
-    button {
-        font-weight: 600;
-        font-size: var(--text-size-label);
-        cursor: pointer;
+  /* Highlight variant styles */
+  button {
+    font-weight: 600;
+    font-size: var(--text-size-label);
+    cursor: pointer;
 
-        display: flex;
-        align-items: center;
-        align-self: flex-start;
-        gap: 0.5em;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.5em;
 
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: var(--button-border-radius);
-        color: var(--background);
-        background-color: var(--highlight);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--button-border-radius);
+    color: var(--background);
+    background-color: var(--highlight);
 
-        transition: box-shadow 0.5s;
-        --shadow-height: 18px;
-        --shadow-distance: 4px;
-        box-shadow: 0px var(--shadow-distance) var(--shadow-height)
-            rgb(from var(--highlight) r g b / 0.5);
-    }
-    button:hover {
-        --shadow-height: 32px;
-        --shadow-distance: 8px;
-    }
-    button:active {
-        transition: box-shadow 0.1s;
-        --shadow-height: 12px;
-        --shadow-distance: 2px;
-    }
+    transition: box-shadow 0.5s;
+    --shadow-height: 18px;
+    --shadow-distance: 4px;
+    box-shadow: 0px var(--shadow-distance) var(--shadow-height)
+      rgb(from var(--highlight) r g b / 0.5);
+  }
+  button:hover {
+    --shadow-height: 32px;
+    --shadow-distance: 8px;
+  }
+  button:active {
+    transition: box-shadow 0.1s;
+    --shadow-height: 12px;
+    --shadow-distance: 2px;
+  }
 
-    :global(.note) {
-        font-weight: 600;
-        padding: var(--element-padding);
-        border-radius: var(--small-border-radius);
-        background-color: var(--background);
-        border-left: 8px solid var(--highlight);
-    }
+  :global(.note) {
+    font-weight: 600;
+    padding: var(--element-padding);
+    border-radius: var(--small-border-radius);
+    background-color: var(--background);
+    border-left: 8px solid var(--highlight);
+  }
 
-    .team {
-        max-width: 54rem;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: calc(2 * var(--element-padding));
-        column-gap: var(--element-padding);
-        justify-content: center;
-    }
-    :global(.team > *) {
-        flex: 1 0 30%;
-        min-width: 10rem;
-    }
+  .team {
+    max-width: 54rem;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: calc(2 * var(--element-padding));
+    column-gap: var(--element-padding);
+    justify-content: center;
+  }
+  :global(.team > *) {
+    flex: 1 0 30%;
+    min-width: 10rem;
+  }
 </style>

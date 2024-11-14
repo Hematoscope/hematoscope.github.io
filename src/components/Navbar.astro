@@ -5,260 +5,257 @@ import Icon from "~src/components/Icon.astro";
 const currentPath = Astro.url.pathname;
 
 const links = [
-    { name: "Application", href: "/application" },
-    { name: "Certifications", href: "/certifications" },
-    { name: "Research", href: "/research" },
-    { name: "Documentation", href: "/documentation" },
-    { name: "Contact", href: "/contact" },
+  { name: "Application", href: "/application" },
+  { name: "Certifications", href: "/certifications" },
+  { name: "Research", href: "/research" },
+  { name: "Documentation", href: "/documentation" },
+  { name: "Contact", href: "/contact" },
 ];
 ---
 
 <header>
-    <div class="header-contents">
-        <a href="/" class="logo-link" aria-label="Back to front page">
-            <Icon name="logo" />
-            Hematoscope
-        </a>
+  <div class="header-contents">
+    <a href="/" class="logo-link" aria-label="Back to front page">
+      <Icon name="logotype" />
+    </a>
 
-        <button
-            id="menuButton"
-            aria-label="Show navigation menu"
-            aria-expanded="false"
-            aria-controls="navigation"
-        >
-            Menu
+    <button
+      id="menuButton"
+      aria-label="Show navigation menu"
+      aria-expanded="false"
+      aria-controls="navigation"
+    >
+      Menu
 
-            <svg width="1.25em" height="1.25em" viewBox="0 0 24 24">
-                <g id="menuOpenIcon">
-                    <path d="M3 12H21"></path>
-                    <path d="M3 6H21"></path>
-                    <path d="M3 18H21"></path>
-                </g>
-                <g id="menuCloseIcon">
-                    <path d="M18 6L6 18"></path>
-                    <path d="M6 6L18 18"></path>
-                </g>
-            </svg>
-        </button>
+      <svg width="1.25em" height="1.25em" viewBox="0 0 24 24">
+        <g id="menuOpenIcon">
+          <path d="M3 12H21"></path>
+          <path d="M3 6H21"></path>
+          <path d="M3 18H21"></path>
+        </g>
+        <g id="menuCloseIcon">
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6L18 18"></path>
+        </g>
+      </svg>
+    </button>
 
-        <nav id="navigation" aria-label="Main navigation">
-            <h2 class="visually-hidden">Main navigation</h2>
-            <ul role="list">
-                {
-                    links.map((link) => (
-                        <li>
-                            <a
-                                href={link.href}
-                                aria-current={
-                                    currentPath.includes(link.href) && "page"
-                                }
-                            >
-                                {link.name}
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
+    <nav id="navigation" aria-label="Main navigation">
+      <h2 class="visually-hidden">Main navigation</h2>
+      <ul role="list">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={currentPath.includes(link.href) && "page"}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
 
-            <LinkButton
-                class="demo-button"
-                href="https://demo.hematoscope.app"
-                variant="highlight"
-            >
-                Demo
-            </LinkButton>
-        </nav>
-    </div>
+      <LinkButton
+        class="demo-button"
+        href="https://demo.hematoscope.app"
+        variant="highlight"
+      >
+        Demo
+      </LinkButton>
+    </nav>
+  </div>
 </header>
 
 <script>
-    const header = document.querySelector("header")!;
-    const navButton = document.getElementById("menuButton")!;
-    const disclosure = document.getElementById("navigation")!;
-    const listItems = disclosure.querySelectorAll("li a");
+  const header = document.querySelector("header")!;
+  const navButton = document.getElementById("menuButton")!;
+  const disclosure = document.getElementById("navigation")!;
+  const listItems = disclosure.querySelectorAll("li a");
 
-    function openNavigation() {
-        navButton.setAttribute("aria-expanded", "true");
-        header.classList.add("shadow");
+  function openNavigation() {
+    navButton.setAttribute("aria-expanded", "true");
+    header.classList.add("shadow");
+  }
+
+  function closeNavigation() {
+    navButton.setAttribute("aria-expanded", "false");
+    if (window.scrollY === 0) header.classList.remove("shadow");
+  }
+
+  function toggleNavigation() {
+    const open = navButton.getAttribute("aria-expanded");
+    open === "false" ? openNavigation() : closeNavigation();
+  }
+
+  navButton.addEventListener("click", toggleNavigation);
+
+  // add event to the last item in the nav list to move focus back to the nav button
+  listItems[listItems.length - 1]!.addEventListener("blur", () =>
+    navButton.focus(),
+  );
+
+  // Close the disclosure if a user presses the escape key
+  window.addEventListener("keyup", (e) => {
+    if (e.key === "Escape") {
+      navButton.focus();
+      closeNavigation();
     }
-
-    function closeNavigation() {
-        navButton.setAttribute("aria-expanded", "false");
-        if (window.scrollY === 0) header.classList.remove("shadow");
+  });
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 5) {
+      header.classList.add("shadow");
+    } else if (window.scrollY <= 5) {
+      header.classList.remove("shadow");
     }
-
-    function toggleNavigation() {
-        const open = navButton.getAttribute("aria-expanded");
-        open === "false" ? openNavigation() : closeNavigation();
-    }
-
-    navButton.addEventListener("click", toggleNavigation);
-
-    // add event to the last item in the nav list to move focus back to the nav button
-    listItems[listItems.length - 1]!.addEventListener("blur", () =>
-        navButton.focus(),
-    );
-
-    // Close the disclosure if a user presses the escape key
-    window.addEventListener("keyup", (e) => {
-        if (e.key === "Escape") {
-            navButton.focus();
-            closeNavigation();
-        }
-    });
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 5) {
-            header.classList.add("shadow");
-        } else if (window.scrollY <= 5) {
-            header.classList.remove("shadow");
-        }
-    });
+  });
 </script>
 
 <style>
-    a {
-        color: var(--text-color-heading);
-        text-decoration: none;
-        font-weight: bold;
-    }
-    a[aria-current="page"] {
-        border-radius: var(--small-border-radius);
-        background-color: var(--accent-2);
-    }
+  a {
+    color: var(--text-color-heading);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  a[aria-current="page"] {
+    border-radius: var(--small-border-radius);
+    background-color: var(--accent-2);
+  }
 
-    header {
-        position: sticky;
-        top: 0px;
-        grid-column: full;
-        display: grid;
-        grid-template-columns: subgrid;
-        background: rgb(from var(--background) r g b / 0.3);
-        -webkit-backdrop-filter: blur(25px);
-        backdrop-filter: blur(25px);
-        z-index: 1;
-    }
-    :global(.shadow) {
-        transition: box-shadow 200ms ease-out;
-        box-shadow: var(--shadow-sm);
-    }
-    .header-contents {
-        grid-column: content;
-        display: grid;
-        grid-template-areas:
-            "logo menu"
-            "dropdown dropdown";
-        grid-template-rows: 5rem auto;
-        grid-template-columns: auto auto;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .logo-link {
-        grid-area: logo;
-        display: flex;
-        align-items: center;
-        gap: 0.5em;
-        font-size: var(--text-size-link);
-        padding-block: 1em;
-    }
+  header {
+    position: sticky;
+    top: 0px;
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
+    background: rgb(from var(--background) r g b / 0.3);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    z-index: 1;
+  }
+  :global(.shadow) {
+    transition: box-shadow 200ms ease-out;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-contents {
+    grid-column: content;
+    display: grid;
+    grid-template-areas:
+      "logo menu"
+      "dropdown dropdown";
+    grid-template-rows: 5rem auto;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-link {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--text-size-link);
+    padding-block: 1em;
+  }
 
-    /* Nav links */
+  /* Nav links */
+  nav {
+    grid-area: menu;
+    display: flex;
+    align-items: center;
+    gap: 2em;
+  }
+  ul {
+    display: flex;
+    gap: 1.5em;
+    list-style: none;
+  }
+  li {
+    position: relative;
+  }
+  li > a {
+    display: block;
+    padding: 0.5em 1em;
+  }
+  li > a:hover {
+    text-decoration: underline;
+  }
+  li:first-child:before {
+    content: "";
+  }
+  li:before {
+    content: "/";
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    left: -1em;
+  }
+
+  .visible {
+    display: unset;
+  }
+  #menuButton {
+    grid-area: menu;
+    display: flex;
+    align-items: center;
+    justify-self: flex-end;
+    gap: 0.5em;
+
+    font-weight: 600;
+    font-size: var(--text-size-label);
+    color: var(--text-color-heading);
+
+    padding: 0.75rem 1.25rem 0.75rem 1.5rem;
+    border-radius: var(--button-border-radius);
+    border: 1px solid var(--primary-1);
+    background-color: transparent;
+
+    cursor: pointer;
+  }
+  #menuButton svg {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  button[aria-expanded="true"] #menuOpenIcon {
+    display: none;
+  }
+  button[aria-expanded="false"] #menuCloseIcon {
+    display: none;
+  }
+  @media screen and (width >= 68em) {
+    #menuButton {
+      display: none;
+    }
+  }
+  @media screen and (width < 68em) {
+    header:has(button[aria-expanded="true"]) {
+      padding-block-end: 2rem;
+      /* 14.5rem is a semi-magic variable based on the navbar popup's height */
+      margin-block-end: calc(-14.5rem - 2rem);
+    }
+    button[aria-expanded="false"] + nav {
+      display: none;
+    }
     nav {
-        grid-area: menu;
-        display: flex;
-        align-items: center;
-        gap: 2em;
+      grid-area: dropdown;
+      justify-content: space-between;
+      padding-inline-start: 3.5em;
     }
     ul {
-        display: flex;
-        gap: 1.5em;
-        list-style: none;
-    }
-    li {
-        position: relative;
+      flex-direction: column;
+      list-style-position: inside;
+      gap: 0.5em;
     }
     li > a {
-        display: block;
-        padding: 0.5em 1em;
+      display: inline-block;
     }
-    li > a:hover {
-        text-decoration: underline;
+    li:first-child::before {
+      content: "/";
     }
-    li:first-child:before {
-        content: "";
+    .demo-button {
+      align-self: flex-end;
     }
-    li:before {
-        content: "/";
-        position: absolute;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        left: -1em;
-    }
-
-    .visible {
-        display: unset;
-    }
-    #menuButton {
-        grid-area: menu;
-        display: flex;
-        align-items: center;
-        justify-self: flex-end;
-        gap: 0.5em;
-
-        font-weight: 600;
-        font-size: var(--text-size-label);
-        color: var(--text-color-heading);
-
-        padding: 0.75rem 1.25rem 0.75rem 1.5rem;
-        border-radius: var(--button-border-radius);
-        border: 1px solid var(--primary-1);
-        background-color: transparent;
-
-        cursor: pointer;
-    }
-    #menuButton svg {
-        stroke: currentColor;
-        stroke-width: 2;
-        stroke-linecap: round;
-    }
-    button[aria-expanded="true"] #menuOpenIcon {
-        display: none;
-    }
-    button[aria-expanded="false"] #menuCloseIcon {
-        display: none;
-    }
-    @media screen and (width >= 68em) {
-        #menuButton {
-            display: none;
-        }
-    }
-    @media screen and (width < 68em) {
-        header:has(button[aria-expanded="true"]) {
-            padding-block-end: 2rem;
-            /* 14.5rem is a semi-magic variable based on the navbar popup's height */
-            margin-block-end: calc(-14.5rem - 2rem);
-        }
-        button[aria-expanded="false"] + nav {
-            display: none;
-        }
-        nav {
-            grid-area: dropdown;
-            justify-content: space-between;
-            padding-inline-start: 3.5em;
-        }
-        ul {
-            flex-direction: column;
-            list-style-position: inside;
-            gap: 0.5em;
-        }
-        li > a {
-            display: inline-block;
-        }
-        li:first-child::before {
-            content: "/";
-        }
-        .demo-button {
-            align-self: flex-end;
-        }
-    }
+  }
 </style>

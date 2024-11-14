@@ -1,12 +1,12 @@
 ---
 export interface Props {
-    name: string;
+  name: string;
 }
 
 const { name } = Astro.props as Props;
 const images = import.meta.glob("/src/assets/icons/**/*", {
-    query: "?raw",
-    import: "default",
+  query: "?raw",
+  import: "default",
 });
 const html = await images[`/src/assets/icons/${name}.svg`]!();
 ---

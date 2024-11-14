@@ -18,229 +18,228 @@ import CallToAction from "~src/components/CallToAction.astro";
 ---
 
 <Layout title="Hematoscope App">
-	<Section variant="gradient-cells" class="hero">
-		<div class="text">
-			<h1>Revolutionizing Diagnostics with Advanced AI Solutions</h1>
-			<p>
-				Hematoscope. Empowering Physicians and Researchers with
-				Cutting-Edge Morphometric Algorithms.
-			</p>
-		</div>
-		<GlassFrame>
-			<video
-				width="1200"
-				autoplay
-				loop
-				aria-label="Demonstration of Hematoscope App's features"
-			>
-				<source src="banner.webm" type="video/webm" />
-			</video>
-		</GlassFrame>
-	</Section>
+  <Section variant="gradient-cells" class="hero">
+    <div class="text">
+      <h1>Revolutionizing Diagnostics with Advanced AI Solutions</h1>
+      <p>
+        Hematoscope. Empowering Physicians and Researchers with Cutting-Edge
+        Morphometric Algorithms.
+      </p>
+    </div>
+    <GlassFrame>
+      <video
+        width="1200"
+        autoplay
+        loop
+        aria-label="Demonstration of Hematoscope App's features"
+      >
+        <source src="banner.webm" type="video/webm" />
+      </video>
+    </GlassFrame>
+  </Section>
 
-	<Section variant="pair">
-		<Image
-			src={microscopeDoctor}
-			alt="Doctor looking at a bone marrow sample through a microscope."
-			widths={WIDTHS}
-			height="300"
-		/>
-		<SectionCard accent="1">
-			<H level="2">Repeatable results. Automated analysis.</H>
-			<p>
-				Automate the tedious analysis, saving time and enabling the
-				practitioners to focus their skills to the tasks that really
-				matter.
-			</p>
-			<LinkButton href="/application" variant="default-arrow">Read more</LinkButton>
-		</SectionCard>
-	</Section>
+  <Section variant="pair">
+    <Image
+      src={microscopeDoctor}
+      alt="Doctor looking at a bone marrow sample through a microscope."
+      widths={WIDTHS}
+      height="300"
+    />
+    <SectionCard accent="1">
+      <H level="2">Repeatable results. Automated analysis.</H>
+      <p>
+        Automate the tedious analysis, saving time and enabling the
+        practitioners to focus their skills to the tasks that really matter.
+      </p>
+      <LinkButton href="/application" variant="default-arrow"
+        >Read more</LinkButton
+      >
+    </SectionCard>
+  </Section>
 
-	<Section variant="blank" class="gallery">
-		<div class="text">
-			<H level="2">Intuitive tools</H>
-			<p>
-				Cell classification, statistics, slide viewer, hype text that
-				looks good to doctors and significant people who might want to
-				buy this app for hospitals.
-			</p>
-		</div>
+  <Section variant="blank" class="gallery">
+    <div class="text">
+      <H level="2">Intuitive tools</H>
+      <p>
+        Cell classification, statistics, slide viewer, hype text that looks good
+        to doctors and significant people who might want to buy this app for
+        hospitals.
+      </p>
+    </div>
 
-		<ol class="scroller">
-			<GlassFrame tag="li" class="scroller-img">
-				<Image
-					src={gallery1}
-					alt="A screenshot of the application showing a 100 times magnified microscope image and labeled cells."
-					widths={WIDTHS}
-				/>
-			</GlassFrame>
-			<GlassFrame tag="li" class="scroller-img">
-				<Image
-					src={gallery2}
-					alt="A screenshot of the application showing a 10 times magnified whole-slide image with a center mask drawn on top of it."
-					widths={WIDTHS}
-				/>
-			</GlassFrame>
-			<GlassFrame tag="li" class="scroller-img">
-				<Image
-					src={gallery3}
-					alt="A screenshot of the application showing a view listing all white blood cells classified as blasts by the algorithms."
-					widths={WIDTHS}
-				/>
-			</GlassFrame>
-		</ol>
-	</Section>
+    <ol class="scroller">
+      <GlassFrame tag="li" class="scroller-img">
+        <Image
+          src={gallery1}
+          alt="A screenshot of the application showing a 100 times magnified microscope image and labeled cells."
+          widths={WIDTHS}
+        />
+      </GlassFrame>
+      <GlassFrame tag="li" class="scroller-img">
+        <Image
+          src={gallery2}
+          alt="A screenshot of the application showing a 10 times magnified whole-slide image with a center mask drawn on top of it."
+          widths={WIDTHS}
+        />
+      </GlassFrame>
+      <GlassFrame tag="li" class="scroller-img">
+        <Image
+          src={gallery3}
+          alt="A screenshot of the application showing a view listing all white blood cells classified as blasts by the algorithms."
+          widths={WIDTHS}
+        />
+      </GlassFrame>
+    </ol>
+  </Section>
 
-	<Section variant="gradient">
-		<div class="text">
-			<H level="2">Comprehensive Algorithms</H>
-			<p>
-				Employing the latest technologies in computer vision and deep
-				learning, Hematoscope delivers results fast, accurately and
-				objectively.
-			</p>
-		</div>
-		<ul class="algorithms">
-			<HighlightCard
-				description="Distinct algorithms for analysis:"
-				highlight="11"
-				icon="highlights/neuralnet"
-				accent="1"
-				linkHref="/application#vast-suite-of-algorithms"
-			/>
-			<HighlightCard
-				description="Average accuracy for the algorithms:"
-				highlight="93.4%"
-				icon="highlights/accuracy"
-				accent="2"
-				linkHref="/application#precision-consistency-efficiency"
-			/>
-			<HighlightCard
-				description="Peer-reviewed publications"
-				highlight="7"
-				icon="highlights/research"
-				accent="3"
-				linkHref="/research#selected-publications"
-			/>
-		</ul>
-	</Section>
+  <Section variant="gradient">
+    <div class="text">
+      <H level="2">Comprehensive Algorithms</H>
+      <p>
+        Employing the latest technologies in computer vision and deep learning,
+        Hematoscope delivers results fast, accurately and objectively.
+      </p>
+    </div>
+    <ul class="algorithms">
+      <HighlightCard
+        description="Distinct algorithms for analysis:"
+        highlight="11"
+        icon="highlights/neuralnet"
+        accent="1"
+        linkHref="/application#vast-suite-of-algorithms"
+      />
+      <HighlightCard
+        description="Average accuracy for the algorithms:"
+        highlight="93.4%"
+        icon="highlights/accuracy"
+        accent="2"
+        linkHref="/application#precision-consistency-efficiency"
+      />
+      <HighlightCard
+        description="Peer-reviewed publications"
+        highlight="7"
+        icon="highlights/research"
+        accent="3"
+        linkHref="/research#selected-publications"
+      />
+    </ul>
+  </Section>
 
-	<Section variant="pair">
-		<SectionCard accent="2">
-			<H level="2">Compatible with West Medica scanners</H>
-			<p>
-				Whole-Slide Imaging with 10x - 100x magnification performed
-				automatically. Analyze up to 1000 samples per day, with each
-				sample analyzed within 5 minutes of the scan.
-			</p>
-			<LinkButton href="/application#effortless-integration-and-compatibility" variant="default-arrow">Read more</LinkButton>
-		</SectionCard>
-		<Image
-			src={microscope}
-			alt="Close-up of a microscope scanning a pathological slide."
-			widths={WIDTHS}
-			height="300"
-		/>
-	</Section>
+  <Section variant="pair">
+    <SectionCard accent="2">
+      <H level="2">Compatible with West Medica scanners</H>
+      <p>
+        Whole-Slide Imaging with 10x - 100x magnification performed
+        automatically. Analyze up to 1000 samples per day, with each sample
+        analyzed within 5 minutes of the scan.
+      </p>
+      <LinkButton
+        href="/application#effortless-integration-and-compatibility"
+        variant="default-arrow">Read more</LinkButton
+      >
+    </SectionCard>
+    <Image
+      src={microscope}
+      alt="Close-up of a microscope scanning a pathological slide."
+      widths={WIDTHS}
+      height="300"
+    />
+  </Section>
 
-	<CallToAction title="See for Yourself" />
+  <CallToAction title="See for Yourself" />
 </Layout>
 
 <style>
-	p {
-		font-size: var(--text-size-ingress);
-	}
+  p {
+    font-size: var(--text-size-ingress);
+  }
 
-	.hero {
-		padding-block: calc(2 * var(--element-padding));
-	}
+  .hero {
+    padding-block: calc(2 * var(--element-padding));
+  }
 
-	video {
-		aspect-ratio: 16 / 8.8;
-	}
+  video {
+    aspect-ratio: 16 / 8.8;
+  }
 
-	.gallery {
-		grid-column: full !important;
-		padding: unset;
-		padding-block-start: var(--element-padding);
-	}
-	.gallery > div {
-		padding-inline: var(--element-padding);
-	}
-	.scroller {
-		display: flex;
-		--animation-multiplier: 1;
-		gap: calc(3 * var(--element-padding));
-		padding-inline: calc(5 * var(--element-padding));
-		padding-block-end: calc(2 * var(--element-padding));
-		list-style: none;
+  .gallery {
+    grid-column: full !important;
+    padding: unset;
+    padding-block-start: var(--element-padding);
+  }
+  .gallery > div {
+    padding-inline: var(--element-padding);
+  }
+  .scroller {
+    display: flex;
+    --animation-multiplier: 1;
+    gap: calc(3 * var(--element-padding));
+    padding-inline: calc(5 * var(--element-padding));
+    padding-block-end: calc(2 * var(--element-padding));
+    list-style: none;
 
-		overflow-x: scroll;
-		scrollbar-color: transparent transparent; /* thumb and track color */
-		scrollbar-width: 0px;
-		scroll-behavior: smooth;
-		scroll-snap-type: x mandatory;
-	}
-	.scroller-img {
-		min-width: 80%;
-		scroll-snap-align: center;
-		animation: scroll 10s linear infinite;
-		animation-timing-function: ease-in-out;
-	}
-	.scroller-img img {
-		height: 100%;
-		width: 100%;
-	}
-	.scroller:hover .scroller-img {
-		animation-play-state: paused;
-	}
-	@media (prefers-reduced-motion), (pointer: coarse) {
-		.scroller-img {
-			animation: none;
-		}
-	}
-	@keyframes scroll {
-		0%,
-		10%,
-		90%,
-		100% {
-			transform: translateX(0);
-		}
-		20%,
-		45% {
-			transform: translateX(
-				calc(
-					-95% - var(--animation-multiplier) * var(--element-padding)
-				)
-			);
-		}
-		55%,
-		80% {
-			transform: translateX(
-				calc(
-					-190% - 2 * var(--animation-multiplier) * var(--element-padding)
-				)
-			);
-		}
-	}
+    overflow-x: scroll;
+    scrollbar-color: transparent transparent; /* thumb and track color */
+    scrollbar-width: 0px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+  .scroller-img {
+    min-width: 80%;
+    scroll-snap-align: center;
+    animation: scroll 10s linear infinite;
+    animation-timing-function: ease-in-out;
+  }
+  .scroller-img img {
+    height: 100%;
+    width: 100%;
+  }
+  .scroller:hover .scroller-img {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion), (pointer: coarse) {
+    .scroller-img {
+      animation: none;
+    }
+  }
+  @keyframes scroll {
+    0%,
+    10%,
+    90%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    45% {
+      transform: translateX(
+        calc(-95% - var(--animation-multiplier) * var(--element-padding))
+      );
+    }
+    55%,
+    80% {
+      transform: translateX(
+        calc(-190% - 2 * var(--animation-multiplier) * var(--element-padding))
+      );
+    }
+  }
 
-	.algorithms {
-		display: flex;
-		gap: calc(2 * var(--element-padding));
-		flex-wrap: wrap;
-		justify-content: center;
-	}
+  .algorithms {
+    display: flex;
+    gap: calc(2 * var(--element-padding));
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-	@media screen and (width < 40em) {
-		.scroller {
-			display: flex;
-			gap: calc(var(--element-padding));
-			--animation-multiplier: 2;
-			padding-inline: calc(2 * var(--element-padding));
-			padding-block-end: calc(2 * var(--element-padding));
-		}
-		.scroller-img {
-			min-width: 100%;
-		}
-	}
+  @media screen and (width < 40em) {
+    .scroller {
+      display: flex;
+      gap: calc(var(--element-padding));
+      --animation-multiplier: 2;
+      padding-inline: calc(2 * var(--element-padding));
+      padding-block-end: calc(2 * var(--element-padding));
+    }
+    .scroller-img {
+      min-width: 100%;
+    }
+  }
 </style>

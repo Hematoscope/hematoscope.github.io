@@ -17,171 +17,160 @@ import CallToAction from "~src/components/CallToAction.astro";
 ---
 
 <Layout title="Application | Hematoscope">
-    <Section variant="pair">
-        <SectionCard gradient>
-            <h1>Automate the Tedium</h1>
-            <p class="ingress">
-                Our AI algorithms provide cytomorphology analysis, assisting in
-                both blood and bone marrow sample classification. This
-                comprehensive approach enhances diagnostic precision and
-                efficiency, empowering medical professionals to focus their
-                efforts on meaningful tasks.
-            </p>
-        </SectionCard>
-        <Image
-            src={cells}
-            alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by the Hematoscope application."
-            widths={WIDTHS}
-            height="300"
-        />
-    </Section>
+  <Section variant="pair">
+    <SectionCard gradient>
+      <h1>Automate the Tedium</h1>
+      <p class="ingress">
+        Our AI algorithms provide cytomorphology analysis, assisting in both
+        blood and bone marrow sample classification. This comprehensive approach
+        enhances diagnostic precision and efficiency, empowering medical
+        professionals to focus their efforts on meaningful tasks.
+      </p>
+    </SectionCard>
+    <Image
+      src={cells}
+      alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by the Hematoscope application."
+      widths={WIDTHS}
+      height="300"
+    />
+  </Section>
 
-    <Section variant="blank">
-        <div class="text">
-            <H level="2">Vast Suite of Algorithms</H>
-            <p>
-                Our AI aims to perform nearly all the same diagnostic tasks as
-                doctors, enhancing every step of the analysis process rather
-                than just optimizing isolated aspects. By combining cell
-                classification with morphology, dysplasia assessment, and sample
-                quality analysis, we provide a fresh angle for research.
-            </p>
-        </div>
-        <div class="algorithms">
-            <AlgorithmItem
-                name="Cellularity"
-                icon="algorithms/cellularity"
-                accent="4"
-            />
-            <AlgorithmItem name="Center" icon="algorithms/center" accent="2" />
-            <AlgorithmItem
-                name="Scarcity"
-                icon="algorithms/scarcity"
-                accent="3"
-            />
-            <AlgorithmItem
-                name="Classification"
-                icon="algorithms/classification"
-                accent="1"
-            />
-            <AlgorithmItem name="Lipids" icon="algorithms/lipids" accent="2" />
-            <AlgorithmItem
-                name="Megakaryocytes"
-                icon="algorithms/megakaryocyte"
-                accent="1"
-            />
-            <AlgorithmItem name="In-focus" icon="algorithms/focus" accent="4" />
-            <AlgorithmItem
-                name="Texture"
-                icon="algorithms/texture"
-                accent="3"
-            />
-        </div>
-    </Section>
+  <Section variant="blank">
+    <div class="text">
+      <H level="2">Vast Suite of Algorithms</H>
+      <p>
+        Our AI aims to perform nearly all the same diagnostic tasks as doctors,
+        enhancing every step of the analysis process rather than just optimizing
+        isolated aspects. By combining cell classification with morphology,
+        dysplasia assessment, and sample quality analysis, we provide a fresh
+        angle for research.
+      </p>
+    </div>
+    <div class="algorithms">
+      <AlgorithmItem
+        name="Cellularity"
+        icon="algorithms/cellularity"
+        accent="4"
+      />
+      <AlgorithmItem name="Center" icon="algorithms/center" accent="2" />
+      <AlgorithmItem name="Scarcity" icon="algorithms/scarcity" accent="3" />
+      <AlgorithmItem
+        name="Classification"
+        icon="algorithms/classification"
+        accent="1"
+      />
+      <AlgorithmItem name="Lipids" icon="algorithms/lipids" accent="2" />
+      <AlgorithmItem
+        name="Megakaryocytes"
+        icon="algorithms/megakaryocyte"
+        accent="1"
+      />
+      <AlgorithmItem name="In-focus" icon="algorithms/focus" accent="4" />
+      <AlgorithmItem name="Texture" icon="algorithms/texture" accent="3" />
+    </div>
+  </Section>
 
-    <Section variant="pair">
-        <Image
-            src={twoDoctors}
-            alt="A doctor microscoping a pathological sample while another doctor is observing and taking notes"
-            widths={WIDTHS}
-            height="300"
-        />
-        <SectionCard accent="1">
-            <H level="2">Precision. Consistency. Efficiency.</H>
-            <p>
-                Automation allows labs to process thousands of samples daily
-                with results available in as little as 5 minutes. This speed
-                accelerates decision-making, enabling quicker diagnoses and
-                faster patient care without compromising accuracy.
-            </p>
-            <p>
-                Time-consuming, labor-intensive tasks become routine with
-                automation. Complex analyses that would typically take hours are
-                completed swiftly, allowing physicians to focus on higher-level
-                decision-making, ultimately improving workflow and resource
-                management.
-            </p>
-        </SectionCard>
-    </Section>
+  <Section variant="pair">
+    <Image
+      src={twoDoctors}
+      alt="A doctor microscoping a pathological sample while another doctor is observing and taking notes"
+      widths={WIDTHS}
+      height="300"
+    />
+    <SectionCard accent="1">
+      <H level="2">Precision. Consistency. Efficiency.</H>
+      <p>
+        Automation allows labs to process thousands of samples daily with
+        results available in as little as 5 minutes. This speed accelerates
+        decision-making, enabling quicker diagnoses and faster patient care
+        without compromising accuracy.
+      </p>
+      <p>
+        Time-consuming, labor-intensive tasks become routine with automation.
+        Complex analyses that would typically take hours are completed swiftly,
+        allowing physicians to focus on higher-level decision-making, ultimately
+        improving workflow and resource management.
+      </p>
+    </SectionCard>
+  </Section>
 
-    <Section variant="blank" class="screenshots">
-        <Image
-            src={screenshot1}
-            alt="Illustrative screenshot of the Hematoscope Application displaying individual cells."
-            widths={WIDTHS}
-            height="300"
-        />
-        <Image
-            src={screenshot2}
-            alt="Illustrative screenshot of the Hematoscope Application displaying a labeled cell in a 100 times magnified microscope image."
-            widths={WIDTHS}
-            height="300"
-        />
-        <Image
-            src={screenshot3}
-            alt="Illustrative screenshot of the Hematoscope Application displaying a 10 times magnified image of a sample."
-            widths={WIDTHS}
-            height="300"
-        />
-    </Section>
+  <Section variant="blank" class="screenshots">
+    <Image
+      src={screenshot1}
+      alt="Illustrative screenshot of the Hematoscope Application displaying individual cells."
+      widths={WIDTHS}
+      height="300"
+    />
+    <Image
+      src={screenshot2}
+      alt="Illustrative screenshot of the Hematoscope Application displaying a labeled cell in a 100 times magnified microscope image."
+      widths={WIDTHS}
+      height="300"
+    />
+    <Image
+      src={screenshot3}
+      alt="Illustrative screenshot of the Hematoscope Application displaying a 10 times magnified image of a sample."
+      widths={WIDTHS}
+      height="300"
+    />
+  </Section>
 
-    <Section variant="pair">
-        <SectionCard accent="1">
-            <H level="2">Effortless Integration and Compatibility</H>
-            <p>
-                Integrating our web-based application into hospitals is seamless
-                and hassle-free. Since no installation is required, labs can
-                quickly adopt our platform without needing complex setup or IT
-                infrastructure changes. The system is designed for rapid
-                deployment, ensuring that hospitals can immediately begin
-                utilizing its powerful diagnostic tools while maintaining
-                top-level security and compliance standards.
-            </p>
-            <p>
-                Our platform supports West Medica scanners, allowing for smooth
-                integration with existing equipment. As we continue to expand
-                compatibility, more scanner models will be supported, making it
-                a future-proof solution for hospitals looking to stay ahead in
-                diagnostic technology.
-            </p>
-        </SectionCard>
-        <Image
-            src={doctorWriting}
-            alt="A doctor is being shown a paper, from which she is writing notes on a computer."
-            widths={WIDTHS}
-            height="300"
-        />
-    </Section>
+  <Section variant="pair">
+    <SectionCard accent="1">
+      <H level="2">Effortless Integration and Compatibility</H>
+      <p>
+        Integrating our web-based application into hospitals is seamless and
+        hassle-free. Since no installation is required, labs can quickly adopt
+        our platform without needing complex setup or IT infrastructure changes.
+        The system is designed for rapid deployment, ensuring that hospitals can
+        immediately begin utilizing its powerful diagnostic tools while
+        maintaining top-level security and compliance standards.
+      </p>
+      <p>
+        Our platform supports West Medica scanners, allowing for smooth
+        integration with existing equipment. As we continue to expand
+        compatibility, more scanner models will be supported, making it a
+        future-proof solution for hospitals looking to stay ahead in diagnostic
+        technology.
+      </p>
+    </SectionCard>
+    <Image
+      src={doctorWriting}
+      alt="A doctor is being shown a paper, from which she is writing notes on a computer."
+      widths={WIDTHS}
+      height="300"
+    />
+  </Section>
 
-    <CallToAction title="Ready to Know More?" />
+  <CallToAction title="Ready to Know More?" />
 </Layout>
 
 <style>
-    .ingress {
-        font-size: var(--text-size-ingress);
-    }
-    .algorithms {
-        max-width: 54rem;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: calc(2 * var(--element-padding));
-        column-gap: var(--element-padding);
-        justify-content: center;
-    }
-    :global(.algorithms > *) {
-        flex: 1 0 20%;
-        min-width: 10rem;
-    }
-    .screenshots {
-        padding: unset !important;
-        flex-direction: row;
-        gap: var(--element-padding);
-    }
-    :global(.screenshots > *) {
-        flex-grow: 1;
-        width: 30%;
-        height: auto;
-        border-radius: var(--element-border-radius);
-        border: var(--glass-border-inner);
-    }
+  .ingress {
+    font-size: var(--text-size-ingress);
+  }
+  .algorithms {
+    max-width: 54rem;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: calc(2 * var(--element-padding));
+    column-gap: var(--element-padding);
+    justify-content: center;
+  }
+  :global(.algorithms > *) {
+    flex: 1 0 20%;
+    min-width: 10rem;
+  }
+  .screenshots {
+    padding: unset !important;
+    flex-direction: row;
+    gap: var(--element-padding);
+  }
+  :global(.screenshots > *) {
+    flex-grow: 1;
+    width: 30%;
+    height: auto;
+    border-radius: var(--element-border-radius);
+    border: var(--glass-border-inner);
+  }
 </style>

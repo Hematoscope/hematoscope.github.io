@@ -3,60 +3,60 @@ import Icon from "~src/components/Icon.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 
 interface Props {
-    linkHref: string;
-    description: string;
-    highlight: string;
-    icon: string;
-    accent: Accent;
+  linkHref: string;
+  description: string;
+  highlight: string;
+  icon: string;
+  accent: Accent;
 }
 const { linkHref, description, highlight, icon, accent } = Astro.props;
 const bg = `var(--accent-${accent})`;
 ---
 
 <li>
-    <div class="row">
-        <p>{description}</p>
-        <div class="icon-wrapper"><Icon name={icon} /></div>
-    </div>
-    <span>{highlight}</span>
-    <LinkButton href={linkHref} variant="default-arrow">Read more</LinkButton>
+  <div class="row">
+    <p>{description}</p>
+    <div class="icon-wrapper"><Icon name={icon} /></div>
+  </div>
+  <span>{highlight}</span>
+  <LinkButton href={linkHref} variant="default-arrow">Read more</LinkButton>
 </li>
 
 <style define:vars={{ bg }}>
-    li {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 
-        width: 18rem;
-        padding: 1.5rem;
-        box-shadow: var(--shadow-lg);
-        border-radius: var(--medium-border-radius);
+    width: 18rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--medium-border-radius);
 
-        background-color: var(--background);
-        color: var(--text-color-heading);
-    }
+    background-color: var(--background);
+    color: var(--text-color-heading);
+  }
 
-    p {
-        color: var(--text-color-body);
-    }
+  p {
+    color: var(--text-color-body);
+  }
 
-    span {
-        font-size: calc(1 * var(--text-size-heading-1));
-        font-weight: 800;
-    }
+  span {
+    font-size: calc(1 * var(--text-size-heading-1));
+    font-weight: 800;
+  }
 
-    .row {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-    .icon-wrapper {
-        display: flex;
-        padding: 0.5rem;
-        background-color: var(--bg);
-        border-radius: var(--small-border-radius);
-    }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .icon-wrapper {
+    display: flex;
+    padding: 0.5rem;
+    background-color: var(--bg);
+    border-radius: var(--small-border-radius);
+  }
 </style>

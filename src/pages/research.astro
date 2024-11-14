@@ -15,100 +15,98 @@ import TextCard from "~src/components/TextCard.astro";
 ---
 
 <Layout title="Research | Hematoscope">
-    <Section variant="pair">
-        <Image
-            src={research}
-            alt="A man looking at a pinboard filled with research papers."
-            widths={WIDTHS}
-            height="300"
-        />
-        <SectionCard gradient>
-            <h1>Research-Driven Innovation at Its Core</h1>
-            <p>
-                Our solutions are built on rigorous, cutting-edge research,
-                ensuring every feature is scientifically validated and designed
-                to meet the evolving needs of modern healthcare. By staying at
-                the forefront of medical and technological advancements, we
-                provide tools that not only enhance diagnostics but also open
-                new avenues for clinical research and discovery.
-            </p>
-            <p>
-                We&apos;re advancing computational hematology with AI that
-                surpasses basic cell classification. Our system analyzes cell
-                morphology, detects dysplasia, and assesses sample quality with
-                unmatched precision. By combining cutting-edge tech with
-                clinical expertise, we deliver faster, more accurate
-                diagnostics, setting a new benchmark in hematology care.
-            </p>
-        </SectionCard>
-    </Section>
+  <Section variant="pair">
+    <Image
+      src={research}
+      alt="A man looking at a pinboard filled with research papers."
+      widths={WIDTHS}
+      height="300"
+    />
+    <SectionCard gradient>
+      <h1>Research-Driven Innovation at Its Core</h1>
+      <p>
+        Our solutions are built on rigorous, cutting-edge research, ensuring
+        every feature is scientifically validated and designed to meet the
+        evolving needs of modern healthcare. By staying at the forefront of
+        medical and technological advancements, we provide tools that not only
+        enhance diagnostics but also open new avenues for clinical research and
+        discovery.
+      </p>
+      <p>
+        We&apos;re advancing computational hematology with AI that surpasses
+        basic cell classification. Our system analyzes cell morphology, detects
+        dysplasia, and assesses sample quality with unmatched precision. By
+        combining cutting-edge tech with clinical expertise, we deliver faster,
+        more accurate diagnostics, setting a new benchmark in hematology care.
+      </p>
+    </SectionCard>
+  </Section>
 
-    <Section variant="blank">
-        <H level="2">Selected publications</H>
-        <div class="publications">
-            <TextCard
-                image={neural}
-                alt="3D illustration of a neural network"
-                accent="2"
-            >
-                <H level="3">
-                    The multimodality cell segmentation challenge: toward
-                    universal solutions
-                </H>
-                <p>
-                    Jan Moritz Middeke, Jan-Niklas Eckardt, Wangkai Li, Zhaoyang
-                    Li, Xiaochen Cai, Bizhe Bai, Noah F. Greenwald, David Van
-                    Valen, Erin Weisbart, Beth A. Cimini, Trevor Cheung, Oscar
-                    Brück, Gary D. Bader, Bo Wang
-                </p>
-                <p>Nature Methods / 26 Mar 2024</p>
-            </TextCard>
-            <TextCard
-                image={head}
-                alt="Stylized 3D illustration of a head outlined by furry lines"
-                accent="3"
-            >
-                <H level="3">Toward an anatomy of human hematopoiesis</H>
-                <p>Oscar Brück</p>
-                <p>Blood / 28 Dec 2023</p>
-            </TextCard>
-            <TextCard
-                image={pills}
-                alt="3D illustration of a neural network"
-                accent="1"
-            >
-                <H level="3">
-                    Real-world evidence of multiple myeloma treated from 2013 to
-                    2019 in the Hospital District of Helsinki and Uusimaa,
-                    Finland
-                </H>
-                <p>
-                    Johanna Vikkula, Kristiina Uusi-Rauva, Tuuli Ranki, Iiro
-                    Toppila, Maria Aalto-Setälä, Katariina Pousar, Lotta
-                    Vassilev, Kimmo Porkka, Raija Silvennoinen, Oscar Brück
-                </p>
-                <p>Future Oncology / 01 Sep 2023</p>
-            </TextCard>
-            <TextCard
-                image={grid}
-                alt="3D illustration of a neural network"
-                accent="4"
-            >
-                <H level="3">
-                    Computational textural mapping harmonises sampling variation
-                    and reveals multidimensional histopathological fingerprints
-                </H>
-                <p>Otso Brummer, Petri Pölönen, Satu Mustjoki, Oscar Brück</p>
-                <p>British Journal of Cancer / 30 Jun 2023</p>
-            </TextCard>
-        </div>
-    </Section>
+  <Section variant="blank">
+    <H level="2">Selected publications</H>
+    <div class="publications">
+      <TextCard
+        image={neural}
+        alt="3D illustration of a neural network"
+        accent="2"
+      >
+        <H level="3">
+          The multimodality cell segmentation challenge: toward universal
+          solutions
+        </H>
+        <p>
+          Jan Moritz Middeke, Jan-Niklas Eckardt, Wangkai Li, Zhaoyang Li,
+          Xiaochen Cai, Bizhe Bai, Noah F. Greenwald, David Van Valen, Erin
+          Weisbart, Beth A. Cimini, Trevor Cheung, Oscar Brück, Gary D. Bader,
+          Bo Wang
+        </p>
+        <p>Nature Methods / 26 Mar 2024</p>
+      </TextCard>
+      <TextCard
+        image={head}
+        alt="Stylized 3D illustration of a head outlined by furry lines"
+        accent="3"
+      >
+        <H level="3">Toward an anatomy of human hematopoiesis</H>
+        <p>Oscar Brück</p>
+        <p>Blood / 28 Dec 2023</p>
+      </TextCard>
+      <TextCard
+        image={pills}
+        alt="3D illustration of a neural network"
+        accent="1"
+      >
+        <H level="3">
+          Real-world evidence of multiple myeloma treated from 2013 to 2019 in
+          the Hospital District of Helsinki and Uusimaa, Finland
+        </H>
+        <p>
+          Johanna Vikkula, Kristiina Uusi-Rauva, Tuuli Ranki, Iiro Toppila,
+          Maria Aalto-Setälä, Katariina Pousar, Lotta Vassilev, Kimmo Porkka,
+          Raija Silvennoinen, Oscar Brück
+        </p>
+        <p>Future Oncology / 01 Sep 2023</p>
+      </TextCard>
+      <TextCard
+        image={grid}
+        alt="3D illustration of a neural network"
+        accent="4"
+      >
+        <H level="3">
+          Computational textural mapping harmonises sampling variation and
+          reveals multidimensional histopathological fingerprints
+        </H>
+        <p>Otso Brummer, Petri Pölönen, Satu Mustjoki, Oscar Brück</p>
+        <p>British Journal of Cancer / 30 Jun 2023</p>
+      </TextCard>
+    </div>
+  </Section>
 </Layout>
 
 <style>
-    .publications {
-        display: flex;
-        flex-direction: column;
-        gap: var(--element-padding);
-    }
+  .publications {
+    display: flex;
+    flex-direction: column;
+    gap: var(--element-padding);
+  }
 </style>

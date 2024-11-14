@@ -2,56 +2,51 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
-    accent?: Accent;
-    gradient?: boolean;
+  accent?: Accent;
+  gradient?: boolean;
 }
 const { accent, gradient, ...props } = Astro.props;
 const bg = `var(--accent-${accent})`;
 ---
 
 <div
-    class:list={[props.class, "section-card", gradient && "gradient"]}
-    {...props}
+  class:list={[props.class, "section-card", gradient && "gradient"]}
+  {...props}
 >
-    <slot />
+  <slot />
 </div>
 
 <style define:vars={accent ? { bg } : {}}>
-    .section-card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: var(--element-padding);
+  .section-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--element-padding);
 
-        border-radius: var(--element-border-radius);
-        padding: var(--element-padding);
-        background-color: var(--bg);
-    }
-    :global(.section-card > h1),
-    :global(.section-card > h2) {
-        text-align: start;
-    }
+    border-radius: var(--element-border-radius);
+    padding: var(--element-padding);
+    background-color: var(--bg);
+  }
+  :global(.section-card > h1),
+  :global(.section-card > h2) {
+    text-align: start;
+  }
 
-    .gradient::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        inset: 0;
-        border-radius: var(--element-border-radius);
-        opacity: 0.15;
-        background: radial-gradient(
-                55% 31% at 93% 5%,
-                #00ffd1 0%,
-                transparent 100%
-            ),
-            radial-gradient(73% 13% at 2% 48%, #00f0ff 0%, transparent 100%),
-            radial-gradient(58% 58% at 86% 87%, #00f0ff 0%, transparent 100%),
-            radial-gradient(109% 20% at 107% 38%, #ff006b 0%, transparent 100%),
-            radial-gradient(51% 51% at 22% 80%, #ff006b 0%, transparent 100%),
-            radial-gradient(83% 24% at 73% 62%, #cc00ff 0%, transparent 100%),
-            radial-gradient(45% 45% at 35% 34%, #0066ff 0%, transparent 100%),
-            #9bb7ff;
-    }
+  .gradient::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: var(--element-border-radius);
+    opacity: 0.15;
+    background: radial-gradient(55% 31% at 93% 5%, #00ffd1 0%, transparent 100%),
+      radial-gradient(73% 13% at 2% 48%, #00f0ff 0%, transparent 100%),
+      radial-gradient(58% 58% at 86% 87%, #00f0ff 0%, transparent 100%),
+      radial-gradient(109% 20% at 107% 38%, #ff006b 0%, transparent 100%),
+      radial-gradient(51% 51% at 22% 80%, #ff006b 0%, transparent 100%),
+      radial-gradient(83% 24% at 73% 62%, #cc00ff 0%, transparent 100%),
+      radial-gradient(45% 45% at 35% 34%, #0066ff 0%, transparent 100%), #9bb7ff;
+  }
 </style>

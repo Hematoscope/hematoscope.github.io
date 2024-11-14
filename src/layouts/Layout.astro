@@ -5,7 +5,7 @@ import "~src/styles/reset.css";
 import "~src/styles/theme.css";
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -13,45 +13,45 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<meta
-			name="description"
-			content="Home page for the Hematoscope Application."
-		/>
-	</head>
-	<body>
-		<Navbar />
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Home page for the Hematoscope Application."
+    />
+  </head>
+  <body>
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
 
 <style>
-	body {
-		display: grid;
-		grid-template-columns:
-			[full-start]
-			minmax(var(--element-padding), 1fr)
-			[content-start]
-			minmax(auto, var(--column-width))
-			[content-end]
-			minmax(var(--element-padding), 1fr)
-			[full-end];
-	}
-	main {
-		display: grid;
-		grid-column: full;
-		grid-template-columns: subgrid;
-		row-gap: var(--element-padding);
-	}
-	:global(main > *) {
-		grid-column: content;
-	}
+  body {
+    display: grid;
+    grid-template-columns:
+      [full-start]
+      minmax(var(--element-padding), 1fr)
+      [content-start]
+      minmax(auto, var(--column-width))
+      [content-end]
+      minmax(var(--element-padding), 1fr)
+      [full-end];
+  }
+  main {
+    display: grid;
+    grid-column: full;
+    grid-template-columns: subgrid;
+    row-gap: var(--element-padding);
+  }
+  :global(main > *) {
+    grid-column: content;
+  }
 </style>

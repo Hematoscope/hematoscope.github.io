@@ -2,30 +2,30 @@
 import Icon from "~src/components/Icon.astro";
 
 interface Props {
-    name: string;
-    icon: string;
-    accent: Accent;
+  name: string;
+  icon: string;
+  accent: Accent;
 }
 const { name, icon, accent } = Astro.props;
 const bg = `var(--accent-${accent})`;
 ---
 
 <article style={{ "--bg": `var(--accent-${accent})` }}>
-    <div class="algo-icon"><Icon name={icon} /></div>
-    <h3>{name}</h3>
+  <div class="algo-icon"><Icon name={icon} /></div>
+  <h3>{name}</h3>
 </article>
 
 <style define:vars={{ bg }}>
-    article {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    .algo-icon {
-        background-color: var(--bg);
-        display: flex;
-        padding: 0.5rem;
-        border-radius: var(--small-border-radius);
-    }
+  article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .algo-icon {
+    background-color: var(--bg);
+    display: flex;
+    padding: 0.5rem;
+    border-radius: var(--small-border-radius);
+  }
 </style>

@@ -16,120 +16,113 @@ import TextCard from "~src/components/TextCard.astro";
 ---
 
 <Layout title="Certifications | Hematoscope">
-    <Section variant="pair">
-        <Image
-            src={certifications}
-            alt="A paper containing various ISO-standard registration marks."
-            widths={WIDTHS}
-            height="300"
-        />
-        <SectionCard gradient>
-            <h1>Certified for Trust and Security</h1>
-            <p>
-                Our application is built to meet the highest standards of
-                medical safety and data security. With IVDR certification and a
-                CE mark, our solution complies with the rigorous requirements
-                for in-vitro diagnostic devices, ensuring top-quality
-                performance and reliability in clinical settings across Europe.
-            </p>
-            <p>
-                Additionally, the platform is HIPAA compliant, safeguarding
-                sensitive patient data with robust encryption and privacy
-                measures. This ensures that healthcare providers can use our
-                system with full confidence, knowing that both diagnostics and
-                data are handled securely and in line with industry regulations.
-            </p>
-        </SectionCard>
-    </Section>
+  <Section variant="pair">
+    <Image
+      src={certifications}
+      alt="A paper containing various ISO-standard registration marks."
+      widths={WIDTHS}
+      height="300"
+    />
+    <SectionCard gradient>
+      <h1>Certified for Trust and Security</h1>
+      <p>
+        Our application is built to meet the highest standards of medical safety
+        and data security. With IVDR certification and a CE mark, our solution
+        complies with the rigorous requirements for in-vitro diagnostic devices,
+        ensuring top-quality performance and reliability in clinical settings
+        across Europe.
+      </p>
+      <p>
+        Additionally, the platform is HIPAA compliant, safeguarding sensitive
+        patient data with robust encryption and privacy measures. This ensures
+        that healthcare providers can use our system with full confidence,
+        knowing that both diagnostics and data are handled securely and in line
+        with industry regulations.
+      </p>
+    </SectionCard>
+  </Section>
 
-    <Section variant="blank">
-        <H level="2">Certifications</H>
-        <div class="certifications">
-            <TextCard
-                image={documentSigning}
-                alt="A document being signed with a fancy pen"
-                accent="2"
-            >
-                <H level="3"
-                    >ISO 13485:2016 Medical Devices Quality Management</H
-                >
-                <p>
-                    Specifies requirements for a quality management system where
-                    an organization must demonstrate its ability to provide
-                    medical devices and related services that consistently meet
-                    customer and applicable regulatory requirements. Such
-                    organizations can be involved in one or more life-cycle
-                    stages, including design and development, production,
-                    storage and distribution, installation or servicing of a
-                    medical device, and design and development or provision of
-                    associated activities (e.g., technical support).
-                </p>
-            </TextCard>
-            <TextCard
-                image={documentBinders}
-                alt="A pile of full document binders"
-                accent="3"
-            >
-                <H level="3">ISO 27001:2022 Information Security Management</H>
-                <p>
-                    Specifies the requirements for establishing, implementing,
-                    maintaining, and continually improving an information
-                    security management system within the context of the
-                    organization. It also includes requirements for assessing
-                    and treating information security risks tailored to the
-                    organization's needs.
-                </p>
-            </TextCard>
-            <TextCard
-                image={documentCursive}
-                alt="A close-up of an old document written by hand in cursive"
-                accent="1"
-            >
-                <H level="3">HIPAA Security Rule</H>
-                <p>
-                    HIPAA is a US federal law that protects the privacy and
-                    security of individuals' health information in the United
-                    States. Compliance with HIPAA requires strict adherence to
-                    various security and privacy measures, including
-                    administrative, physical, and technical safeguards
-                </p>
-            </TextCard>
-        </div>
-    </Section>
+  <Section variant="blank">
+    <H level="2">Certifications</H>
+    <div class="certifications">
+      <TextCard
+        image={documentSigning}
+        alt="A document being signed with a fancy pen"
+        accent="2"
+      >
+        <H level="3">ISO 13485:2016 Medical Devices Quality Management</H>
+        <p>
+          Specifies requirements for a quality management system where an
+          organization must demonstrate its ability to provide medical devices
+          and related services that consistently meet customer and applicable
+          regulatory requirements. Such organizations can be involved in one or
+          more life-cycle stages, including design and development, production,
+          storage and distribution, installation or servicing of a medical
+          device, and design and development or provision of associated
+          activities (e.g., technical support).
+        </p>
+      </TextCard>
+      <TextCard
+        image={documentBinders}
+        alt="A pile of full document binders"
+        accent="3"
+      >
+        <H level="3">ISO 27001:2022 Information Security Management</H>
+        <p>
+          Specifies the requirements for establishing, implementing,
+          maintaining, and continually improving an information security
+          management system within the context of the organization. It also
+          includes requirements for assessing and treating information security
+          risks tailored to the organization's needs.
+        </p>
+      </TextCard>
+      <TextCard
+        image={documentCursive}
+        alt="A close-up of an old document written by hand in cursive"
+        accent="1"
+      >
+        <H level="3">HIPAA Security Rule</H>
+        <p>
+          HIPAA is a US federal law that protects the privacy and security of
+          individuals' health information in the United States. Compliance with
+          HIPAA requires strict adherence to various security and privacy
+          measures, including administrative, physical, and technical safeguards
+        </p>
+      </TextCard>
+    </div>
+  </Section>
 
-    <Section variant="pair">
-        <SectionCard accent="2">
-            <H level="2">Security, Reliability and Scalability in Cloud</H>
-            <p>
-                Our cloud platform ensures the highest level of security for
-                medical data, using end-to-end encryption, firewalls, and
-                multi-factor authentication. Fully HIPAA-compliant, it keeps
-                patient information protected during storage, processing, and
-                transmission.
-            </p>
-            <p>
-                Built for reliability and scalability, the system handles
-                increasing workloads effortlessly, delivering consistent,
-                accurate results. Whether for small clinics or large hospitals,
-                our platform scales with your needs, ensuring smooth,
-                uninterrupted diagnostics at any capacity.
-            </p>
-        </SectionCard>
-        <Image
-            src={cloud}
-            alt="A woman leaning on a glass wall holding a laptop, with racks of servers in the adjacent room."
-            widths={WIDTHS}
-            height="300"
-        />
-    </Section>
+  <Section variant="pair">
+    <SectionCard accent="2">
+      <H level="2">Security, Reliability and Scalability in Cloud</H>
+      <p>
+        Our cloud platform ensures the highest level of security for medical
+        data, using end-to-end encryption, firewalls, and multi-factor
+        authentication. Fully HIPAA-compliant, it keeps patient information
+        protected during storage, processing, and transmission.
+      </p>
+      <p>
+        Built for reliability and scalability, the system handles increasing
+        workloads effortlessly, delivering consistent, accurate results. Whether
+        for small clinics or large hospitals, our platform scales with your
+        needs, ensuring smooth, uninterrupted diagnostics at any capacity.
+      </p>
+    </SectionCard>
+    <Image
+      src={cloud}
+      alt="A woman leaning on a glass wall holding a laptop, with racks of servers in the adjacent room."
+      widths={WIDTHS}
+      height="300"
+    />
+  </Section>
 
-    <CallToAction title="Ready to Know More?" />
+  <CallToAction title="Ready to Know More?" />
 </Layout>
 
 <style>
-    .certifications {
-        display: flex;
-        flex-direction: column;
-        gap: var(--element-padding);
-    }
+  .certifications {
+    display: flex;
+    flex-direction: column;
+    gap: var(--element-padding);
+  }
 </style>

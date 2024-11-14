@@ -2,36 +2,36 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends Omit<HTMLAttributes<"textarea">, "id"> {
-    label: string;
-    name: string;
+  label: string;
+  name: string;
 }
 const { label, ...props } = Astro.props;
 ---
 
 <div>
-    <label for={props.name}>{label}</label>
-    <textarea rows="6" id={props.name} {...props}></textarea>
+  <label for={props.name}>{label}</label>
+  <textarea rows="6" id={props.name} {...props}></textarea>
 </div>
 
 <style>
-    div {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25em;
-    }
-    label {
-        color: var(--text-color-heading);
-        font-size: var(--text-size-label);
-        font-weight: 500;
-    }
-    textarea {
-        border: 1px solid var(--primary-1);
-        border-radius: var(--tiny-border-radius);
-        background-color: var(--background);
-        padding: 0.25em 0.5em;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+  }
+  label {
+    color: var(--text-color-heading);
+    font-size: var(--text-size-label);
+    font-weight: 500;
+  }
+  textarea {
+    border: 1px solid var(--primary-1);
+    border-radius: var(--tiny-border-radius);
+    background-color: var(--background);
+    padding: 0.25em 0.5em;
 
-        font-size: 1.25rem;
-        color: var(--text-color-heading);
-        resize: vertical;
-    }
+    font-size: 1.25rem;
+    color: var(--text-color-heading);
+    resize: vertical;
+  }
 </style>

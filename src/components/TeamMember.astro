@@ -4,36 +4,36 @@ import { Image } from "astro:assets";
 import { WIDTHS } from "~src/consts";
 
 interface Props {
-    photo: ImageMetadata;
-    name: string;
-    title: string;
-    email: string;
+  photo: ImageMetadata;
+  name: string;
+  title: string;
+  email: string;
 }
 const { photo, name, title, email } = Astro.props;
 ---
 
 <article>
-    <Image src={photo} alt={name} widths={WIDTHS} height="240" />
-    <h3>{name}</h3>
-    <p>{title}</p>
-    <p>{email}</p>
+  <Image src={photo} alt={name} widths={WIDTHS} height="240" />
+  <h3>{name}</h3>
+  <p>{title}</p>
+  <p>{email}</p>
 </article>
 
 <style>
-    article {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-width: 240px;
-    }
-    article > img {
-        border-radius: var(--small-border-radius);
-        margin-bottom: 1em;
-        object-position: top;
-        height: 200px;
-    }
-    h3 {
-        font-size: var(--text-size-body);
-        line-height: 1.5;
-    }
+  article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 240px;
+  }
+  article > img {
+    border-radius: var(--small-border-radius);
+    margin-bottom: 1em;
+    object-position: top;
+    height: 200px;
+  }
+  h3 {
+    font-size: var(--text-size-body);
+    line-height: 1.5;
+  }
 </style>

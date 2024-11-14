@@ -2,87 +2,82 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"section"> {
-    variant: "gradient-cells" | "gradient" | "pair" | "blank";
+  variant: "gradient-cells" | "gradient" | "pair" | "blank";
 }
 const { variant, ...props } = Astro.props;
 ---
 
 <section class:list={[props.class, ...variant.split("-")]} {...props}>
-    <slot />
+  <slot />
 </section>
 
 <style>
-    section {
-        position: relative;
-        border-radius: var(--element-border-radius);
-        padding: var(--element-padding);
+  section {
+    position: relative;
+    border-radius: var(--element-border-radius);
+    padding: var(--element-padding);
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: calc(2 * var(--element-padding));
-    }
-    :global(section h1),
-    :global(section h2) {
-        text-align: center;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(2 * var(--element-padding));
+  }
+  :global(section h1),
+  :global(section h2) {
+    text-align: center;
+  }
 
-    .blank {
-        padding-block: calc(2 * var(--element-padding));
-        padding-inline: unset;
-    }
+  .blank {
+    padding-block: calc(2 * var(--element-padding));
+    padding-inline: unset;
+  }
 
-    .cells::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: var(--element-border-radius);
-        z-index: -1;
-        background-image: url("/cells.webp");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 200%;
+  .cells::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--element-border-radius);
+    z-index: -1;
+    background-image: url("/cells.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200%;
 
-        opacity: 0.2;
-        filter: blur(8px);
-        /* Fix blur perf issue on safari. Ref: https://graffino.com/til/how-to-fix-filter-blur-performance-issue-in-safari */
-        transform: translate3d(0, 0, 0);
-    }
+    opacity: 0.2;
+    filter: blur(8px);
+    /* Fix blur perf issue on safari. Ref: https://graffino.com/til/how-to-fix-filter-blur-performance-issue-in-safari */
+    transform: translate3d(0, 0, 0);
+  }
 
-    .gradient::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        inset: 0;
-        border-radius: var(--element-border-radius);
-        opacity: 0.15;
-        background: radial-gradient(
-                55% 31% at 93% 5%,
-                #00ffd1 0%,
-                transparent 100%
-            ),
-            radial-gradient(73% 13% at 2% 48%, #00f0ff 0%, transparent 100%),
-            radial-gradient(58% 58% at 86% 87%, #00f0ff 0%, transparent 100%),
-            radial-gradient(109% 20% at 107% 38%, #ff006b 0%, transparent 100%),
-            radial-gradient(51% 51% at 22% 80%, #ff006b 0%, transparent 100%),
-            radial-gradient(83% 24% at 73% 62%, #cc00ff 0%, transparent 100%),
-            radial-gradient(45% 45% at 35% 34%, #0066ff 0%, transparent 100%),
-            #9bb7ff;
-    }
+  .gradient::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: var(--element-border-radius);
+    opacity: 0.15;
+    background: radial-gradient(55% 31% at 93% 5%, #00ffd1 0%, transparent 100%),
+      radial-gradient(73% 13% at 2% 48%, #00f0ff 0%, transparent 100%),
+      radial-gradient(58% 58% at 86% 87%, #00f0ff 0%, transparent 100%),
+      radial-gradient(109% 20% at 107% 38%, #ff006b 0%, transparent 100%),
+      radial-gradient(51% 51% at 22% 80%, #ff006b 0%, transparent 100%),
+      radial-gradient(83% 24% at 73% 62%, #cc00ff 0%, transparent 100%),
+      radial-gradient(45% 45% at 35% 34%, #0066ff 0%, transparent 100%), #9bb7ff;
+  }
 
-    .pair {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: stretch;
-        gap: var(--element-padding);
-        padding: unset;
-    }
-    :global(.pair > *) {
-        flex: 400px;
-    }
-    :global(.pair img) {
-        border-radius: var(--element-border-radius);
-        height: auto;
-        aspect-ratio: 2 / 1;
-    }
+  .pair {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: var(--element-padding);
+    padding: unset;
+  }
+  :global(.pair > *) {
+    flex: 400px;
+  }
+  :global(.pair img) {
+    border-radius: var(--element-border-radius);
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
 </style>

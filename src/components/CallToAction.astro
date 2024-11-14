@@ -4,33 +4,35 @@ import LinkButton from "~src/components/LinkButton.astro";
 import H from "./HeadingLink.astro";
 
 interface Props {
-    title: string;
+  title: string;
 }
 const { title } = Astro.props;
 ---
 
 <Section variant="blank" class="call-to-action">
-    <div class="text">
-        <H level="2">{title}</H>
-        <p>
-            Try the demo to get a feel for the application, or contact us and we
-            can discuss how to best integrate it into your systems.
-        </p>
-    </div>
-    <div class="buttons">
-        <LinkButton href="https://demo.hematoscope.app" variant="highlight">Try the demo</LinkButton>
-        <LinkButton href="/contact">Contact us</LinkButton>
-    </div>
+  <div class="text">
+    <H level="2">{title}</H>
+    <p>
+      Try the demo to get a feel for the application, or contact us and we can
+      discuss how to best integrate it into your systems.
+    </p>
+  </div>
+  <div class="buttons">
+    <LinkButton href="https://demo.hematoscope.app" variant="highlight"
+      >Try the demo</LinkButton
+    >
+    <LinkButton href="/contact">Contact us</LinkButton>
+  </div>
 </Section>
 
 <style>
-    .call-to-action {
-        gap: var(--element-padding);
-    }
-    .buttons {
-        display: flex;
-        gap: var(--element-padding);
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+  .call-to-action {
+    gap: var(--element-padding);
+  }
+  .buttons {
+    display: flex;
+    gap: var(--element-padding);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 </style>

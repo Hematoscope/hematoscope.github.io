@@ -2,35 +2,35 @@
 import type { HTMLAttributes, HTMLTag } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
-    tag?: HTMLTag;
+  tag?: HTMLTag;
 }
 const { tag = "div", ...props } = Astro.props;
 const Tag = tag;
 ---
 
 <Tag class:list={[props.class, "glass-wrapper"]} {...props}>
-    <slot />
+  <slot />
 </Tag>
 
 <style>
-    .glass-wrapper {
-        max-width: 70rem;
-        background: rgba(255, 255, 255, 0.3);
+  .glass-wrapper {
+    max-width: 70rem;
+    background: rgba(255, 255, 255, 0.3);
 
-        border: var(--glass-border-outer);
-        box-shadow: var(--shadow-lg);
-        -webkit-backdrop-filter: blur(25px);
-        backdrop-filter: blur(25px);
-        border-radius: var(--element-border-radius);
-        padding: calc(0.5 * var(--element-padding));
+    border: var(--glass-border-outer);
+    box-shadow: var(--shadow-lg);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    border-radius: var(--element-border-radius);
+    padding: calc(0.5 * var(--element-padding));
+  }
+  :global(.glass-wrapper > *) {
+    border: var(--glass-border-inner);
+    border-radius: calc(0.5 * var(--element-border-radius));
+  }
+  @media screen and (width < 40em) {
+    .glass-wrapper {
+      padding: calc(0.4 * var(--element-padding));
     }
-    :global(.glass-wrapper > *) {
-        border: var(--glass-border-inner);
-        border-radius: calc(0.5 * var(--element-border-radius));
-    }
-    @media screen and (width < 40em) {
-        .glass-wrapper {
-            padding: calc(0.4 * var(--element-padding));
-        }
-    }
+  }
 </style>
