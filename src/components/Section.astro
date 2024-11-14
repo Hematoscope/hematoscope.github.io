@@ -49,6 +49,9 @@ const { variant, ...props } = Astro.props;
     transform: translate3d(0, 0, 0);
   }
 
+  .gradient {
+    overflow: hidden;
+  }
   .gradient::before {
     content: "";
     position: absolute;

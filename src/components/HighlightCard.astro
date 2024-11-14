@@ -15,10 +15,10 @@ const bg = `var(--accent-${accent})`;
 
 <li>
   <div class="row">
-    <p>{description}</p>
+    <span>{highlight}</span>
     <div class="icon-wrapper"><Icon name={icon} /></div>
   </div>
-  <span>{highlight}</span>
+  <p>{description}</p>
   <LinkButton href={linkHref} variant="default-arrow">Read more</LinkButton>
 </li>
 
@@ -40,18 +40,21 @@ const bg = `var(--accent-${accent})`;
 
   p {
     color: var(--text-color-body);
+    text-align: center;
+    margin-bottom: 0.5em;
   }
 
   span {
-    font-size: calc(1 * var(--text-size-heading-1));
+    font-size: var(--text-size-heading-1);
+    line-height: var(--text-size-heading-1);
     font-weight: 800;
   }
 
   .row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 2em;
   }
   .icon-wrapper {
     display: flex;

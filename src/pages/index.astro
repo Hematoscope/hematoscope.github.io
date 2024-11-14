@@ -1,10 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import microscopeDoctor from "~src/assets/images/home/microscope-doctor.jpg";
+import appMask from "~src/assets/images/home/app-mask.png";
+import appLabelings from "~src/assets/images/home/app-labelings.png";
 import microscope from "~src/assets/images/home/microscope.jpg";
-import gallery1 from "~src/assets/images/home/gallery-1.jpg";
-import gallery2 from "~src/assets/images/home/gallery-2.jpg";
-import gallery3 from "~src/assets/images/home/gallery-3.jpg";
+import server from "~src/assets/images/home/server.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -17,14 +16,11 @@ import HighlightCard from "~src/components/HighlightCard.astro";
 import CallToAction from "~src/components/CallToAction.astro";
 ---
 
-<Layout title="Hematoscope App">
+<Layout title="Hematoscope">
   <Section variant="gradient-cells" class="hero">
     <div class="text">
-      <h1>Revolutionizing Diagnostics with Advanced AI Solutions</h1>
-      <p>
-        Hematoscope. Empowering Physicians and Researchers with Cutting-Edge
-        Morphometric Algorithms.
-      </p>
+      <h1>Hematoscope &ndash; Precision Hematology with Digital Microscopy</h1>
+      <p>AI Solutions for Hematopathologists, Hematologists and Researchers.</p>
     </div>
     <GlassFrame>
       <video
@@ -40,83 +36,69 @@ import CallToAction from "~src/components/CallToAction.astro";
 
   <Section variant="pair">
     <Image
-      src={microscopeDoctor}
-      alt="Doctor looking at a bone marrow sample through a microscope."
+      src={appLabelings}
+      alt="Doctor looking at cell labels viewed with the Hematoscope app"
       widths={WIDTHS}
       height="300"
     />
-    <SectionCard accent="1">
-      <H level="2">Repeatable results. Automated analysis.</H>
+    <SectionCard>
+      <H level="2">Objective and Fast</H>
       <p>
-        Automate the tedious analysis, saving time and enabling the
-        practitioners to focus their skills to the tasks that really matter.
+        Hematoscope will not replace hematopathologists. However, standardized
+        and real-time digital assessment can enhance human performance and
+        decrease subjectivity.
       </p>
-      <LinkButton href="/application" variant="default-arrow"
-        >Read more</LinkButton
-      >
+      <LinkButton href="/application" variant="default-arrow">
+        Read more
+      </LinkButton>
     </SectionCard>
   </Section>
 
-  <Section variant="blank" class="gallery">
-    <div class="text">
-      <H level="2">Intuitive tools</H>
+  <Section variant="pair">
+    <SectionCard>
+      <H level="2">Intuitive and Explainable</H>
       <p>
-        Cell classification, statistics, slide viewer, hype text that looks good
-        to doctors and significant people who might want to buy this app for
-        hospitals.
+        Every model prediction comes with clear visualizations and quantifiable
+        data, ensuring transparency and straightforward interpretation.
       </p>
-    </div>
-
-    <ol class="scroller">
-      <GlassFrame tag="li" class="scroller-img">
-        <Image
-          src={gallery1}
-          alt="A screenshot of the application showing a 100 times magnified microscope image and labeled cells."
-          widths={WIDTHS}
-        />
-      </GlassFrame>
-      <GlassFrame tag="li" class="scroller-img">
-        <Image
-          src={gallery2}
-          alt="A screenshot of the application showing a 10 times magnified whole-slide image with a center mask drawn on top of it."
-          widths={WIDTHS}
-        />
-      </GlassFrame>
-      <GlassFrame tag="li" class="scroller-img">
-        <Image
-          src={gallery3}
-          alt="A screenshot of the application showing a view listing all white blood cells classified as blasts by the algorithms."
-          widths={WIDTHS}
-        />
-      </GlassFrame>
-    </ol>
+      <LinkButton href="/application" variant="default-arrow">
+        Read more
+      </LinkButton>
+    </SectionCard>
+    <Image
+      src={appMask}
+      alt="Doctor looking at a sample with an overlaid mask viewed with the Hematoscope app"
+      widths={WIDTHS}
+      height="300"
+    />
   </Section>
 
   <Section variant="gradient">
     <div class="text">
-      <H level="2">Comprehensive Algorithms</H>
+      <H level="2">Comprehensive Analysis</H>
       <p>
-        Employing the latest technologies in computer vision and deep learning,
-        Hematoscope delivers results fast, accurately and objectively.
+        Hematopathology is not just about counting cells. By employing clinical
+        insights and recent advances in computer vision and deep learning,
+        Hematoscope performs end-to-end cytomorphological assessment.
       </p>
     </div>
     <ul class="algorithms">
       <HighlightCard
-        description="Distinct algorithms for analysis:"
+        description="Algorithms"
         highlight="11"
         icon="highlights/neuralnet"
         accent="1"
         linkHref="/application#vast-suite-of-algorithms"
       />
       <HighlightCard
-        description="Average accuracy for the algorithms:"
-        highlight="93.4%"
+        description="Accuracy"
+        highlight="93%"
         icon="highlights/accuracy"
         accent="2"
         linkHref="/application#precision-consistency-efficiency"
       />
       <HighlightCard
-        description="Peer-reviewed publications"
+        description="Publications"
         highlight="7"
         icon="highlights/research"
         accent="3"
@@ -126,12 +108,12 @@ import CallToAction from "~src/components/CallToAction.astro";
   </Section>
 
   <Section variant="pair">
-    <SectionCard accent="2">
-      <H level="2">Compatible with West Medica scanners</H>
+    <SectionCard>
+      <H level="2">Compatible with Multiple Microscopes</H>
       <p>
-        Whole-Slide Imaging with 10x - 100x magnification performed
-        automatically. Analyze up to 1000 samples per day, with each sample
-        analyzed within 5 minutes of the scan.
+        Whole-slide and single-cell image analysis is compatible with West
+        Medica&apos;s and other imaging systems. No need for additional
+        hardwares or complex installations &ndash; only your computer.
       </p>
       <LinkButton
         href="/application#effortless-integration-and-compatibility"
@@ -144,6 +126,26 @@ import CallToAction from "~src/components/CallToAction.astro";
       widths={WIDTHS}
       height="300"
     />
+  </Section>
+
+  <Section variant="pair">
+    <Image
+      src={server}
+      alt="A rack of servers with blinking lights"
+      widths={WIDTHS}
+      height="300"
+    />
+    <SectionCard>
+      <H level="2">Safe and Secure</H>
+      <p>
+        Data security is more than a priority; it is a commitment. By strictly
+        adhering to international standards and data privacy regulations, we can
+        guarantee users to retain have complete control over their data.
+      </p>
+      <LinkButton href="/application" variant="default-arrow">
+        Read more
+      </LinkButton>
+    </SectionCard>
   </Section>
 
   <CallToAction title="See for Yourself" />
@@ -159,68 +161,8 @@ import CallToAction from "~src/components/CallToAction.astro";
   }
 
   video {
+    /* magic ratio that happens to look good for current video */
     aspect-ratio: 16 / 8.8;
-  }
-
-  .gallery {
-    grid-column: full !important;
-    padding: unset;
-    padding-block-start: var(--element-padding);
-  }
-  .gallery > div {
-    padding-inline: var(--element-padding);
-  }
-  .scroller {
-    display: flex;
-    --animation-multiplier: 1;
-    gap: calc(3 * var(--element-padding));
-    padding-inline: calc(5 * var(--element-padding));
-    padding-block-end: calc(2 * var(--element-padding));
-    list-style: none;
-
-    overflow-x: scroll;
-    scrollbar-color: transparent transparent; /* thumb and track color */
-    scrollbar-width: 0px;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-  }
-  .scroller-img {
-    min-width: 80%;
-    scroll-snap-align: center;
-    animation: scroll 10s linear infinite;
-    animation-timing-function: ease-in-out;
-  }
-  .scroller-img img {
-    height: 100%;
-    width: 100%;
-  }
-  .scroller:hover .scroller-img {
-    animation-play-state: paused;
-  }
-  @media (prefers-reduced-motion), (pointer: coarse) {
-    .scroller-img {
-      animation: none;
-    }
-  }
-  @keyframes scroll {
-    0%,
-    10%,
-    90%,
-    100% {
-      transform: translateX(0);
-    }
-    20%,
-    45% {
-      transform: translateX(
-        calc(-95% - var(--animation-multiplier) * var(--element-padding))
-      );
-    }
-    55%,
-    80% {
-      transform: translateX(
-        calc(-190% - 2 * var(--animation-multiplier) * var(--element-padding))
-      );
-    }
   }
 
   .algorithms {

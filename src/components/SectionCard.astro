@@ -27,7 +27,7 @@ const bg = `var(--accent-${accent})`;
 
     border-radius: var(--element-border-radius);
     padding: var(--element-padding);
-    background-color: var(--bg);
+    background-color: var(--bg, unset);
   }
   :global(.section-card > h1),
   :global(.section-card > h2) {
