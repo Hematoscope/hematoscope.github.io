@@ -13,6 +13,10 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   /* 3. Add accessible line-height */
   line-height: 1.5;

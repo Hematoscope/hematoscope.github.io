@@ -6,10 +6,10 @@ const currentPath = Astro.url.pathname;
 
 const links = [
   { name: "Application", href: "/application" },
-  { name: "Certifications", href: "/certifications" },
+  { name: "Compliance", href: "/compliance" },
   { name: "Research", href: "/research" },
   { name: "Documentation", href: "/documentation" },
-  { name: "Contact", href: "/contact" },
+  { name: "Company", href: "/company" },
 ];
 ---
 
@@ -59,10 +59,10 @@ const links = [
 
       <LinkButton
         class="demo-button"
-        href="https://demo.hematoscope.app"
+        href="/contact"
         variant="highlight"
       >
-        Demo
+        Contact us
       </LinkButton>
     </nav>
   </div>
@@ -167,7 +167,7 @@ const links = [
   }
   ul {
     display: flex;
-    gap: 1.5em;
+    gap: 0.5em;
     list-style: none;
   }
   li {
@@ -179,17 +179,6 @@ const links = [
   }
   li > a:hover {
     text-decoration: underline;
-  }
-  li:first-child:before {
-    content: "";
-  }
-  li:before {
-    content: "/";
-    position: absolute;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    left: -1em;
   }
 
   .visible {
@@ -250,9 +239,6 @@ const links = [
     }
     li > a {
       display: inline-block;
-    }
-    li:first-child::before {
-      content: "/";
     }
     .demo-button {
       align-self: flex-end;

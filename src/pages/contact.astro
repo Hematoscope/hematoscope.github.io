@@ -1,26 +1,18 @@
 ---
 import { Image } from "astro:assets";
 import doctorLaptop from "~src/assets/images/contact/doctor-laptop.jpg";
-import oscar from "~src/assets/images/contact/oscar.jpg";
-import sanna from "~src/assets/images/contact/sanna.jpg";
-import mikko from "~src/assets/images/contact/mikko.jpg";
-import julia from "~src/assets/images/contact/julia.jpg";
-import joonas from "~src/assets/images/contact/joonas.jpg";
-import stas from "~src/assets/images/contact/stas.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
-import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
 import Input from "~src/components/Input.astro";
 import Textarea from "~src/components/Textarea.astro";
-import TeamMember from "~src/components/TeamMember.astro";
 
 const url = Astro.url;
 ---
 
-<Layout title="Research | Hematoscope">
+<Layout title="Contact | Hematoscope">
   <Section variant="pair">
     <Image
       src={doctorLaptop}
@@ -56,56 +48,6 @@ const url = Astro.url;
       </form>
     </SectionCard>
   </Section>
-
-  <Section variant="blank">
-    <div class="text">
-      <H level="2">Meet the team</H>
-      <p>
-        Our multidisciplinary team brings together experts in AI, medical
-        diagnostics, and software development, working collaboratively to create
-        innovative solutions that bridge technology and healthcare for better
-        patient outcomes.
-      </p>
-    </div>
-    <div class="team">
-      <TeamMember
-        photo={oscar}
-        name="Oscar Brück / MD, PhD"
-        title="Chief Executive Officer"
-        email="first.last@email.com"
-      />
-      <TeamMember
-        photo={sanna}
-        name="Sanna Siitonen / MD, PhD"
-        title="Chief Medical Officer"
-        email="first.last@email.com"
-      />
-      <TeamMember
-        photo={mikko}
-        name="Mikko Purhonen / M.Sc."
-        title="Chief Algorithm Officer"
-        email="first.last@email.com"
-      />
-      <TeamMember
-        photo={julia}
-        name="Julia Prihu / M.Sc."
-        title="Chief Certification Officer"
-        email="first.last@email.com"
-      />
-      <TeamMember
-        photo={joonas}
-        name="Joonas Palosuo / M.Sc."
-        title="Chief Application Officer"
-        email="first.last@email.com"
-      />
-      <TeamMember
-        photo={stas}
-        name="Stas Tatun / M.Sc."
-        title="Chief Deeplearning Officer"
-        email="first.last@email.com"
-      />
-    </div>
-  </Section>
 </Layout>
 
 <script>
@@ -123,6 +65,13 @@ const url = Astro.url;
 </script>
 
 <style>
+  :global(body) {
+    grid-template-rows: auto 1fr auto;
+  }
+  :global(main) {
+    margin-bottom: auto;
+  }
+
   form {
     display: flex;
     flex-wrap: wrap;
@@ -175,18 +124,5 @@ const url = Astro.url;
     border-radius: var(--small-border-radius);
     background-color: var(--background);
     border-left: 8px solid var(--highlight);
-  }
-
-  .team {
-    max-width: 54rem;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: calc(2 * var(--element-padding));
-    column-gap: var(--element-padding);
-    justify-content: center;
-  }
-  :global(.team > *) {
-    flex: 1 0 30%;
-    min-width: 10rem;
   }
 </style>

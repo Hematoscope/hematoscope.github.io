@@ -1,0 +1,88 @@
+---
+import oscar from "~src/assets/images/contact/oscar.jpg";
+import sanna from "~src/assets/images/contact/sanna.jpg";
+import mikko from "~src/assets/images/contact/mikko.jpg";
+import julia from "~src/assets/images/contact/julia.jpg";
+import joonas from "~src/assets/images/contact/joonas.jpg";
+import stas from "~src/assets/images/contact/stas.jpg";
+
+import Section from "~src/components/Section.astro";
+import H from "~src/components/HeadingLink.astro";
+import Layout from "~src/layouts/Layout.astro";
+import TeamMember from "~src/components/TeamMember.astro";
+---
+
+<Layout title="Company | Hematoscope">
+  <Section variant="blank">
+    <div class="text">
+      <h1>Meet the team</h1>
+      <p>
+        Our multidisciplinary team brings together experts in AI, medical
+        diagnostics, and software development, working collaboratively to create
+        innovative solutions that bridge technology and healthcare for better
+        patient outcomes.
+      </p>
+    </div>
+
+    <H level="2">Board of directors</H>
+    <div class="team">
+      <TeamMember
+        photo={oscar}
+        name="Oscar Brück / MD, PhD"
+        title="Chief Executive Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={sanna}
+        name="Sanna Siitonen / MD, PhD"
+        title="Chief Medical Officer"
+        email="first.last@email.com"
+      />
+    </div>
+
+    <H level="2">Application</H>
+    <div class="team">
+      <TeamMember
+        photo={oscar}
+        name="Oscar Brück / MD, PhD"
+        title="Chief Product Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={mikko}
+        name="Mikko Purhonen / M.Sc."
+        title="Chief Algorithm Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={julia}
+        name="Julia Prihu / M.Sc."
+        title="Chief Certification Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={joonas}
+        name="Joonas Palosuo / M.Sc."
+        title="Chief Application Officer"
+        email="first.last@email.com"
+      />
+      <TeamMember
+        photo={stas}
+        name="Stas Tatun / M.Sc."
+        title="Chief Deeplearning Officer"
+        email="first.last@email.com"
+      />
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  .team {
+    max-width: 54rem;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: calc(2 * var(--element-padding));
+    column-gap: var(--element-padding);
+    justify-content: center;
+  }
+</style>
