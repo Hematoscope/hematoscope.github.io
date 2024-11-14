@@ -1,10 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import certifications from "~src/assets/images/certifications/certifications.jpg";
-import documentSigning from "~src/assets/images/certifications/document-signing.jpg";
-import documentBinders from "~src/assets/images/certifications/document-binders.jpg";
-import documentCursive from "~src/assets/images/certifications/document-cursive.jpg";
-import cloud from "~src/assets/images/certifications/cloud.jpg";
+import certifications from "~src/assets/images/compliance/certifications.jpg";
+import documentSigning from "~src/assets/images/compliance/document-signing.jpg";
+import documentBinders from "~src/assets/images/compliance/document-binders.jpg";
+import documentCursive from "~src/assets/images/compliance/document-cursive.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -24,20 +23,17 @@ import TextCard from "~src/components/TextCard.astro";
       height="300"
     />
     <SectionCard gradient>
-      <h1>Certified for Trust and Security</h1>
+      <h1>Commitment to Security and Quality</h1>
       <p>
-        Our application is built to meet the highest standards of medical safety
-        and data security. With IVDR certification and a CE mark, our solution
-        complies with the rigorous requirements for in-vitro diagnostic devices,
-        ensuring top-quality performance and reliability in clinical settings
-        across Europe.
+        Only by adhering to medical device requirements can we guarantee
+        reliable performance and medical safety regulatory standards. Our
+        CE-marked Hematoscope software complies with globally recognized quality
+        certifications and the IVDR.
       </p>
       <p>
-        Additionally, the platform is HIPAA compliant, safeguarding sensitive
-        patient data with robust encryption and privacy measures. This ensures
-        that healthcare providers can use our system with full confidence,
-        knowing that both diagnostics and data are handled securely and in line
-        with industry regulations.
+        The Hematoscope team and platform adhere to data privacy regulations
+        such as HIPAA and GDPR. We ensure uncompromised data security through
+        advanced encryption and privacy measures.
       </p>
     </SectionCard>
   </Section>
@@ -50,16 +46,18 @@ import TextCard from "~src/components/TextCard.astro";
         alt="A document being signed with a fancy pen"
         accent="2"
       >
-        <H level="3">ISO 13485:2016 Medical Devices Quality Management</H>
+        <H level="3">
+          ISO 13485:2016 &ndash; Medical Devices Quality Management
+        </H>
         <p>
-          Specifies requirements for a quality management system where an
-          organization must demonstrate its ability to provide medical devices
-          and related services that consistently meet customer and applicable
-          regulatory requirements. Such organizations can be involved in one or
-          more life-cycle stages, including design and development, production,
-          storage and distribution, installation or servicing of a medical
-          device, and design and development or provision of associated
-          activities (e.g., technical support).
+          Outlines the requirements for a quality management system that ensures
+          an organization can consistently deliver medical devices and related
+          services that meet both customer expectations and regulatory
+          standards. Organizations adhering to this standard may be involved in
+          various stages of the device life cycle, including design and
+          development, production, storage and distribution, installation,
+          servicing, or providing associated activities such as technical
+          support.
         </p>
       </TextCard>
       <TextCard
@@ -67,13 +65,13 @@ import TextCard from "~src/components/TextCard.astro";
         alt="A pile of full document binders"
         accent="3"
       >
-        <H level="3">ISO 27001:2022 Information Security Management</H>
+        <H level="3">ISO 27001:2022 &ndash; Information Security Management</H>
         <p>
-          Specifies the requirements for establishing, implementing,
-          maintaining, and continually improving an information security
-          management system within the context of the organization. It also
-          includes requirements for assessing and treating information security
-          risks tailored to the organization's needs.
+          Defines the requirements for establishing, implementing, maintaining,
+          and continuously improving an information security management system
+          within an organization. It also outlines the processes for assessing
+          and addressing information security risks, customized to meet the
+          organization's specific needs.
         </p>
       </TextCard>
       <TextCard
@@ -81,39 +79,20 @@ import TextCard from "~src/components/TextCard.astro";
         alt="A close-up of an old document written by hand in cursive"
         accent="1"
       >
-        <H level="3">HIPAA Security Rule</H>
+        <H level="3">HIPAA Security Rule & GDPR Art. 32</H>
         <p>
-          HIPAA is a US federal law that protects the privacy and security of
-          individuals' health information in the United States. Compliance with
-          HIPAA requires strict adherence to various security and privacy
-          measures, including administrative, physical, and technical safeguards
+          U.S. federal and EU regulations are designed to protect the privacy
+          and security of personal health information. Compliance requires
+          strict adherence to administrative, physical, and technical safeguards
+          to maintain the confidentiality and integrity of health data. The
+          Microsoft Azure cloud is designed to provide the highest level of
+          security for medical data, featuring end-to-end encryption, firewalls,
+          and multi-factor authentication. Patient information is securely
+          protected throughout storage, processing, and transmission ensuring
+          privacy across regions and borders.
         </p>
       </TextCard>
     </div>
-  </Section>
-
-  <Section variant="pair">
-    <SectionCard accent="2">
-      <H level="2">Security, Reliability and Scalability in Cloud</H>
-      <p>
-        Our cloud platform ensures the highest level of security for medical
-        data, using end-to-end encryption, firewalls, and multi-factor
-        authentication. Fully HIPAA-compliant, it keeps patient information
-        protected during storage, processing, and transmission.
-      </p>
-      <p>
-        Built for reliability and scalability, the system handles increasing
-        workloads effortlessly, delivering consistent, accurate results. Whether
-        for small clinics or large hospitals, our platform scales with your
-        needs, ensuring smooth, uninterrupted diagnostics at any capacity.
-      </p>
-    </SectionCard>
-    <Image
-      src={cloud}
-      alt="A woman leaning on a glass wall holding a laptop, with racks of servers in the adjacent room."
-      widths={WIDTHS}
-      height="300"
-    />
   </Section>
 
   <CallToAction title="Ready to Know More?" />
