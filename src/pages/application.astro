@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import cells from "~src/assets/images/application/cells.jpg";
-import twoDoctors from "~src/assets/images/application/microscope-two-doctors.jpg";
-import doctorWriting from "~src/assets/images/application/doctor-writing.jpg";
-import screenshot1 from "~src/assets/images/application/screenshot-1.png";
-import screenshot2 from "~src/assets/images/application/screenshot-2.png";
-import screenshot3 from "~src/assets/images/application/screenshot-3.png";
+import slides from "~src/assets/images/application/slides.jpg";
+import networking from "~src/assets/images/application/networking.jpg";
+import cellHighlight from "~src/assets/images/application/app-cell-highlight.png";
+import cellList from "~src/assets/images/application/app-cell-list.png";
+import report from "~src/assets/images/application/report.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -14,17 +14,22 @@ import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
 import AlgorithmItem from "~src/components/AlgorithmItem.astro";
 import CallToAction from "~src/components/CallToAction.astro";
+import WorkflowStep from "~src/components/WorkflowStep.astro";
 ---
 
 <Layout title="Application | Hematoscope" description="Automate the Tedium">
   <Section variant="pair">
     <SectionCard gradient>
-      <h1>Automate the Tedium</h1>
+      <h1>A New Era</h1>
       <p class="ingress">
-        Our AI algorithms provide cytomorphology analysis, assisting in both
-        blood and bone marrow sample classification. This comprehensive approach
-        enhances diagnostic precision and efficiency, empowering medical
-        professionals to focus their efforts on meaningful tasks.
+        Digital cytopathology streamlines workflows by fostering synergy between
+        physicians and technology. With AI managing time-consuming, quantifiable
+        tasks, human experts apply their clinical judgment to verify and
+        interpret results. To support interpretation, Hematoscope is the first
+        platform to also provide reference values for healthy subjects. Remote
+        collaboration becomes effortless, enabling seamless sample evaluation
+        and colleague consultations. The Hematoscope application brings digital
+        cytopathology to life.
       </p>
     </SectionCard>
     <Image
@@ -33,6 +38,42 @@ import CallToAction from "~src/components/CallToAction.astro";
       widths={WIDTHS}
       height="300"
     />
+  </Section>
+
+  <Section variant="blank" class="workflow">
+    <H level="2">Hematoscope Workflow</H>
+    <ol>
+      <WorkflowStep
+        image={slides}
+        alt="A doctor skimming through a drawer filled with bone marrow slides."
+        heading="Scan Slides"
+        text="Capture cytomorphological slides using your microscope."
+      />
+      <WorkflowStep
+        image={networking}
+        alt="A rack of servers with networking cables running from one to another."
+        heading="Automatic Upload"
+        text="Images are securely uploaded to the cloud-based file storage."
+      />
+      <WorkflowStep
+        image={cellHighlight}
+        alt="A screenshot of Hematoscope application showing a highlighted, labeled cell."
+        heading="Feature Extraction"
+        text="Hematoscope analyzes key features from whole-slide and single-cell images."
+      />
+      <WorkflowStep
+        image={cellList}
+        alt="A screenshot of Hematoscope application showing a list of cells with their labels."
+        heading="Physician Review"
+        text="Pre-classification results are reviewed and verified by a physician."
+      />
+      <WorkflowStep
+        image={report}
+        alt="A doctor reviewing a report, holding a pen in hand."
+        heading="Seamless Reporting"
+        text="Share a standardized digital report directly to your laboratory information system."
+      />
+    </ol>
   </Section>
 
   <Section variant="blank">
@@ -70,78 +111,6 @@ import CallToAction from "~src/components/CallToAction.astro";
     </div>
   </Section>
 
-  <Section variant="pair">
-    <Image
-      src={twoDoctors}
-      alt="A doctor microscoping a pathological sample while another doctor is observing and taking notes"
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard accent="1">
-      <H level="2">Precision. Consistency. Efficiency.</H>
-      <p>
-        Automation allows labs to process thousands of samples daily with
-        results available in as little as 5 minutes. This speed accelerates
-        decision-making, enabling quicker diagnoses and faster patient care
-        without compromising accuracy.
-      </p>
-      <p>
-        Time-consuming, labor-intensive tasks become routine with automation.
-        Complex analyses that would typically take hours are completed swiftly,
-        allowing physicians to focus on higher-level decision-making, ultimately
-        improving workflow and resource management.
-      </p>
-    </SectionCard>
-  </Section>
-
-  <Section variant="blank" class="screenshots">
-    <Image
-      src={screenshot1}
-      alt="Illustrative screenshot of the Hematoscope Application displaying individual cells."
-      widths={WIDTHS}
-      height="300"
-    />
-    <Image
-      src={screenshot2}
-      alt="Illustrative screenshot of the Hematoscope Application displaying a labeled cell in a 100 times magnified microscope image."
-      widths={WIDTHS}
-      height="300"
-    />
-    <Image
-      src={screenshot3}
-      alt="Illustrative screenshot of the Hematoscope Application displaying a 10 times magnified image of a sample."
-      widths={WIDTHS}
-      height="300"
-    />
-  </Section>
-
-  <Section variant="pair">
-    <SectionCard accent="1">
-      <H level="2">Effortless Integration and Compatibility</H>
-      <p>
-        Integrating our web-based application into hospitals is seamless and
-        hassle-free. Since no installation is required, labs can quickly adopt
-        our platform without needing complex setup or IT infrastructure changes.
-        The system is designed for rapid deployment, ensuring that hospitals can
-        immediately begin utilizing its powerful diagnostic tools while
-        maintaining top-level security and compliance standards.
-      </p>
-      <p>
-        Our platform supports West Medica scanners, allowing for smooth
-        integration with existing equipment. As we continue to expand
-        compatibility, more scanner models will be supported, making it a
-        future-proof solution for hospitals looking to stay ahead in diagnostic
-        technology.
-      </p>
-    </SectionCard>
-    <Image
-      src={doctorWriting}
-      alt="A doctor is being shown a paper, from which she is writing notes on a computer."
-      widths={WIDTHS}
-      height="300"
-    />
-  </Section>
-
   <CallToAction title="Want to Learn More?" />
 </Layout>
 
@@ -149,6 +118,32 @@ import CallToAction from "~src/components/CallToAction.astro";
   .ingress {
     font-size: var(--text-size-ingress);
   }
+
+  .workflow {
+    counter-reset: step;
+  }
+  :global(.workflow > h2) {
+    grid-column: content;
+  }
+  .workflow ol {
+    display: grid;
+    grid-template-areas: "image counter text";
+    grid-template-columns: 1fr 6rem 1fr;
+    column-gap: calc(2 * var(--element-padding));
+    row-gap: calc(4 * var(--element-padding));
+    position: relative;
+  }
+  .workflow ol::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    left: 50%;
+    top: 8rem;
+    bottom: 8rem;
+    background-color: #d9d9d9;
+    z-index: -1;
+  }
+
   .algorithms {
     max-width: 54rem;
     display: flex;
@@ -161,16 +156,22 @@ import CallToAction from "~src/components/CallToAction.astro";
     flex: 1 0 20%;
     min-width: 10rem;
   }
-  .screenshots {
-    padding: unset !important;
-    flex-direction: row;
-    gap: var(--element-padding);
+
+  /* Media queries for workflow section */
+  @media screen and (width < 70em) {
+    .workflow ol {
+      column-gap: calc(var(--element-padding));
+    }
   }
-  :global(.screenshots > *) {
-    flex-grow: 1;
-    width: 30%;
-    height: auto;
-    border-radius: var(--element-border-radius);
-    border: var(--glass-border-inner);
+
+  @media screen and (width < 50em) {
+    .workflow ol {
+      display: grid;
+      grid-template-areas: "image text";
+      grid-template-columns: 1fr 1fr;
+    }
+    .workflow ol::before {
+      content: unset;
+    }
   }
 </style>
