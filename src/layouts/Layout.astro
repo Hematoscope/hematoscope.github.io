@@ -6,9 +6,10 @@ import "~src/styles/theme.css";
 
 interface Props {
   title: string;
+  description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,11 +19,16 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
-    <meta
-      name="description"
-      content="Home page for the Hematoscope Application."
-    />
+    <meta name="description" content={description} />
+
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${Astro.site}/opengraph.jpg`} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <Navbar />
