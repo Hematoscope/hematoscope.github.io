@@ -76,6 +76,45 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
     </ol>
   </Section>
 
+  <Section variant="gradient-cells">
+    <H level="2">Key Features</H>
+
+    <div class="features">
+      <div class="feature">
+        <H level="3">Sample Triage</H>
+        <p>Prioritize urgent samples with a multi-parameter risk model.</p>
+      </div>
+      <div class="feature">
+        <H level="3">Comprehensive Image View</H>
+        <p>Access whole-slide images, numerical analysis, and visual masks.</p>
+      </div>
+      <div class="feature">
+        <H level="3">Single-Cell Analysis</H>
+        <p>
+          View single-cell images with classifications and potential dysplasia
+          indicators.
+        </p>
+      </div>
+      <div class="feature">
+        <H level="3">Reference Comparisons</H>
+        <p>Compare results with population-scale reference ranges.</p>
+      </div>
+      <div class="feature">
+        <H level="3">Standardized Reporting</H>
+        <p>
+          Assess and share clinically essential findings in a structured report.
+        </p>
+      </div>
+      <div class="feature">
+        <H level="3">Collaborative Sharing</H>
+        <p>
+          Easily share slides and cell images with colleagues for consultations
+          and meetings.
+        </p>
+      </div>
+    </div>
+  </Section>
+
   <Section variant="blank">
     <div class="text">
       <H level="2">Vast Suite of Algorithms</H>
@@ -142,6 +181,56 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
     bottom: 8rem;
     background-color: #d9d9d9;
     z-index: -1;
+  }
+
+  .features {
+    counter-reset: feature;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--element-padding);
+    max-width: 70em;
+  }
+  .feature {
+    flex: 25rem 1 1;
+    counter-increment: feature;
+    background-color: var(--background);
+    padding: var(--element-padding);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-lg);
+
+    display: grid;
+    grid-template-areas:
+      "number heading"
+      "number paragraph";
+    grid-template-columns: 5rem auto;
+    column-gap: var(--element-padding);
+    align-items: center;
+  }
+  .feature::before {
+    content: counter(feature);
+    font-size: 8rem;
+    line-height: 6rem;
+    font-weight: 900;
+    grid-area: number;
+    text-align: center;
+  }
+  .feature:nth-child(1)::before {
+    color: var(--accent-2);
+  }
+  .feature:nth-child(2)::before {
+    color: var(--accent-4);
+  }
+  .feature:nth-child(3)::before {
+    color: var(--accent-5);
+  }
+  .feature:nth-child(4)::before {
+    color: var(--accent-6);
+  }
+  .feature:nth-child(5)::before {
+    color: var(--accent-1);
+  }
+  .feature:nth-child(6)::before {
+    color: var(--accent-3);
   }
 
   .algorithms {
