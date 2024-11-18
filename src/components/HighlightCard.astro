@@ -1,15 +1,13 @@
 ---
 import Icon from "~src/components/Icon.astro";
-import LinkButton from "~src/components/LinkButton.astro";
 
 interface Props {
-  linkHref: string;
   description: string;
   highlight: string;
   icon: string;
   accent: Accent;
 }
-const { linkHref, description, highlight, icon, accent } = Astro.props;
+const { description, highlight, icon, accent } = Astro.props;
 const bg = `var(--accent-${accent})`;
 ---
 
@@ -19,7 +17,6 @@ const bg = `var(--accent-${accent})`;
     <div class="icon-wrapper"><Icon name={icon} /></div>
   </div>
   <p>{description}</p>
-  <LinkButton href={linkHref} variant="default-arrow">Read more</LinkButton>
 </li>
 
 <style define:vars={{ bg }}>
@@ -30,7 +27,8 @@ const bg = `var(--accent-${accent})`;
     gap: 1rem;
 
     width: 18rem;
-    padding: 1.5rem;
+    padding-block: 2.5rem;
+    padding-inline: 1rem;
     box-shadow: var(--shadow-lg);
     border-radius: var(--medium-border-radius);
 
@@ -39,14 +37,15 @@ const bg = `var(--accent-${accent})`;
   }
 
   p {
+    font-size: 1.5rem;
     color: var(--text-color-body);
     text-align: center;
     margin-bottom: 0.5em;
   }
 
   span {
-    font-size: var(--text-size-heading-1);
-    line-height: var(--text-size-heading-1);
+    font-size: 4rem;
+    line-height: 4rem;
     font-weight: 800;
   }
 
