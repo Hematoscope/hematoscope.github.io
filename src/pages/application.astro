@@ -79,33 +79,33 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
   <Section variant="gradient-cells">
     <H level="2">Key Features</H>
 
-    <div class="features">
-      <div class="feature">
+    <div class="card-grid features">
+      <div class="card-item feature">
         <H level="3">Sample Triage</H>
         <p>Prioritize urgent samples with a multi-parameter risk model.</p>
       </div>
-      <div class="feature">
+      <div class="card-item feature">
         <H level="3">Comprehensive Image View</H>
         <p>Access whole-slide images, numerical analysis, and visual masks.</p>
       </div>
-      <div class="feature">
+      <div class="card-item feature">
         <H level="3">Single-Cell Analysis</H>
         <p>
           View single-cell images with classifications and potential dysplasia
           indicators.
         </p>
       </div>
-      <div class="feature">
+      <div class="card-item feature">
         <H level="3">Reference Comparisons</H>
         <p>Compare results with population-scale reference ranges.</p>
       </div>
-      <div class="feature">
+      <div class="card-item feature">
         <H level="3">Standardized Reporting</H>
         <p>
           Assess and share clinically essential findings in a structured report.
         </p>
       </div>
-      <div class="feature">
+      <div class="card-item feature">
         <H level="3">Collaborative Sharing</H>
         <p>
           Easily share slides and cell images with colleagues for consultations
@@ -150,6 +150,80 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
     </div>
   </Section>
 
+  <Section variant="gradient-cells">
+    <H level="2">Frequently Asked Questions</H>
+
+    <div class="card-grid">
+      <div class="card-item faq">
+        <H level="3">How can I use the Hematoscope application?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">Can I test the Hematoscope application?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">How robust are the algorithms?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">
+          Will the Hematoscope application replace hematopathologists?
+        </H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">Why should I use the Hematoscope application?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">What types of images are supported?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">Why is the Hematoscope application only cloud-based?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">
+          What is the price of the Hematoscope application license?
+        </H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+      <div class="card-item faq">
+        <H level="3">Can I use the application for research?</H>
+        <p>
+          Figma ipsum component variant main layer. Distribute underline
+          subtract italic line line stroke strikethrough line ipsum.
+        </p>
+      </div>
+    </div>
+  </Section>
+
   <CallToAction title="Want to Learn More?" />
 </Layout>
 
@@ -182,21 +256,41 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
     background-color: #d9d9d9;
     z-index: -1;
   }
+  @media screen and (width < 70em) {
+    .workflow ol {
+      column-gap: calc(var(--element-padding));
+    }
+  }
+  @media screen and (width < 50em) {
+    .workflow ol {
+      display: grid;
+      grid-template-areas: "image text";
+      grid-template-columns: 1fr 1fr;
+    }
+    .workflow ol::before {
+      content: unset;
+    }
+  }
 
-  .features {
-    counter-reset: feature;
+  .card-grid {
     display: flex;
     flex-wrap: wrap;
     gap: var(--element-padding);
     max-width: 70em;
   }
-  .feature {
+  .card-item {
     flex: 25rem 1 1;
-    counter-increment: feature;
     background-color: var(--background);
     padding: var(--element-padding);
     border-radius: 0.75rem;
     box-shadow: var(--shadow-lg);
+  }
+
+  .features {
+    counter-reset: feature;
+  }
+  .feature {
+    counter-increment: feature;
 
     display: grid;
     grid-template-areas:
@@ -246,21 +340,13 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
     min-width: 10rem;
   }
 
-  /* Media queries for workflow section */
-  @media screen and (width < 70em) {
-    .workflow ol {
-      column-gap: calc(var(--element-padding));
-    }
+  .faq {
+    display: grid;
+    gap: 0.5em;
   }
-
-  @media screen and (width < 50em) {
-    .workflow ol {
-      display: grid;
-      grid-template-areas: "image text";
-      grid-template-columns: 1fr 1fr;
-    }
-    .workflow ol::before {
-      content: unset;
+  @media (width > 61em) {
+    .faq:last-child {
+      max-width: calc(50% - (var(--element-padding) / 2));
     }
   }
 </style>
