@@ -236,7 +236,8 @@ import SectionCard from "./SectionCard.astro";
 </script>
 
 <style>
-  .scroller {
+  /* we need this specificity hack to compensate for nondeterministic astro css order */
+  .scroller.scroller {
     width: 100%;
     position: relative;
 
