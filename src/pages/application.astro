@@ -12,9 +12,9 @@ import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
-import AlgorithmItem from "~src/components/AlgorithmItem.astro";
 import CallToAction from "~src/components/CallToAction.astro";
 import WorkflowStep from "~src/components/WorkflowStep.astro";
+import ApplicationScroller from "~src/components/ApplicationScroller.astro";
 ---
 
 <Layout title="Application | Hematoscope" description="Automate the Tedium">
@@ -115,40 +115,7 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
     </div>
   </Section>
 
-  <Section variant="blank">
-    <div class="text">
-      <H level="2">Vast Suite of Algorithms</H>
-      <p>
-        Our AI aims to perform nearly all the same diagnostic tasks as doctors,
-        enhancing every step of the analysis process rather than just optimizing
-        isolated aspects. By combining cell classification with morphology,
-        dysplasia assessment, and sample quality analysis, we provide a fresh
-        angle for research.
-      </p>
-    </div>
-    <div class="algorithms">
-      <AlgorithmItem
-        name="Cellularity"
-        icon="algorithms/cellularity"
-        accent="4"
-      />
-      <AlgorithmItem name="Center" icon="algorithms/center" accent="2" />
-      <AlgorithmItem name="Scarcity" icon="algorithms/scarcity" accent="3" />
-      <AlgorithmItem
-        name="Classification"
-        icon="algorithms/classification"
-        accent="1"
-      />
-      <AlgorithmItem name="Lipids" icon="algorithms/lipids" accent="2" />
-      <AlgorithmItem
-        name="Megakaryocytes"
-        icon="algorithms/megakaryocyte"
-        accent="1"
-      />
-      <AlgorithmItem name="In-focus" icon="algorithms/focus" accent="4" />
-      <AlgorithmItem name="Texture" icon="algorithms/texture" accent="3" />
-    </div>
-  </Section>
+  <ApplicationScroller />
 
   <Section variant="gradient-cells">
     <H level="2">Frequently Asked Questions</H>

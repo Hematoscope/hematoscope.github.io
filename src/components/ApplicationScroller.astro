@@ -1,0 +1,303 @@
+---
+import { Image } from "astro:assets";
+import base from "~src/assets/images/applicationScroller/01-base.jpg";
+import triage from "~src/assets/images/applicationScroller/02-triage.jpg";
+import scarcity from "~src/assets/images/applicationScroller/04-scarcity-cellularity.jpg";
+import infocus from "~src/assets/images/applicationScroller/05-infocus-mask.jpg";
+import sample from "~src/assets/images/applicationScroller/06-sample-mask.jpg";
+import center from "~src/assets/images/applicationScroller/07-center-mask.jpg";
+import mkc from "~src/assets/images/applicationScroller/08-mkc.jpg";
+import textures from "~src/assets/images/applicationScroller/09-textures.jpg";
+import lipids from "~src/assets/images/applicationScroller/10-lipids.jpg";
+import cells from "~src/assets/images/applicationScroller/11-cells.jpg";
+import dysplasia from "~src/assets/images/applicationScroller/12-dysplasia.jpg";
+
+import { WIDTHS as W } from "~src/consts";
+import Section from "~src/components/Section.astro";
+import H from "~src/components/HeadingLink.astro";
+import GlassFrame from "~src/components/GlassFrame.astro";
+import SectionCard from "./SectionCard.astro";
+---
+
+<Section variant="blank">
+  <div class="text">
+    <H level="2">Comprehensive AI-Powered Analysis</H>
+    <p>
+      Our AI aims to perform nearly all the same diagnostic tasks as doctors,
+      enhancing every step of the analysis process rather than just optimizing
+      isolated aspects. By combining cell classification with morphology,
+      dysplasia assessment, and sample quality analysis, we provide a fresh
+      angle for research.
+    </p>
+  </div>
+  <SectionCard gradient class="scroller">
+    <GlassFrame class="screen">
+      <Image src={base} alt="" widths={W} height="600" />
+      <Image class="triage" src={triage} alt="" widths={W} height="600" />
+      <Image class="scarcity" src={scarcity} alt="" widths={W} height="600" />
+      <Image class="infocus" src={infocus} alt="" widths={W} height="600" />
+      <Image class="sample" src={sample} alt="" widths={W} height="600" />
+      <Image class="center" src={center} alt="" widths={W} height="600" />
+      <Image class="mkc" src={mkc} alt="" widths={W} height="600" />
+      <Image class="textures" src={textures} alt="" widths={W} height="600" />
+      <Image class="lipid" src={lipids} alt="" widths={W} height="600" />
+      <Image class="cells" src={cells} alt="" widths={W} height="600" />
+      <Image class="dysplasia" src={dysplasia} alt="" widths={W} height="600" />
+    </GlassFrame>
+
+    <div class="card triage left">
+      <H level="3">General sample properties</H>
+      <p>
+        <b>Triage score:</b> Assessment of the urgency of the bone marrow sample.
+        Samples can be prioritized based on their triage score, ensuring that the
+        most critical cases are analyzed first.
+      </p>
+    </div>
+
+    <div class="card scarcity right">
+      <H level="3" aria-hidden="true">General sample properties</H>
+      <p>
+        <b>Scarcity estimate:</b> Assessment of whether the sample is representative
+        enough for cytomorphological assessment. Scarcity is determined based on
+        the quantity of cellular material in the sample slide.
+      </p>
+      <p>
+        <b>Cellularity estimate:</b> Estimate of the density of hematopoietic cells
+        in the bone marrow.
+      </p>
+    </div>
+
+    <div class="card infocus left">
+      <H level="3">Technical sample properties</H>
+      <p>
+        <b>Out-of-focus:</b> Identification of the out-of-focus areas within the
+        whole-slide image. Users are warned if the proportion of out-of-focus area
+        exceeds a critical threshold indicating that clinically relevant parameter
+        values might be unreliable.
+      </p>
+    </div>
+
+    <div class="card sample left">
+      <H level="3">Clinical sample properties</H>
+      <p>
+        <b>Sample region:</b> Identification of the region within the whole-slide
+        image of the sample that contains the specimen. The identified region is
+        visualized as an overlay mask on the whole-slide image.
+      </p>
+    </div>
+
+    <div class="card center left">
+      <H level="3" aria-hidden="true">Clinical sample properties</H>
+      <p>
+        <b>Center region:</b> Identification of the possible center region of the
+        sample within the whole-slide image. The identified region is visualized
+        as an overlay mask on the whole-slide image.
+      </p>
+    </div>
+
+    <div class="card mkc left">
+      <H level="3" aria-hidden="true">Clinical sample properties</H>
+      <p>
+        <b>Megakaryocytes in the whole slide:</b> Quantification of megakaryocytes
+        within the sample slide. Megakaryocytes are counted per 10x field of view,
+        and counts are categorized as "low," "intermediate," or "high" for easier
+        interpretation. The identified megakaryocytes are visualized as an overlay
+        mask on the whole-slide image.
+      </p>
+    </div>
+
+    <div class="card textures left">
+      <H level="3" aria-hidden="true">Clinical sample properties</H>
+      <p>
+        Quantity and distribution of <b>red blood cells</b>,
+        <b>eukaryotic cells</b> and <b>stromal tissue</b> within the sample. The
+        application provides numerical data detailing their quantities across various
+        regions of the sample and visualizes them as an overlay mask on the whole-slide
+        image.
+      </p>
+    </div>
+
+    <div class="card lipid left">
+      <H level="3" aria-hidden="true">Clinical sample properties</H>
+      <p>
+        <b>Lipid droplets:</b> Quantity and distribution of lipid droplets within
+        the sample. The application provides numerical data detailing their quantities
+        across various regions of the sample and visualizes them as an overlay mask
+        on the whole-slide image.
+      </p>
+    </div>
+
+    <div class="card cells right">
+      <H level="3">Cell-level properties</H>
+      <p>
+        <b>Cells:</b> Detection and classification of individual bone marrow cells
+        in the selected regions of the sample, categorized into 17 distinct cell
+        types. The application provides differential counts for each cell type, along
+        with their locations, visualized on the images.
+      </p>
+    </div>
+
+    <div class="card dysplasia right">
+      <H level="3" aria-hidden="true">Cell-level properties</H>
+      <p>
+        <b>Dysplasia:</b> Assessment of dysplastic alterations in individual bone
+        marrow cells. Different forms of dysplasia are assessed in various cell types,
+        including promyelocytic dysplasia, megakaryocyte dysplasia, and erythroblast
+        dysplasia. Users are warned if the quantity of dysplastic changes exceeds
+        a critical threshold.
+      </p>
+    </div>
+  </SectionCard>
+</Section>
+
+<script>
+  const scroller = document.querySelector(".scroller")!;
+  const offsetStart = scroller.getBoundingClientRect().top + window.scrollY;
+  const offsetEnd =
+    document.documentElement.getBoundingClientRect().height -
+    offsetStart -
+    scroller.getBoundingClientRect().height;
+
+  function setOffsetVar() {
+    const relativeOffset =
+      (window.scrollY - offsetStart) /
+      (document.body.offsetHeight -
+        offsetStart -
+        offsetEnd -
+        window.innerHeight);
+    const clampedOffset = Math.min(Math.max(relativeOffset, 0), 1);
+    document.documentElement.style.setProperty("--scroll", `${clampedOffset}`);
+  }
+
+  window.addEventListener("scroll", setOffsetVar);
+  window.addEventListener("load", setOffsetVar);
+
+  /* animation tags */
+  const style = document.createElement("style");
+  document.head.appendChild(style);
+
+  // Add keyframes dynamically
+  function keyframes(name: string, offset: number) {
+    const transition = 3;
+
+    const narrow = window.matchMedia("(width < 50em)").matches;
+
+    const imageKeyframes = `
+      @keyframes ${name} {
+        ${offset}% { opacity: 0; }
+        ${offset + transition}%, 100% { opacity: 1; }
+      }
+    `;
+    const imageAnimation = `
+      img.${name} {
+        animation: ${name} 1s linear;
+      }
+    `;
+
+    const sheet = style.sheet!;
+    sheet.insertRule(imageKeyframes, sheet.cssRules.length);
+    sheet.insertRule(imageAnimation, sheet.cssRules.length);
+
+    if (narrow) {
+      console.log("lol");
+      const duration = 5;
+
+      const cardKeyframes = `
+        @keyframes ${name}card {
+          ${offset + transition + duration}% { opacity: 1; }
+          ${offset + transition + duration + 1}%, 100% { opacity: 0; }
+        }
+      `;
+      const cardAnimation = `
+        .card.${name} {
+          animation: ${name}card 1s linear;
+        }
+      `;
+      sheet.insertRule(cardKeyframes, sheet.cssRules.length);
+      sheet.insertRule(cardAnimation, sheet.cssRules.length);
+    }
+  }
+
+  const initial = 3;
+  const step = 9.3;
+  const frames = [
+    "triage",
+    "scarcity",
+    "infocus",
+    "sample",
+    "center",
+    "mkc",
+    "textures",
+    "lipid",
+    "cells",
+    "dysplasia",
+  ];
+  frames.forEach((frame, idx) => keyframes(frame, initial + step * idx));
+</script>
+
+<style>
+  .scroller {
+    width: 100%;
+    position: relative;
+
+    display: grid;
+    grid-template-rows: repeat(12, minmax(600px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 5rem;
+    justify-items: center;
+    align-items: center;
+  }
+  .screen {
+    position: sticky;
+    top: 15%;
+    display: grid;
+    grid-template-areas: "img";
+  }
+
+  img {
+    grid-area: img;
+    height: auto;
+  }
+  img:not(:first-child) {
+    opacity: 0;
+  }
+  .screen > img,
+  .scroller .card {
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+  }
+
+  .card {
+    background-color: var(--background);
+    border-radius: var(--small-border-radius);
+    box-shadow: var(--shadow-sm);
+    padding: calc(0.5 * var(--element-padding));
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    z-index: 1;
+    max-width: 35rem;
+  }
+  .left {
+    justify-self: flex-start;
+  }
+  .right {
+    justify-self: flex-end;
+  }
+
+  @media screen and (width < 50em) {
+    .scroller {
+      align-items: flex-end;
+    }
+    .screen {
+      align-self: flex-start;
+      z-index: 2;
+    }
+    .card {
+      margin-inline: 1em;
+      justify-self: center;
+    }
+  }
+</style>

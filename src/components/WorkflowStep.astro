@@ -76,6 +76,7 @@ const { image, alt, heading, text } = Astro.props;
   @media screen and (width < 50em) {
     li::after {
       grid-area: image;
+      grid-row: 1;
       background-color: #00000055;
       height: 100%;
       border-radius: var(--element-border-radius);
