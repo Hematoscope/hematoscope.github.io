@@ -18,7 +18,13 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
 ---
 
 <Layout title="Application | Hematoscope" description="Automate the Tedium">
-  <Section variant="pair">
+  <Section variant="pair-reverse">
+    <Image
+      src={cells}
+      alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by the Hematoscope application."
+      widths={WIDTHS}
+      height="300"
+    />
     <SectionCard gradient>
       <h1>A New Era</h1>
       <p class="ingress">
@@ -32,12 +38,6 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         cytopathology to life.
       </p>
     </SectionCard>
-    <Image
-      src={cells}
-      alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by the Hematoscope application."
-      widths={WIDTHS}
-      height="300"
-    />
   </Section>
 
   <Section variant="blank" class="workflow">

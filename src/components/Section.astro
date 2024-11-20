@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"section"> {
-  variant: "gradient-cells" | "gradient" | "pair" | "blank";
+  variant: "gradient-cells" | "gradient" | "pair" | "pair-reverse" | "blank";
 }
 const { variant, ...props } = Astro.props;
 ---
@@ -74,6 +74,9 @@ const { variant, ...props } = Astro.props;
     align-items: stretch;
     gap: var(--element-padding);
     padding: unset;
+  }
+  .reverse {
+    flex-direction: row-reverse;
   }
   :global(.pair > *) {
     flex: 400px;
