@@ -29,5 +29,10 @@
     "**/*.sass",
     "**/*.less",
     "**/*.astro"
-  ]
+  ],
+  "markdownlint.config": {
+    "MD025": { "front_matter_title": "" },
+    "MD033": { "allowed_elements": ["div"] }, // need table overflow wrappers
+    "MD036": false
+  }
 }
