@@ -3,8 +3,9 @@ import type { HTMLAttributes, HTMLTag } from "astro/types";
 
 interface Props extends Omit<HTMLAttributes<"h1">, "id"> {
   level: "2" | "3" | "4";
+  externalUrl?: string;
 }
-const { level, ...props } = Astro.props;
+const { level, externalUrl, ...props } = Astro.props;
 const Tag: HTMLTag = `h${level}`;
 const contents = await Astro.slots.render("default");
 
@@ -14,10 +15,17 @@ const slug = contents
   .replace(/[^a-z0-9 -]/g, "") // remove any non-alphanumeric characters
   .replace(/\s+/g, "-") // replace spaces with hyphens
   .replace(/-+/g, "-"); // remove consecutive hyphens
+
+const link = externalUrl ?? `#${slug}`;
+const id = externalUrl ? undefined : slug;
 ---
 
-<Tag class:list={[props.class]} id={slug} {...props}>
-  <a href={`#${slug}`}>
+<Tag
+  class:list={[props.class, externalUrl ? "external" : undefined]}
+  id={id}
+  {...props}
+>
+  <a href={link}>
     <span>
       <slot />
     </span>
@@ -31,8 +39,16 @@ const slug = contents
     scroll-margin-top: 8rem;
   }
 
-  span {
+  a {
+    text-decoration: none;
+    color: inherit;
     position: relative;
+    display: block;
+  }
+
+  .external > a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
   }
 
   span::after {
@@ -40,18 +56,29 @@ const slug = contents
     opacity: 0;
     transition: opacity 0.3s ease;
     position: absolute;
-    right: -1em;
-    margin-top: 0.25em;
+    margin-top: 0.1em;
+    margin-left: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
     width: 0.6em;
     height: 0.6em;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>')
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>')
       no-repeat center;
     background-size: contain;
     pointer-events: none;
   }
-
-  span:hover::after {
+  a:hover span::after {
     animation: fadeIn 0.3s forwards 1s;
+  }
+
+  .external span::after {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.0002 5H8.2002C7.08009 5 6.51962 5 6.0918 5.21799C5.71547 5.40973 5.40973 5.71547 5.21799 6.0918C5 6.51962 5 7.08009 5 8.2002V15.8002C5 16.9203 5 17.4801 5.21799 17.9079C5.40973 18.2842 5.71547 18.5905 6.0918 18.7822C6.5192 19 7.07899 19 8.19691 19H15.8031C16.921 19 17.48 19 17.9074 18.7822C18.2837 18.5905 18.5905 18.2839 18.7822 17.9076C19 17.4802 19 16.921 19 15.8031V14M20 9V4M20 4H15M20 4L13 11"/></svg>')
+      no-repeat center;
+    width: 0.8em;
+    height: 0.8em;
+  }
+  .external > a:hover span::after {
+    animation: fadeIn 0.3s forwards 0.1s;
   }
 
   /* Keyframes for fade-in animation */
@@ -62,10 +89,5 @@ const slug = contents
     to {
       opacity: 0.5;
     }
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
   }
 </style>
