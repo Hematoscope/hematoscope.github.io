@@ -1,0 +1,79 @@
+---
+import Section from "~src/components/Section.astro";
+import Layout from "~src/layouts/Layout.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+  };
+}
+
+const {
+  frontmatter: { title, description },
+} = Astro.props;
+---
+
+<Layout title={`${title} | Hematoscope`} description={description}>
+  <Section variant="blank">
+    <article>
+      <slot />
+    </article>
+  </Section>
+</Layout>
+
+<style is:global>
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 70ch;
+
+    color: var(--text-color-body);
+    font-size: var(--text-size-body);
+  }
+
+  article > * {
+    grid-column: 2;
+  }
+
+  article > * + h1,
+  article > * + h2,
+  article > * + h3 {
+    margin-top: 1rem;
+  }
+
+  article > h1,
+  article > h2,
+  article > h3,
+  article > h4 {
+    text-align: start;
+  }
+
+  article > ul {
+    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  article table {
+    border-collapse: collapse;
+    max-width: 100ch;
+    min-width: 40rem;
+    margin: auto;
+  }
+  article table th,
+  article table td {
+    padding-block: 0.5em;
+    padding-inline: 0.3em;
+  }
+  article table tbody tr:nth-child(odd) {
+    background-color: var(--accent-2);
+  }
+
+  article > hr {
+    width: 50%;
+    margin-block: 2em;
+  }
+</style>
