@@ -1,16 +1,16 @@
 ---
 import { Image } from "astro:assets";
-import base from "~src/assets/images/applicationScroller/01-base.jpg";
-import triage from "~src/assets/images/applicationScroller/02-triage.jpg";
-import scarcity from "~src/assets/images/applicationScroller/04-scarcity-cellularity.jpg";
-import infocus from "~src/assets/images/applicationScroller/05-infocus-mask.jpg";
-import sample from "~src/assets/images/applicationScroller/06-sample-mask.jpg";
-import center from "~src/assets/images/applicationScroller/07-center-mask.jpg";
-import mkc from "~src/assets/images/applicationScroller/08-mkc.jpg";
-import textures from "~src/assets/images/applicationScroller/09-textures.jpg";
-import lipids from "~src/assets/images/applicationScroller/10-lipids.jpg";
-import cells from "~src/assets/images/applicationScroller/11-cells.jpg";
-import dysplasia from "~src/assets/images/applicationScroller/12-dysplasia.jpg";
+import base from "~src/assets/images/applicationScroller/01-base.png";
+import triage from "~src/assets/images/applicationScroller/02-triage.png";
+import scarcity from "~src/assets/images/applicationScroller/03-scarcity-cellularity.png";
+import infocus from "~src/assets/images/applicationScroller/04-infocus-mask.png";
+import sample from "~src/assets/images/applicationScroller/05-sample-mask.png";
+import center from "~src/assets/images/applicationScroller/06-center-mask.png";
+import mkc from "~src/assets/images/applicationScroller/07-mkc-mask.png";
+import textures from "~src/assets/images/applicationScroller/08-texture-mask.png";
+import lipids from "~src/assets/images/applicationScroller/09-lipid-mask.png";
+import diff from "~src/assets/images/applicationScroller/10-cell-diff.png";
+import cells from "~src/assets/images/applicationScroller/11-cell-list.png";
 
 import { WIDTHS as W } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -41,8 +41,8 @@ import SectionCard from "./SectionCard.astro";
       <Image class="mkc" src={mkc} alt="" widths={W} height="600" />
       <Image class="textures" src={textures} alt="" widths={W} height="600" />
       <Image class="lipid" src={lipids} alt="" widths={W} height="600" />
+      <Image class="diff" src={diff} alt="" widths={W} height="600" />
       <Image class="cells" src={cells} alt="" widths={W} height="600" />
-      <Image class="dysplasia" src={dysplasia} alt="" widths={W} height="600" />
     </GlassFrame>
 
     <div class="card triage left">
@@ -228,8 +228,8 @@ import SectionCard from "./SectionCard.astro";
     "mkc",
     "textures",
     "lipid",
+    "diff",
     "cells",
-    "dysplasia",
   ];
   frames.forEach((frame, idx) => keyframes(frame, initial + step * idx));
 </script>
