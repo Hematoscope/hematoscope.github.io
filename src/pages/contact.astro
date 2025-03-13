@@ -61,7 +61,8 @@ const url = Astro.url;
     element.innerHTML =
       "Thank you for contacting us! We will reach back to you shortly.";
     element.classList.add("note");
-    document.querySelector("div:has(h1)")!.appendChild(element);
+    const reference = document.querySelector("div:has(h1) form")!;
+    document.querySelector("div:has(h1)")!.insertBefore(element, reference);
   }
 </script>
 
