@@ -31,8 +31,23 @@ import CallToAction from "~src/components/CallToAction.astro";
         autoplay
         loop
         aria-label="Demonstration of Hematoscope App's features"
+        poster="banner_image.jpeg"
       >
-        <source src="banner.webm" type="video/webm" />
+        <source
+          src="banner_large.webm"
+          type="video/webm"
+          media="(1000px <= width)"
+        />
+        <source
+          src="banner_mid.webm"
+          type="video/webm"
+          media="(600px <= width < 1000px)"
+        />
+        <source
+          src="banner_small.webm"
+          type="video/webm"
+          media="(width < 600px)"
+        />
       </video>
     </GlassFrame>
   </Section>
@@ -163,8 +178,7 @@ import CallToAction from "~src/components/CallToAction.astro";
   }
 
   video {
-    /* magic ratio that happens to look good for current video */
-    aspect-ratio: 16 / 8.8;
+    aspect-ratio: 16 / 10;
   }
 
   .algorithms {
