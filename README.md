@@ -1,3 +1,3 @@
-# Hematoscope Web
+# Cellbytes Web
 
-Home page for the Hematoscope Application
+Home page for the Cellbytes Application

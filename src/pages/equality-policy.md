@@ -1,6 +1,6 @@
 ---
 title: Equality Policy
-description: Hematoscope equality policy
+description: Cellbytes equality policy
 layout: ~src/layouts/Article.astro
 ---
 

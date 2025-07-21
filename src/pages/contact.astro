@@ -12,7 +12,7 @@ import Textarea from "~src/components/Textarea.astro";
 const url = Astro.url;
 ---
 
-<Layout title="Contact | Hematoscope" description="Contact us">
+<Layout title="Contact | Cellbytes" description="Contact us">
   <Section variant="pair">
     <Image
       src={doctorLaptop}
@@ -23,7 +23,7 @@ const url = Astro.url;
     <SectionCard gradient>
       <h1>Contact us</h1>
       <p>
-        Do you have questions about our company or Hematoscope&apos;s image
+        Do you have questions about our company or Cellbytes&apos;s image
         analysis solutions? Fill out the form, and one of our experts will reach
         out to you shortly.
       </p>
@@ -56,7 +56,7 @@ const url = Astro.url;
   const params = Object.fromEntries(urlSearchParams.entries());
   if ("success" in params) {
     document.querySelector("title")!.innerHTML =
-      "Thank you for contacting us! | Hematoscope";
+      "Thank you for contacting us! | Cellbytes";
     const element = document.createElement("p");
     element.innerHTML =
       "Thank you for contacting us! We will reach back to you shortly.";

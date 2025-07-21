@@ -1,5 +1,5 @@
 {
-  "name": "Hematoscope Web",
+  "name": "Cellbytes Web",
   "build": { "dockerfile": "Dockerfile", "context": ".." },
   "postCreateCommand": "npm install",
   "mounts": [

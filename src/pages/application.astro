@@ -17,11 +17,11 @@ import WorkflowStep from "~src/components/WorkflowStep.astro";
 import ApplicationScroller from "~src/components/ApplicationScroller.astro";
 ---
 
-<Layout title="Application | Hematoscope" description="Automate the Tedium">
+<Layout title="Application | Cellbytes" description="Automate the Tedium">
   <Section variant="pair-reverse">
     <Image
       src={cells}
-      alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by the Hematoscope application."
+      alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by Cellbytes."
       widths={WIDTHS}
       height="300"
     />
@@ -31,17 +31,17 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         Digital cytopathology streamlines workflows by fostering synergy between
         physicians and technology. With AI managing time-consuming, quantifiable
         tasks, human experts apply their clinical judgment to verify and
-        interpret results. To support interpretation, Hematoscope is the first
+        interpret results. To support interpretation, Cellbytes is the first
         platform to also provide reference values for healthy subjects. Remote
         collaboration becomes effortless, enabling seamless sample evaluation
-        and colleague consultations. The Hematoscope application brings digital
-        cytopathology to life.
+        and colleague consultations. Cellbytes brings digital cytopathology to
+        life.
       </p>
     </SectionCard>
   </Section>
 
   <Section variant="blank" class="workflow">
-    <H level="2">Hematoscope Workflow</H>
+    <H level="2">Cellbytes Workflow</H>
     <ol>
       <WorkflowStep
         image={slides}
@@ -57,13 +57,13 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       />
       <WorkflowStep
         image={textureMask}
-        alt="A screenshot of Hematoscope application showing slide texture overlay mask."
+        alt="A screenshot of Cellbytes showing slide texture overlay mask."
         heading="Feature Extraction"
-        text="Hematoscope analyzes key features from whole-slide and single-cell images."
+        text="Cellbytes analyzes key features from whole-slide and single-cell images."
       />
       <WorkflowStep
         image={cellList}
-        alt="A screenshot of Hematoscope application showing a list of cells with their labels."
+        alt="A screenshot of Cellbytes showing a list of cells with their labels."
         heading="Physician Review"
         text="Pre-classification results are reviewed and verified by a physician."
       />
@@ -122,9 +122,9 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
 
     <div class="card-grid">
       <div class="card-item faq">
-        <H level="3">How can I use the Hematoscope application?</H>
+        <H level="3">How can I use Cellbytes?</H>
         <p>
-          Hematoscope can be used by uploading high-resolution images of bone
+          Cellbytes can be used by uploading high-resolution images of bone
           marrow aspirates to the platform. The application analyzes these
           images using advanced machine learning algorithms, delivering
           quantitative results and visual annotations. It is accessible via a
@@ -132,9 +132,9 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         </p>
       </div>
       <div class="card-item faq">
-        <H level="3">Can I test the Hematoscope application?</H>
+        <H level="3">Can I test Cellbytes?</H>
         <p>
-          Yes, Hematoscope offers a trial version for institutions and
+          Yes, Cellbytes offers a trial version for institutions and
           professionals interested in evaluating its capabilities. You can
           request trial access by contacting the support team through the
           website.
@@ -143,38 +143,36 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       <div class="card-item faq">
         <H level="3">How robust are the algorithms?</H>
         <p>
-          Hematoscope's algorithms have been trained on a comprehensive
-          real-world dataset comprising different pathologies and over 60,000
-          samples. The system achieves high accuracy in detecting and
-          classifying various blood cell types and their abnormalities, with
-          performance metrics benchmarked against expert diagnoses.
+          Cellbytes's algorithms have been trained on a comprehensive real-world
+          dataset comprising different pathologies and over 60,000 samples. The
+          system achieves high accuracy in detecting and classifying various
+          blood cell types and their abnormalities, with performance metrics
+          benchmarked against expert diagnoses.
         </p>
       </div>
       <div class="card-item faq">
-        <H level="3">
-          Will the Hematoscope application replace hematopathologists?
-        </H>
+        <H level="3"> Will Cellbytes replace hematopathologists? </H>
         <p>
-          No, Hematoscope is designed to assist hematopathologists. It serves as
-          a diagnostic aid that enhances efficiency and consistency. Final
+          No, Cellbytes is designed to assist hematopathologists. It serves as a
+          diagnostic aid that enhances efficiency and consistency. Final
           clinical decisions should always be made by a qualified medical
           professional.
         </p>
       </div>
       <div class="card-item faq">
-        <H level="3">Why should I use the Hematoscope application?</H>
+        <H level="3">Why should I use Cellbytes?</H>
         <p>
-          Hematoscope accelerates and enhances hematological analysis by
-          providing AI-assisted interpretation of bone marrow cell images.
-          Hematoscope will facilitate remote working and consultation but also
-          reduce diagnostic turnaround time and improve standardization,
-          particularly in high-volume settings.
+          Cellbytes accelerates and enhances hematological analysis by providing
+          AI-assisted interpretation of bone marrow cell images. Cellbytes will
+          facilitate remote working and consultation but also reduce diagnostic
+          turnaround time and improve standardization, particularly in
+          high-volume settings.
         </p>
       </div>
       <div class="card-item faq">
         <H level="3">What types of images are supported?</H>
         <p>
-          Hematoscope supports high-resolution digital images of
+          Cellbytes supports high-resolution digital images of
           May-Grünwald-Giemsa–stained bone marrow aspirate slides. Whole-slide
           images must be captured at 10x magnification and saved in an
           open-source format such as MIRAX. Region-of-interest images should be
@@ -182,7 +180,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         </p>
       </div>
       <div class="card-item faq">
-        <H level="3">Why is the Hematoscope application only cloud-based?</H>
+        <H level="3">Why is Cellbytes only cloud-based?</H>
         <p>
           Being cloud-based ensures seamless updates, scalable computing
           resources, and consistent algorithm performance across users. It also
@@ -191,9 +189,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         </p>
       </div>
       <div class="card-item faq">
-        <H level="3">
-          What is the price of the Hematoscope application license?
-        </H>
+        <H level="3"> What is the price of the Cellbytes license? </H>
         <p>
           Pricing depends on your usage volume. Contact the support team to test
           a trial version and discuss your needs.
@@ -202,7 +198,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       <div class="card-item faq">
         <H level="3">Can I use the application for research?</H>
         <p>
-          Absolutely. Hematoscope is increasingly used in research settings to
+          Absolutely. Cellbytes is increasingly used in research settings to
           study hematologic disorders, develop new biomarkers, and support
           clinical trials. It offers data export and integration with other
           medical data domains.

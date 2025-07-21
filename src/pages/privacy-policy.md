@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-description: Hematoscope website privacy policy
+description: Cellbytes website privacy policy
 layout: ~src/layouts/Article.astro
 ---
 
@@ -10,7 +10,7 @@ layout: ~src/layouts/Article.astro
 
 ## General
 
-At Hematoscope Oy (”Hematoscope”, “we”), your privacy is of utmost importance to us. Therefore, we adhere to data minimization principles:
+At Hematoscope Oy (”Cellbytes”, “we”), your privacy is of utmost importance to us. Therefore, we adhere to data minimization principles:
 
 - We collect only the information necessary to provide our services and meet the purposes outlined in this policy.  
 - Your data will not be used for any purposes beyond what is specified here.  
@@ -21,7 +21,7 @@ At Hematoscope Oy (”Hematoscope”, “we”), your privacy is of utmost impor
 Hematoscope Oy  
 **Business ID**: 3259091-4  
 **Address**: Biomedicum Helsinki 2C, Tukholmankatu 8, 00290 Helsinki Finland  
-**Representative**: For further information on data privacy issues, please contact <https://hematoscope.github.io/contact>
+**Representative**: For further information on data privacy issues, please contact <https://cellbytes.github.io/contact>
 
 ## Why do we collect data?
 
@@ -43,7 +43,7 @@ Any data we collect, both personal information and anonymous analytics, are stor
 
 | Data point | Example | Comment |
 | :---- | :---- | :---- |
-| Page URL | *<https://hematoscope.app/contact>* | We track the page URL of each page view on our website. We use this to analyze which pages have been viewed and how many times a particular page has been viewed. |
+| Page URL | *<https://cellbytes.app/contact>* | We track the page URL of each page view on our website. We use this to analyze which pages have been viewed and how many times a particular page has been viewed. |
 | HTTP referer | *<https://linkedin.com>* | We use the referrer string to analyze the number of visitors referred to our website from links on other sites. |
 | Browser | *Chrome 86.0* | We use this to analyze what browsers and browser version numbers people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. |
 | Operating system | *macOS 10.15* | We use this to analyze what operating systems people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. |
@@ -78,4 +78,4 @@ We are committed to giving you control over your personal information. Your data
 - **Withdraw consent or object**: Withdraw consent at any time or object to data processing for specific purposes such as direct marketing or any other purposes.  
 - **Lodge a complaint**: File a complaint with a supervisory authority if you believe your data rights are violated.
 
-To exercise these rights or for further assistance, please contact us through the Contact form <https://hematoscope.github.io/contact/>. You can stop receiving future communications from us by clicking the unsubscribe link at the bottom of any email.
+To exercise these rights or for further assistance, please contact us through the Contact form <https://cellbytes.github.io/contact/>. You can stop receiving future communications from us by clicking the unsubscribe link at the bottom of any email.
