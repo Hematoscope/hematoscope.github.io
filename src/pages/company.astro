@@ -1,13 +1,11 @@
 ---
 import oscar from "~src/assets/images/company/oscar.jpg";
-import sanna from "~src/assets/images/company/sanna.jpg";
 import mikko from "~src/assets/images/company/mikko.jpg";
 import diponkor from "~src/assets/images/company/diponkor.jpg";
 import joonas from "~src/assets/images/company/joonas.jpg";
 import stas from "~src/assets/images/company/stas.jpg";
 
 import Section from "~src/components/Section.astro";
-import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
 import TeamMember from "~src/components/TeamMember.astro";
 ---
@@ -24,28 +22,11 @@ import TeamMember from "~src/components/TeamMember.astro";
       </p>
     </div>
 
-    <H level="2">Board of directors</H>
     <div class="team">
       <TeamMember
         photo={oscar}
         name="Oscar Brück / MD, PhD"
         title="Chief Executive Officer"
-        email="first.last@email.com"
-      />
-      <TeamMember
-        photo={sanna}
-        name="Sanna Siitonen / MD, PhD"
-        title="Chief Medical Officer"
-        email="first.last@email.com"
-      />
-    </div>
-
-    <H level="2">Application</H>
-    <div class="team">
-      <TeamMember
-        photo={oscar}
-        name="Oscar Brück / MD, PhD"
-        title="Chief Product Officer"
         email="first.last@email.com"
       />
       <TeamMember
