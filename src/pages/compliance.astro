@@ -2,8 +2,6 @@
 import { Image } from "astro:assets";
 import certifications from "~src/assets/images/compliance/certifications.jpg";
 import documentSigning from "~src/assets/images/compliance/document-signing.jpg";
-import documentBinders from "~src/assets/images/compliance/document-binders.jpg";
-import documentCursive from "~src/assets/images/compliance/document-cursive.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -61,38 +59,6 @@ import TextCard from "~src/components/TextCard.astro";
           development, production, storage and distribution, installation,
           servicing, or providing associated activities such as technical
           support.
-        </p>
-      </TextCard>
-      <TextCard
-        image={documentBinders}
-        alt="A pile of full document binders"
-        accent="3"
-      >
-        <H level="3">ISO 27001:2022 &ndash; Information Security Management</H>
-        <p>
-          Defines the requirements for establishing, implementing, maintaining,
-          and continuously improving an information security management system
-          within an organization. It also outlines the processes for assessing
-          and addressing information security risks, customized to meet the
-          organization's specific needs.
-        </p>
-      </TextCard>
-      <TextCard
-        image={documentCursive}
-        alt="A close-up of an old document written by hand in cursive"
-        accent="1"
-      >
-        <H level="3">HIPAA Security Rule & GDPR Art. 32</H>
-        <p>
-          U.S. federal and EU regulations are designed to protect the privacy
-          and security of personal health information. Compliance requires
-          strict adherence to administrative, physical, and technical safeguards
-          to maintain the confidentiality and integrity of health data. The
-          Microsoft Azure cloud is designed to provide the highest level of
-          security for medical data, featuring end-to-end encryption, firewalls,
-          and multi-factor authentication. Patient information is securely
-          protected throughout storage, processing, and transmission ensuring
-          privacy across regions and borders.
         </p>
       </TextCard>
     </div>
