@@ -92,7 +92,7 @@ h4,
 h5,
 h6 {
   color: var(--text-color-heading);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1;
 }
 
@@ -138,13 +138,14 @@ p {
   gap: 1rem;
 }
 
-.text > p {
+.text>p {
   max-width: 55ch;
 }
 
 img {
   position: relative;
 }
+
 img::before {
   content: attr(alt);
   position: absolute;
