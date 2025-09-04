@@ -8,12 +8,12 @@ const links = [
   { name: "Application", href: "/application" },
   { name: "Compliance", href: "/compliance" },
   { name: "Research", href: "/research" },
-  { name: "Documentation", href: "/documentation" },
+  // { name: "Documentation", href: "/documentation" },
   { name: "Company", href: "/company" },
 ];
 ---
 
-<header>
+<header style={`--links: ${links.length}`}>
   <div class="header-contents">
     <a href="/" class="logo-link" aria-label="Back to front page">
       <Icon name="logotype" />
@@ -222,8 +222,7 @@ const links = [
   @media screen and (width < 68em) {
     header:has(button[aria-expanded="true"]) {
       padding-block-end: 2rem;
-      /* 14.5rem is a semi-magic variable based on the navbar popup's height */
-      margin-block-end: calc(-14.5rem - 2rem);
+      margin-block-end: calc(var(--links) * -3rem - 1.5rem);
     }
     button[aria-expanded="false"] + nav {
       display: none;

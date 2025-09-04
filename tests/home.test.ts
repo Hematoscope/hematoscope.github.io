@@ -13,7 +13,7 @@ test.describe("desktop", { tag: "@desktop" }, () => {
     await expect(page.getByRole("navigation")).toBeVisible();
     await expect(
       page.getByRole("navigation").getByRole("list").getByRole("link"),
-    ).toHaveCount(5);
+    ).toHaveCount(4);
   });
 });
 
@@ -31,7 +31,7 @@ test.describe("mobile", { tag: "@mobile" }, () => {
     await expect(page.getByRole("navigation")).toBeVisible();
     await expect(
       page.getByRole("navigation").getByRole("list").getByRole("link"),
-    ).toHaveCount(5);
+    ).toHaveCount(4);
 
     await menuButton.click();
     await expect(page.getByRole("navigation")).not.toBeVisible();
