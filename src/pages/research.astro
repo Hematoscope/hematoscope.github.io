@@ -1,10 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import research from "~src/assets/images/research/research.jpg";
-import grid from "~src/assets/images/research/grid.jpg";
 import head from "~src/assets/images/research/head.jpg";
 import neural from "~src/assets/images/research/neural.jpg";
-import pills from "~src/assets/images/research/pills.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -87,40 +85,6 @@ import TextCard from "~src/components/TextCard.astro";
         </H>
         <p>Oscar Brück</p>
         <p>Blood / 28 Dec 2023</p>
-      </TextCard>
-      <TextCard
-        image={pills}
-        alt="3D illustration of a neural network"
-        accent="1"
-      >
-        <H
-          level="3"
-          externalUrl="https://www.tandfonline.com/doi/full/10.2217/fon-2023-0120"
-        >
-          Real-world evidence of multiple myeloma treated from 2013 to 2019 in
-          the Hospital District of Helsinki and Uusimaa, Finland
-        </H>
-        <p>
-          Johanna Vikkula, Kristiina Uusi-Rauva, Tuuli Ranki, Iiro Toppila,
-          Maria Aalto-Setälä, Katariina Pousar, Lotta Vassilev, Kimmo Porkka,
-          Raija Silvennoinen, Oscar Brück
-        </p>
-        <p>Future Oncology / 01 Sep 2023</p>
-      </TextCard>
-      <TextCard
-        image={grid}
-        alt="3D illustration of a neural network"
-        accent="4"
-      >
-        <H
-          level="3"
-          externalUrl="https://www.nature.com/articles/s41416-023-02329-4"
-        >
-          Computational textural mapping harmonises sampling variation and
-          reveals multidimensional histopathological fingerprints
-        </H>
-        <p>Otso Brummer, Petri Pölönen, Satu Mustjoki, Oscar Brück</p>
-        <p>British Journal of Cancer / 30 Jun 2023</p>
       </TextCard>
     </div>
   </Section>
