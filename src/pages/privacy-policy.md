@@ -10,7 +10,7 @@ layout: ~src/layouts/Article.astro
 
 ## General
 
-At Hematoscope Oy (”Cellbytes”, “we”), your privacy is of utmost importance to us. Therefore, we adhere to data minimization principles:
+At Cellbytes Ltd. (”Cellbytes”, “we”), your privacy is of utmost importance to us. Therefore, we adhere to data minimization principles:
 
 - We collect only the information necessary to provide our services and meet the purposes outlined in this policy.  
 - Your data will not be used for any purposes beyond what is specified here.  
@@ -18,7 +18,7 @@ At Hematoscope Oy (”Cellbytes”, “we”), your privacy is of utmost importa
 
 ### Data Controller
 
-Hematoscope Oy  
+Cellbytes Ltd.  
 **Business ID**: 3259091-4  
 **Address**: Biomedicum Helsinki 2C, Tukholmankatu 8, 00290 Helsinki Finland  
 **Representative**: For further information on data privacy issues, please contact <https://cellbytes.github.io/contact>
@@ -43,7 +43,7 @@ Any data we collect, both personal information and anonymous analytics, are stor
 
 | Data point | Example | Comment |
 | :---- | :---- | :---- |
-| Page URL | *<https://cellbytes.app/contact>* | We track the page URL of each page view on our website. We use this to analyze which pages have been viewed and how many times a particular page has been viewed. |
+| Page URL | *<https://cellbytes.io/contact>* | We track the page URL of each page view on our website. We use this to analyze which pages have been viewed and how many times a particular page has been viewed. |
 | HTTP referer | *<https://linkedin.com>* | We use the referrer string to analyze the number of visitors referred to our website from links on other sites. |
 | Browser | *Chrome 86.0* | We use this to analyze what browsers and browser version numbers people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. |
 | Operating system | *macOS 10.15* | We use this to analyze what operating systems people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. |
