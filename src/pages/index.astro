@@ -12,7 +12,6 @@ import LinkButton from "~src/components/LinkButton.astro";
 import GlassFrame from "~src/components/GlassFrame.astro";
 import Layout from "~src/layouts/Layout.astro";
 import SectionCard from "~src/components/SectionCard.astro";
-import HighlightCard from "~src/components/HighlightCard.astro";
 ---
 
 <Layout
@@ -95,7 +94,7 @@ import HighlightCard from "~src/components/HighlightCard.astro";
   </Section>
 
   <Section variant="gradient">
-    <div class="text">
+    <div class="text" style="margin: 4rem;">
       <H level="2">Comprehensive analysis</H>
       <p>
         Hematopathology is not just about counting cells. By employing clinical
@@ -103,26 +102,6 @@ import HighlightCard from "~src/components/HighlightCard.astro";
         Cellbytes performs end-to-end cytomorphological assessment.
       </p>
     </div>
-    <ul class="algorithms">
-      <HighlightCard
-        description="Algorithms"
-        highlight="11"
-        icon="highlights/neuralnet"
-        accent="1"
-      />
-      <HighlightCard
-        description="Accuracy"
-        highlight="93%"
-        icon="highlights/accuracy"
-        accent="2"
-      />
-      <HighlightCard
-        description="Publications"
-        highlight="7"
-        icon="highlights/research"
-        accent="3"
-      />
-    </ul>
   </Section>
 
   <Section variant="pair-reverse">
