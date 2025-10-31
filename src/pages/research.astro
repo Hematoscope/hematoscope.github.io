@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import research from "~src/assets/images/research/research.jpg";
 import head from "~src/assets/images/research/head.jpg";
 import neural from "~src/assets/images/research/neural.jpg";
+import pills from "~src/assets/images/research/pills.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -52,6 +53,27 @@ import TextCard from "~src/components/TextCard.astro";
   <Section variant="blank">
     <H level="2">Selected publications</H>
     <div class="publications">
+      <TextCard
+        image={pills}
+        alt="3D illustration of a machine outputting streams of data with pills watching along"
+        accent="1"
+      >
+        <H
+          level="3"
+          externalUrl="https://www.nature.com/articles/s41375-025-02769-2"
+        >
+          Granulocyte abundance and maturation state at diagnosis predicts
+          treatment-free remission in CML
+        </H>
+        <p>
+          Purhonen M, Tatun M, Luukkainen K, Hung K, Sundquist H, Tafjord O,
+          Söderlund S, Adnan-Awad S, Dohlen A, Heikkinen J, Koskenvesa P,
+          Siitonen S, Mustjoki S, Shanmuganathan N, Bryce C, Danielsson S,
+          Hjorth-Hansen H, Olsson-Strömberg U, Kumagai T, Kimura S, Ross DM,
+          Brück O
+        </p>
+        <p>Leukemia / 16 Sep 2025</p>
+      </TextCard>
       <TextCard
         image={neural}
         alt="3D illustration of a neural network"
