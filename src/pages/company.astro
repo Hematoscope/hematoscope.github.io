@@ -5,6 +5,7 @@ import diponkor from "~src/assets/images/company/diponkor.jpg";
 import joonas from "~src/assets/images/company/joonas.jpg";
 import stas from "~src/assets/images/company/stas.jpg";
 
+import H from "~src/components/HeadingLink.astro";
 import Section from "~src/components/Section.astro";
 import Layout from "~src/layouts/Layout.astro";
 import TeamMember from "~src/components/TeamMember.astro";
@@ -13,15 +14,25 @@ import TeamMember from "~src/components/TeamMember.astro";
 <Layout title="Company | Cellbytes" description="Meet the team">
   <Section variant="blank">
     <div class="text">
-      <h1>Meet the team</h1>
+      <h1>About Cellbytes</h1>
       <p>
-        Our multidisciplinary team brings together experts in AI, medical
-        diagnostics, and software development, working collaboratively to create
-        innovative solutions that bridge technology and healthcare for better
-        patient outcomes.
+        We are a team of hematology, computer vision, and medical-software
+        professionals eager to make a change. With a long background in research
+        and technology, we are committed to design the best algorithms for you.
+        If something is missing or you are not happy with the results, we
+        promise to make it our priority to fix it.
+      </p>
+    </div>
+    <div class="text">
+      <H level="2">Our Vision</H>
+      <p>
+        Cellbytes aims to make high-quality blood and marrow cytomorphology
+        accessible, reliable, and more efficient, and to achieve better patient
+        outcomes.
       </p>
     </div>
 
+    <H level="2">Meet the team</H>
     <div class="team">
       <TeamMember
         photo={oscar}
