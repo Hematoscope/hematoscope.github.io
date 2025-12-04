@@ -5,27 +5,34 @@ import H from "./HeadingLink.astro";
 
 interface Props {
   title: string;
+  demo?: boolean;
 }
-const { title } = Astro.props;
+const { title, demo } = Astro.props;
 ---
 
 <Section variant="blank" class="call-to-action">
   <div class="text">
     <H level="2">{title}</H>
-    <p>
-      Try the application yourself, or contact us to explore how Cellbytes can
-      enhance your daily workflow.
-    </p>
+    <p>Contact us to explore how Cellbytes can enhance your daily workflow.</p>
   </div>
   <div class="buttons">
-    <LinkButton href="https://demo.cellbytes.app" variant="highlight"
-      >Try the demo</LinkButton
-    >
-    <LinkButton href="/contact">Contact us</LinkButton>
+    {
+      demo && (
+        <LinkButton href="https://demo.cellbytes.app" variant="highlight">
+          Try the demo
+        </LinkButton>
+      )
+    }
+    <LinkButton href="/contact" variant={demo ? "default" : "highlight"}>
+      Contact us
+    </LinkButton>
   </div>
 </Section>
 
 <style>
+  p {
+    font-size: var(--text-size-ingress);
+  }
   .call-to-action {
     gap: var(--element-padding);
   }

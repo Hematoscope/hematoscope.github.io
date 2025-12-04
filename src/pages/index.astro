@@ -7,6 +7,7 @@ import server from "~src/assets/images/home/server.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
+import CallToAction from "~src/components/CallToAction.astro";
 import H from "~src/components/HeadingLink.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import GlassFrame from "~src/components/GlassFrame.astro";
@@ -21,8 +22,6 @@ import SectionCard from "~src/components/SectionCard.astro";
   <Section variant="gradient-cells" class="hero">
     <div class="text">
       <h1>Cellbytes &ndash; precision hematology with digital microscopy</h1>
-      <p>Cellbytes is the colleague you have been waiting for.</p>
-      <p>Ready to digitize your hematology workflow? Request a demo to see Cellbytes in action.</p>
     </div>
     <GlassFrame>
       <video
@@ -64,9 +63,11 @@ import SectionCard from "~src/components/SectionCard.astro";
       <p>
         Cellbytes will not replace hematopathologists. However, standardized and
         real-time digital assessment can enhance human performance and decrease
-        subjectivity. Trained on millions of cells across diverse hematologic conditions,
-        Cellbytes provides consistent, high-quality outputs. Every model prediction comes with clear visualizations and quantifiable
-        data, ensuring transparency and supporting users to review what the software has identified.
+        subjectivity. Trained on millions of cells across diverse hematologic
+        conditions, Cellbytes provides consistent, high-quality outputs. Every
+        model prediction comes with clear visualizations and quantifiable data,
+        ensuring transparency and supporting users to review what the software
+        has identified.
       </p>
       <LinkButton href="/application" variant="default-arrow">
         Application
@@ -84,10 +85,11 @@ import SectionCard from "~src/components/SectionCard.astro";
     <SectionCard>
       <H level="2">Real-time analysis</H>
       <p>
-        Cloud-based computing is available 24/7 and designed for rapid batch analysis.
+        Cloud-based computing is available 24/7 and designed for rapid batch
+        analysis.
       </p>
       <LinkButton
-        href="/application#vast-suite-of-algorithms"
+        href="/application#comprehensive-ai-powered-analysis"
         variant="default-arrow"
       >
         Algorithms
@@ -99,10 +101,12 @@ import SectionCard from "~src/components/SectionCard.astro";
     <div class="text" style="margin: 4rem;">
       <H level="2">Full AI-assisted morphology analysis</H>
       <p>
-        Hematopathology is not just about counting cells. 
-        Cellbytes performs end-to-end cytomorphological assessment covering assessment of cellularity,
-        sample adequacy, megakaryocyte counts, cell classification, and dysplasia detection.
-        Results are summarized in a standardized report that can be seamlessly integrated into your laboratory information system.
+        Hematopathology is not just about counting cells. Cellbytes performs
+        end-to-end cytomorphological assessment covering assessment of
+        cellularity, sample adequacy, megakaryocyte counts, cell classification,
+        and dysplasia detection. Results are summarized in a standardized report
+        that can be seamlessly integrated into your laboratory information
+        system.
       </p>
     </div>
   </Section>
@@ -117,9 +121,10 @@ import SectionCard from "~src/components/SectionCard.astro";
     <SectionCard>
       <H level="2">Flexible workflow integration</H>
       <p>
-        Whole-slide and single-cell image analysis is compatible with diverse microscopes and imaging systems.
-        Cellbytes is simple to deploy and scales effortlessly to labs of any size.
-        No need for additional hardwares or complex installations &ndash; only your computer.
+        Whole-slide and single-cell image analysis is compatible with diverse
+        microscopes and imaging systems. Cellbytes is simple to deploy and
+        scales effortlessly to labs of any size. No need for additional
+        hardwares or complex installations &ndash; only your computer.
       </p>
       <LinkButton href="/application#scan-slides" variant="default-arrow">
         Compatibility
@@ -146,6 +151,8 @@ import SectionCard from "~src/components/SectionCard.astro";
       </LinkButton>
     </SectionCard>
   </Section>
+
+  <CallToAction title="Ready to digitize your hematology workflow?" />
 </Layout>
 
 <style>
