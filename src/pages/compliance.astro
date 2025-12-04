@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import certifications from "~src/assets/images/compliance/certifications.jpg";
+import security from "~src/assets/images/compliance/security.jpg";
 import documentSigning from "~src/assets/images/compliance/document-signing.jpg";
 import documentBinders from "~src/assets/images/compliance/document-binders.jpg";
 import documentCursive from "~src/assets/images/compliance/document-cursive.jpg";
@@ -19,24 +19,18 @@ import TextCard from "~src/components/TextCard.astro";
 >
   <Section variant="pair">
     <Image
-      src={certifications}
-      alt="A paper containing various ISO-standard registration marks."
+      src={security}
+      alt="A patient discussing treatment details with a doctor."
       widths={WIDTHS}
       height="300"
     />
     <SectionCard gradient>
       <h1>Commitment to security and quality</h1>
-      <p>
-        Adhering to medical device requirements is fundamental to guarantee
-        reliable performance and medical safety regulatory standards. Cellbytes is
-        CE-Marked and complies with globally recognized quality
-        certifications (ISO 13485:2016) and the In Vitro Diagnostic Regulation (IVDR 2017/746).
-        It is not yet commercially available in the US for in vitro diagnostic procedures.
-      </p>
-      <p>
-        The Cellbytes team and platform adhere to data privacy regulations such
-        as HIPAA and GDPR. We ensure uncompromised data security through
-        advanced encryption and comprehensive privacy measures.
+      <p class="ingress">
+        For Cellbytes, adhering to medical device requirements is fundamental to
+        guarantee reliable performance and medical safety regulatory standards.
+        We ensure uncompromised data security through advanced encryption and
+        comprehensive privacy measures.
       </p>
     </SectionCard>
   </Section>
@@ -44,6 +38,18 @@ import TextCard from "~src/components/TextCard.astro";
   <Section variant="blank">
     <H level="2">Compliance</H>
     <div class="certifications">
+      <TextCard
+        image={documentBinders}
+        alt="A pile of full document binders"
+        accent="3"
+      >
+        <H level="3">IVDR &ndash; In Vitro Diagnostics Regulations</H>
+        <p>
+          Cellbytes is CE-marked, adhering to the EU 2017/746 IVDR, and
+          available for use in EU countries. Cellbytes is not yet in the US for
+          clinical use.
+        </p>
+      </TextCard>
       <TextCard
         image={documentSigning}
         alt="A document being signed with a fancy pen"
@@ -54,27 +60,9 @@ import TextCard from "~src/components/TextCard.astro";
         </H>
         <p>
           Outlines the requirements for a quality management system that ensures
-          an organization can consistently deliver medical devices and related
+          Cellbytes Ltd. can consistently deliver medical devices and related
           services that meet both customer expectations and regulatory
-          standards. Organizations adhering to this standard may be involved in
-          various stages of the device life cycle, including design and
-          development, production, storage and distribution, installation,
-          servicing, or providing associated activities such as technical
-          support.
-        </p>
-      </TextCard>
-      <TextCard
-        image={documentBinders}
-        alt="A pile of full document binders"
-        accent="3"
-      >
-        <H level="3">ISO 27001:2022 &ndash; Information Security Management</H>
-        <p>
-          Defines the requirements for establishing, implementing, maintaining,
-          and continuously improving an information security management system
-          within an organization. It also outlines the processes for assessing
-          and addressing information security risks, customized to meet the
-          organization's specific needs.
+          standards.
         </p>
       </TextCard>
       <TextCard
@@ -82,17 +70,13 @@ import TextCard from "~src/components/TextCard.astro";
         alt="A close-up of an old document written by hand in cursive"
         accent="1"
       >
-        <H level="3">HIPAA Security Rule & GDPR Art. 32</H>
+        <H level="3">HIPAA Security Rule & GDPR</H>
         <p>
-          U.S. federal and EU regulations are designed to protect the privacy
-          and security of personal health information. Compliance requires
-          strict adherence to administrative, physical, and technical safeguards
-          to maintain the confidentiality and integrity of health data. The
-          Microsoft Azure cloud is designed to provide the highest level of
-          security for medical data, featuring end-to-end encryption, firewalls,
-          and multi-factor authentication. Patient information is securely
-          protected throughout storage, processing, and transmission ensuring
-          privacy across regions and borders.
+          Cellbytes is built on cloud services, designed to provide the highest
+          level of security for medical data; featuring end-to-end encryption,
+          firewalls, and multi-factor authentication. Patient information is
+          securely protected throughout storage, processing, and transmission
+          ensuring privacy across regions and borders.
         </p>
       </TextCard>
     </div>
@@ -100,6 +84,9 @@ import TextCard from "~src/components/TextCard.astro";
 </Layout>
 
 <style>
+  .ingress {
+    font-size: var(--text-size-ingress);
+  }
   .certifications {
     display: flex;
     flex-direction: column;
