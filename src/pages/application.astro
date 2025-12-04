@@ -25,7 +25,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       height="300"
     />
     <SectionCard gradient>
-      <h1>A new era</h1>
+      <H level="2">A new era</H>
       <p class="ingress">
         Digital cytopathology streamlines workflows by fostering synergy between
         physicians and technology. With AI managing time-consuming, quantifiable
@@ -33,8 +33,10 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         interpret results. To support interpretation, Cellbytes is the first
         platform to also provide reference values for healthy subjects. Remote
         collaboration becomes effortless, enabling seamless sample evaluation
-        and colleague consultations. Cellbytes brings digital cytopathology to
-        life.
+        and colleague consultations.
+      </p>
+      <p style="text-align: center;">
+        Cellbytes brings digital cytopathology to life.
       </p>
     </SectionCard>
   </Section>
@@ -46,7 +48,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         image={slides}
         alt="A doctor skimming through a drawer filled with bone marrow slides."
         heading="Scan Slides"
-        text="Capture cytomorphological slides using your microscope."
+        text="Digitize cytomorphological slides using your microscope."
       />
       <WorkflowStep
         image={networking}
@@ -63,8 +65,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       <WorkflowStep
         image={cellList}
         alt="A screenshot of Cellbytes showing a list of cells with their labels."
-        heading="Physician Review"
-        text="Pre-classification results are reviewed and verified by a physician."
+        heading="Review"
+        text="Pre-classification results are reviewed and verified by a healthcare professional."
       />
       <WorkflowStep
         image={report}
@@ -81,7 +83,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
     <div class="card-grid features">
       <div class="card-item feature">
         <H level="3">Sample triage</H>
-        <p>Prioritize urgent samples with a multi-parameter risk model.</p>
+        <p>Prioritize urgent samples with a multi-parameter risk assessment system.</p>
       </div>
       <div class="card-item feature">
         <H level="3">Comprehensive image view</H>
@@ -90,8 +92,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       <div class="card-item feature">
         <H level="3">Single-cell analysis</H>
         <p>
-          View single-cell images with classifications and potential dysplasia
-          indicators.
+          Fast validation of cell types and potential signs of dysplasia with single-cell images.
         </p>
       </div>
       <div class="card-item feature">
@@ -107,7 +108,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
       <div class="card-item feature">
         <H level="3">Collaborative sharing</H>
         <p>
-          Easily share slides and cell images with colleagues for consultations
+          Effortlessly share slides and cell images with colleagues for consultations
           and meetings.
         </p>
       </div>
@@ -124,17 +125,16 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         <H level="3">How can I use Cellbytes?</H>
         <p>
           Cellbytes can be used by uploading high-resolution images of bone
-          marrow aspirates to the platform. The application analyzes these
+          marrow aspirates to the platform. The system has been validated with diverse scanners simplifying testing and adoption to clinical workflows. The application analyzes these
           images using advanced machine learning algorithms, delivering
-          quantitative results and visual annotations. It is accessible via a
-          secure web interface—no installation required.
+          quantitative results and visual annotations via a
+          secure web interface. No time-consuming software or hardware installation is required.
         </p>
       </div>
       <div class="card-item faq">
         <H level="3">Can I test Cellbytes?</H>
         <p>
-          Yes, Cellbytes offers a trial version for institutions and
-          professionals interested in evaluating its capabilities. You can
+          Yes, Cellbytes offers a trial version for evaluating its capabilities. You can
           request trial access by contacting the support team through the
           website.
         </p>
@@ -143,10 +143,10 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         <H level="3">How robust are the algorithms?</H>
         <p>
           Cellbytes's algorithms have been trained on a comprehensive real-world
-          dataset comprising different pathologies and over 60,000 samples. The
+          dataset comprising diverse pathologies and millions of images. The
           system achieves high accuracy in detecting and classifying various
           blood cell types and their abnormalities, with performance metrics
-          benchmarked against expert diagnoses.
+          benchmarked against findings from thousands of clinical reports.
         </p>
       </div>
       <div class="card-item faq">
@@ -179,6 +179,12 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
         </p>
       </div>
       <div class="card-item faq">
+        <H level="3">What about peripheral blood samples?</H>
+        <p>
+          A separate module is currently being developed to be included in the same software enabling dual bone marrow and peripheral blood assessment.
+        </p>
+      </div>
+      <div class="card-item faq">
         <H level="3">Why is Cellbytes only cloud-based?</H>
         <p>
           Being cloud-based ensures seamless updates, scalable computing
@@ -200,7 +206,7 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           Absolutely. Cellbytes is increasingly used in research settings to
           study hematologic disorders, develop new biomarkers, and support
           clinical trials. It offers data export and integration with other
-          medical data domains.
+          medical data domains. The Cellbytes team is more than happy to assist you in making the medical discoveries of tomorrow.
         </p>
       </div>
     </div>
