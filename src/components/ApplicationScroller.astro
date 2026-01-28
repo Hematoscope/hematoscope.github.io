@@ -2,21 +2,111 @@
 import { Image } from "astro:assets";
 import base from "~src/assets/images/applicationScroller/01-base.png";
 import triage from "~src/assets/images/applicationScroller/02-triage.png";
-import scarcity from "~src/assets/images/applicationScroller/03-scarcity-cellularity.png";
-import infocus from "~src/assets/images/applicationScroller/04-infocus-mask.png";
-import sample from "~src/assets/images/applicationScroller/05-sample-mask.png";
-import center from "~src/assets/images/applicationScroller/06-center-mask.png";
-import mkc from "~src/assets/images/applicationScroller/07-mkc-mask.png";
-import textures from "~src/assets/images/applicationScroller/08-texture-mask.png";
-import lipids from "~src/assets/images/applicationScroller/09-lipid-mask.png";
-import diff from "~src/assets/images/applicationScroller/10-cell-diff.png";
-import cells from "~src/assets/images/applicationScroller/11-cell-list.png";
+import tutorialRois from "~src/assets/images/applicationScroller/03-tutorialization-rois.png";
+import tutorialCells from "~src/assets/images/applicationScroller/04-tutorialization-cells.png";
+import slideViewer from "~src/assets/images/applicationScroller/05-slide-viewer.png";
+import scarcityCellularity from "~src/assets/images/applicationScroller/06-scarcity-cellularity.png";
+import maskVisualization from "~src/assets/images/applicationScroller/07-mask-visualization.png";
+import cellDifferential from "~src/assets/images/applicationScroller/08-cell-differential.png";
+import fullDifferential from "~src/assets/images/applicationScroller/09-full-differential.png";
+import cellList from "~src/assets/images/applicationScroller/10-cell-list.png";
+import dysplasias from "~src/assets/images/applicationScroller/11-dysplasias.png";
 
 import { WIDTHS as W } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import GlassFrame from "~src/components/GlassFrame.astro";
 import SectionCard from "./SectionCard.astro";
+
+const scrollerData = [
+  {
+    name: "base",
+    image: base,
+    cardTitle: null,
+    cardBody: null,
+    position: null,
+  },
+  {
+    name: "triage",
+    image: triage,
+    cardTitle: "Triaging all slides",
+    cardBody:
+      "Assessment of the urgency of the bone marrow sample. Samples can be prioritized based on their triage score, ensuring that the most critical cases are analyzed first.",
+    position: "right",
+  },
+  {
+    name: "tutorial-rois",
+    image: tutorialRois,
+    cardTitle: "Tutorialized evaluation",
+    cardBody:
+      "When evaluating samples, the professionals can choose to follow a recommended evaluation path with instructions and incremental introductions to the user interface.",
+    position: "right",
+  },
+  {
+    name: "tutorial-cells",
+    image: tutorialCells,
+    cardTitle: "Tutorialized evaluation",
+    cardBody:
+      "The evaluation flow guides the professionals through all the different analyses and visualizations to aid them in diagnosing the sample.",
+    position: "left",
+  },
+  {
+    name: "slide-viewer",
+    image: slideViewer,
+    cardTitle: "Advanced user interface",
+    cardBody:
+      "The professionals can also use the advanded interface, which allows them to use all the available results and tools to analyze the sample however they want to.",
+    position: "right",
+  },
+  {
+    name: "scarcity-cellularity",
+    image: scarcityCellularity,
+    cardTitle: "General sample properties",
+    cardBody:
+      "The sample is assessed for representativeness for cytomorphological analysis; scarcity is determined based on the quantity of cellular material in the sample slide, and cellularity estimates the density of hematopoietic cells in the bone marrow.",
+    position: "right",
+  },
+  {
+    name: "mask-visualization",
+    image: maskVisualization,
+    cardTitle: "Mask visualizations",
+    cardBody:
+      "For evaluating the automated results, different types of masks can be overlaid on the sample to help identify regions that have been considered in the analysis.",
+    position: "left",
+  },
+  {
+    name: "cell-differential",
+    image: cellDifferential,
+    cardTitle: "Automated cell differential",
+    cardBody:
+      "The application classifies all cells found in the sample, and the professionals can manually select regions of interest from which a cell differential is instantly calculated.",
+    position: "right",
+  },
+  {
+    name: "full-differential",
+    image: fullDifferential,
+    cardTitle: "Detailed differential view",
+    cardBody:
+      "For a more thorough evaluation, the application can analyze and display results on a ROI-per-ROI basis.",
+    position: "right",
+  },
+  {
+    name: "cell-list",
+    image: cellList,
+    cardTitle: "Cell evaluation",
+    cardBody:
+      "By listing all cells based on their classification label, the professionals can quickly validate the results of the automated analysis and even adjust the labels if needed.",
+    position: "right",
+  },
+  {
+    name: "dysplasias",
+    image: dysplasias,
+    cardTitle: "Dysplastic cell evaluation",
+    cardBody:
+      "A first in automated cytomorphology: detect dysplastic cells across different cell lineages to gain deeper insights for the whole slide.",
+    position: "right",
+  },
+];
 ---
 
 <Section variant="blank">
@@ -32,121 +122,32 @@ import SectionCard from "./SectionCard.astro";
   </div>
   <SectionCard gradient class="scroller">
     <GlassFrame class="screen">
-      <Image src={base} alt="" widths={W} height="600" />
-      <Image class="triage" src={triage} alt="" widths={W} height="600" />
-      <Image class="scarcity" src={scarcity} alt="" widths={W} height="600" />
-      <Image class="infocus" src={infocus} alt="" widths={W} height="600" />
-      <Image class="sample" src={sample} alt="" widths={W} height="600" />
-      <Image class="center" src={center} alt="" widths={W} height="600" />
-      <Image class="mkc" src={mkc} alt="" widths={W} height="600" />
-      <Image class="textures" src={textures} alt="" widths={W} height="600" />
-      <Image class="lipid" src={lipids} alt="" widths={W} height="600" />
-      <Image class="diff" src={diff} alt="" widths={W} height="600" />
-      <Image class="cells" src={cells} alt="" widths={W} height="600" />
+      {
+        scrollerData.map((item) => (
+          <Image
+            src={item.image}
+            class={item.name}
+            alt=""
+            widths={W}
+            height="600"
+          />
+        ))
+      }
     </GlassFrame>
 
-    <div class="card triage left">
-      <H level="3">General sample properties</H>
-      <p>
-        <b>Triage score:</b> Assessment of the urgency of the bone marrow sample.
-        Samples can be prioritized based on their triage score, ensuring that the
-        most critical cases are analyzed first.
-      </p>
-    </div>
-
-    <div class="card scarcity right">
-      <H level="3" aria-hidden="true">General sample properties</H>
-      <p>
-        <b>Scarcity estimate:</b> Assessment of whether the sample is representative
-        enough for cytomorphological assessment. Scarcity is determined based on
-        the quantity of cellular material in the sample slide.
-      </p>
-      <p>
-        <b>Cellularity estimate:</b> Estimate of the density of hematopoietic cells
-        in the bone marrow.
-      </p>
-    </div>
-
-    <div class="card infocus left">
-      <H level="3">Technical sample properties</H>
-      <p>
-        <b>Out-of-focus:</b> Identification of the out-of-focus areas within the
-        whole-slide image. Users are warned if the proportion of out-of-focus area
-        exceeds a critical threshold indicating that clinically relevant parameter
-        values might be unreliable.
-      </p>
-    </div>
-
-    <div class="card sample left">
-      <H level="3">Clinical sample properties</H>
-      <p>
-        <b>Sample region:</b> Identification of the region within the whole-slide
-        image of the sample that contains the specimen. The identified region is
-        visualized as an overlay mask on the whole-slide image.
-      </p>
-    </div>
-
-    <div class="card center left">
-      <H level="3" aria-hidden="true">Clinical sample properties</H>
-      <p>
-        <b>Center region:</b> Identification of the possible center region of the
-        sample within the whole-slide image. The identified region is visualized
-        as an overlay mask on the whole-slide image.
-      </p>
-    </div>
-
-    <div class="card mkc left">
-      <H level="3" aria-hidden="true">Clinical sample properties</H>
-      <p>
-        <b>Megakaryocytes in the whole slide:</b> Quantification of megakaryocytes
-        within the sample slide. Megakaryocytes are counted per 10x field of view,
-        and counts are categorized as "low," "intermediate," or "high" for easier
-        interpretation. The identified megakaryocytes are visualized as an overlay
-        mask on the whole-slide image.
-      </p>
-    </div>
-
-    <div class="card textures left">
-      <H level="3" aria-hidden="true">Clinical sample properties</H>
-      <p>
-        Quantity and distribution of <b>red blood cells</b>,
-        <b>eukaryotic cells</b> and <b>stromal tissue</b> within the sample. The
-        application provides numerical data detailing their quantities across various
-        regions of the sample and visualizes them as an overlay mask on the whole-slide
-        image.
-      </p>
-    </div>
-
-    <div class="card lipid left">
-      <H level="3" aria-hidden="true">Clinical sample properties</H>
-      <p>
-        <b>Lipid droplets:</b> Quantity and distribution of lipid droplets within
-        the sample. The application provides numerical data detailing their quantities
-        across various regions of the sample and visualizes them as an overlay mask
-        on the whole-slide image.
-      </p>
-    </div>
-
-    <div class="card cells right">
-      <H level="3">Cell-level properties</H>
-      <p>
-        <b>Cells:</b> Detection and classification of individual bone marrow cells
-        in the selected regions of the sample, categorized into 17 distinct cell
-        types. The application provides differential counts for each cell type, along
-        with their locations, visualized on the images.
-      </p>
-    </div>
-
-    <div class="card dysplasia right">
-      <H level="3" aria-hidden="true">Cell-level properties</H>
-      <p>
-        <b>Dysplasia:</b> Assessment of dysplastic alterations in individual bone
-        marrow cells. Different forms of dysplasia are assessed in various cell types,
-        including promyelocytic dysplasia, megakaryocyte dysplasia, and erythroblast
-        dysplasia. Users are warned if the quantity of dysplastic changes exceeds
-        a critical threshold.
-      </p>
-    </div>
+    {
+      scrollerData
+        .filter((item) => item.cardTitle !== null)
+        .map((item) => (
+          <div
+            class={`card ${item.name} ${item.position}`}
+            data-name={item.name}
+          >
+            <H level="3">{item.cardTitle}</H>
+            <p>{item.cardBody}</p>
+          </div>
+        ))
+    }
   </SectionCard>
 </Section>
 
@@ -219,18 +220,9 @@ import SectionCard from "./SectionCard.astro";
 
   const initial = 3;
   const step = 9.3;
-  const frames = [
-    "triage",
-    "scarcity",
-    "infocus",
-    "sample",
-    "center",
-    "mkc",
-    "textures",
-    "lipid",
-    "diff",
-    "cells",
-  ];
+  const frames = [...document.querySelectorAll("div[data-name]")].map(
+    (element) => element.getAttribute("data-name") || "",
+  );
   frames.forEach((frame, idx) => keyframes(frame, initial + step * idx));
 </script>
 
