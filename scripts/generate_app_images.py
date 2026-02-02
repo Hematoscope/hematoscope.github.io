@@ -12,6 +12,8 @@ Script for generating the individual images in the /application page's
 highlighted feature scroller. Requires a locally running dev environment.
 """
 
+from io import BytesIO
+from math import floor
 from pathlib import Path
 from playwright.sync_api import expect, sync_playwright
 import cv2
@@ -28,6 +30,16 @@ DIMS = {"width": 1600, "height": 900}
 CLEAN_OSD_STYLE = '.openseadragon-canvas ~ div:last-of-type , div[id^="navigator-"] { display: none !important; }'
 
 
+def dim_image(pil_img, factor=0.7):
+    """Dim image by multiplying pixel brightness by factor (0..1)."""
+    if factor >= 1.0:
+        return pil_img.copy()
+    arr = np.asarray(pil_img).astype(np.float32)
+    arr[..., :3] = arr[..., :3] * factor
+    arr = np.clip(arr, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr)
+
+
 def mask(file, rects, out=None, dim=0.7, radius=16):
     def make_rounded_mask(size, radius):
         """Create a rounded-corner mask PIL Image (L) for given size (w,h) and radius."""
@@ -36,15 +48,6 @@ def mask(file, rects, out=None, dim=0.7, radius=16):
         draw = ImageDraw.Draw(mask)
         draw.rounded_rectangle([0, 0, w, h], radius=radius, fill=255)
         return mask
-
-    def dim_image(pil_img, factor=0.7):
-        """Dim image by multiplying pixel brightness by factor (0..1)."""
-        if factor >= 1.0:
-            return pil_img.copy()
-        arr = np.asarray(pil_img).astype(np.float32)
-        arr[..., :3] = arr[..., :3] * factor
-        arr = np.clip(arr, 0, 255).astype(np.uint8)
-        return Image.fromarray(arr)
 
     def paste_with_mask(base_pil, src_pil, box, radius=None):
         """Paste src_pil region into base_pil at box=(x1,y1,x2,y2) with rounded mask."""
@@ -168,6 +171,23 @@ with sync_playwright() as p:
         [(11, 273, 452, 823)],
         ASSETS_FOLDER / "applicationScroller" / "08-cell-differential.png",
     )
+
+    with page.expect_popup() as popup_info:
+        page.get_by_role("button", name="Open report").click()
+
+    popup = popup_info.value
+    popup.wait_for_load_state("networkidle")
+
+    main_window_img = dim_image(Image.open(BytesIO(page.screenshot())))
+    popup_window_img = Image.open(BytesIO(popup.screenshot()))
+    popup_window_img = popup_window_img.crop(popup_window_img.getbbox(alpha_only=True))
+
+    popup_position = (
+        floor(main_window_img.width / 2 - popup_window_img.width / 2),
+        20,
+    )
+    main_window_img.paste(popup_window_img, popup_position)
+    main_window_img.save(ASSETS_FOLDER / "applicationScroller" / "12-report.png")
 
     page.get_by_role("button", name="Diff per ROI").click()
     page.wait_for_timeout(3000)

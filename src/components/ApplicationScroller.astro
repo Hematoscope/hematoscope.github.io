@@ -11,6 +11,7 @@ import cellDifferential from "~src/assets/images/applicationScroller/08-cell-dif
 import fullDifferential from "~src/assets/images/applicationScroller/09-full-differential.png";
 import cellList from "~src/assets/images/applicationScroller/10-cell-list.png";
 import dysplasias from "~src/assets/images/applicationScroller/11-dysplasias.png";
+import report from "~src/assets/images/applicationScroller/12-report.png";
 
 import { WIDTHS as W } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -29,82 +30,90 @@ const scrollerData = [
   {
     name: "triage",
     image: triage,
-    cardTitle: "Triaging all slides",
+    cardTitle: "Intelligent triage",
     cardBody:
-      "Assessment of the urgency of the bone marrow sample. Samples can be prioritized based on their triage score, ensuring that the most critical cases are analyzed first.",
+      "Our system ranks bone marrow samples by clinical urgency. By scoring cytomorphological features automatically, we ensure high-priority cases receive immediate attention.",
     position: "right",
   },
   {
     name: "tutorial-rois",
     image: tutorialRois,
-    cardTitle: "Tutorialized evaluation",
+    cardTitle: "Guided diagnostic workflow",
     cardBody:
-      "When evaluating samples, the professionals can choose to follow a recommended evaluation path with instructions and incremental introductions to the user interface.",
+      "Our system facilitates rapid adoption through step-by-step instructions and an intuitive introduction to the interface.",
     position: "right",
   },
   {
     name: "tutorial-cells",
     image: tutorialCells,
-    cardTitle: "Tutorialized evaluation",
+    cardTitle: "Guided diagnostic workflow",
     cardBody:
-      "The evaluation flow guides the professionals through all the different analyses and visualizations to aid them in diagnosing the sample.",
+      "The evaluation flow will guide you through a sequence of analyses covering whole-sample analysis, selection of regions of interest, cell differential, dysplasia assessment and finally approving a standardized sample report.",
     position: "left",
   },
   {
     name: "slide-viewer",
     image: slideViewer,
-    cardTitle: "Advanced user interface",
+    cardTitle: "Advanced interface for expert control",
     cardBody:
-      "The professionals can also use the advanded interface, which allows them to use all the available results and tools to analyze the sample however they want to.",
+      "For experienced users, the advanced interface provides access to the full sample, offering total flexibility to conduct deep-dive analyses tailored to each case.",
     position: "right",
   },
   {
     name: "scarcity-cellularity",
     image: scarcityCellularity,
-    cardTitle: "General sample properties",
+    cardTitle: "Comprehensive sample assessment",
     cardBody:
-      "The sample is assessed for representativeness for cytomorphological analysis; scarcity is determined based on the quantity of cellular material in the sample slide, and cellularity estimates the density of hematopoietic cells in the bone marrow.",
+      "The system evaluates sample sufficiency, cellularity estimates to assess the density of hematopoietic cells and megakaryoycyte density, which are integral part of a comprehensive cytomorphological analysis.",
     position: "right",
   },
   {
     name: "mask-visualization",
     image: maskVisualization,
-    cardTitle: "Mask visualizations",
+    cardTitle: "Visual verification",
     cardBody:
-      "For evaluating the automated results, different types of masks can be overlaid on the sample to help identify regions that have been considered in the analysis.",
+      "Validate preclassification results with precision using diagnostic masks. Overlays highlight the exact regions factored into the analysis, providing full transparency into the system’s identification process.",
     position: "left",
   },
   {
     name: "cell-differential",
     image: cellDifferential,
-    cardTitle: "Automated cell differential",
+    cardTitle: "Innovative cell differential",
     cardBody:
-      "The application classifies all cells found in the sample, and the professionals can manually select regions of interest from which a cell differential is instantly calculated.",
+      "Cellbytes combines a powerful in-house foundation model trained with millions of cells and medical context to preclassify every cell identified within the sample. For targeted analysis, users can define specific regions of interest to maximize clinical accuracy.",
     position: "right",
   },
   {
     name: "full-differential",
     image: fullDifferential,
-    cardTitle: "Detailed differential view",
+    cardTitle: "Per-ROI detailed view",
     cardBody:
-      "For a more thorough evaluation, the application can analyze and display results on a ROI-per-ROI basis.",
+      "For a deeper dive, Cellbytes provides a detailed breakdown of results on a region-by-region basis to precisely compare different areas within the sample.",
     position: "right",
   },
   {
     name: "cell-list",
     image: cellList,
-    cardTitle: "Cell evaluation",
+    cardTitle: "Interactive cell gallery",
     cardBody:
-      "By listing all cells based on their classification label, the professionals can quickly validate the results of the automated analysis and even adjust the labels if needed.",
+      "Review and refine automated classifications with ease. Our organized cell-by-cell list allows users to validate the system’s performance and maintain full diagnostic control by updating labels on the fly. Cellbytes ensures rapid correction and validation using an intelligent cell similarity measure.",
     position: "right",
   },
   {
     name: "dysplasias",
     image: dysplasias,
-    cardTitle: "Dysplastic cell evaluation",
+    cardTitle: "Lineage-specific dysplasia analysis",
     cardBody:
-      "A first in automated cytomorphology: detect dysplastic cells across different cell lineages to gain deeper insights for the whole slide.",
+      "A first in automated cytomorphology: detect and characterize dysplastic cells across multiple lineages rapidly and securely.",
     position: "right",
+  },
+  {
+    name: "report",
+    image: report,
+    cardTitle: "Seamless reporting",
+    cardBody:
+      "Finalize your evaluation with a single click. Approve the generated results and sign off on the sample to complete the digital workflow and archive the report.",
+    position: "left",
   },
 ];
 ---
