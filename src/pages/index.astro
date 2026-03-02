@@ -4,6 +4,7 @@ import appMask from "~src/assets/images/home/app-mask.png"; // https://mockuper.
 import appLabelings from "~src/assets/images/home/app-labelings.png"; // https://mockuper.net/generator/mockup/2085/imac
 import microscope from "~src/assets/images/home/microscope.jpg";
 import server from "~src/assets/images/home/server.jpg";
+import HusLogo from "~src/assets/icons/partners/hus.svg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -152,6 +153,19 @@ import SectionCard from "~src/components/SectionCard.astro";
     </SectionCard>
   </Section>
 
+  <Section variant="gradient-cells">
+    <div style="margin-block-start: 3rem;">
+      <H level="2">In research partnership with</H>
+    </div>
+    <ul style="margin-block-end: 3rem;">
+      <li>
+        <a href="https://www.hus.fi/en">
+          <HusLogo aria-label="HUS logo" />
+        </a>
+      </li>
+    </ul>
+  </Section>
+
   <CallToAction title="Ready to digitize your hematology workflow?" />
 </Layout>
 
@@ -173,6 +187,10 @@ import SectionCard from "~src/components/SectionCard.astro";
     gap: calc(2 * var(--element-padding));
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  ul {
+    list-style: none;
   }
 
   @media screen and (width < 40em) {
