@@ -5,6 +5,8 @@ import appLabelings from "~src/assets/images/home/app-labelings.png"; // https:/
 import microscope from "~src/assets/images/home/microscope.jpg";
 import server from "~src/assets/images/home/server.jpg";
 import HusLogo from "~src/assets/icons/partners/hus.svg";
+import FimlabLogo from "~src/assets/icons/partners/fimlab.svg";
+import VarhaLogo from "~src/assets/icons/partners/varha.svg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -163,6 +165,16 @@ import SectionCard from "~src/components/SectionCard.astro";
           <HusLogo aria-label="HUS logo" />
         </a>
       </li>
+      <li>
+        <a href="https://fimlab.fi/en/frontpage-eng/">
+          <FimlabLogo aria-label="Fimlab logo" />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.varha.fi/en">
+          <VarhaLogo aria-label="Varha logo" />
+        </a>
+      </li>
     </ul>
   </Section>
 
@@ -191,6 +203,15 @@ import SectionCard from "~src/components/SectionCard.astro";
 
   ul {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: calc(2 * var(--element-padding));
+  }
+  li {
+    width: 150px;
   }
 
   @media screen and (width < 40em) {
