@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import appMask from "~src/assets/images/home/app-mask.png"; // https://mockuper.net/generator/mockup/2286/imac
 import appLabelings from "~src/assets/images/home/app-labelings.png"; // https://mockuper.net/generator/mockup/2085/imac
+import evidentMicroscope from "~src/assets/images/home/evident-vs200-logos-side.png";
 import microscope from "~src/assets/images/home/microscope.jpg";
 import server from "~src/assets/images/home/server.jpg";
 import HusLogo from "~src/assets/icons/partners/hus.svg";
@@ -54,6 +55,15 @@ import SectionCard from "~src/components/SectionCard.astro";
     </GlassFrame>
   </Section>
 
+  <Section variant="blank">
+    <H level="2">The future is now</H>
+    <p class="ingress">
+      Cellbytes is the next step in hematopathology. With cloud-native analysis
+      and support for the digital microscope you already have, it's easier than
+      ever to revolutionize your workflows.
+    </p>
+  </Section>
+
   <Section variant="pair">
     <Image
       src={appLabelings}
@@ -88,8 +98,8 @@ import SectionCard from "~src/components/SectionCard.astro";
     <SectionCard>
       <H level="2">Real-time analysis</H>
       <p>
-        Cloud-based computing is available 24/7 and designed for rapid batch
-        analysis.
+        Cloud-based computing is available where ever you are, 24/7. Cellbytes
+        is designed for high throughput, parallelized batch analysis.
       </p>
       <LinkButton
         href="/application#comprehensive-ai-powered-analysis"
@@ -100,10 +110,29 @@ import SectionCard from "~src/components/SectionCard.astro";
     </SectionCard>
   </Section>
 
+  <Section variant="pair" style={{ marginBlock: "4rem" }}>
+    <Image
+      src={evidentMicroscope}
+      alt="Evident's digital microscope, the VS200, shown on top of the Evident and Cellbytes logos."
+      widths={WIDTHS}
+      height="400"
+      style={{ objectFit: "contain", height: "500px" }}
+    />
+    <SectionCard>
+      <H level="2">Leading hardware loves leading software</H>
+      <p>
+        Out of all the supported scanners, the Evident VS200 is a perfect match
+        for Cellbytes. Partnering with industry leading image quality and
+        automated imaging of over 200 slides enables you to focus on what
+        matters.
+      </p>
+    </SectionCard>
+  </Section>
+
   <Section variant="gradient">
     <div class="text" style="margin: 4rem;">
       <H level="2">Full AI-assisted morphology analysis</H>
-      <p>
+      <p class="ingress">
         Hematopathology is not just about counting cells. Cellbytes performs
         end-to-end cytomorphological assessment covering assessment of
         cellularity, sample adequacy, megakaryocyte counts, cell classification,
@@ -126,8 +155,8 @@ import SectionCard from "~src/components/SectionCard.astro";
       <p>
         Whole-slide and single-cell image analysis is compatible with diverse
         microscopes and imaging systems. Cellbytes is simple to deploy and
-        scales effortlessly to labs of any size. No need for additional
-        hardwares or complex installations &ndash; only your computer.
+        scales effortlessly to labs of any size. No need for additional hardware
+        or complex installations &ndash; only your computer.
       </p>
       <LinkButton href="/application#scan-slides" variant="default-arrow">
         Compatibility
@@ -155,6 +184,8 @@ import SectionCard from "~src/components/SectionCard.astro";
     </SectionCard>
   </Section>
 
+  <CallToAction title="Ready to digitize your hematology workflow?" />
+
   <Section variant="gradient-cells">
     <div style="margin-block-start: 3rem;">
       <H level="2">In research partnership with</H>
@@ -177,13 +208,11 @@ import SectionCard from "~src/components/SectionCard.astro";
       </li>
     </ul>
   </Section>
-
-  <CallToAction title="Ready to digitize your hematology workflow?" />
 </Layout>
 
 <style>
   p {
-    font-size: var(--text-size-ingress);
+    font-size: var(--text-size-body);
   }
 
   .hero {
@@ -192,6 +221,11 @@ import SectionCard from "~src/components/SectionCard.astro";
 
   video {
     aspect-ratio: 16 / 10;
+  }
+
+  .ingress {
+    font-size: var(--text-size-ingress);
+    max-width: 60ch;
   }
 
   .algorithms {
