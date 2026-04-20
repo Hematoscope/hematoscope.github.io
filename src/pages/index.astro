@@ -111,13 +111,18 @@ import SectionCard from "~src/components/SectionCard.astro";
   </Section>
 
   <Section variant="pair" style={{ marginBlock: "4rem" }}>
-    <Image
-      src={evidentMicroscope}
-      alt="Evident's digital microscope, the VS200, shown on top of the Evident and Cellbytes logos."
-      widths={WIDTHS}
-      height="400"
-      style={{ objectFit: "contain", height: "500px" }}
-    />
+    <a
+      href="https://evidentscientific.com/en/products/slide-scanners/vs200"
+      class="imagelink"
+    >
+      <Image
+        src={evidentMicroscope}
+        alt="Evident's digital microscope, the VS200, shown on top of the Evident and Cellbytes logos."
+        widths={WIDTHS}
+        height="400"
+        style={{ objectFit: "contain", height: "500px" }}
+      />
+    </a>
     <SectionCard>
       <H level="2">Leading hardware loves leading software</H>
       <p>
@@ -226,6 +231,11 @@ import SectionCard from "~src/components/SectionCard.astro";
   .ingress {
     font-size: var(--text-size-ingress);
     max-width: 60ch;
+  }
+
+  .imagelink {
+    display: flex;
+    justify-content: center;
   }
 
   .algorithms {
