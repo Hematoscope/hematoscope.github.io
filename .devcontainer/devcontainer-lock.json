@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/va-h/devcontainers-features/difftastic:1": {
+      "version": "1.1.0",
+      "resolved": "ghcr.io/va-h/devcontainers-features/difftastic@sha256:0531484b814537884ee86f3df8a03e643d022e06d4057edb72141b495b3faeff",
+      "integrity": "sha256:0531484b814537884ee86f3df8a03e643d022e06d4057edb72141b495b3faeff"
+    }
+  }
+}

@@ -33,25 +33,11 @@ import SectionCard from "~src/components/SectionCard.astro";
         autoplay
         muted
         loop
+        playsinline
         aria-label="Demonstration of Cellbytes's features"
         poster="banner_image.jpeg"
-      >
-        <source
-          src="banner_large.webm"
-          type="video/webm"
-          media="(1000px <= width)"
-        />
-        <source
-          src="banner_mid.webm"
-          type="video/webm"
-          media="(600px <= width < 1000px)"
-        />
-        <source
-          src="banner_small.webm"
-          type="video/webm"
-          media="(width < 600px)"
-        />
-      </video>
+        data-hls-src="/banner/master.m3u8"
+      ></video>
     </GlassFrame>
   </Section>
 
@@ -214,6 +200,28 @@ import SectionCard from "~src/components/SectionCard.astro";
     </ul>
   </Section>
 </Layout>
+
+<script>
+  // @ts-expect-error - hls.js light build ships without its own type declarations; runtime API matches the main export
+  import Hls from "hls.js/light";
+
+  const video = document.querySelector<HTMLVideoElement>("video[data-hls-src]");
+  if (video) {
+    const src = video.dataset.hlsSrc!;
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = src;
+    } else if (Hls.isSupported()) {
+      // 8 Mbps initial bandwidth estimate biases the first segment toward the
+      // highest rendition; hls.js will downshift if real throughput is lower.
+      // Without this the player starts on the lowest tier and the 60s loop
+      // often ends before it has ramped up to high.
+      const hls = new Hls({ abrEwmaDefaultEstimate: 8_000_000 });
+      hls.loadSource(src);
+      hls.attachMedia(video);
+    }
+    // No HLS support: the poster image stays visible (no further fallback).
+  }
+</script>
 
 <style>
   p {
