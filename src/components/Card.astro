@@ -8,7 +8,7 @@ const { tag = "div", ...props } = Astro.props;
 const Tag = tag;
 ---
 
-<Tag class:list={[props.class, "card"]} {...props}>
+<Tag class:list={["card", props.class]} {...props}>
   <slot />
 </Tag>
 
