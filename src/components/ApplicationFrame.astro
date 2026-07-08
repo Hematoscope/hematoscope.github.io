@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  tag?: HTMLTag;
+}
+const { tag = "div", ...props } = Astro.props;
+const Tag = tag;
+---
+
+<Tag class:list={[props.class, "application-wrapper"]} {...props}>
+  <slot />
+</Tag>
+
+<style>
+  .application-wrapper {
+    max-width: 70rem;
+    background-color: var(--background-1);
+
+    border-radius: var(--element-border-radius);
+    padding: calc(0.5 * var(--element-padding));
+  }
+  .application-wrapper > :global(*) {
+    border-radius: calc(0.5 * var(--element-border-radius));
+  }
+
+  @media screen and (width < 40em) {
+    .application-wrapper {
+      padding: calc(0.4 * var(--element-padding));
+    }
+  }
+</style>

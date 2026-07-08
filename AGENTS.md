@@ -21,16 +21,16 @@ and deployed via GitHub Pages (`cellbytes.github.io`).
 
 ## Common commands
 
-| Command | Purpose |
-| --- | --- |
-| `npm install` | Install dependencies. |
-| `npm run dev` | Start the Astro dev server (`--host`). |
-| `npm run build` | `astro check` (type/diagnostics) then `astro build`. |
-| `npm run preview` | Serve the production build locally. |
-| `npm test` | Run the Playwright suite. |
-| `npm run test:smoke` | Run the home-page smoke test only. |
-| `npx eslint .` | Lint. |
-| `npx prettier --write .` | Format. |
+| Command                  | Purpose                                              |
+| ------------------------ | ---------------------------------------------------- |
+| `npm install`            | Install dependencies.                                |
+| `npm run dev`            | Start the Astro dev server (`--host`).               |
+| `npm run build`          | `astro check` (type/diagnostics) then `astro build`. |
+| `npm run preview`        | Serve the production build locally.                  |
+| `npm test`               | Run the Playwright suite.                            |
+| `npm run test:smoke`     | Run the home-page smoke test only.                   |
+| `npx eslint .`           | Lint.                                                |
+| `npx prettier --write .` | Format.                                              |
 
 There is no `lint`/`format` npm script; invoke `eslint` and `prettier` directly
 as above.

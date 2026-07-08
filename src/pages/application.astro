@@ -6,40 +6,55 @@ import networking from "~src/assets/images/application/networking.jpg";
 import textureMask from "~src/assets/images/application/app-texture-mask.png";
 import cellList from "~src/assets/images/application/app-cell-list.png";
 import report from "~src/assets/images/application/report.jpg";
+import BytesCorner from "~src/assets/backgrounds/bytes/in-element-corner.svg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
-import SectionCard from "~src/components/SectionCard.astro";
 import WorkflowStep from "~src/components/WorkflowStep.astro";
 import ApplicationScroller from "~src/components/ApplicationScroller.astro";
+import ContentBlock from "~src/components/ContentBlock.astro";
+import DecoratedCard from "~src/components/DecoratedCard.astro";
+import Pair from "~src/components/Pair.astro";
+
+import Collaboration from "~src/assets/icons/keyFeatures/collaboration.svg";
+import Comprehensive from "~src/assets/icons/keyFeatures/comprehensive.svg";
+import Reference from "~src/assets/icons/keyFeatures/reference.svg";
+import Report from "~src/assets/icons/keyFeatures/report.svg";
+import SingleCell from "~src/assets/icons/keyFeatures/singlecell.svg";
+import Triage from "~src/assets/icons/keyFeatures/triage.svg";
+import Card from "~src/components/Card.astro";
+import BytesSection from "~src/components/BytesSection.astro";
+import HeroSection from "~src/components/HeroSection.astro";
 ---
 
 <Layout title="Application | Cellbytes" description="A new era">
-  <Section variant="pair-reverse">
-    <Image
-      src={cells}
-      alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by Cellbytes."
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard gradient>
-      <h1>A new era</h1>
-      <p class="ingress">
-        Digital cytopathology streamlines workflows by fostering synergy between
-        physicians and technology. With AI managing time-consuming, quantifiable
-        tasks, human experts apply their clinical judgment to verify and
-        interpret results. To support interpretation, Cellbytes is the first
-        platform to also provide reference values for healthy subjects. Remote
-        collaboration becomes effortless, enabling seamless sample evaluation
-        and colleague consultations. Cellbytes brings digital cytopathology to
-        life.
-      </p>
-    </SectionCard>
-  </Section>
+  <HeroSection>
+    <Pair reversed>
+      <Image
+        src={cells}
+        alt="100 times magnified image of blood cells, with annotated bounding boxes around white blood cells labeled by Cellbytes."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <h1>A new era</h1>
+        <p class="ingress">
+          Digital cytopathology streamlines workflows by fostering synergy
+          between physicians and technology. With AI managing time-consuming,
+          quantifiable tasks, human experts apply their clinical judgment to
+          verify and interpret results. To support interpretation, Cellbytes is
+          the first platform to also provide reference values for healthy
+          subjects. Remote collaboration becomes effortless, enabling seamless
+          sample evaluation and colleague consultations. Cellbytes brings
+          digital cytopathology to life.
+        </p>
+      </ContentBlock>
+    </Pair>
+  </HeroSection>
 
-  <Section variant="blank" class="workflow">
+  <Section class="workflow">
     <H level="2">Cellbytes workflow</H>
     <ol>
       <WorkflowStep
@@ -75,52 +90,59 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
     </ol>
   </Section>
 
-  <Section variant="gradient-cells">
+  <DecoratedCard variant="bytes">
     <H level="2">Key features</H>
 
-    <div class="card-grid features">
-      <div class="card-item feature">
+    <div class="card-grid">
+      <Card class="card-item feature">
+        <Triage />
         <H level="3">Sample triage</H>
         <p>Prioritize urgent samples with a multi-parameter risk model.</p>
-      </div>
-      <div class="card-item feature">
+      </Card>
+      <Card class="card-item feature">
+        <Comprehensive />
         <H level="3">Comprehensive image view</H>
         <p>Access whole-slide images, numerical analysis, and visual masks.</p>
-      </div>
-      <div class="card-item feature">
+      </Card>
+      <Card class="card-item feature">
+        <SingleCell />
         <H level="3">Single-cell analysis</H>
         <p>
           View single-cell images with classifications and potential dysplasia
           indicators.
         </p>
-      </div>
-      <div class="card-item feature">
+      </Card>
+      <Card class="card-item feature">
+        <Reference />
         <H level="3">Reference comparisons</H>
         <p>Compare results with population-scale reference ranges.</p>
-      </div>
-      <div class="card-item feature">
+      </Card>
+      <Card class="card-item feature">
+        <Report />
         <H level="3">Standardized reporting</H>
         <p>
           Assess and share clinically essential findings in a structured report.
         </p>
-      </div>
-      <div class="card-item feature">
+      </Card>
+      <Card class="card-item feature">
+        <Collaboration />
         <H level="3">Collaborative sharing</H>
         <p>
           Easily share slides and cell images with colleagues for consultations
           and meetings.
         </p>
-      </div>
+      </Card>
     </div>
-  </Section>
+  </DecoratedCard>
 
   <ApplicationScroller />
 
-  <Section variant="gradient-cells">
-    <H level="2">Frequently asked questions</H>
+  <BytesSection color="purple">
+    <BytesCorner class="bytes-corner" />
 
+    <H level="2">Frequently asked questions</H>
     <div class="card-grid">
-      <div class="card-item faq">
+      <Card class="card-item faq">
         <H level="3">How can I use Cellbytes?</H>
         <p>
           Cellbytes can be used by uploading high-resolution images of bone
@@ -129,8 +151,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           quantitative results and visual annotations. It is accessible via a
           secure web interface—no installation required.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3">Can I test Cellbytes?</H>
         <p>
           Yes, Cellbytes offers a trial version for institutions and
@@ -138,8 +160,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           request trial access by contacting the support team through the
           website.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3">How robust are the algorithms?</H>
         <p>
           Cellbytes's algorithms have been trained on a comprehensive real-world
@@ -148,8 +170,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           blood cell types and their abnormalities, with performance metrics
           benchmarked against expert diagnoses.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3"> Will Cellbytes replace hematopathologists? </H>
         <p>
           No, Cellbytes is designed to assist hematopathologists. It serves as a
@@ -157,8 +179,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           clinical decisions should always be made by a qualified medical
           professional.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3">Why should I use Cellbytes?</H>
         <p>
           Cellbytes accelerates and enhances hematological analysis by providing
@@ -167,8 +189,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           turnaround time and improve standardization, particularly in
           high-volume settings.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3">What types of images are supported?</H>
         <p>
           Cellbytes supports high-resolution digital images of
@@ -177,8 +199,8 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           images should be acquired at 100x magnification. Cellbytes supports
           multiple imaging formats, such as SVS, VSI or MIRAX.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3">Why is Cellbytes only cloud-based?</H>
         <p>
           Being cloud-based ensures seamless updates, scalable computing
@@ -186,15 +208,15 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           allows for secure data storage and easy collaboration between
           institutes, laboratories and specialists across geographic locations.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3"> What is the price of the Cellbytes license? </H>
         <p>
           Pricing depends on your usage volume. Contact the support team to test
           a trial version and discuss your needs.
         </p>
-      </div>
-      <div class="card-item faq">
+      </Card>
+      <Card class="card-item faq">
         <H level="3">Can I use the application for research?</H>
         <p>
           Absolutely. Cellbytes is increasingly used in research settings to
@@ -202,9 +224,9 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
           clinical trials. It offers data export and integration with other
           medical data domains.
         </p>
-      </div>
+      </Card>
     </div>
-  </Section>
+  </BytesSection>
 </Layout>
 
 <style>
@@ -253,73 +275,39 @@ import ApplicationScroller from "~src/components/ApplicationScroller.astro";
   }
 
   .card-grid {
+    place-self: center;
     display: flex;
     flex-wrap: wrap;
     gap: var(--element-padding);
     max-width: 70em;
+    z-index: 1;
   }
   .card-item {
     flex: 25rem 1 1;
-    background-color: var(--background);
-    padding: var(--element-padding);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-lg);
   }
 
-  .features {
-    counter-reset: feature;
-  }
   .feature {
-    counter-increment: feature;
-
     display: grid;
     grid-template-areas:
-      "number heading"
-      "number paragraph";
-    grid-template-columns: 5rem auto;
+      "icon heading"
+      "icon paragraph";
+    grid-template-columns: calc(var(--text-size-heading-1) + 1rem) auto;
     column-gap: var(--element-padding);
+    row-gap: 0.5em;
     align-items: center;
   }
-  .feature::before {
-    content: counter(feature);
-    font-size: 8rem;
-    line-height: 6rem;
-    font-weight: 900;
-    grid-area: number;
-    text-align: center;
-  }
-  .feature:nth-child(1)::before {
-    color: var(--accent-2);
-  }
-  .feature:nth-child(2)::before {
-    color: var(--accent-4);
-  }
-  .feature:nth-child(3)::before {
-    color: var(--accent-5);
-  }
-  .feature:nth-child(4)::before {
-    color: var(--accent-6);
-  }
-  .feature:nth-child(5)::before {
-    color: var(--accent-1);
-  }
-  .feature:nth-child(6)::before {
-    color: var(--accent-3);
+
+  .feature svg {
+    grid-area: icon;
+    place-self: center;
   }
 
-  .algorithms {
-    max-width: 54rem;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: calc(2 * var(--element-padding));
-    column-gap: var(--element-padding);
-    justify-content: center;
+  .bytes-corner {
+    position: absolute;
+    bottom: -5%;
+    right: -10%;
+    height: 100%;
   }
-  :global(.algorithms > *) {
-    flex: 1 0 20%;
-    min-width: 10rem;
-  }
-
   .faq {
     display: grid;
     gap: 0.5em;

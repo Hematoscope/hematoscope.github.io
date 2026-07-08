@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  tag?: HTMLTag;
+}
+const { tag = "div", ...props } = Astro.props;
+const Tag = tag;
+---
+
+<Tag class:list={[props.class, "card"]} {...props}>
+  <slot />
+</Tag>
+
+<style>
+  .card {
+    background-color: var(--background);
+    border-radius: var(--small-border-radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--element-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+</style>

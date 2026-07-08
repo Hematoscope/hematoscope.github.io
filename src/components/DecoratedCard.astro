@@ -1,0 +1,97 @@
+---
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+import BytesTopLeft from "~src/assets/backgrounds/bytes/corner-1.svg";
+import BytesBottomRight from "~src/assets/backgrounds/bytes/corner-2.svg";
+import BytesTopRight from "~src/assets/backgrounds/bytes/corner-detached.svg";
+import CellsBottomLeft from "~src/assets/backgrounds/cells/corner-detached.svg";
+
+interface Props extends HTMLAttributes<"div"> {
+  tag?: HTMLTag;
+  /**
+   * bytes: purple card with bytes clusters in opposite corners.
+   * cells-bytes: pink card with a bytes corner up top and a cells corner
+   * down below.
+   */
+  variant: "bytes" | "cells-bytes";
+}
+const { tag = "div", variant, ...props } = Astro.props;
+const Tag = tag;
+---
+
+<Tag class:list={[props.class, "decorated-card", variant]} {...props}>
+  {
+    variant === "bytes" ? (
+      <BytesTopLeft class="top-left" />
+    ) : (
+      <BytesTopRight class="top-right" />
+    )
+  }
+  <slot />
+  {
+    variant === "bytes" ? (
+      <BytesBottomRight class="bottom-right" />
+    ) : (
+      <CellsBottomLeft class="bottom-left" />
+    )
+  }
+</Tag>
+
+<style>
+  .decorated-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--element-padding);
+    border-radius: var(--element-border-radius);
+    justify-self: center;
+    align-items: center;
+    position: relative;
+
+    --size: 150px;
+    --offset: calc(var(--size) * 0.45 - var(--size));
+    --padding: calc(2 * var(--element-padding));
+    /* Reserve room for the corner decorations overflowing the card. */
+    margin-block: calc(-1rem - var(--offset));
+    padding: var(--padding);
+  }
+  .decorated-card :global(> h1),
+  .decorated-card :global(> h2),
+  .decorated-card :global(> h3),
+  .decorated-card :global(> h4) {
+    text-align: center;
+  }
+  .bytes {
+    background-color: var(--bytes-purple);
+  }
+  .cells-bytes {
+    background-color: var(--background-2);
+  }
+
+  .decorated-card > :global(svg) {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+  }
+  .decorated-card > :global(svg.top-left) {
+    top: var(--offset);
+    left: var(--offset);
+  }
+  .decorated-card > :global(svg.top-right) {
+    top: var(--offset);
+    right: var(--offset);
+  }
+  .decorated-card > :global(svg.bottom-right) {
+    bottom: var(--offset);
+    right: var(--offset);
+    transform: rotate(180deg);
+  }
+  .decorated-card > :global(svg.bottom-left) {
+    bottom: var(--offset);
+    left: var(--offset);
+  }
+
+  @media screen and (width < 70em) {
+    .decorated-card {
+      --padding: var(--element-padding);
+    }
+  }
+</style>

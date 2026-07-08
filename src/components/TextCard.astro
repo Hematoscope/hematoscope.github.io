@@ -6,14 +6,14 @@ import { WIDTHS } from "~src/consts";
 interface Props {
   image: ImageMetadata;
   alt: string;
-  accent: Accent;
+  accent: "bytes-blue" | "bytes-purple" | "support-pink";
 }
 const { image, alt, accent } = Astro.props;
-const bg = `var(--accent-${accent})`;
+const bg = `var(--${accent})`;
 ---
 
 <article>
-  <Image src={image} alt={alt} widths={WIDTHS} height="200" width="300" />
+  <Image src={image} alt={alt} widths={WIDTHS} height="200" width="350" />
   <div class="content">
     <slot />
   </div>
@@ -38,6 +38,7 @@ const bg = `var(--accent-${accent})`;
   .content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
 
     padding: var(--element-padding);

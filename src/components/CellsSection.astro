@@ -1,0 +1,67 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import CellsBottomLeft from "~src/assets/backgrounds/cells/in-element-lower-left.svg";
+import CellsTopRight from "~src/assets/backgrounds/cells/in-element-upper-right.svg";
+
+interface Props extends HTMLAttributes<"section"> {}
+const props = Astro.props;
+---
+
+<section {...props}>
+  <CellsTopRight class="top-right" />
+  <slot />
+  <CellsBottomLeft class="bottom-left" />
+</section>
+
+<style>
+  section {
+    position: relative;
+    grid-column: full;
+    padding-block: var(--block-padding);
+
+    display: grid;
+    grid-template-columns: subgrid;
+    row-gap: calc(4 * var(--element-padding));
+    overflow: hidden;
+    background-color: var(--background-2);
+
+    --content-max: var(--column-width);
+    --pad: var(--element-padding);
+    --gap-left: -500px;
+    --gap-right: -600px;
+    --edge: -100px;
+    --svg-w: 1000px;
+    --offset-vertical: -100px;
+  }
+
+  section > :global(*:not(svg)) {
+    grid-column: content;
+    z-index: 1;
+  }
+
+  svg {
+    position: absolute;
+    height: 1000px;
+    width: var(--svg-w);
+  }
+  svg.top-right {
+    top: var(--offset-vertical);
+    right: min(
+      var(--edge),
+      calc(
+        50% - min(var(--content-max), 100% - 2 * var(--pad)) / 2 -
+          var(--gap-right) - var(--svg-w)
+      )
+    );
+  }
+  svg.bottom-left {
+    bottom: var(--offset-vertical);
+    left: min(
+      var(--edge),
+      calc(
+        50% - min(var(--content-max), 100% - 2 * var(--pad)) / 2 -
+          var(--gap-left) - var(--svg-w)
+      )
+    );
+  }
+</style>

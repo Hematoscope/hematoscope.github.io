@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  tag?: HTMLTag;
+  reversed?: boolean;
+}
+const { tag = "div", reversed = false, ...props } = Astro.props;
+const Tag = tag;
+---
+
+<Tag class:list={[props.class, "pair", reversed && "reversed"]} {...props}>
+  <slot />
+</Tag>
+
+<style>
+  .pair {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: calc(2 * var(--element-padding));
+    position: relative;
+  }
+  .reversed {
+    flex-direction: row-reverse;
+  }
+  .pair :global(img) {
+    border-radius: var(--element-border-radius);
+    height: auto;
+  }
+
+  .pair > :global(*) {
+    flex: 400px;
+  }
+</style>

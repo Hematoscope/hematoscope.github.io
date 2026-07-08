@@ -9,11 +9,12 @@ import H from "~src/components/HeadingLink.astro";
 import Section from "~src/components/Section.astro";
 import Layout from "~src/layouts/Layout.astro";
 import TeamMember from "~src/components/TeamMember.astro";
+import HeroSection from "~src/components/HeroSection.astro";
 ---
 
 <Layout title="Company | Cellbytes" description="Meet the team">
-  <Section variant="blank">
-    <div class="text">
+  <HeroSection>
+    <div class="hero-content text">
       <h1>About Cellbytes</h1>
       <p>
         Cellbytes® began from frustration. Having spent years navigating the
@@ -29,8 +30,6 @@ import TeamMember from "~src/components/TeamMember.astro";
         counts. We're here to help you focus on interpretation, not manual
         overhead.
       </p>
-    </div>
-    <div class="text">
       <H level="2">Our Promise</H>
       <p>
         We're humans, not a faceless corporation. If a feature isn't intuitive
@@ -46,7 +45,9 @@ import TeamMember from "~src/components/TeamMember.astro";
         helping people get back to their lives.
       </p>
     </div>
+  </HeroSection>
 
+  <Section>
     <H level="2">Meet the team</H>
     <div class="team">
       <TeamMember
@@ -84,6 +85,11 @@ import TeamMember from "~src/components/TeamMember.astro";
 </Layout>
 
 <style>
+  /* Element selector included so the gap deterministically wins over the
+     global .text rule regardless of stylesheet order. */
+  div.hero-content {
+    gap: var(--element-padding);
+  }
   .team {
     max-width: 54rem;
     display: flex;

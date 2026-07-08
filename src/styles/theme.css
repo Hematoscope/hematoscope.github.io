@@ -1,36 +1,53 @@
 @font-face {
-  font-family: "Inter";
-  src: url("/inter.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Lato";
+  src: url("/lato.woff2") format("woff2-variations");
   font-display: swap;
-  font-weight: 1 999;
+  font-style: normal;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Pragati";
+  src: url("/pragatinarrow-bold.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: bold;
 }
 
 :root {
   /* Color variables */
   --primary-1: #0d083f;
   --primary-2: #484566;
-  --highlight: #6c61eb;
 
-  --accent-1: #ffdeec;
-  --accent-2: #def0ff;
-  --accent-3: #ffe8de;
-  --accent-4: #d1ffe2;
-  --accent-5: #a9ffd5;
-  --accent-6: #f5e4ff;
+  --accent-1: #a24396;
+  --accent-2: #4d3378;
 
+  --highlight: var(--accent-1);
   --background: #ffffff;
-  --footer-background: var(--primary-2);
 
-  --text-color-heading: var(--primary-1);
+  --background-1: #e4eef4;
+  --background-2: #fdf5fb;
+
+  --bytes-light-blue: var(--background-1);
+  --bytes-blue: #e4eef4;
+  --bytes-dark-blue: #c2ddf3;
+  --bytes-magenta: #c896c6;
+  --bytes-purple: #e7daed;
+
+  --cells-light-pink: var(--background-2);
+  --cells-dark-pink: #fbdbe8;
+
+  --support-purple: #e2dbf6;
+  --support-pink: #ffeaf3;
+  --support-blue: #def0ff;
+
+  --footer-background: var(--accent-2);
+
+  --text-color-heading: #130d56;
   --text-color-body: var(--primary-2);
 
   --shadow-lg: 0px 24px 48px rgba(0, 0, 0, 0.1);
   --shadow-sm: 0px 4px 12px rgba(0, 0, 0, 0.2);
-
-  --glass-border-outer: 1px solid #f7f7f7;
-  --glass-border-inner: 1px solid #e2e2e2;
 
   /* Text sizes */
   --text-size-heading-1: 4rem;
@@ -40,20 +57,19 @@
   --text-size-body: 1.125rem;
   --text-size-link: 1.125rem;
   --text-size-label: 1.125rem;
-  --text-size-navlink: 1rem;
 
   /* Sizing variables */
   --element-border-radius: 1.5rem;
-  --medium-border-radius: 0.75rem;
   --small-border-radius: 0.5rem;
   --tiny-border-radius: 0.25rem;
   --button-border-radius: 999px;
 
   --element-padding: 2rem;
+  --block-padding: 10rem;
   --column-width: 1400px;
 
   /* Default styles */
-  font-family: "Inter", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 /* Update root sizes with small enough screens */
@@ -63,6 +79,8 @@
     --text-size-heading-2: 2rem;
     --text-size-heading-3: 1.5rem;
     --text-size-ingress: 1.25rem;
+
+    --block-padding: 8rem;
 
     --shadow-lg: 0px 16px 32px rgba(0, 0, 0, 0.1);
   }
@@ -75,6 +93,8 @@
     --element-padding: 1rem;
     --element-border-radius: 1rem;
 
+    --block-padding: 6rem;
+
     --shadow-lg: 0px 8px 16px rgba(0, 0, 0, 0.1);
   }
 }
@@ -83,6 +103,11 @@ body {
   background-color: var(--background);
   row-gap: var(--element-padding);
   overflow-x: hidden;
+  height: 100%;
+}
+
+main {
+  margin-bottom: auto;
 }
 
 h1,
@@ -98,10 +123,12 @@ h6 {
 
 h1 {
   font-size: var(--text-size-heading-1);
+  font-family: "Pragati", sans-serif;
 }
 
 h2 {
   font-size: var(--text-size-heading-2);
+  font-family: "Pragati", sans-serif;
 }
 
 h3 {

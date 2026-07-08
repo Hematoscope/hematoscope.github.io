@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import BytesBorder from "~src/assets/backgrounds/bytes/border.svg";
+
+interface Props extends HTMLAttributes<"section"> {
+  color?: "light-blue" | "blue" | "dark-blue" | "purple";
+}
+const { color, ...props } = Astro.props;
+const bg = `var(--bytes-${color ?? "light-blue"})`;
+---
+
+<section {...props}>
+  <BytesBorder class="top" />
+  <slot />
+  <BytesBorder class="bottom" />
+</section>
+
+<style define:vars={{ bg }}>
+  section {
+    grid-column: full;
+    position: relative;
+    padding-block: var(--block-padding);
+    margin-block: 8rem;
+
+    display: grid;
+    grid-template-columns: subgrid;
+    row-gap: calc(4 * var(--element-padding));
+
+    --section-background: var(--bg);
+    background-color: var(--section-background);
+  }
+
+  section > :global(*:not(svg)) {
+    grid-column: content;
+  }
+
+  svg {
+    position: absolute;
+    width: 100%;
+    min-width: 2000px;
+    z-index: -1;
+  }
+  svg :global(path[class$="cls-2"]) {
+    fill: var(--section-background);
+  }
+  svg.top {
+    top: 0;
+    transform: translateY(-99%);
+  }
+  svg.bottom {
+    bottom: 0;
+    transform: rotate(180deg) translateY(-99%);
+  }
+</style>

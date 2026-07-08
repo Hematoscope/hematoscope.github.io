@@ -15,7 +15,7 @@ const {
 ---
 
 <Layout title={`${title} | Cellbytes`} description={description}>
-  <Section variant="blank">
+  <Section class="article-section">
     <article>
       <slot />
     </article>
@@ -23,6 +23,9 @@ const {
 </Layout>
 
 <style is:global>
+  .article-section {
+    padding-block: calc(2 * var(--element-padding));
+  }
   article {
     display: flex;
     flex-direction: column;

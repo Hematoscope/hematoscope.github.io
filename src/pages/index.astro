@@ -1,47 +1,53 @@
 ---
 import { Image } from "astro:assets";
-import appMask from "~src/assets/images/home/app-mask.png"; // https://mockuper.net/generator/mockup/2286/imac
-import appLabelings from "~src/assets/images/home/app-labelings.png"; // https://mockuper.net/generator/mockup/2085/imac
+import collaborating from "~src/assets/images/mockups/collaborating_erythroblasts.webp";
+import commenting from "~src/assets/images/mockups/comment-function.webp";
 import evidentMicroscope from "~src/assets/images/home/evident-vs200-logos-side.png";
 import microscope from "~src/assets/images/home/microscope.jpg";
-import server from "~src/assets/images/home/server.jpg";
+import BytesEdge from "~src/assets/backgrounds/bytes/in-element-edge.svg";
 import HusLogo from "~src/assets/icons/partners/hus.svg";
 import FimlabLogo from "~src/assets/icons/partners/fimlab.svg";
 import VarhaLogo from "~src/assets/icons/partners/varha.svg";
 
 import { WIDTHS } from "~src/consts";
+import ContentBlock from "~src/components/ContentBlock.astro";
 import Section from "~src/components/Section.astro";
+import Pair from "~src/components/Pair.astro";
+import DecoratedCard from "~src/components/DecoratedCard.astro";
+import CellsSection from "~src/components/CellsSection.astro";
 import CallToAction from "~src/components/CallToAction.astro";
 import H from "~src/components/HeadingLink.astro";
 import LinkButton from "~src/components/LinkButton.astro";
-import GlassFrame from "~src/components/GlassFrame.astro";
+import ApplicationFrame from "~src/components/ApplicationFrame.astro";
 import Layout from "~src/layouts/Layout.astro";
-import SectionCard from "~src/components/SectionCard.astro";
+import BytesSection from "~src/components/BytesSection.astro";
+import HeroSection from "~src/components/HeroSection.astro";
 ---
 
 <Layout
   title="Cellbytes"
   description="AI solutions for hematopathologists, hematologists and researchers."
 >
-  <Section variant="gradient-cells" class="hero">
-    <div class="text">
+  <HeroSection class="hero">
+    <div class="hero-content">
       <h1>Cellbytes &ndash; precision hematology with digital microscopy</h1>
+      <ApplicationFrame>
+        <video
+          width="1200"
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-label="Demonstration of Cellbytes's features"
+          poster="banner_image.jpeg"
+          data-hls-src="/banner/master.m3u8"
+        >
+        </video>
+      </ApplicationFrame>
     </div>
-    <GlassFrame>
-      <video
-        width="1200"
-        autoplay
-        muted
-        loop
-        playsinline
-        aria-label="Demonstration of Cellbytes's features"
-        poster="banner_image.jpeg"
-        data-hls-src="/banner/master.m3u8"
-      ></video>
-    </GlassFrame>
-  </Section>
+  </HeroSection>
 
-  <Section variant="blank">
+  <Section>
     <H level="2">The future is now</H>
     <p class="ingress">
       Cellbytes is the next step in hematopathology. With cloud-native analysis
@@ -50,53 +56,55 @@ import SectionCard from "~src/components/SectionCard.astro";
     </p>
   </Section>
 
-  <Section variant="pair">
-    <Image
-      src={appLabelings}
-      alt="Doctor looking at cell labels viewed with Cellbytes."
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard>
-      <H level="2">Objective and transparent</H>
-      <p>
-        Cellbytes will not replace hematopathologists. However, standardized and
-        real-time digital assessment can enhance human performance and decrease
-        subjectivity. Trained on millions of cells across diverse hematologic
-        conditions, Cellbytes provides consistent, high-quality outputs. Every
-        model prediction comes with clear visualizations and quantifiable data,
-        ensuring transparency and supporting users to review what the software
-        has identified.
-      </p>
-      <LinkButton href="/application" variant="default-arrow">
-        Application
-      </LinkButton>
-    </SectionCard>
-  </Section>
+  <CellsSection>
+    <Pair>
+      <Image
+        src={collaborating}
+        alt="Two doctors analyzing the results of a slide using Cellbytes."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <H level="2">Objective and transparent</H>
+        <p>
+          Cellbytes will not replace hematopathologists. However, standardized
+          and real-time digital assessment can enhance human performance and
+          decrease subjectivity. Trained on millions of cells across diverse
+          hematologic conditions, Cellbytes provides consistent, high-quality
+          outputs. Every model prediction comes with clear visualizations and
+          quantifiable data, ensuring transparency and supporting users to
+          review what the software has identified.
+        </p>
+        <LinkButton href="/application" variant="default-arrow">
+          Application
+        </LinkButton>
+      </ContentBlock>
+    </Pair>
 
-  <Section variant="pair-reverse">
-    <Image
-      src={appMask}
-      alt="Doctor looking at a sample with an overlaid mask viewed with Cellbytes."
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard>
-      <H level="2">Real-time analysis</H>
-      <p>
-        Cloud-based computing is available where ever you are, 24/7. Cellbytes
-        is designed for high throughput, parallelized batch analysis.
-      </p>
-      <LinkButton
-        href="/application#comprehensive-ai-powered-analysis"
-        variant="default-arrow"
-      >
-        Algorithms
-      </LinkButton>
-    </SectionCard>
-  </Section>
+    <Pair reversed>
+      <Image
+        src={commenting}
+        alt="Doctor leaving a comment on an interesting slide region using Cellbytes."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <H level="2">Real-time analysis</H>
+        <p>
+          Cloud-based computing is available where ever you are, 24/7. Cellbytes
+          is designed for high throughput, parallelized batch analysis.
+        </p>
+        <LinkButton
+          href="/application#comprehensive-ai-powered-analysis"
+          variant="default-arrow"
+        >
+          Algorithms
+        </LinkButton>
+      </ContentBlock>
+    </Pair>
+  </CellsSection>
 
-  <Section variant="pair" style={{ marginBlock: "4rem" }}>
+  <Pair tag="section">
     <a
       href="https://evidentscientific.com/en/products/slide-scanners/vs200"
       class="imagelink"
@@ -106,10 +114,10 @@ import SectionCard from "~src/components/SectionCard.astro";
         alt="Evident's digital microscope, the SLIDEVIEW VS200, shown on top of the Evident and Cellbytes logos."
         widths={WIDTHS}
         height="400"
-        style={{ objectFit: "contain", height: "500px" }}
+        style={{ objectFit: "contain", height: "400px" }}
       />
     </a>
-    <SectionCard>
+    <ContentBlock>
       <H level="2">Leading hardware loves leading software</H>
       <p>
         Out of all the supported scanners, the Evident SLIDEVIEW VS200 is a
@@ -117,31 +125,31 @@ import SectionCard from "~src/components/SectionCard.astro";
         quality and automated imaging of over 200 slides enables you to focus on
         what matters.
       </p>
-    </SectionCard>
-  </Section>
+    </ContentBlock>
+  </Pair>
 
-  <Section variant="gradient">
-    <div class="text" style="margin: 4rem;">
-      <H level="2">Full AI-assisted morphology analysis</H>
-      <p class="ingress">
-        Hematopathology is not just about counting cells. Cellbytes performs
-        end-to-end cytomorphological assessment covering assessment of
-        cellularity, sample adequacy, megakaryocyte counts, cell classification,
-        and dysplasia detection. Results are summarized in a standardized report
-        that can be seamlessly integrated into your laboratory information
-        system.
-      </p>
+  <DecoratedCard variant="bytes" tag="section">
+    <H level="2">Full AI-assisted morphology analysis</H>
+    <p class="ingress">
+      Hematopathology is not just about counting cells. Cellbytes performs
+      end-to-end cytomorphological assessment covering assessment of
+      cellularity, sample adequacy, megakaryocyte counts, cell classification,
+      and dysplasia detection. Results are summarized in a standardized report
+      that can be seamlessly integrated into your laboratory information system.
+    </p>
+  </DecoratedCard>
+
+  <BytesSection class="tall">
+    <BytesEdge class="bytes-edge" />
+    <div class="tall-image">
+      <Image
+        src={microscope}
+        alt="Close-up of a microscope scanning a hematopathological slide."
+        widths={WIDTHS}
+        height="800"
+      />
     </div>
-  </Section>
-
-  <Section variant="pair-reverse">
-    <Image
-      src={microscope}
-      alt="Close-up of a microscope scanning a pathological slide."
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard>
+    <ContentBlock class="tall-text">
       <H level="2">Flexible workflow integration</H>
       <p>
         Whole-slide and single-cell image analysis is compatible with diverse
@@ -152,17 +160,8 @@ import SectionCard from "~src/components/SectionCard.astro";
       <LinkButton href="/application#scan-slides" variant="default-arrow">
         Compatibility
       </LinkButton>
-    </SectionCard>
-  </Section>
-
-  <Section variant="pair">
-    <Image
-      src={server}
-      alt="A rack of servers with blinking lights"
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard>
+    </ContentBlock>
+    <ContentBlock class="tall-text">
       <H level="2">Safe and secure</H>
       <p>
         Data security is more than a priority; it is a commitment. By strictly
@@ -172,16 +171,14 @@ import SectionCard from "~src/components/SectionCard.astro";
       <LinkButton href="/compliance" variant="default-arrow">
         Security
       </LinkButton>
-    </SectionCard>
-  </Section>
+    </ContentBlock>
+  </BytesSection>
 
   <CallToAction title="Ready to digitize your hematology workflow?" />
 
-  <Section variant="gradient-cells">
-    <div style="margin-block-start: 3rem;">
-      <H level="2">In research partnership with</H>
-    </div>
-    <ul style="margin-block-end: 3rem;">
+  <DecoratedCard variant="cells-bytes" tag="section" class="partnerships">
+    <H level="2">In research partnership with</H>
+    <ul>
       <li>
         <a href="https://www.hus.fi/en">
           <HusLogo aria-label="HUS logo" />
@@ -198,7 +195,7 @@ import SectionCard from "~src/components/SectionCard.astro";
         </a>
       </li>
     </ul>
-  </Section>
+  </DecoratedCard>
 </Layout>
 
 <script>
@@ -224,12 +221,22 @@ import SectionCard from "~src/components/SectionCard.astro";
 </script>
 
 <style>
-  p {
-    font-size: var(--text-size-body);
+  .hero {
+    --gap: -100px;
+  }
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    text-align: center;
+    margin-block-end: var(--element-padding);
+    max-width: 30ch;
   }
 
-  .hero {
-    padding-block: calc(2 * var(--element-padding));
+  p {
+    font-size: var(--text-size-body);
   }
 
   video {
@@ -246,11 +253,48 @@ import SectionCard from "~src/components/SectionCard.astro";
     justify-content: center;
   }
 
-  .algorithms {
-    display: flex;
-    gap: calc(2 * var(--element-padding));
-    flex-wrap: wrap;
-    justify-content: center;
+  .tall {
+    grid-column: full;
+    grid-template-columns: subgrid;
+    align-items: center;
+    column-gap: calc(2 * var(--element-padding));
+  }
+
+  .tall-image {
+    grid-column: full-start / content-mid;
+    grid-row: 1 / span 2;
+    align-self: stretch;
+  }
+  .tall-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 var(--element-border-radius) var(--element-border-radius) 0;
+  }
+
+  .tall-text {
+    grid-column: content-mid / content-end;
+  }
+
+  .bytes-edge {
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    right: -10%;
+    height: 120%;
+  }
+
+  @media screen and (width < 50em) {
+    .tall-image {
+      grid-column: full;
+    }
+    .tall-image :global(img) {
+      border-radius: 0;
+      max-height: 60vh;
+    }
+    .tall-text {
+      grid-column: content;
+    }
   }
 
   ul {
@@ -266,16 +310,9 @@ import SectionCard from "~src/components/SectionCard.astro";
     width: 150px;
   }
 
-  @media screen and (width < 40em) {
-    .scroller {
-      display: flex;
-      gap: calc(var(--element-padding));
-      --animation-multiplier: 2;
-      padding-inline: calc(2 * var(--element-padding));
-      padding-block-end: calc(2 * var(--element-padding));
-    }
-    .scroller-img {
-      min-width: 100%;
-    }
+  .partnerships {
+    padding-inline: calc(4 * var(--element-padding));
+    padding-block: var(--element-padding);
+    margin-block-end: var(--block-padding);
   }
 </style>

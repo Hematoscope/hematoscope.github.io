@@ -4,7 +4,7 @@ description: Cellbytes equality policy
 layout: ~src/layouts/Article.astro
 ---
 
-# Gender Equality Plan  
+# Gender Equality Plan
 
 ## Introduction
 

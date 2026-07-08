@@ -1,0 +1,59 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import BytesCluster from "~src/assets/backgrounds/bytes/cluster-large.svg";
+import CellsCluster from "~src/assets/backgrounds/cells/cluster-large.svg";
+
+interface Props extends HTMLAttributes<"section"> {}
+const props = Astro.props;
+---
+
+<section {...props}>
+  <BytesCluster class="bytes" />
+  <slot />
+  <CellsCluster class="cells" />
+</section>
+
+<style>
+  section {
+    position: relative;
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    /* Cluster placement knobs; override these from the caller. */
+    --content-max: var(--column-width);
+    --pad: var(--element-padding);
+    --gap: var(--element-padding);
+    --edge: -100px;
+    --svg-w: 400px;
+  }
+  section > :global(*:not(svg)) {
+    grid-column: content;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: var(--svg-w);
+    z-index: -1;
+  }
+  svg.cells {
+    left: min(
+      var(--edge),
+      calc(
+        50% - min(var(--content-max), 100% - 2 * var(--pad)) / 2 - var(--gap) -
+          var(--svg-w)
+      )
+    );
+  }
+  svg.bytes {
+    right: min(
+      var(--edge),
+      calc(
+        50% - min(var(--content-max), 100% - 2 * var(--pad)) / 2 - var(--gap) -
+          var(--svg-w)
+      )
+    );
+  }
+</style>

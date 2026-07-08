@@ -1,86 +1,72 @@
 ---
 import { Image } from "astro:assets";
 import security from "~src/assets/images/compliance/security.jpg";
-import documentSigning from "~src/assets/images/compliance/document-signing.jpg";
-import documentBinders from "~src/assets/images/compliance/document-binders.jpg";
-import documentCursive from "~src/assets/images/compliance/document-cursive.jpg";
 
 import { WIDTHS } from "~src/consts";
-import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
-import SectionCard from "~src/components/SectionCard.astro";
-import TextCard from "~src/components/TextCard.astro";
+import ContentBlock from "~src/components/ContentBlock.astro";
+import Card from "~src/components/Card.astro";
+import DecoratedCard from "~src/components/DecoratedCard.astro";
+import HeroSection from "~src/components/HeroSection.astro";
+import Pair from "~src/components/Pair.astro";
 ---
 
 <Layout
   title="Compliance | Cellbytes"
   description="Commitment to security and quality"
 >
-  <Section variant="pair">
-    <Image
-      src={security}
-      alt="A patient discussing treatment details with a doctor."
-      widths={WIDTHS}
-      height="300"
-    />
-    <SectionCard gradient>
-      <h1>Commitment to security and quality</h1>
-      <p class="ingress">
-        For Cellbytes, adhering to medical device requirements is fundamental to
-        guarantee reliable performance and medical safety regulatory standards.
-        We ensure uncompromised data security through advanced encryption and
-        comprehensive privacy measures.
-      </p>
-    </SectionCard>
-  </Section>
+  <HeroSection>
+    <Pair>
+      <Image
+        src={security}
+        alt="A patient discussing treatment details with a doctor."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <h1>Commitment to security and quality</h1>
+        <p class="ingress">
+          For Cellbytes, adhering to medical device requirements is fundamental
+          to guarantee reliable performance and medical safety regulatory
+          standards. We ensure uncompromised data security through advanced
+          encryption and comprehensive privacy measures.
+        </p>
+      </ContentBlock>
+    </Pair>
+  </HeroSection>
 
-  <Section variant="blank">
-    <H level="2">Compliance</H>
-    <div class="certifications">
-      <TextCard
-        image={documentBinders}
-        alt="A pile of full document binders"
-        accent="3"
-      >
-        <H level="3">IVDR &ndash; In Vitro Diagnostics Regulations</H>
-        <p>
-          Cellbytes is CE-marked, adhering to the EU 2017/746 IVDR, and
-          available for use in EU countries. Cellbytes is not yet in the US for
-          clinical use.
-        </p>
-      </TextCard>
-      <TextCard
-        image={documentSigning}
-        alt="A document being signed with a fancy pen"
-        accent="2"
-      >
-        <H level="3">
-          ISO 13485:2016 &ndash; Medical Devices Quality Management
-        </H>
-        <p>
-          Outlines the requirements for a quality management system that ensures
-          Cellbytes Ltd. can consistently deliver medical devices and related
-          services that meet both customer expectations and regulatory
-          standards.
-        </p>
-      </TextCard>
-      <TextCard
-        image={documentCursive}
-        alt="A close-up of an old document written by hand in cursive"
-        accent="1"
-      >
-        <H level="3">HIPAA Security Rule & GDPR</H>
-        <p>
-          Cellbytes is built on cloud services, designed to provide the highest
-          level of security for medical data; featuring end-to-end encryption,
-          firewalls, and multi-factor authentication. Patient information is
-          securely protected throughout storage, processing, and transmission
-          ensuring privacy across regions and borders.
-        </p>
-      </TextCard>
-    </div>
-  </Section>
+  <DecoratedCard variant="bytes" class="certifications">
+    <H level="2">Certifications</H>
+    <Card>
+      <H level="3">IVDR &ndash; In Vitro Diagnostics Regulations</H>
+      <p>
+        Cellbytes is CE-marked, adhering to the EU 2017/746 IVDR, and available
+        for use in EU countries. Cellbytes is not yet in the US for clinical
+        use.
+      </p>
+    </Card>
+    <Card>
+      <H level="3">
+        ISO 13485:2016 &ndash; Medical Devices Quality Management
+      </H>
+      <p>
+        Outlines the requirements for a quality management system that ensures
+        Cellbytes Ltd. can consistently deliver medical devices and related
+        services that meet both customer expectations and regulatory standards.
+      </p>
+    </Card>
+    <Card>
+      <H level="3">HIPAA Security Rule & GDPR</H>
+      <p>
+        Cellbytes is built on cloud services, designed to provide the highest
+        level of security for medical data; featuring end-to-end encryption,
+        firewalls, and multi-factor authentication. Patient information is
+        securely protected throughout storage, processing, and transmission
+        ensuring privacy across regions and borders.
+      </p>
+    </Card>
+  </DecoratedCard>
 </Layout>
 
 <style>
@@ -88,8 +74,6 @@ import TextCard from "~src/components/TextCard.astro";
     font-size: var(--text-size-ingress);
   }
   .certifications {
-    display: flex;
-    flex-direction: column;
-    gap: var(--element-padding);
+    max-width: 60rem;
   }
 </style>

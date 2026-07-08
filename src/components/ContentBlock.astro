@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {}
+const props = Astro.props;
+---
+
+<article class:list={[props.class, "content-block"]} {...props}>
+  <slot />
+</article>
+
+<style>
+  .content-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--element-padding);
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 import Section from "~src/components/Section.astro";
 import LinkButton from "~src/components/LinkButton.astro";
-import H from "./HeadingLink.astro";
+import H from "~src/components/HeadingLink.astro";
 
 interface Props {
   title: string;
@@ -10,7 +10,7 @@ interface Props {
 const { title, demo } = Astro.props;
 ---
 
-<Section variant="blank" class="call-to-action">
+<Section class="call-to-action">
   <div class="text">
     <H level="2">{title}</H>
     <p>Contact us to explore how Cellbytes can enhance your daily workflow.</p>
@@ -30,6 +30,9 @@ const { title, demo } = Astro.props;
 </Section>
 
 <style>
+  h2 {
+    text-align: center;
+  }
   p {
     font-size: var(--text-size-ingress);
   }

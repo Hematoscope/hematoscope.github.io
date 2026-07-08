@@ -27,7 +27,7 @@ const { title, description } = Astro.props;
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${Astro.site}/opengraph.jpg`} />
+    <meta property="og:image" content={new URL("opengraph.jpg", Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
@@ -42,11 +42,14 @@ const { title, description } = Astro.props;
 <style>
   body {
     display: grid;
+    grid-template-rows: auto 1fr auto;
     grid-template-columns:
       [full-start]
       minmax(var(--element-padding), 1fr)
       [content-start]
-      minmax(auto, var(--column-width))
+      minmax(auto, calc(var(--column-width) / 2))
+      [content-mid]
+      minmax(auto, calc(var(--column-width) / 2))
       [content-end]
       minmax(var(--element-padding), 1fr)
       [full-end];
@@ -55,7 +58,8 @@ const { title, description } = Astro.props;
     display: grid;
     grid-column: full;
     grid-template-columns: subgrid;
-    row-gap: var(--element-padding);
+    row-gap: var(--block-padding);
+    padding-block: var(--element-padding);
   }
   :global(main > *) {
     grid-column: content;

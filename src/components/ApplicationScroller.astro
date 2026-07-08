@@ -16,8 +16,9 @@ import report from "~src/assets/images/applicationScroller/12-report.png";
 import { WIDTHS as W } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
-import GlassFrame from "~src/components/GlassFrame.astro";
-import SectionCard from "./SectionCard.astro";
+import Card from "~src/components/Card.astro";
+import ApplicationFrame from "~src/components/ApplicationFrame.astro";
+import ContentBlock from "~src/components/ContentBlock.astro";
 
 const scrollerData = [
   {
@@ -118,7 +119,7 @@ const scrollerData = [
 ];
 ---
 
-<Section variant="blank">
+<Section class="scroller-section">
   <div class="text">
     <H level="2">Comprehensive AI-powered analysis</H>
     <p>
@@ -129,8 +130,8 @@ const scrollerData = [
       angle for research.
     </p>
   </div>
-  <SectionCard gradient class="scroller">
-    <GlassFrame class="screen">
+  <ContentBlock class="scroller">
+    <ApplicationFrame class="screen">
       {
         scrollerData.map((item) => (
           <Image
@@ -142,22 +143,22 @@ const scrollerData = [
           />
         ))
       }
-    </GlassFrame>
+    </ApplicationFrame>
 
     {
       scrollerData
         .filter((item) => item.cardTitle !== null)
         .map((item) => (
-          <div
+          <Card
             class={`card ${item.name} ${item.position}`}
             data-name={item.name}
           >
-            <H level="3">{item.cardTitle}</H>
+            <h3>{item.cardTitle}</h3>
             <p>{item.cardBody}</p>
-          </div>
+          </Card>
         ))
     }
-  </SectionCard>
+  </ContentBlock>
 </Section>
 
 <script>
@@ -236,6 +237,11 @@ const scrollerData = [
 </script>
 
 <style>
+  /* Preserve the spacing the pre-merge Section variant used to provide. */
+  .scroller-section {
+    gap: calc(2 * var(--element-padding));
+    padding-block: calc(2 * var(--element-padding));
+  }
   /* we need this specificity hack to compensate for nondeterministic astro css order */
   .scroller.scroller {
     width: 100%;
@@ -247,6 +253,10 @@ const scrollerData = [
     gap: 5rem;
     justify-items: center;
     align-items: center;
+
+    background-color: var(--background-2);
+    border-radius: var(--element-border-radius);
+    padding: var(--element-padding);
   }
   .screen {
     position: sticky;
@@ -274,13 +284,7 @@ const scrollerData = [
   }
 
   .card {
-    background-color: var(--background);
-    border-radius: var(--small-border-radius);
-    box-shadow: var(--shadow-sm);
     padding: calc(0.5 * var(--element-padding));
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
     z-index: 1;
     max-width: 35rem;
   }
