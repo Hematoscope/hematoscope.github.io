@@ -28,11 +28,15 @@ const bg = `var(--bytes-${color ?? "light-blue"})`;
 
     --section-background: var(--bg);
     background-color: var(--section-background);
-    overflow: hidden;
   }
 
   section > :global(*:not(svg)) {
     grid-column: content;
+  }
+  section > :global(h1),
+  section > :global(h2),
+  section > :global(h3) {
+    text-align: center;
   }
 
   svg {
