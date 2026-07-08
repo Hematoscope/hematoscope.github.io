@@ -20,14 +20,12 @@ import Card from "~src/components/Card.astro";
 import ApplicationFrame from "~src/components/ApplicationFrame.astro";
 import ContentBlock from "~src/components/ContentBlock.astro";
 
-const scrollerData = [
-  {
-    name: "base",
-    image: base,
-    cardTitle: null,
-    cardBody: null,
-    position: null,
-  },
+// The base screenshot is always visible; each slide fades its screenshot
+// in over it and gets a text card next to (desktop) or below (narrow) the
+// application frame.
+const baseImage = base;
+
+const slides = [
   {
     name: "triage",
     image: triage,
@@ -117,6 +115,68 @@ const scrollerData = [
     position: "left",
   },
 ];
+
+// All animations run on the scroller's view timeline: progress is 0 when
+// the top of .scroller reaches the top of the viewport and 1 when its
+// bottom reaches the bottom (the "contain" range set in the style below).
+// The offsets here are percentages of that timeline: slide screenshots
+// crossfade in REVEAL_START + index * STEP percent in, and on narrow
+// layouts each sticky card fades out CARD_HOLD percent after its
+// screenshot has fully appeared, to make room for the next card.
+const REVEAL_START = 3;
+const CROSSFADE = 3;
+const CARD_HOLD = 4;
+const END_MARGIN = 1;
+const STEP =
+  (100 - REVEAL_START - CROSSFADE - END_MARGIN) / (slides.length - 1);
+
+const pct = (value: number) => Math.round(value * 100) / 100;
+
+// The animation-name rules are gated on the .animated class, which the
+// script below only adds once scroll-driven animations work (natively or
+// through the polyfill). Without it the section stays a static image
+// with all cards readable instead of freezing in some animation state.
+//
+// animation-timeline and animation-range are declared together with
+// animation-name instead of in the shared rule below: the polyfill only
+// pairs a timeline with an animation when both appear in the same rule
+// (a name-only rule processed later hides an earlier timeline-only rule).
+const timelineProps = `
+    animation-timeline: --scroller;
+    animation-range: contain 0% contain 100%;`;
+
+const animationCss = slides
+  .map((slide, index) => {
+    const revealStart = REVEAL_START + index * STEP;
+    const cardFadeStart = revealStart + CROSSFADE + CARD_HOLD;
+    const imageCss = `
+@keyframes reveal-${slide.name} {
+  ${pct(revealStart)}% { opacity: 0; }
+  ${pct(revealStart + CROSSFADE)}%, 100% { opacity: 1; }
+}
+.scroller.animated img.${slide.name} {
+  animation-name: reveal-${slide.name};${timelineProps}
+}`;
+    // Keyframe offsets above 100% are invalid CSS, so a card whose
+    // fade-out would land there (the last one) just stays visible.
+    // The card rule is only meant for narrow layouts, but the polyfill
+    // parser does not see rules nested in a media query, so it applies
+    // at every width and the wide layout switches it off in the style
+    // block below.
+    const cardCss =
+      cardFadeStart + 1 > 100
+        ? ""
+        : `
+@keyframes hide-${slide.name} {
+  ${pct(cardFadeStart)}% { opacity: 1; }
+  ${pct(cardFadeStart + 1)}%, 100% { opacity: 0; }
+}
+.scroller.animated .card.${slide.name} {
+  animation-name: hide-${slide.name};${timelineProps}
+}`;
+    return imageCss + cardCss;
+  })
+  .join("\n");
 ---
 
 <Section class="scroller-section">
@@ -132,11 +192,12 @@ const scrollerData = [
   </div>
   <ContentBlock class="scroller">
     <ApplicationFrame class="screen">
+      <Image src={baseImage} class="base" alt="" widths={W} height="600" />
       {
-        scrollerData.map((item) => (
+        slides.map((slide) => (
           <Image
-            src={item.image}
-            class={item.name}
+            src={slide.image}
+            class={slide.name}
             alt=""
             widths={W}
             height="600"
@@ -146,94 +207,31 @@ const scrollerData = [
     </ApplicationFrame>
 
     {
-      scrollerData
-        .filter((item) => item.cardTitle !== null)
-        .map((item) => (
-          <Card
-            class={`card ${item.name} ${item.position}`}
-            data-name={item.name}
-          >
-            <h3>{item.cardTitle}</h3>
-            <p>{item.cardBody}</p>
-          </Card>
-        ))
+      slides.map((slide) => (
+        <Card class={`card ${slide.name} ${slide.position}`}>
+          <h3>{slide.cardTitle}</h3>
+          <p>{slide.cardBody}</p>
+        </Card>
+      ))
     }
   </ContentBlock>
 </Section>
 
+<style is:inline set:html={animationCss}></style>
+
 <script>
-  const scroller = document.querySelector(".scroller")!;
-  const offsetStart = scroller.getBoundingClientRect().top + window.scrollY;
-  const offsetEnd =
-    document.documentElement.getBoundingClientRect().height -
-    offsetStart -
-    scroller.getBoundingClientRect().height;
-
-  function setOffsetVar() {
-    const relativeOffset =
-      (window.scrollY - offsetStart) /
-      (document.body.offsetHeight -
-        offsetStart -
-        offsetEnd -
-        window.innerHeight);
-    const clampedOffset = Math.min(Math.max(relativeOffset, 0), 1);
-    document.documentElement.style.setProperty("--scroll", `${clampedOffset}`);
+  // The scroller is driven by CSS scroll-driven animations; browsers
+  // without support get the polyfill instead. The animations only engage
+  // once .animated is set, so if this script does not run or the polyfill
+  // fails to load the section degrades to a static base screenshot with
+  // all cards readable.
+  if (
+    !CSS.supports("animation-timeline: --works") ||
+    !CSS.supports("view-timeline-name: --works")
+  ) {
+    await import("scroll-timeline-polyfill/dist/scroll-timeline.js");
   }
-
-  window.addEventListener("scroll", setOffsetVar);
-  window.addEventListener("load", setOffsetVar);
-
-  /* animation tags */
-  const style = document.createElement("style");
-  document.head.appendChild(style);
-
-  // Add keyframes dynamically
-  function keyframes(name: string, offset: number) {
-    const transition = 3;
-
-    const narrow = window.matchMedia("(width < 50em)").matches;
-
-    const imageKeyframes = `
-      @keyframes ${name} {
-        ${offset}% { opacity: 0; }
-        ${offset + transition}%, 100% { opacity: 1; }
-      }
-    `;
-    const imageAnimation = `
-      img.${name} {
-        animation: ${name} 1s linear;
-      }
-    `;
-
-    const sheet = style.sheet!;
-    sheet.insertRule(imageKeyframes, sheet.cssRules.length);
-    sheet.insertRule(imageAnimation, sheet.cssRules.length);
-
-    if (narrow) {
-      const duration = 4;
-
-      const cardKeyframes = `
-        @keyframes ${name}card {
-          ${offset + transition + duration}% { opacity: 1; }
-          ${offset + transition + duration + 1}%, 100% { opacity: 0; }
-        }
-      `;
-      const cardAnimation = `
-        .card.${name} {
-          animation: ${name}card 1s linear;
-        }
-      `;
-      sheet.insertRule(cardKeyframes, sheet.cssRules.length);
-      sheet.insertRule(cardAnimation, sheet.cssRules.length);
-    }
-  }
-
-  const initial = 3;
-  const step = 9.3;
-  const frames = [...document.querySelectorAll("div[data-name]")].map(
-    (element) => element.getAttribute("data-name") || "",
-  );
-  frames.forEach((frame, idx) => keyframes(frame, initial + step * idx));
+  document.querySelector(".scroller")?.classList.add("animated");
 </script>
 
 <style>
@@ -248,7 +246,7 @@ const scrollerData = [
     position: relative;
 
     display: grid;
-    grid-template-rows: repeat(12, minmax(600px, 1fr));
+    grid-auto-rows: minmax(600px, 1fr);
     grid-template-columns: 1fr;
     gap: 5rem;
     justify-items: center;
@@ -257,6 +255,8 @@ const scrollerData = [
     background-color: var(--background-2);
     border-radius: var(--element-border-radius);
     padding: var(--element-padding);
+
+    view-timeline-name: --scroller;
   }
   .screen {
     position: sticky;
@@ -277,9 +277,11 @@ const scrollerData = [
   }
   .screen > img,
   .scroller .card {
-    animation-play-state: paused;
-    animation-delay: calc(var(--scroll) * -1s);
-    animation-iteration-count: 1;
+    /* animation-name, -timeline and -range come from the generated
+       per-slide style above. Any fixed duration spans the whole timeline
+       range; the polyfill does not understand duration "auto". */
+    animation-duration: 1ms;
+    animation-timing-function: linear;
     animation-fill-mode: both;
   }
 
@@ -293,6 +295,17 @@ const scrollerData = [
   }
   .right {
     justify-self: flex-end;
+  }
+
+  @media screen and (width >= 50em) {
+    .card {
+      /* Cards only fade out on narrow layouts, but the generated rules
+         cannot express that with a media query (the polyfill would not
+         see them), so the wide layout switches the animation off here.
+         !important because the generated rules come later in the
+         cascade and would win otherwise. */
+      animation-name: none !important;
+    }
   }
 
   @media screen and (width < 50em) {
