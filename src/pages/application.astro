@@ -285,7 +285,10 @@ import HeroSection from "~src/components/HeroSection.astro";
     flex: 25rem 1 1;
   }
 
-  .feature {
+  /* Doubled class to beat Card's own .card { display: flex } rule: the
+     prod build inlines some component styles after the page stylesheet,
+     so equal-specificity rules lose nondeterministically. */
+  .feature.feature {
     display: grid;
     grid-template-areas:
       "icon heading"

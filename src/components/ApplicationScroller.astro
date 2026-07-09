@@ -145,6 +145,19 @@ const timelineProps = `
     animation-timeline: --scroller;
     animation-range: contain 0% contain 100%;`;
 
+// view-timeline-name must live in this inline style block, not in the
+// scoped style below: the prod build moves scoped styles into a linked
+// stylesheet, which the polyfill fetches asynchronously. The .animated
+// class is added right after the polyfill import resolves, so the 1ms
+// animations finish on the document timeline before the fetch completes
+// and the polyfill never finds the --scroller timeline (every image ends
+// at opacity 1). Inline style tags are parsed synchronously at polyfill
+// init, so declaring the timeline here removes the race.
+const timelineCss = `
+.scroller {
+  view-timeline-name: --scroller;
+}`;
+
 const animationCss = slides
   .map((slide, index) => {
     const revealStart = REVEAL_START + index * STEP;
@@ -217,7 +230,7 @@ const animationCss = slides
   </ContentBlock>
 </Section>
 
-<style is:inline set:html={animationCss}></style>
+<style is:inline set:html={timelineCss + animationCss}></style>
 
 <script>
   // The scroller is driven by CSS scroll-driven animations; browsers
@@ -256,7 +269,8 @@ const animationCss = slides
     border-radius: var(--element-border-radius);
     padding: var(--element-padding);
 
-    view-timeline-name: --scroller;
+    /* view-timeline-name is declared in the inline style block above so
+       the scroll-timeline polyfill can parse it synchronously. */
   }
   .screen {
     position: sticky;
