@@ -78,8 +78,11 @@
   }
 
   /*
-   * shimmer / blink: for the bytes graphics. Squares fade (shimmer)
-   * or snap (blink) between opacity levels on staggered cycles.
+   * blink: for the bytes graphics. Each square rests at full opacity
+   * for most of its cycle and only occasionally snaps down and back,
+   * so at any moment just a few squares are mid-blink while the rest
+   * sit still. Dips are brief and shallow (55% at the deepest) so the
+   * flicker stays ambient rather than jarring.
    *
    * The pure-white squares (class cls-4 in corner-1/corner-2) stay
    * static: animating white reads as holes opening in the graphic.
@@ -88,66 +91,52 @@
    * other bytes assets cls-4 is a regular color, so a few squares
    * simply sit the animation out, which is invisible.
    */
-  svg.shimmer :is(path):not([class$="cls-4"]) {
-    animation: byte-shimmer 3.3s ease-in-out infinite alternate;
-  }
-  @keyframes byte-shimmer {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0.3;
-    }
-  }
-
-  /* Dips are shallow (55% at the deepest) so the flicker stays
-     ambient rather than jarring. */
   svg.blink :is(path):not([class$="cls-4"]) {
-    animation: byte-blink 3.3s linear infinite;
+    animation: byte-blink 8s linear infinite;
   }
   @keyframes byte-blink {
     0%,
-    38% {
+    55% {
       opacity: 1;
     }
-    39%,
-    54% {
+    56%,
+    62% {
       opacity: 0.55;
     }
-    55%,
-    71% {
+    63%,
+    78% {
       opacity: 1;
     }
-    72%,
-    80% {
+    79%,
+    83% {
       opacity: 0.78;
     }
-    81%,
+    84%,
     100% {
       opacity: 1;
     }
   }
 
-  /* Shared stagger for the bytes recipes: overlapping 3-, 5- and
+  /* Stagger for the byte squares: overlapping 3-, 5- and
      7-cycles give up to 105 distinct phase combinations. Like the
      breathe overrides above, this block must come after the recipes'
      animation shorthands to survive the cascade. */
-  :is(svg.shimmer, svg.blink) :is(path):nth-child(3n) {
-    animation-delay: -1.4s;
+  svg.blink :is(path):nth-child(3n) {
+    animation-delay: -3.1s;
   }
-  :is(svg.shimmer, svg.blink) :is(path):nth-child(3n + 1) {
-    animation-delay: -2.7s;
-    animation-duration: 4.3s;
+  svg.blink :is(path):nth-child(3n + 1) {
+    animation-delay: -5.8s;
+    animation-duration: 11.3s;
   }
-  :is(svg.shimmer, svg.blink) :is(path):nth-child(5n + 2) {
-    animation-delay: -0.9s;
-    animation-duration: 3.7s;
+  svg.blink :is(path):nth-child(5n + 2) {
+    animation-delay: -1.7s;
+    animation-duration: 9.7s;
   }
-  :is(svg.shimmer, svg.blink) :is(path):nth-child(7n + 2) {
-    animation-delay: -3.4s;
-    animation-duration: 2.7s;
+  svg.blink :is(path):nth-child(7n + 2) {
+    animation-delay: -7.2s;
+    animation-duration: 7.4s;
   }
-  :is(svg.shimmer, svg.blink) :is(path):nth-child(7n + 5) {
-    animation-delay: -2.1s;
+  svg.blink :is(path):nth-child(7n + 5) {
+    animation-delay: -4.4s;
   }
 }
