@@ -8,10 +8,10 @@
 
 @font-face {
   font-family: "Pragati";
-  src: url("/pragatinarrow-bold.woff2") format("woff2");
+  src: url("/pragatinarrow-regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 :root {
@@ -88,8 +88,9 @@
 
 @media screen and (width < 50em) {
   :root {
-    --text-size-heading-1: 2rem;
-    --text-size-heading-2: 1.75rem;
+    --text-size-heading-1: 2.5rem;
+    --text-size-heading-2: 2rem;
+    --text-size-heading-3: 1.25rem;
     --element-padding: 1rem;
     --element-border-radius: 1rem;
 
@@ -172,7 +173,7 @@ p {
   gap: 1rem;
 }
 
-.text > p {
+.text>p {
   max-width: 55ch;
 }
 
