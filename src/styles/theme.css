@@ -99,10 +99,17 @@
   }
 }
 
+html {
+  /* Clip (not hide) sideways overflow from decorative background SVGs.
+     With overflow-x: hidden the overflow still counts as scrollable
+     content, so mobile browsers zoom out to fit the whole document. */
+  overflow-x: clip;
+}
+
 body {
   background-color: var(--background);
   row-gap: var(--element-padding);
-  overflow-x: hidden;
+  overflow-x: clip;
   height: 100%;
 }
 
