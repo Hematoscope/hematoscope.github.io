@@ -21,17 +21,17 @@ const Tag = tag;
 <Tag class:list={[props.class, "decorated-card", variant]} {...props}>
   {
     variant === "bytes" ? (
-      <BytesTopLeft class="top-left" />
+      <BytesTopLeft class="top-left blink" />
     ) : (
-      <BytesTopRight class="top-right" />
+      <BytesTopRight class="top-right blink" />
     )
   }
   <slot />
   {
     variant === "bytes" ? (
-      <BytesBottomRight class="bottom-right" />
+      <BytesBottomRight class="bottom-right blink" />
     ) : (
-      <CellsBottomLeft class="bottom-left" />
+      <CellsBottomLeft class="bottom-left breathe" />
     )
   }
 </Tag>

@@ -1,0 +1,153 @@
+/*
+ * Ambient animation for the inlined background SVGs. Astro inlines
+ * imported SVGs into the page, so every cell / byte square in the
+ * artwork is a real <path> this stylesheet can animate - no asset
+ * edits needed. Each usage opts in by adding a recipe class next to
+ * its positioning class, e.g. <CellsCluster class="cells breathe" />;
+ * Astro forwards the class onto the inlined <svg> root.
+ *
+ * Not every asset can join: bytes/border.svg, bytes/in-element-corner.svg
+ * and bytes/in-element-edge.svg draw all their squares as one compound
+ * path, so per-square stagger is impossible and the whole graphic would
+ * animate in unison. Leave those static.
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+   * breathe: for the cells graphics. Each cell squishes, drifts and
+   * tilts on three independent transform channels with mismatched
+   * durations, so the combined phase takes ages to repeat and reads
+   * as idle organic motion rather than a loop.
+   */
+  svg.breathe :is(path, circle, ellipse) {
+    /* Scale/rotate around each cell's own box, not the SVG origin. */
+    transform-box: fill-box;
+    transform-origin: center;
+    animation:
+      cell-squish 4.6s ease-in-out infinite alternate,
+      cell-drift 7.9s ease-in-out infinite alternate,
+      cell-tilt 6.4s ease-in-out infinite alternate;
+  }
+  /* Desynchronize neighbours. Cycles of 3 and 5 overlap to give 15
+     distinct phase combinations before the pattern repeats. These
+     overrides must come after the animation shorthand above: the
+     shorthand resets delay and duration, so they only survive by
+     winning the cascade. */
+  svg.breathe :is(path, circle, ellipse):nth-child(3n + 1) {
+    animation-delay:
+      -1.9s,
+      -3.1s,
+      -5.4s;
+  }
+  svg.breathe :is(path, circle, ellipse):nth-child(3n + 2) {
+    animation-delay:
+      -3.7s,
+      -6.2s,
+      -1.2s;
+  }
+  svg.breathe :is(path, circle, ellipse):nth-child(5n + 1) {
+    animation-duration: 5.3s, 8.7s, 7.1s;
+  }
+  svg.breathe :is(path, circle, ellipse):nth-child(5n + 3) {
+    animation-duration: 4.1s, 6.9s, 5.7s;
+  }
+
+  @keyframes cell-squish {
+    from {
+      scale: 0.95 1.06;
+    }
+    to {
+      scale: 1.07 0.94;
+    }
+  }
+  @keyframes cell-drift {
+    from {
+      translate: -3.5% 2.5%;
+    }
+    to {
+      translate: 3.5% -2.5%;
+    }
+  }
+  @keyframes cell-tilt {
+    from {
+      rotate: -2.6deg;
+    }
+    to {
+      rotate: 2.6deg;
+    }
+  }
+
+  /*
+   * shimmer / blink: for the bytes graphics. Squares fade (shimmer)
+   * or snap (blink) between opacity levels on staggered cycles.
+   *
+   * The pure-white squares (class cls-4 in corner-1/corner-2) stay
+   * static: animating white reads as holes opening in the graphic.
+   * The [class$="cls-4"] suffix match survives SVGO's class prefixing,
+   * the same trick BytesSection uses for path[class$="cls-2"]. In the
+   * other bytes assets cls-4 is a regular color, so a few squares
+   * simply sit the animation out, which is invisible.
+   */
+  svg.shimmer :is(path):not([class$="cls-4"]) {
+    animation: byte-shimmer 3.3s ease-in-out infinite alternate;
+  }
+  @keyframes byte-shimmer {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.3;
+    }
+  }
+
+  /* Dips are shallow (55% at the deepest) so the flicker stays
+     ambient rather than jarring. */
+  svg.blink :is(path):not([class$="cls-4"]) {
+    animation: byte-blink 3.3s linear infinite;
+  }
+  @keyframes byte-blink {
+    0%,
+    38% {
+      opacity: 1;
+    }
+    39%,
+    54% {
+      opacity: 0.55;
+    }
+    55%,
+    71% {
+      opacity: 1;
+    }
+    72%,
+    80% {
+      opacity: 0.78;
+    }
+    81%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Shared stagger for the bytes recipes: overlapping 3-, 5- and
+     7-cycles give up to 105 distinct phase combinations. Like the
+     breathe overrides above, this block must come after the recipes'
+     animation shorthands to survive the cascade. */
+  :is(svg.shimmer, svg.blink) :is(path):nth-child(3n) {
+    animation-delay: -1.4s;
+  }
+  :is(svg.shimmer, svg.blink) :is(path):nth-child(3n + 1) {
+    animation-delay: -2.7s;
+    animation-duration: 4.3s;
+  }
+  :is(svg.shimmer, svg.blink) :is(path):nth-child(5n + 2) {
+    animation-delay: -0.9s;
+    animation-duration: 3.7s;
+  }
+  :is(svg.shimmer, svg.blink) :is(path):nth-child(7n + 2) {
+    animation-delay: -3.4s;
+    animation-duration: 2.7s;
+  }
+  :is(svg.shimmer, svg.blink) :is(path):nth-child(7n + 5) {
+    animation-delay: -2.1s;
+  }
+}
