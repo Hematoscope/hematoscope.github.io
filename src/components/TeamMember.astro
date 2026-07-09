@@ -7,7 +7,7 @@ interface Props {
   photo: ImageMetadata;
   name: string;
   title: string;
-  email: string;
+  email?: string;
 }
 const { photo, name, title, email } = Astro.props;
 ---
@@ -16,7 +16,7 @@ const { photo, name, title, email } = Astro.props;
   <Image src={photo} alt={name} widths={WIDTHS} height="240" />
   <h3>{name}</h3>
   <p>{title}</p>
-  <p>{email}</p>
+  {email && <p>{email}</p>}
 </article>
 
 <style>
