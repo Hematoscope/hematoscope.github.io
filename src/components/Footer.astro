@@ -1,11 +1,24 @@
+---
+import LinkedIn from "~src/assets/icons/linkedin.svg";
+---
+
 <footer>
   <div class="contents">
     <p>
       <strong>Cellbytes</strong><br />
       © Cellbytes Ltd.<br />
-      Tukholmankatu 8, 00290 Helsinki, Finland<br />
+      Tukholmankatu 8,<br />
+      00290 Helsinki, Finland<br />
       All rights reserved.
     </p>
+
+    <ul>
+      <li>
+        <a href="https://www.linkedin.com/company/cellbytes">
+          <LinkedIn />
+        </a>
+      </li>
+    </ul>
 
     <div class="links">
       <a href="/privacy-policy">Privacy policy</a>
@@ -39,6 +52,10 @@
     display: flex;
     align-items: center;
     gap: 2em;
+  }
+  li svg {
+    width: 2em;
+    height: 2em;
   }
 
   div.links {
