@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { HTMLTag } from "astro/types";
+import TextCard from "~src/components/TextCard.astro";
+import LinkButton from "~src/components/LinkButton.astro";
+
+interface Props {
+  post: CollectionEntry<"news">;
+  accent: "bytes-blue" | "bytes-purple" | "support-pink";
+  /** Heading level of the post title, depending on the page context. */
+  level?: "2" | "3";
+}
+const { post, accent, level = "2" } = Astro.props;
+const Heading: HTMLTag = `h${level}`;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<TextCard image={post.data.image} alt={post.data.imageAlt} accent={accent}>
+  <Heading class="title">
+    <a href={`/news/${post.id}`}>{post.data.title}</a>
+  </Heading>
+  <div class="post-meta">
+    <time datetime={post.data.date.toISOString()}>
+      {formatDate(post.data.date)}
+    </time>
+    {
+      post.data.tags && (
+        <ul class="tag-list">
+          {post.data.tags.map((tag) => (
+            <li class="tag">{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  <p>{post.data.description}</p>
+  <LinkButton variant="default-arrow" href={`/news/${post.id}`} aria-hidden>
+    Read article
+  </LinkButton>
+</TextCard>
+
+<style>
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  time {
+    font-size: var(--text-size-label);
+    font-style: italic;
+    color: var(--text-color-body);
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.2em 0.75em;
+    border-radius: var(--button-border-radius);
+    background-color: var(--background);
+    color: var(--text-color-heading);
+    text-transform: capitalize;
+  }
+
+  .title {
+    text-align: start;
+    font-size: var(--text-size-heading-3);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .title > a {
+    text-decoration: none;
+    color: var(--text-color-heading);
+  }
+
+  .title > a:hover {
+    text-decoration: underline;
+  }
+</style>

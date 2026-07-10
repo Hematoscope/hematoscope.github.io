@@ -4,22 +4,13 @@ import BytesSmall from "~src/assets/backgrounds/bytes/cluster-mini.svg";
 import CellsSmall from "~src/assets/backgrounds/cells/cluster-mini.svg";
 import Layout from "~src/layouts/Layout.astro";
 import Section from "~src/components/Section.astro";
-import TextCard from "~src/components/TextCard.astro";
-import LinkButton from "~src/components/LinkButton.astro";
+import NewsCard from "~src/components/NewsCard.astro";
 
 const posts = (await getCollection("news", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
 const accents = ["bytes-blue", "support-pink", "bytes-purple"] as const;
-
-function formatDate(date: Date) {
-  return date.toLocaleDateString("en-GB", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 ---
 
 <Layout
@@ -42,35 +33,7 @@ function formatDate(date: Date) {
     <section class="posts" aria-label="News articles">
       {
         posts.map((post, i) => (
-          <TextCard
-            image={post.data.image}
-            alt={post.data.imageAlt}
-            accent={accents[i % accents.length]!}
-          >
-            <h2>
-              <a href={`/news/${post.id}`}>{post.data.title}</a>
-            </h2>
-            <div class="post-meta">
-              <time datetime={post.data.date.toISOString()}>
-                {formatDate(post.data.date)}
-              </time>
-              {post.data.tags && (
-                <ul class="tag-list">
-                  {post.data.tags.map((tag) => (
-                    <li class="tag">{tag}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <p>{post.data.description}</p>
-            <LinkButton
-              variant="default-arrow"
-              href={`/news/${post.id}`}
-              aria-hidden
-            >
-              Read article
-            </LinkButton>
-          </TextCard>
+          <NewsCard post={post} accent={accents[i % accents.length]!} />
         ))
       }
     </section>
@@ -114,52 +77,5 @@ function formatDate(date: Date) {
     align-items: center;
     gap: var(--element-padding);
     width: 100%;
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  time {
-    font-size: var(--text-size-label);
-    font-style: italic;
-    color: var(--text-color-body);
-  }
-
-  .tag-list {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.2em 0.75em;
-    border-radius: var(--button-border-radius);
-    background-color: var(--background);
-    color: var(--text-color-heading);
-    text-transform: capitalize;
-  }
-
-  h2 {
-    text-align: start;
-    font-size: var(--text-size-heading-3);
-    font-weight: 700;
-    line-height: 1.1;
-  }
-
-  h2 > a {
-    text-decoration: none;
-    color: var(--text-color-heading);
-  }
-
-  h2 > a:hover {
-    text-decoration: underline;
   }
 </style>
