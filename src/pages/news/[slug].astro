@@ -2,6 +2,8 @@
 import Layout from "~src/layouts/Layout.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import { WIDTHS } from "~src/consts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("news");
@@ -30,10 +32,18 @@ function formatDate(date: Date) {
   description={post.data.description}
 >
   <article>
-    <div
-      class:list={["post-hero", hasImage ? "image" : "gradient"]}
-      style={hasImage ? `--hero-image: url('${post.data.image}')` : undefined}
-    >
+    <div class:list={["post-hero", hasImage ? "image" : "gradient"]}>
+      {
+        post.data.image && (
+          <Image
+            src={post.data.image}
+            alt={post.data.imageAlt ?? ""}
+            widths={WIDTHS}
+            loading="eager"
+            class="hero-image"
+          />
+        )
+      }
       <LinkButton variant="default-arrow-back" href="/news">
         News list
       </LinkButton>
@@ -118,12 +128,22 @@ function formatDate(date: Date) {
     margin-inline: calc(0px - var(--element-padding));
   }
 
-  /* h1 must sit above the scrim pseudo-element */
+  /* h1 must sit above the image and scrim pseudo-element */
   .post-hero > * {
     position: relative;
     z-index: 1;
     text-align: start;
     max-width: 70ch;
+  }
+
+  .post-hero > .hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
   }
 
   /* Gradient variant (no image) */
@@ -145,11 +165,6 @@ function formatDate(date: Date) {
         transparent 100%
       ),
       var(--background-1);
-  }
-
-  /* Image variant */
-  .image {
-    background: var(--hero-image) center / cover no-repeat;
   }
 
   /* Dark gradient scrim so light text stays legible */

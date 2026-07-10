@@ -4,8 +4,8 @@ import { Image } from "astro:assets";
 import { WIDTHS } from "~src/consts";
 
 interface Props {
-  image: ImageMetadata;
-  alt: string;
+  image?: ImageMetadata | undefined;
+  alt?: string | undefined;
   accent: "bytes-blue" | "bytes-purple" | "support-pink";
 }
 const { image, alt, accent } = Astro.props;
@@ -13,7 +13,17 @@ const bg = `var(--${accent})`;
 ---
 
 <article>
-  <Image src={image} alt={alt} widths={WIDTHS} height="200" width="350" />
+  {
+    image && (
+      <Image
+        src={image}
+        alt={alt ?? ""}
+        widths={WIDTHS}
+        height="200"
+        width="350"
+      />
+    )
+  }
   <div class="content">
     <slot />
   </div>

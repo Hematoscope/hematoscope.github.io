@@ -4,20 +4,14 @@ import BytesSmall from "~src/assets/backgrounds/bytes/cluster-mini.svg";
 import CellsSmall from "~src/assets/backgrounds/cells/cluster-mini.svg";
 import Layout from "~src/layouts/Layout.astro";
 import Section from "~src/components/Section.astro";
+import TextCard from "~src/components/TextCard.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 
 const posts = (await getCollection("news", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-const accents = [
-  "bytes-blue",
-  "support-pink",
-  "support-purple",
-  "cells-dark-pink",
-  "support-blue",
-  "bytes-purple",
-] as const;
+const accents = ["bytes-blue", "support-pink", "bytes-purple"] as const;
 
 function formatDate(date: Date) {
   return date.toLocaleDateString("en-GB", {
@@ -47,36 +41,37 @@ function formatDate(date: Date) {
   <Section>
     <section class="posts" aria-label="News articles">
       {
-        posts.map((post, i) => {
-          const accent = accents[i % accents.length];
-          return (
-            <article class="post-card" style={`--card-bg: var(--${accent})`}>
-              <h2>
-                <a href={`/news/${post.id}`}>{post.data.title}</a>
-              </h2>
-              <div class="post-meta">
-                <time datetime={post.data.date.toISOString()}>
-                  {formatDate(post.data.date)}
-                </time>
-                {post.data.tags && (
-                  <ul class="tag-list">
-                    {post.data.tags.map((tag) => (
-                      <li class="tag">{tag}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <p>{post.data.description}</p>
-              <LinkButton
-                variant="default-arrow"
-                href={`/news/${post.id}`}
-                aria-hidden
-              >
-                Read article
-              </LinkButton>
-            </article>
-          );
-        })
+        posts.map((post, i) => (
+          <TextCard
+            image={post.data.image}
+            alt={post.data.imageAlt}
+            accent={accents[i % accents.length]!}
+          >
+            <h2>
+              <a href={`/news/${post.id}`}>{post.data.title}</a>
+            </h2>
+            <div class="post-meta">
+              <time datetime={post.data.date.toISOString()}>
+                {formatDate(post.data.date)}
+              </time>
+              {post.data.tags && (
+                <ul class="tag-list">
+                  {post.data.tags.map((tag) => (
+                    <li class="tag">{tag}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <p>{post.data.description}</p>
+            <LinkButton
+              variant="default-arrow"
+              href={`/news/${post.id}`}
+              aria-hidden
+            >
+              Read article
+            </LinkButton>
+          </TextCard>
+        ))
       }
     </section>
   </Section>
@@ -105,20 +100,20 @@ function formatDate(date: Date) {
     bottom: 0;
   }
 
-  .posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--element-padding);
-    width: 100%;
+  /* The clusters collide with the heading on narrow screens */
+  @media screen and (width < 50em) {
+    .cells,
+    .bytes {
+      display: none;
+    }
   }
 
-  .post-card {
+  .posts {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: var(--element-padding);
-    border-radius: var(--element-border-radius);
-    background-color: var(--card-bg);
+    align-items: center;
+    gap: var(--element-padding);
+    width: 100%;
   }
 
   .post-meta {
@@ -155,7 +150,7 @@ function formatDate(date: Date) {
   h2 {
     text-align: start;
     font-size: var(--text-size-heading-3);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.1;
   }
 
@@ -166,11 +161,5 @@ function formatDate(date: Date) {
 
   h2 > a:hover {
     text-decoration: underline;
-  }
-
-  .post-card > :global(.link-button) {
-    align-self: flex-start;
-    justify-self: flex-end;
-    margin-top: auto;
   }
 </style>

@@ -4,6 +4,8 @@ description: "How machine learning is changing the way blood samples are analyse
 date: 2026-04-10
 author: "Cellbytes Team"
 tags: ["technology", "research"]
+image: ./ai-in-haematopathology.jpg
+imageAlt: "Colourful 3D illustration of protein structures and molecules floating in deep blue light."
 ---
 
 Haematopathology — the study of blood diseases through microscopic examination — has long relied on the trained eye of an expert. Identifying a blast cell, flagging an abnormal neutrophil, or quantifying a differential count requires years of experience and sustained concentration. AI is now beginning to assist in this process, not to replace the pathologist, but to make their work faster, more consistent, and more scalable.

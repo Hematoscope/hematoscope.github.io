@@ -4,6 +4,8 @@ description: "Introducing the official Cellbytes news, where we share updates on
 date: 2026-04-17
 author: "Cellbytes Team"
 tags: ["news", "company"]
+image: ./welcome-to-the-cellbytes-blog.jpg
+imageAlt: "A sculpted tree in bloom growing out of a cracked concrete pillar against a clear blue sky."
 ---
 
 We're excited to launch the official Cellbytes news — a space where we share updates on our work, insights from the field of digital pathology, and news from our growing network of research and clinical partners.
