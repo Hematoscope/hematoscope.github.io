@@ -6,14 +6,6 @@
   font-weight: 100 900;
 }
 
-@font-face {
-  font-family: "Pragati";
-  src: url("/pragatinarrow-regular.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: normal;
-}
-
 :root {
   /* Color variables */
   --primary-1: #0d083f;
@@ -32,6 +24,7 @@
   --bytes-blue: #e4eef4;
   --bytes-dark-blue: #c2ddf3;
   --bytes-magenta: #c896c6;
+  --bytes-light-magenta: #e5c8e4;
   --bytes-purple: #e7daed;
 
   --cells-light-pink: var(--background-2);
@@ -46,8 +39,9 @@
   --text-color-heading: #130d56;
   --text-color-body: var(--primary-2);
 
-  --shadow-lg: 0px 24px 48px rgba(0, 0, 0, 0.1);
-  --shadow-sm: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  --shadow-color: color-mix(in srgb, var(--bytes-magenta), transparent 50%);
+
+  --shadow-sm: 0px 4px 12px var(--shadow-color);
 
   /* Text sizes */
   --text-size-heading-1: 4rem;
@@ -81,8 +75,6 @@
     --text-size-ingress: 1.25rem;
 
     --block-padding: 8rem;
-
-    --shadow-lg: 0px 16px 32px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -90,13 +82,11 @@
   :root {
     --text-size-heading-1: 2.5rem;
     --text-size-heading-2: 2rem;
-    --text-size-heading-3: 1.25rem;
+    --text-size-heading-3: 1.5rem;
     --element-padding: 1rem;
     --element-border-radius: 1rem;
 
     --block-padding: 6rem;
-
-    --shadow-lg: 0px 8px 16px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -125,18 +115,16 @@ h4,
 h5,
 h6 {
   color: var(--text-color-heading);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
 }
 
 h1 {
   font-size: var(--text-size-heading-1);
-  font-family: "Pragati", sans-serif;
 }
 
 h2 {
   font-size: var(--text-size-heading-2);
-  font-family: "Pragati", sans-serif;
 }
 
 h3 {
@@ -173,7 +161,7 @@ p {
   gap: 1rem;
 }
 
-.text>p {
+.text > p {
   max-width: 55ch;
 }
 

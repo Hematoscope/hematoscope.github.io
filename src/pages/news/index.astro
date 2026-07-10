@@ -1,7 +1,6 @@
 ---
 import Layout from "~src/layouts/Layout.astro";
 import Section from "~src/components/Section.astro";
-import HeroSection from "~src/components/HeroSection.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import { getCollection } from "astro:content";
 
@@ -31,7 +30,7 @@ function formatDate(date: Date) {
   title="News | Cellbytes"
   description="Updates from the Cellbytes team on the Cellbytes application, digital pathology and related research."
 >
-  <HeroSection>
+  <Section>
     <div class="text">
       <h1>News from Cellbytes</h1>
       <p>
@@ -39,7 +38,7 @@ function formatDate(date: Date) {
         pathology and related research.
       </p>
     </div>
-  </HeroSection>
+  </Section>
 
   <Section>
     <section class="posts" aria-label="News articles">
@@ -80,6 +79,14 @@ function formatDate(date: Date) {
 </Layout>
 
 <style>
+  :global(body) {
+    min-height: 100vh;
+  }
+
+  :global(main) {
+    row-gap: calc(var(--block-padding) / 2) !important;
+  }
+
   .posts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -124,6 +131,7 @@ function formatDate(date: Date) {
     border-radius: var(--button-border-radius);
     background-color: var(--background);
     color: var(--text-color-heading);
+    text-transform: capitalize;
   }
 
   h2 {

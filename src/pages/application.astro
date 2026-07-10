@@ -4,7 +4,7 @@ import cells from "~src/assets/images/application/cells.png";
 import slides from "~src/assets/images/application/slides.jpg";
 import networking from "~src/assets/images/application/networking.jpg";
 import textureMask from "~src/assets/images/application/app-texture-mask.png";
-import cellList from "~src/assets/images/application/app-cell-list.png";
+import physicianReview from "~src/assets/images/application/physician-review.webp";
 import report from "~src/assets/images/application/report.jpg";
 import BytesCorner from "~src/assets/backgrounds/bytes/in-element-corner.svg";
 
@@ -75,8 +75,8 @@ import HeroSection from "~src/components/HeroSection.astro";
         text="Cellbytes analyzes key features from whole-slide and single-cell images."
       />
       <WorkflowStep
-        image={cellList}
-        alt="A screenshot of Cellbytes showing a list of cells with their labels."
+        image={physicianReview}
+        alt="A physician reviewing cells using Cellbytes."
         heading="Physician review"
         text="Review pre-classification results."
       />
@@ -314,6 +314,9 @@ import HeroSection from "~src/components/HeroSection.astro";
     bottom: -5%;
     right: -10%;
     height: 100%;
+  }
+  .bytes-corner :global(path) {
+    fill: var(--bytes-light-magenta);
   }
   .faq {
     display: grid;
