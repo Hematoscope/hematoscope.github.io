@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the Cellbytes News"
 description: "Introducing the official Cellbytes news, where we share updates on our digital pathology platform, research partnerships, and insights from the field."
-date: 2026-06-10
+date: 2026-06-15
 author: "Cellbytes Team"
 tags: ["news", "company"]
 image: ./welcome-to-the-cellbytes-blog.jpg
