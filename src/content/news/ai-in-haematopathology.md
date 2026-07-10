@@ -1,7 +1,7 @@
 ---
 title: "The Role of AI in Modern Haematopathology"
 description: "How machine learning is changing the way blood samples are analysed, and what it means for clinical laboratories and their patients."
-date: 2026-04-10
+date: 2026-04-17
 author: "Cellbytes Team"
 tags: ["technology", "research"]
 image: ./ai-in-haematopathology.jpg
