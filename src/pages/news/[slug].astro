@@ -117,6 +117,12 @@ function formatDate(date: Date) {
   article sup + sup:before {
     content: ", ";
   }
+
+  /* Offset footnote jump targets (both the definitions and the back-reference
+     markers) so the sticky header does not cover them when clicked. */
+  article [id^="user-content-fn"] {
+    scroll-margin-top: 6rem;
+  }
 </style>
 
 <style>
