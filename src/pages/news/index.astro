@@ -1,8 +1,10 @@
 ---
+import { getCollection } from "astro:content";
+import BytesSmall from "~src/assets/backgrounds/bytes/cluster-mini.svg";
+import CellsSmall from "~src/assets/backgrounds/cells/cluster-mini.svg";
 import Layout from "~src/layouts/Layout.astro";
 import Section from "~src/components/Section.astro";
 import LinkButton from "~src/components/LinkButton.astro";
-import { getCollection } from "astro:content";
 
 const posts = (await getCollection("news", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
@@ -31,6 +33,7 @@ function formatDate(date: Date) {
   description="Updates from the Cellbytes team on the Cellbytes application, digital pathology and related research."
 >
   <Section>
+    <CellsSmall class="cells" />
     <div class="text">
       <h1>News from Cellbytes</h1>
       <p>
@@ -38,6 +41,7 @@ function formatDate(date: Date) {
         pathology and related research.
       </p>
     </div>
+    <BytesSmall class="bytes" />
   </Section>
 
   <Section>
@@ -85,6 +89,20 @@ function formatDate(date: Date) {
 
   :global(main) {
     row-gap: calc(var(--block-padding) / 2) !important;
+  }
+
+  .cells {
+    position: absolute;
+    height: 100px;
+    left: 0;
+    top: 0;
+  }
+
+  .bytes {
+    position: absolute;
+    height: 100px;
+    right: 0;
+    bottom: 0;
   }
 
   .posts {
