@@ -73,7 +73,8 @@ function formatDate(date: Date) {
 </Layout>
 
 <style is:global>
-  article {
+  article,
+  section {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -86,28 +87,34 @@ function formatDate(date: Date) {
     margin-block-end: calc(2 * var(--element-padding));
   }
 
-  article > * + h2,
-  article > * + h3 {
+  article * + h2,
+  article * + h3 {
     margin-top: 1rem;
   }
 
-  article > h2,
-  article > h3,
-  article > h4 {
+  article h2,
+  article h3,
+  article h4 {
     text-align: start;
   }
 
   article > ul,
-  article > ol {
-    padding-left: 1.5em;
+  article > ol,
+  section > ul,
+  section > ol {
+    padding-left: 1.1em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
   }
 
-  article > hr {
+  article hr {
     width: 50%;
     margin-block: 2em;
+  }
+
+  article sup + sup:before {
+    content: ", ";
   }
 </style>
 
