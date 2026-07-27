@@ -10,9 +10,9 @@ const bg = `var(--bytes-${color ?? "light-blue"})`;
 ---
 
 <section {...props}>
-  <BytesBorder class="top" />
+  <BytesBorder class="art-bytes-border top" />
   <slot />
-  <BytesBorder class="bottom" />
+  <BytesBorder class="art-bytes-border bottom" />
 </section>
 
 <style define:vars={{ bg }}>

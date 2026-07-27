@@ -22,10 +22,12 @@
 
   --bytes-light-blue: var(--background-1);
   --bytes-blue: #e4eef4;
+  --bytes-mid-blue: #d8e6f2;
   --bytes-dark-blue: #c2ddf3;
   --bytes-magenta: #c896c6;
+  --bytes-mid-magenta: #d7b8d9;
   --bytes-light-magenta: #e5c8e4;
-  --bytes-purple: #e7daed;
+  --bytes-purple: #eed7f4;
 
   --cells-light-pink: var(--background-2);
   --cells-dark-pink: #fbdbe8;
@@ -161,7 +163,7 @@ p {
   gap: 1rem;
 }
 
-.text > p {
+.text>p {
   max-width: 55ch;
 }
 

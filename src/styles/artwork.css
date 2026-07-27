@@ -1,0 +1,137 @@
+/* Theme colors for the imported SVG artwork.
+ *
+ * The asset files under src/assets/ keep the literal colors their design tool
+ * exported; nothing rewrites them. Instead every usage site tags the SVG with
+ * an `art-*` class and this stylesheet repaints it from theme.css tokens, so
+ * overriding a token (globally, or on any ancestor element) retints the
+ * artwork with it.
+ *
+ * How this works, and what to know before editing:
+ *
+ * - Astro inlines imported SVGs into the page DOM, so these rules can reach
+ *   inside them and custom properties inherit into them. `fill="var(--x)"`
+ *   would not work in an SVG presentation attribute, but a stylesheet
+ *   declaration like the ones below always does.
+ *
+ * - Illustrator puts its colors in a `<style>` block inside the SVG, keyed by
+ *   generic `.cls-1`, `.cls-2`, ... classes. Our SVGO pass in astro.config.mjs
+ *   namespaces those with a per-file content hash (`.svg1a2b3c4d__cls-1`) to
+ *   stop the ids and classes of two inlined SVGs from colliding. The hash
+ *   changes whenever the artwork changes, so the selectors below match on the
+ *   suffix instead. Colored elements only ever carry that one class.
+ *
+ * - Each rule below outranks the SVG's own `.cls-N` rule (two compound
+ *   selectors beat one), which is what lets it win regardless of the order the
+ *   inline `<style>` block lands in.
+ *
+ * - `cls-N` is positional, not semantic: `cls-1` is magenta in one file and
+ *   pale blue in another, and re-exporting artwork can renumber it. So the
+ *   maps below are per asset, and tests/artwork-colors.test.ts asserts the
+ *   rendered color of every tagged element. A re-export that shuffles the
+ *   classes fails that test instead of quietly mistinting the page.
+ *
+ * The cell artwork under src/assets/backgrounds/cells/ is deliberately not
+ * covered: its colors are radial gradient stops rather than flat fills, and it
+ * needs its own approach.
+ */
+
+/* backgrounds/bytes/cluster-large.svg, cluster-mini.svg */
+.art-bytes-cluster [class$="__cls-1"] {
+  fill: var(--bytes-magenta);
+}
+.art-bytes-cluster [class$="__cls-2"] {
+  fill: var(--bytes-blue);
+}
+.art-bytes-cluster [class$="__cls-3"] {
+  fill: var(--support-purple);
+}
+.art-bytes-cluster [class$="__cls-4"] {
+  fill: var(--bytes-purple);
+}
+
+/* backgrounds/bytes/corner-1.svg, corner-2.svg */
+.art-bytes-corner [class$="__cls-1"] {
+  fill: var(--bytes-magenta);
+}
+.art-bytes-corner [class$="__cls-2"] {
+  fill: var(--bytes-blue);
+}
+.art-bytes-corner [class$="__cls-3"] {
+  fill: var(--support-purple);
+}
+.art-bytes-corner [class$="__cls-4"] {
+  fill: var(--background);
+}
+.art-bytes-corner [class$="__cls-5"] {
+  fill: var(--bytes-purple);
+}
+/* corner-2.svg pins one square with an inline `style="fill:#e7daed"`, and an
+   inline style outranks every selector. !important is the only way to reach
+   it, and it is safe here because no other element in either corner asset
+   carries a style attribute. */
+.art-bytes-corner [style*="fill:"] {
+  fill: var(--bytes-purple) !important;
+}
+
+/* backgrounds/bytes/corner-detached.svg */
+.art-bytes-corner-detached [class$="__cls-1"] {
+  fill: var(--bytes-blue);
+}
+.art-bytes-corner-detached [class$="__cls-2"] {
+  fill: var(--support-purple);
+}
+.art-bytes-corner-detached [class$="__cls-3"] {
+  fill: var(--bytes-mid-magenta);
+}
+.art-bytes-corner-detached [class$="__cls-4"] {
+  fill: var(--bytes-purple);
+}
+
+/* backgrounds/bytes/border.svg
+ *
+ * This is the wavy divider between the page and a section, so cls-1 is the
+ * page showing through the wave. cls-2 is the section's own background and is
+ * therefore owned by BytesSection.astro, which paints it per section from
+ * --section-background; the #e7daed in the asset is never seen. */
+.art-bytes-border [class$="__cls-1"] {
+  fill: var(--background);
+}
+
+/* backgrounds/bytes/in-element-corner.svg */
+.art-bytes-in-element-corner [class$="__cls-1"] {
+  fill: var(--bytes-magenta);
+}
+
+/* backgrounds/bytes/in-element-edge.svg */
+.art-bytes-in-element-edge [class$="__cls-1"] {
+  fill: var(--bytes-mid-blue);
+}
+
+/* icons/keyFeatures/*.svg
+ *
+ * These are single-color line icons: the same --accent-2 paints the outlined
+ * shapes as a stroke and the solid shapes as a fill. The two cannot share one
+ * rule, because setting a stroke on a solid shape would outline it and setting
+ * a fill on an outlined shape would flood it, so each file lists which of its
+ * classes is which. */
+.art-icon-collaboration [class$="__cls-1"],
+.art-icon-collaboration [class$="__cls-2"],
+.art-icon-comprehensive [class$="__cls-1"],
+.art-icon-reference [class$="__cls-1"],
+.art-icon-reference [class$="__cls-2"],
+.art-icon-singlecell [class$="__cls-1"],
+.art-icon-triage [class$="__cls-1"] {
+  stroke: var(--accent-2);
+}
+.art-icon-comprehensive [class$="__cls-2"],
+.art-icon-reference [class$="__cls-3"],
+.art-icon-singlecell [class$="__cls-2"],
+.art-icon-triage [class$="__cls-2"] {
+  fill: var(--accent-2);
+}
+/* report.svg came from Figma rather than Illustrator: it has no classes and
+   strokes every path with a `stroke` presentation attribute, which any
+   stylesheet rule outranks. */
+.art-icon-report path {
+  stroke: var(--accent-2);
+}

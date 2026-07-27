@@ -94,17 +94,17 @@ import HeroSection from "~src/components/HeroSection.astro";
 
     <div class="card-grid">
       <Card class="card-item feature">
-        <Triage />
+        <Triage class="art-icon-triage" />
         <H level="3">Sample triage</H>
         <p>Prioritize urgent samples with a multi-parameter risk model.</p>
       </Card>
       <Card class="card-item feature">
-        <Comprehensive />
+        <Comprehensive class="art-icon-comprehensive" />
         <H level="3">Comprehensive image view</H>
         <p>Access whole-slide images, numerical analysis, and visual masks.</p>
       </Card>
       <Card class="card-item feature">
-        <SingleCell />
+        <SingleCell class="art-icon-singlecell" />
         <H level="3">Single-cell analysis</H>
         <p>
           View single-cell images with classifications and potential dysplasia
@@ -112,19 +112,19 @@ import HeroSection from "~src/components/HeroSection.astro";
         </p>
       </Card>
       <Card class="card-item feature">
-        <Reference />
+        <Reference class="art-icon-reference" />
         <H level="3">Reference comparisons</H>
         <p>Compare results with population-scale reference ranges.</p>
       </Card>
       <Card class="card-item feature">
-        <Report />
+        <Report class="art-icon-report" />
         <H level="3">Standardized reporting</H>
         <p>
           Assess and share clinically essential findings in a structured report.
         </p>
       </Card>
       <Card class="card-item feature">
-        <Collaboration />
+        <Collaboration class="art-icon-collaboration" />
         <H level="3">Collaborative sharing</H>
         <p>
           Easily share slides and cell images with colleagues for consultations
@@ -137,7 +137,7 @@ import HeroSection from "~src/components/HeroSection.astro";
   <ApplicationScroller />
 
   <BytesSection color="purple">
-    <BytesCorner class="bytes-corner" />
+    <BytesCorner class="art-bytes-in-element-corner bytes-corner" />
 
     <H level="2">Frequently asked questions</H>
     <div class="card-grid">
@@ -314,9 +314,10 @@ import HeroSection from "~src/components/HeroSection.astro";
     bottom: -5%;
     right: -10%;
     height: 100%;
-  }
-  .bytes-corner :global(path) {
-    fill: var(--bytes-light-magenta);
+
+    /* Retint this one instance of the artwork by overriding the token it
+       paints with, rather than by overwriting its fills from out here. */
+    --bytes-magenta: var(--bytes-light-magenta);
   }
   .faq {
     display: grid;
