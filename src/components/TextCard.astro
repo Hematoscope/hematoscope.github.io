@@ -7,7 +7,7 @@ import { imageNeedsFrame } from "~src/utils/image";
 interface Props {
   image?: ImageMetadata | undefined;
   alt?: string | undefined;
-  accent: "bytes-blue" | "bytes-purple" | "support-pink";
+  accent: "bytes-blue" | "bytes-purple" | "support-pink" | "support-purple";
 }
 const { image, alt, accent } = Astro.props;
 const bg = `var(--${accent})`;

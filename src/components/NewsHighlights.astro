@@ -9,7 +9,12 @@ const posts = (await getCollection("news", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const accents = ["bytes-blue", "support-pink", "bytes-purple"] as const;
+const accents = [
+  "bytes-purple",
+  "bytes-blue",
+  "support-purple",
+  "support-pink",
+] as const;
 ---
 
 <Section>
