@@ -1,21 +1,12 @@
 ---
-import { getCollection } from "astro:content";
 import BytesSmall from "~src/assets/backgrounds/bytes/cluster-mini.svg";
 import CellsSmall from "~src/assets/backgrounds/cells/cluster-mini.svg";
 import Layout from "~src/layouts/Layout.astro";
 import Section from "~src/components/Section.astro";
 import NewsCard from "~src/components/NewsCard.astro";
+import { getNewsPosts } from "~src/utils/news";
 
-const posts = (await getCollection("news", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-
-const accents = [
-  "bytes-purple",
-  "bytes-blue",
-  "support-purple",
-  "support-pink",
-] as const;
+const posts = await getNewsPosts();
 ---
 
 <Layout
@@ -37,8 +28,8 @@ const accents = [
   <Section>
     <section class="posts" aria-label="News articles">
       {
-        posts.map((post, i) => (
-          <NewsCard post={post} accent={accents[i % accents.length]!} />
+        posts.map(({ post, accent }) => (
+          <NewsCard post={post} accent={accent} />
         ))
       }
     </section>

@@ -3,10 +3,11 @@ import type { CollectionEntry } from "astro:content";
 import type { HTMLTag } from "astro/types";
 import TextCard from "~src/components/TextCard.astro";
 import LinkButton from "~src/components/LinkButton.astro";
+import type { Accent } from "~src/consts";
 
 interface Props {
   post: CollectionEntry<"news">;
-  accent: "bytes-blue" | "bytes-purple" | "support-pink" | "support-purple";
+  accent: Accent;
   /** Heading level of the post title, depending on the page context. */
   level?: "2" | "3";
 }
