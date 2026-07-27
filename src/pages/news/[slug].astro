@@ -4,6 +4,7 @@ import LinkButton from "~src/components/LinkButton.astro";
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import { WIDTHS } from "~src/consts";
+import { imageNeedsFrame } from "~src/utils/image";
 
 export async function getStaticPaths() {
   const posts = await getCollection("news");
@@ -17,6 +18,9 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const hasImage = Boolean(post.data.image);
+// A transparent or mostly white hero image blends into the light page, so frame
+// it to keep a defined edge. See TextCard for the same guard.
+const framed = post.data.image ? await imageNeedsFrame(post.data.image) : false;
 
 function formatDate(date: Date) {
   return date.toLocaleDateString("en-GB", {
@@ -32,7 +36,9 @@ function formatDate(date: Date) {
   description={post.data.description}
 >
   <article>
-    <div class:list={["post-hero", hasImage ? "image" : "gradient"]}>
+    <div
+      class:list={["post-hero", hasImage ? "image" : "gradient", { framed }]}
+    >
       {
         post.data.image && (
           <Image
@@ -133,13 +139,19 @@ function formatDate(date: Date) {
     overflow: clip;
     border-radius: var(--element-border-radius);
 
-    min-height: 22rem;
+    min-height: 26rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     padding: var(--element-padding);
     margin-inline: calc(0px - var(--element-padding));
+  }
+
+  /* Frame only light/transparent hero images so they stay defined against the
+     light page. Detection matches TextCard (transparency or white edges). */
+  .post-hero.framed {
+    border: 2px solid var(--background-1);
   }
 
   /* h1 must sit above the image and scrim pseudo-element */
@@ -158,6 +170,7 @@ function formatDate(date: Date) {
     height: 100%;
     max-width: none;
     object-fit: cover;
+    background-color: var(--background);
   }
 
   /* Gradient variant (no image) */
@@ -189,7 +202,7 @@ function formatDate(date: Date) {
     background: linear-gradient(
       to top,
       rgb(from var(--primary-1) r g b / 0.85) 0%,
-      transparent 65%
+      transparent 55%
     );
   }
 
@@ -238,5 +251,12 @@ function formatDate(date: Date) {
     background-color: var(--support-purple);
     color: var(--text-color-heading);
     text-transform: capitalize;
+  }
+
+  /* smallest breakpoint -2*var(--element-padding) */
+  @media screen and (width < 48em) {
+    .post-hero {
+      border-radius: 0px;
+    }
   }
 </style>

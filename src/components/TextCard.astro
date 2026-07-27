@@ -2,6 +2,7 @@
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { WIDTHS } from "~src/consts";
+import { imageNeedsFrame } from "~src/utils/image";
 
 interface Props {
   image?: ImageMetadata | undefined;
@@ -10,9 +11,13 @@ interface Props {
 }
 const { image, alt, accent } = Astro.props;
 const bg = `var(--${accent})`;
+
+// Images that are transparent or have a mostly white perimeter blend into a
+// light background, so they need a frame to stay visible. Others do not.
+const framed = image ? await imageNeedsFrame(image) : false;
 ---
 
-<article>
+<article class:list={[{ framed }]}>
   {
     image && (
       <Image
@@ -42,8 +47,13 @@ const bg = `var(--${accent})`;
   }
   img {
     border-radius: var(--element-border-radius);
-    outline: var(--outline-width) solid var(--background);
     height: 100%;
+    background-color: var(--background);
+    outline: var(--outline-width) solid var(--background);
+  }
+  /* Frame only transparent images so they read against a light background. */
+  article.framed img {
+    border: 2px solid var(--bg);
   }
   .content {
     display: flex;
@@ -55,7 +65,7 @@ const bg = `var(--${accent})`;
   }
 
   @media screen and (width >= 50em) {
-    .content {
+    article.framed .content {
       padding-inline-start: calc(var(--element-padding) + var(--outline-width));
     }
   }
@@ -63,7 +73,7 @@ const bg = `var(--${accent})`;
     article {
       flex-direction: column;
     }
-    .content {
+    article.framed .content {
       padding-block-start: calc(var(--element-padding) + var(--outline-width));
     }
     img {
