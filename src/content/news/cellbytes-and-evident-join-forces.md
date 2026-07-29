@@ -16,16 +16,15 @@ Cellbytes is pleased to announce a strategic workflow collaboration with Evident
 
 The end-to-end workflow connects high-magnification optical acquisition with automated cloud analysis:
 
-1.	Precision imaging: Evident’s SLIDEVIEW VS200 slide scanner captures ultra-sharp cytomorphological images of MGG-stained bone marrow aspirates.
-2.	Instant cloud stream: Scanned slides are automatically transferred via encrypted protocols to the Cellbytes cloud platform.
-3.	AI-driven triage & analysis: Cellbytes algorithms immediately begin evaluating the entire sample, prioritizing urgent cases and running comprehensive whole-slide and single-cell analyses.
-
+1. Precision imaging: Evident’s SLIDEVIEW VS200 slide scanner captures ultra-sharp cytomorphological images of MGG-stained bone marrow aspirates.
+2. Instant cloud stream: Scanned slides are automatically transferred via encrypted protocols to the Cellbytes cloud platform.
+3. AI-driven triage & analysis: Cellbytes algorithms immediately begin evaluating the entire sample, prioritizing urgent cases and running comprehensive whole-slide and single-cell analyses.
 
 ## Beyond the Clinic: Empowering Large-Scale Discovery
 
 In addition to streamlining routine diagnostic turnarounds, the combined VS200–Cellbytes workflow unlocks massive potential for translational research. Researchers can study cytomorphology at scale, discover novel biomarker profiles, and accelerate subgroup analysis within oncology clinical trials.
 
-**Read the Full Application Note**
+### Read the Full Application Note
 
 To explore the full technical details, sample results, and cytomorphological figures, read the white paper on Evident’s website:
 
