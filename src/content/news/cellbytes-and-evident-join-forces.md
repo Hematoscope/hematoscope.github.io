@@ -24,8 +24,4 @@ The end-to-end workflow connects high-magnification optical acquisition with aut
 
 In addition to streamlining routine diagnostic turnarounds, the combined VS200–Cellbytes workflow unlocks massive potential for translational research. Researchers can study cytomorphology at scale, discover novel biomarker profiles, and accelerate subgroup analysis within oncology clinical trials.
 
-### Read the Full Application Note
-
-To explore the full technical details, sample results, and cytomorphological figures, read the white paper on Evident’s website:
-
-[Accelerate Hematological Analysis with AI-Powered Digital Pathology](https://evidentscientific.com/en/applications/accelerate-hematological-analysis-ai-powered-digital-pathology)
+Ready to digitize your hematology laboratory? Contact us at <contact@cellbytes.io> to explore how Cellbytes can enhance your daily workflow.
