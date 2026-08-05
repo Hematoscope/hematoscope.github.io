@@ -33,7 +33,13 @@ const prefixIdsOptimizer = {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://cellbytes.github.io",
+  // The canonical origin, not the GitHub Pages one: cellbytes.github.io serves
+  // the site but redirects to this. Only generated absolute URLs read it (see
+  // `Astro.site` in Layout.astro), so pointing it at the domain visitors and
+  // crawlers actually land on keeps og:url and og:image off a redirect hop.
+  // `base` stays the default `/`: this is an org page served at the root, not a
+  // project page under a repository path.
+  site: "https://cellbytes.io",
   experimental: {
     svgOptimizer: prefixIdsOptimizer,
   },

@@ -7,7 +7,11 @@ how to develop on it.
 ## What this repo is, in one line
 
 The public marketing/home page for the Cellbytes application, built with Astro
-and deployed via GitHub Pages (`cellbytes.github.io`).
+and deployed via GitHub Pages (`cellbytes.github.io`), which serves it under the
+custom domain `cellbytes.io` and redirects the github.io URLs there. That domain
+is configured in the repository's Pages settings, not by a `CNAME` file in the
+tree, and `site` in `astro.config.mjs` names it so generated absolute URLs point
+at the origin visitors actually reach.
 
 ## Toolchain
 
