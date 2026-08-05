@@ -4,6 +4,7 @@ import doctorLaptop from "~src/assets/images/contact/doctor-laptop.jpg";
 
 import { WIDTHS } from "~src/consts";
 import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
 import Input from "~src/components/Input.astro";
 import Textarea from "~src/components/Textarea.astro";
 import ContentBlock from "~src/components/ContentBlock.astro";
@@ -12,9 +13,16 @@ import LinkButton from "~src/components/LinkButton.astro";
 import Pair from "~src/components/Pair.astro";
 
 const url = Astro.url;
+
+export const meta = {
+  title: "Contact | Cellbytes",
+  description:
+    "Questions about Cellbytes for clinical diagnostics, research or a proof-of-concept? Our experts are ready to help.",
+  card: { title: "Contact us", image: doctorLaptop },
+} satisfies PageMeta;
 ---
 
-<Layout title="Contact | Cellbytes" description="Contact us">
+<Layout {...meta}>
   <HeroSection>
     <Pair>
       <Image

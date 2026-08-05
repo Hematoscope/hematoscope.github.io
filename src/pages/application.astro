@@ -12,6 +12,7 @@ import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
 import WorkflowStep from "~src/components/WorkflowStep.astro";
 import ApplicationScroller from "~src/components/ApplicationScroller.astro";
 import ContentBlock from "~src/components/ContentBlock.astro";
@@ -27,9 +28,16 @@ import Triage from "~src/assets/icons/keyFeatures/triage.svg";
 import Card from "~src/components/Card.astro";
 import BytesSection from "~src/components/BytesSection.astro";
 import HeroSection from "~src/components/HeroSection.astro";
+
+export const meta = {
+  title: "Application | Cellbytes",
+  description:
+    "Triage, review and report bone marrow aspirates and peripheral blood smears in one browser-based workflow, with AI pre-classification of every cell.",
+  card: { title: "The Cellbytes application", image: physicianReview },
+} satisfies PageMeta;
 ---
 
-<Layout title="Application | Cellbytes" description="A new era">
+<Layout {...meta}>
   <HeroSection>
     <Pair reversed>
       <Image

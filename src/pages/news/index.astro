@@ -2,17 +2,23 @@
 import BytesSmall from "~src/assets/backgrounds/bytes/cluster-mini.svg";
 import CellsSmall from "~src/assets/backgrounds/cells/cluster-mini.svg";
 import Layout from "~src/layouts/Layout.astro";
+import microscope from "~src/assets/images/home/microscope.jpg";
+import type { PageMeta } from "~src/utils/opengraph";
 import Section from "~src/components/Section.astro";
 import NewsCard from "~src/components/NewsCard.astro";
 import { getNewsPosts } from "~src/utils/news";
 
 const posts = await getNewsPosts();
+
+export const meta = {
+  title: "News | Cellbytes",
+  description:
+    "Updates from the Cellbytes team on the Cellbytes application, digital pathology and related research.",
+  card: { title: "News from Cellbytes", image: microscope },
+} satisfies PageMeta;
 ---
 
-<Layout
-  title="News | Cellbytes"
-  description="Updates from the Cellbytes team on the Cellbytes application, digital pathology and related research."
->
+<Layout {...meta}>
   <Section>
     <CellsSmall class="cells breathe" />
     <div class="text">

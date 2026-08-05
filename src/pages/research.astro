@@ -9,17 +9,22 @@ import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
 import TextCard from "~src/components/TextCard.astro";
 import ContentBlock from "~src/components/ContentBlock.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import HeroSection from "~src/components/HeroSection.astro";
 import Pair from "~src/components/Pair.astro";
+
+export const meta = {
+  title: "Research | Cellbytes",
+  description:
+    "Clinically validated models built with hematology laboratories, and the published research behind Cellbytes cytomorphology analysis.",
+  card: { title: "Innovation powered by research", image: research },
+} satisfies PageMeta;
 ---
 
-<Layout
-  title="Research | Cellbytes"
-  description="Innovation powered by research"
->
+<Layout {...meta}>
   <HeroSection>
     <Pair>
       <Image

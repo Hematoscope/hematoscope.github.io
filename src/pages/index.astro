@@ -20,15 +20,20 @@ import H from "~src/components/HeadingLink.astro";
 import LinkButton from "~src/components/LinkButton.astro";
 import ApplicationFrame from "~src/components/ApplicationFrame.astro";
 import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
 import BytesSection from "~src/components/BytesSection.astro";
 import HeroSection from "~src/components/HeroSection.astro";
 import NewsHighlights from "~src/components/NewsHighlights.astro";
+
+export const meta = {
+  title: "Cellbytes",
+  description:
+    "AI solutions for hematopathologists, hematologists and researchers.",
+  card: { variant: "brand" },
+} satisfies PageMeta;
 ---
 
-<Layout
-  title="Cellbytes"
-  description="AI solutions for hematopathologists, hematologists and researchers."
->
+<Layout {...meta}>
   <HeroSection class="hero">
     <div class="hero-content">
       <h1>Cellbytes &ndash; precision hematology with digital microscopy</h1>

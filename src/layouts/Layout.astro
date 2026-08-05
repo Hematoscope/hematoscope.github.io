@@ -1,17 +1,31 @@
 ---
 import Footer from "~src/components/Footer.astro";
 import Navbar from "~src/components/Navbar.astro";
+import {
+  cardHeading,
+  ogImagePath,
+  ogSlug,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_TYPE,
+  OG_IMAGE_WIDTH,
+  type PageMeta,
+} from "~src/utils/opengraph";
 import "~src/styles/breathe.css";
 import "~src/styles/reset.css";
 import "~src/styles/theme.css";
 import "~src/styles/artwork.css";
 
-interface Props {
-  title: string;
-  description: string;
-}
+// A page declares this as its own `meta` export and spreads it in, so its copy
+// stays in its own file. `src/pages/og/[...slug].jpg.ts` reads the same export
+// to draw the card, and nobody has to name the card's URL: it follows from where
+// the page lives, which is what `ogSlug` derives below.
+type Props = PageMeta;
 
-const { title, description } = Astro.props;
+const meta = Astro.props;
+const { title, description, ogType = "website" } = meta;
+
+// Crawlers only follow absolute image URLs, so resolve against the site origin.
+const ogImageUrl = new URL(ogImagePath(ogSlug(Astro.url.pathname)), Astro.site);
 ---
 
 <!doctype html>
@@ -26,11 +40,19 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
 
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Cellbytes" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL("opengraph.png", Astro.site)} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content={OG_IMAGE_TYPE} />
+    <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+    <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+    <meta property="og:image:alt" content={cardHeading(meta)} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body>
     <Navbar />

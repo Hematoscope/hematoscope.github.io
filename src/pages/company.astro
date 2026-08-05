@@ -9,11 +9,19 @@ import karita from "~src/assets/images/company/karita.jpg";
 import H from "~src/components/HeadingLink.astro";
 import Section from "~src/components/Section.astro";
 import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
 import TeamMember from "~src/components/TeamMember.astro";
 import HeroSection from "~src/components/HeroSection.astro";
+
+export const meta = {
+  title: "Company | Cellbytes",
+  description:
+    "A team of physicians and engineers building the digital pathology tools that complex blood disorders have been missing.",
+  card: { title: "About Cellbytes" },
+} satisfies PageMeta;
 ---
 
-<Layout title="Company | Cellbytes" description="Meet the team">
+<Layout {...meta}>
   <HeroSection>
     <div class="hero-content text">
       <h1>About Cellbytes</h1>

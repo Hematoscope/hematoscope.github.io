@@ -5,17 +5,22 @@ import security from "~src/assets/images/compliance/security.jpg";
 import { WIDTHS } from "~src/consts";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
 import ContentBlock from "~src/components/ContentBlock.astro";
 import Card from "~src/components/Card.astro";
 import DecoratedCard from "~src/components/DecoratedCard.astro";
 import HeroSection from "~src/components/HeroSection.astro";
 import Pair from "~src/components/Pair.astro";
+
+export const meta = {
+  title: "Compliance | Cellbytes",
+  description:
+    "How Cellbytes handles patient data, and the quality and information security standards the platform is built to.",
+  card: { title: "Commitment to security and quality", image: security },
+} satisfies PageMeta;
 ---
 
-<Layout
-  title="Compliance | Cellbytes"
-  description="Commitment to security and quality"
->
+<Layout {...meta}>
   <HeroSection>
     <Pair>
       <Image

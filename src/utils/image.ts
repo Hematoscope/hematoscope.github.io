@@ -5,6 +5,15 @@ import sharp from "sharp";
 // source path via `fsPath`. It is not part of the public type, so we widen it.
 type WithFsPath = ImageMetadata & { fsPath?: string | undefined };
 
+/**
+ * Absolute path of an imported image on disk, for build-time steps that need
+ * to read the original bytes. Undefined for images Astro cannot map back to a
+ * source file, such as remote ones.
+ */
+export function imageFsPath(image: ImageMetadata): string | undefined {
+  return (image as WithFsPath).fsPath;
+}
+
 // A channel value at or above this counts as "white". Truly pure 255 is rare
 // after jpeg compression, so allow a small tolerance.
 const WHITE_THRESHOLD = 250;
@@ -35,7 +44,7 @@ export async function imageNeedsFrame(
   image: ImageMetadata,
   whiteEdgeCutoff = DEFAULT_WHITE_EDGE_CUTOFF,
 ): Promise<boolean> {
-  const fsPath = (image as WithFsPath).fsPath;
+  const fsPath = imageFsPath(image);
   if (!fsPath) return false;
 
   const cacheKey = `${fsPath}|${whiteEdgeCutoff}`;
