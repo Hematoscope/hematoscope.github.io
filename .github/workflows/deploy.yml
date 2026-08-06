@@ -11,8 +11,21 @@ permissions:
   id-token: write
 
 jobs:
+  build:
+    name: Build website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        with:
+          # astro 7 requires node >= 22.12; the action defaults to node 20
+          node-version: 22
+
   test:
     name: Run tests
+    needs: build
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -38,22 +51,9 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-  build:
-    name: Build website
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        with:
-          # astro 7 requires node >= 22.12; the action defaults to node 20
-          node-version: 22
-
   deploy:
     name: Deploy website
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     environment:
       name: Production
