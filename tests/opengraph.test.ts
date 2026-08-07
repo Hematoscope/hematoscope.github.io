@@ -23,6 +23,22 @@ function walk(dir: string): string[] {
 }
 
 /**
+ * Slug of every news post. A post is either a flat `<slug>.md` or a folder
+ * `<slug>/index.mdx` holding its own assets; both serve `/news/<slug>`, so the
+ * trailing `index` goes.
+ */
+function newsSlugs(): string[] {
+  return walk("src/content/news")
+    .filter((file) => /\.mdx?$/.test(file))
+    .map((file) =>
+      relative("src/content/news", file)
+        .replace(/\.mdx?$/, "")
+        .replace(/\/index$/, ""),
+    )
+    .sort();
+}
+
+/**
  * Every path the site routes, found the way the endpoint finds what to draw
  * rather than listed by hand. A hand-written list keeps passing after someone
  * adds a page and forgets the card; this one fails on the new page.
@@ -34,16 +50,7 @@ function routedPaths(): string[] {
     .filter((route) => route !== undefined);
 
   // Drafts are routed like any other post, so they need a card like any other.
-  // A post is either a flat `<slug>.md` or a folder `<slug>/index.mdx` holding
-  // its own assets; both serve `/news/<slug>`, so the trailing `index` goes.
-  const posts = walk("src/content/news")
-    .filter((file) => /\.mdx?$/.test(file))
-    .map(
-      (file) =>
-        `/news/${relative("src/content/news", file)
-          .replace(/\.mdx?$/, "")
-          .replace(/\/index$/, "")}`,
-    );
+  const posts = newsSlugs().map((slug) => `/news/${slug}`);
 
   return [...pages, ...posts].sort();
 }
@@ -134,11 +141,14 @@ test.describe("desktop", { tag: "@desktop" }, () => {
   }
 
   test("a news post is shared as an article", async ({ page }) => {
-    await page.goto("/news/cellbytes-and-evident-join-forces");
+    // Any post will do: being an article is a property of the post type, not
+    // of one particular post, so take whichever one is on disk.
+    const [slug] = newsSlugs();
+    expect(slug, "no news posts to check").toBeTruthy();
+
+    await page.goto(`/news/${slug}`);
     expect(await meta(page, "og:type")).toBe("article");
-    expect(await meta(page, "og:image")).toContain(
-      "/og/news/cellbytes-and-evident-join-forces.jpg",
-    );
+    expect(await meta(page, "og:image")).toContain(`/og/news/${slug}.jpg`);
   });
 });
 
