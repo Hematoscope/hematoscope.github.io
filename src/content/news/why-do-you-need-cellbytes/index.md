@@ -4,7 +4,7 @@ description: "How Cellbytes turns cell morphology into precise, reproducible dig
 date: 2026-07-10
 author: "Cellbytes Team"
 tags: ["news", "company"]
-image: ./why-do-you-need-cellbytes.jpg
+image: ./hero.jpg
 imageAlt: "Colourful 3D illustration of protein structures and molecules floating in deep blue light."
 ---
 

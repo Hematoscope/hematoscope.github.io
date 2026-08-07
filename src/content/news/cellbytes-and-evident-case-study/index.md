@@ -4,7 +4,7 @@ description: "How utilizing Evident’s high-precision slide scanner with Cellby
 date: 2026-07-29
 author: "Cellbytes Team"
 tags: ["technology"]
-image: ./cellbytes-x-evident_2607.jpg
+image: ./hero.jpg
 imageAlt: "Playful cells and bytes surround the Evident VS200 slide scanner and a computer monitor with the Cellbytes software."
 ---
 

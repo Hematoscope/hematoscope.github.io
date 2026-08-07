@@ -4,7 +4,7 @@ description: "Introducing the official Cellbytes news, where we share updates on
 date: 2026-06-15
 author: "Cellbytes Team"
 tags: ["news", "company"]
-image: ./welcome-to-the-cellbytes-blog.jpg
+image: ./hero.jpg
 imageAlt: "A sculpted tree in bloom growing out of a cracked concrete pillar against a clear blue sky."
 ---
 

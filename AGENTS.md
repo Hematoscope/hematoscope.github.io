@@ -45,25 +45,37 @@ as above.
   unicode arrows, or other special characters.
 - Keep components in Astro idiom; reach for client-side JS only where needed.
 
-### News posts: a file or a folder
+### News posts are folders
 
-The `news` collection (`src/content.config.ts`) takes `.md` and `.mdx`, and a
-post is either shape:
+Every post is a folder holding the post and everything it uses:
 
-- `src/content/news/<slug>.md` for a post whose only asset is a hero image,
-  which sits beside it in the same directory.
-- `src/content/news/<slug>/index.mdx` for a post that carries several assets:
-  `hero.png`, a recording, its poster. They live in the post's own folder, so
-  they travel with it and cannot be orphaned by a rename.
+```txt
+src/content/news/<slug>/
+  index.md     (or index.mdx)
+  hero.jpg
+  ...whatever else that post needs
+```
 
-Both serve `/news/<slug>`. The loader's `generateId` drops a trailing `/index`,
-which is what keeps the folder shape off the URL, so moving a post from one
-shape to the other never changes where it is published. Anything walking the
-posts by filename has to strip it too; `tests/opengraph.test.ts` does.
+The hero is always `hero.<ext>`, referenced from frontmatter as `./hero.jpg`.
+Naming it after the post instead only invites the two to drift apart, and
+nothing outside the folder ever refers to it.
 
-`.mdx` buys one thing over `.md`: the post can `import` components and its own
-colocated files, with Vite content-hashing whatever it imports. A screen
-recording goes through `PostVideo`:
+The folder is what keeps a post's assets attached to it: they move when it
+moves, and a rename cannot orphan them in a shared directory. It costs nothing
+for a post with only a hero, so there is no threshold to argue about and no
+second shape to support.
+
+The loader's `generateId` (`src/content.config.ts`) drops the trailing `/index`,
+so a post at `<slug>/index.md` still serves `/news/<slug>` and the folder never
+shows up in a URL. Anything walking the posts by filename has to strip it too;
+`tests/opengraph.test.ts` does.
+
+Use `.md` unless the post needs to import something, which is the one thing
+`.mdx` buys.
+
+An `.mdx` post can `import` components and its own colocated files, with Vite
+content-hashing whatever it imports. A screen recording goes through
+`PostVideo`:
 
 ```mdx
 import PostVideo from "~src/components/PostVideo.astro";
