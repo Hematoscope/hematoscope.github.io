@@ -1,6 +1,6 @@
 ---
-title: "Cellbytes and Evident Join Forces"
-description: "How combining Evident’s high-precision slide scanner with Cellbytes’ cloud-based AI pathology software elevates AI-powered cytomorphology analysis."
+title: "A case study using Evident SLIDEVIEW™ VS200"
+description: "How utilizing Evident’s high-precision slide scanner with Cellbytes’ cloud-based AI pathology software elevates AI-powered cytomorphology analysis."
 date: 2026-07-29
 author: "Cellbytes Team"
 tags: ["technology", "collaboration"]
@@ -8,20 +8,24 @@ image: ./cellbytes-x-evident_2607.jpg
 imageAlt: "Playful cells and bytes surround the Evident VS200 slide scanner and a computer monitor with the Cellbytes software."
 ---
 
-## Elevate AI-Powered Cytomorphology Analysis
+## Cellbytes in Action: A case study using Evident’s VS200 (RUO) slide scanner for High-Resolution Digital Cytomorphology Analysis
 
-Cellbytes is pleased to announce a strategic workflow collaboration with Evident, a global leader in optical and digital microscopy. By combining Evident’s high-precision SLIDEVIEW™ VS200 slide scanner with Cellbytes’ cloud-based AI pathology software we are providing together the vocabulary to translate complex cellular data into actionable clinical insights and scientific breakthroughs.
+Cellbytes is a cloud-based AI pathology platform designed for automated cytomorphology analysis of digitized slides. The software performs comprehensive whole-slide and single-cell analysis, helping laboratories evaluate large datasets, prioritize cases, and generate quantitative insights for research and diagnostic applications.
 
-## High-Resolution Imaging Meets Clinical-Grade Analytics
+## High-Resolution Digital Slide Acquisition
 
-The end-to-end workflow connects high-magnification optical acquisition with automated cloud analysis:
+High-quality digital images are fundamental for reliable AI analysis. Digitized slides can be generated using a range of whole-slide scanners, including the Evident SLIDEVIEW™ VS200, which is particularly well suited to applications requiring exceptional image detail.
 
-1. Precision imaging: Evident’s SLIDEVIEW VS200 slide scanner captures ultra-sharp cytomorphological images of MGG-stained bone marrow aspirates.
-2. Instant cloud stream: Scanned slides are automatically transferred via encrypted protocols to the Cellbytes cloud platform.
-3. AI-driven triage & analysis: Cellbytes algorithms immediately begin evaluating the entire sample, prioritizing urgent cases and running comprehensive whole-slide and single-cell analyses.
+The VS200 supports automated oil immersion scanning, enabling the acquisition of ultra-high-resolution images with excellent preservation of fine cellular morphology. This level of detail is especially valuable for specimens such as MGG-stained bone marrow aspirates, where subtle nuclear and cytoplasmic features are essential for accurate assessment.
 
-## Beyond the Clinic: Empowering Large-Scale Discovery
+Once digital slides have been created, they can be uploaded to the Cellbytes cloud platform for automated analysis.
 
-In addition to streamlining routine diagnostic turnarounds, the combined VS200–Cellbytes workflow unlocks massive potential for translational research. Researchers can study cytomorphology at scale, discover novel biomarker profiles, and accelerate subgroup analysis within oncology clinical trials.
+## AI-Driven Analysis
+
+Within the Cellbytes platform, digitized slides undergo comprehensive AI-based evaluation. The software performs whole-slide and single-cell analysis, identifies cellular populations, extracts quantitative morphological data, and supports efficient review of large datasets. These capabilities assist researchers and clinicians in accelerating image interpretation while maintaining a standardized analytical approach.
+
+## Supporting Research and Clinical Applications
+
+The combination of high-quality digital slide acquisition and AI-powered image analysis enables researchers to investigate cytomorphology at scale. Applications include biomarker discovery, quantitative cell profiling, oncology research, and large cohort studies where consistent, high-resolution imaging and automated analysis are essential for generating reproducible results.
 
 Ready to digitize your hematology laboratory? Contact us at <contact@cellbytes.io> to explore how Cellbytes can enhance your daily workflow.
