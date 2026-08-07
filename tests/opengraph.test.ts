@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { readdirSync } from "node:fs";
-import { basename, join, relative } from "node:path";
+import { join, relative } from "node:path";
 import { test, expect, type Page } from "@playwright/test";
 import { pageRoute } from "~src/utils/opengraph";
 
@@ -29,14 +29,21 @@ function walk(dir: string): string[] {
  */
 function routedPaths(): string[] {
   const pages = walk("src/pages")
-    .filter((file) => /\.(astro|md)$/.test(file))
+    .filter((file) => /\.(astro|mdx?)$/.test(file))
     .map((file) => pageRoute(relative("src/pages", file)))
     .filter((route) => route !== undefined);
 
   // Drafts are routed like any other post, so they need a card like any other.
-  const posts = readdirSync("src/content/news")
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => `/news/${basename(file, ".md")}`);
+  // A post is either a flat `<slug>.md` or a folder `<slug>/index.mdx` holding
+  // its own assets; both serve `/news/<slug>`, so the trailing `index` goes.
+  const posts = walk("src/content/news")
+    .filter((file) => /\.mdx?$/.test(file))
+    .map(
+      (file) =>
+        `/news/${relative("src/content/news", file)
+          .replace(/\.mdx?$/, "")
+          .replace(/\/index$/, "")}`,
+    );
 
   return [...pages, ...posts].sort();
 }

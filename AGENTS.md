@@ -16,8 +16,8 @@ at the origin visitors actually reach.
 ## Toolchain
 
 - Node; npm for dependencies (`package-lock.json`).
-- Framework: Astro 5 (`astro.config.mjs`); content/components under `src/`,
-  static assets under `public/`.
+- Framework: Astro (`astro.config.mjs`), with the MDX integration for news
+  posts; content/components under `src/`, static assets under `public/`.
 - Lint: ESLint (`eslint.config.js`, with the Astro, jsx-a11y, and Playwright
   plugins). Format: Prettier (`.prettierrc.mjs`, `prettier-plugin-astro`).
 - Tests: Playwright (`playwright.config.ts`, specs under `tests/`).
@@ -44,6 +44,50 @@ as above.
 - Only use ASCII characters in code and comments. No em-dashes, en-dashes,
   unicode arrows, or other special characters.
 - Keep components in Astro idiom; reach for client-side JS only where needed.
+
+### News posts: a file or a folder
+
+The `news` collection (`src/content.config.ts`) takes `.md` and `.mdx`, and a
+post is either shape:
+
+- `src/content/news/<slug>.md` for a post whose only asset is a hero image,
+  which sits beside it in the same directory.
+- `src/content/news/<slug>/index.mdx` for a post that carries several assets:
+  `hero.png`, a recording, its poster. They live in the post's own folder, so
+  they travel with it and cannot be orphaned by a rename.
+
+Both serve `/news/<slug>`. The loader's `generateId` drops a trailing `/index`,
+which is what keeps the folder shape off the URL, so moving a post from one
+shape to the other never changes where it is published. Anything walking the
+posts by filename has to strip it too; `tests/opengraph.test.ts` does.
+
+`.mdx` buys one thing over `.md`: the post can `import` components and its own
+colocated files, with Vite content-hashing whatever it imports. A screen
+recording goes through `PostVideo`, which takes URLs rather than reading the
+files itself:
+
+```mdx
+import PostVideo from "~src/components/PostVideo.astro";
+import demo from "./demo.mp4?url";
+import demoPoster from "./demo-poster.jpg?url";
+
+<PostVideo
+  src={demo}
+  poster={demoPoster}
+  width={1280}
+  height={800}
+  caption="What the recording shows, in a sentence."
+/>
+```
+
+The declared `width`/`height` are the recording's real pixel size: they set the
+aspect ratio, so the box is reserved before the poster loads. Recordings are
+silent and carry no `<track>`; the caption and the prose around it are the text
+alternative. See the component for why it does not autoplay.
+
+Encode a recording the way the placeholder in
+`src/content/news/new-standard-for-cell-reclassification/` is encoded: H.264,
+`yuv420p`, no audio track, `-movflags +faststart`.
 
 ### Head metadata and OpenGraph cards
 

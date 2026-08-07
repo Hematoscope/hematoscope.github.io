@@ -97,7 +97,7 @@ export function ogImagePath(slug: string): string {
  * ended up with a card.
  */
 export function pageRoute(relPath: string): string | undefined {
-  const rel = relPath.replace(/\.(astro|md)$/, "");
+  const rel = relPath.replace(/\.(astro|mdx?)$/, "");
   if (rel.split("/").some((part) => /^[_[]/.test(part))) return undefined;
   const withoutIndex = rel === "index" ? "" : rel.replace(/\/index$/, "");
   return `/${withoutIndex}`;

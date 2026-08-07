@@ -1,0 +1,80 @@
+---
+/**
+ * A screen recording embedded in the body of a news post.
+ *
+ * The file is imported by the post itself, so it sits in the post's own folder
+ * (`src/content/news/<slug>/`) and Vite content-hashes it on the way out; the
+ * component only knows the URL it was handed.
+ *
+ * Deliberately not a hero loop: no `autoplay`, `loop` or `muted`. A recording
+ * that explains something has to be startable, pausable and seekable, which is
+ * what `controls` plus user-initiated playback gives, and it is the same answer
+ * for anyone who cannot chase a moving picture. `preload="none"` keeps a post
+ * that nobody scrolls to the end of from pulling the file down; the poster is
+ * the only thing fetched until someone presses play.
+ *
+ * No `<track>`: these recordings are silent, so there is no dialogue to
+ * caption. The visible caption and the prose around it are the text
+ * alternative.
+ */
+interface Props {
+  /** URL of the MP4, from a colocated `import demo from "./demo.mp4?url"`. */
+  src: string;
+  /** Poster frame, imported the same way. Shown until playback starts. */
+  poster: string;
+  /** Intrinsic size of the recording, which reserves the box before it loads. */
+  width: number;
+  height: number;
+  /** Visible caption, and the text alternative for the recording. */
+  caption: string;
+}
+
+const { src, poster, width, height, caption } = Astro.props;
+---
+
+<figure class="post-video">
+  <video
+    controls
+    preload="none"
+    playsinline
+    width={width}
+    height={height}
+    poster={poster}
+    style={{ aspectRatio: `${width} / ${height}` }}
+  >
+    <source src={src} type="video/mp4" />
+    Your browser cannot play this video.
+    <a href={src} download>Download the recording</a>.
+  </video>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .post-video {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* Fluid, but the box is the recording's own shape from the first paint: the
+     ratio is set inline from the declared size, so nothing below it moves when
+     the poster arrives.
+
+     The reset gives every video `object-fit: cover`, which crops a recording to
+     whatever box it lands in. A screencast has to be shown whole. */
+  .post-video video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+
+    background-color: var(--primary-1);
+    border-radius: var(--small-border-radius);
+  }
+
+  .post-video figcaption {
+    color: var(--text-color-body);
+    text-align: center;
+    font-size: var(--text-size-label);
+    font-style: italic;
+  }
+</style>

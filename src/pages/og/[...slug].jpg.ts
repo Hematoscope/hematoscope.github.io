@@ -34,7 +34,7 @@ interface PageModule {
   frontmatter?: { title?: string; description?: string };
 }
 
-const pageModules = import.meta.glob<PageModule>("../**/*.{astro,md}", {
+const pageModules = import.meta.glob<PageModule>("../**/*.{astro,md,mdx}", {
   eager: true,
 });
 

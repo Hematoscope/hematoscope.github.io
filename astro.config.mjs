@@ -2,6 +2,7 @@
 import { createHash } from "node:crypto";
 import { optimize } from "svgo";
 import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 
 // Astro inlines imported SVGs into the page DOM. Our asset SVGs all use
 // generic single-letter element ids (a, b, c, ... for their gradients), and
@@ -40,6 +41,10 @@ export default defineConfig({
   // `base` stays the default `/`: this is an org page served at the root, not a
   // project page under a repository path.
   site: "https://cellbytes.io",
+  // MDX so a post can import its own colocated assets and components (see
+  // src/content.config.ts). Plain `.md` posts are untouched by this: the
+  // integration only adds a second content format alongside them.
+  integrations: [mdx()],
   experimental: {
     svgOptimizer: prefixIdsOptimizer,
   },
