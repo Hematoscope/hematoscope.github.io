@@ -10,7 +10,7 @@ imageAlt: "Screenshot from the Cellbytes software from view similar cells, showc
 
 import PostVideo from "~src/components/PostVideo.astro";
 import demo from "./demo.mp4?url";
-import demoPoster from "./demo-poster.jpg?url";
+import demoPoster from "./demo-poster.jpg";
 
 With numerous blood cell classification tools on the market, choosing the right software comes down to two critical factors: model accuracy and daily operational efficiency.
 
@@ -23,8 +23,6 @@ Cellbytes was built to set a new benchmark for both.
 <PostVideo
   src={demo}
   poster={demoPoster}
-  width={2560}
-  height={1352}
   caption="Reclassifying has never been easier: the Cell Similarity Network groups the look-alike cells, the group is selected in one gesture, and a single interaction relabels all of them."
 />
 

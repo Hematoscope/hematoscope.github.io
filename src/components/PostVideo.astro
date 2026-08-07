@@ -20,16 +20,28 @@
 interface Props {
   /** URL of the MP4, from a colocated `import demo from "./demo.mp4?url"`. */
   src: string;
-  /** Poster frame, imported the same way. Shown until playback starts. */
-  poster: string;
-  /** Intrinsic size of the recording, which reserves the box before it loads. */
-  width: number;
-  height: number;
+  /**
+   * Poster frame, from a plain `import poster from "./demo-poster.jpg"`. The
+   * import must NOT carry `?url`: Astro's asset pipeline hands back the image's
+   * dimensions along with its URL, and those dimensions are what reserve the
+   * box. A poster cut from the recording has the recording's shape, so there is
+   * nothing left for an author to measure and keep in sync by hand.
+   */
+  poster: ImageMetadata;
   /** Visible caption, and the text alternative for the recording. */
   caption: string;
+  /**
+   * Only when the poster is not the recording's own shape. The box would
+   * otherwise letterbox the video rather than crop it, so this is a nicety
+   * rather than a correctness fix.
+   */
+  width?: number;
+  height?: number;
 }
 
-const { src, poster, width, height, caption } = Astro.props;
+const { src, poster, caption } = Astro.props;
+const width = Astro.props.width ?? poster.width;
+const height = Astro.props.height ?? poster.height;
 ---
 
 <figure class="post-video">
@@ -39,7 +51,7 @@ const { src, poster, width, height, caption } = Astro.props;
     playsinline
     width={width}
     height={height}
-    poster={poster}
+    poster={poster.src}
     style={{ aspectRatio: `${width} / ${height}` }}
   >
     <source src={src} type="video/mp4" />

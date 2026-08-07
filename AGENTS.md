@@ -63,31 +63,41 @@ posts by filename has to strip it too; `tests/opengraph.test.ts` does.
 
 `.mdx` buys one thing over `.md`: the post can `import` components and its own
 colocated files, with Vite content-hashing whatever it imports. A screen
-recording goes through `PostVideo`, which takes URLs rather than reading the
-files itself:
+recording goes through `PostVideo`:
 
 ```mdx
 import PostVideo from "~src/components/PostVideo.astro";
 import demo from "./demo.mp4?url";
-import demoPoster from "./demo-poster.jpg?url";
+import demoPoster from "./demo-poster.jpg";
 
 <PostVideo
   src={demo}
   poster={demoPoster}
-  width={1280}
-  height={800}
   caption="What the recording shows, in a sentence."
 />
 ```
 
-The declared `width`/`height` are the recording's real pixel size: they set the
-aspect ratio, so the box is reserved before the poster loads. Recordings are
-silent and carry no `<track>`; the caption and the prose around it are the text
-alternative. See the component for why it does not autoplay.
+Note the two different import forms. The video takes `?url`, because nothing
+reads inside it. The poster must NOT: a plain image import returns Astro's
+`ImageMetadata`, whose width and height reserve the box before anything loads.
+A poster cut from the recording carries the recording's shape, so no dimension
+has to be written down or kept in sync by hand. `PostVideo` accepts `width` and
+`height` only for a poster that is not the recording's shape, which would
+otherwise letterbox rather than crop.
 
-Encode a recording the way the placeholder in
-`src/content/news/new-standard-for-cell-reclassification/` is encoded: H.264,
-`yuv420p`, no audio track, `-movflags +faststart`.
+Cut the poster at an exact fraction of the recording (`scale=1280:676` for a
+2560x1352 capture) rather than with `-2` height rounding, which lands on an even
+number and skews the ratio by a fraction of a percent.
+
+Recordings are silent and carry no `<track>`; the caption and the prose around
+it are the text alternative. See the component for why it does not autoplay.
+
+Prefer remuxing a screen capture over re-encoding it. OBS output is usually
+already efficient, so `-c:v copy -an -movflags +faststart` gives a smaller file
+at full resolution with no generation loss; re-encoding is worth it only once a
+probe shows the capture is genuinely too big. Trimming survives a stream copy
+via an MP4 edit list, except that a cut can only start where a keyframe already
+is.
 
 ### Head metadata and OpenGraph cards
 
