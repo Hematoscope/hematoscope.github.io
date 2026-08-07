@@ -1,9 +1,9 @@
 ---
-title: "A case study using Evident SLIDEVIEW™ VS200"
+title: "Case study: Evident SLIDEVIEW™ VS200"
 description: "How utilizing Evident’s high-precision slide scanner with Cellbytes’ cloud-based AI pathology software elevates AI-powered cytomorphology analysis."
 date: 2026-07-29
 author: "Cellbytes Team"
-tags: ["technology", "collaboration"]
+tags: ["technology"]
 image: ./cellbytes-x-evident_2607.jpg
 imageAlt: "Playful cells and bytes surround the Evident VS200 slide scanner and a computer monitor with the Cellbytes software."
 ---
