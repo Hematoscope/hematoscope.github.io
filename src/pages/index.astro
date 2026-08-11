@@ -22,6 +22,7 @@ import ApplicationFrame from "~src/components/ApplicationFrame.astro";
 import Layout from "~src/layouts/Layout.astro";
 import type { PageMeta } from "~src/utils/opengraph";
 import BytesSection from "~src/components/BytesSection.astro";
+import FormatFlow from "~src/components/FormatFlow.astro";
 import HeroSection from "~src/components/HeroSection.astro";
 import NewsHighlights from "~src/components/NewsHighlights.astro";
 
@@ -111,6 +112,31 @@ export const meta = {
       </ContentBlock>
     </Pair>
   </CellsSection>
+
+  <BytesSection class="formats">
+    <div class="formats-copy">
+      <ContentBlock>
+        <H level="2">Input formats</H>
+        <p>
+          Slides arrive in whatever your scanner already writes. Cellbytes reads
+          the vendor formats directly and converts them for viewing and
+          analysis, so nobody in the laboratory has to prepare a file by hand.
+        </p>
+      </ContentBlock>
+    </div>
+    <FormatFlow />
+    <div class="formats-copy trailing">
+      <ContentBlock>
+        <H level="2">Output formats</H>
+        <p>
+          Results leave in the shape your workflow needs. Cell differentials,
+          morphology measurements and quality metrics export as ready-made
+          tables, and a standardized report integrates straight into your
+          laboratory information system.
+        </p>
+      </ContentBlock>
+    </div>
+  </BytesSection>
 
   <Pair tag="section">
     <a
@@ -267,6 +293,29 @@ export const meta = {
   .imagelink {
     display: flex;
     justify-content: center;
+  }
+
+  /* The diagram already carries its own whitespace, so it does not need the
+     full row gap between it and the copy it belongs to. */
+  .formats {
+    row-gap: calc(2 * var(--element-padding));
+  }
+
+  /* The copy brackets the diagram: inputs above it and to the left, outputs
+     below it and to the right, following the direction the flow runs. Both
+     bands are capped at the diagram's own width so they line up with the ends
+     of the arrows rather than with the page. Below the diagram's breakpoint
+     there is no room to hold a column to one side, so they simply stack. */
+  .formats-copy {
+    width: 100%;
+    max-width: 920px;
+    margin-inline: auto;
+  }
+  .formats-copy :global(.content-block) {
+    max-width: 27rem;
+  }
+  .formats-copy.trailing :global(.content-block) {
+    margin-inline-start: auto;
   }
 
   .tall {

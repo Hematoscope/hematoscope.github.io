@@ -236,7 +236,16 @@ Not covered: the cell artwork in `src/assets/backgrounds/cells/`, whose colors
 are radial gradient stops rather than flat fills. Brand marks stay hardcoded on
 purpose, since the partner logos are third-party trademarks and the logotype has
 to match `public/favicon.svg`, which is loaded through `<link rel="icon">` and
-cannot see the page's custom properties at all.
+cannot see the page's custom properties at all. `icons/logomark.svg` is that
+same mark without the wordmark, for places that need the ring and pixels alone
+(the hub of the formats diagram on the front page); it is the favicon's art
+verbatim, so the three move together or not at all.
+
+The mark's five pixel fills are also declared as `--logo-*` tokens in
+`theme.css`, for elements that echo the mark rather than repaint it (the pixels
+flowing out of it in `FormatFlow`). Nothing reads those tokens back into the
+artwork, so they are a copy that has to be updated with it, not a source of
+truth over it.
 
 ## Before finishing a change
 

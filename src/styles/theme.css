@@ -36,6 +36,19 @@
   --support-pink: #ffeaf3;
   --support-blue: #def0ff;
 
+  /* The five fills of the pixels in the logo mark, read straight off
+     src/assets/icons/logomark.svg (the same art as public/favicon.svg and the
+     mark in logotype.svg). They are here for elements that echo the mark, such
+     as the pixels flowing out of it in FormatFlow. The marks themselves keep
+     their hardcoded fills and do not read these, so changing one of these
+     retints the echoes and leaves the logo alone; they only stay honest if
+     they are updated together with the artwork. */
+  --logo-purple: #8a099e;
+  --logo-pink: #f16dfa;
+  --logo-blue: #5386fe;
+  --logo-magenta: #a13190;
+  --logo-violet: #9125f5;
+
   --footer-background: var(--accent-2);
 
   --text-color-heading: #130d56;
@@ -163,7 +176,7 @@ p {
   gap: 1rem;
 }
 
-.text>p {
+.text > p {
   max-width: 55ch;
 }
 
