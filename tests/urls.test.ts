@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 import config from "../astro.config.mjs";
-import { pageRoute } from "~src/utils/opengraph";
-import { routedPaths } from "./routes";
+import { pageRoute, routedPaths } from "~src/utils/routes";
 
 // The site serves one URL per page and says so: no `.html`, no trailing slash,
 // and every internal link pointing at that exact shape. GitHub Pages resolves

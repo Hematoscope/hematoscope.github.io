@@ -91,19 +91,3 @@ export function ogSlug(pathname: string): string {
 export function ogImagePath(slug: string): string {
   return `/og/${slug}.jpg`;
 }
-
-/**
- * The route a page file under `src/pages` serves, or undefined when it serves
- * none: `_`-prefixed files are not routed and `[...]` ones are dynamic, so
- * their metadata is per-entry rather than per-file and comes from elsewhere.
- *
- * Shared by the card endpoint, which walks the pages to decide what to draw,
- * and by `tests/opengraph.test.ts`, which walks them to check that every page
- * ended up with a card.
- */
-export function pageRoute(relPath: string): string | undefined {
-  const rel = relPath.replace(/\.(astro|mdx?)$/, "");
-  if (rel.split("/").some((part) => /^[_[]/.test(part))) return undefined;
-  const withoutIndex = rel === "index" ? "" : rel.replace(/\/index$/, "");
-  return `/${withoutIndex}`;
-}

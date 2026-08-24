@@ -17,6 +17,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # The sitemap dates every page from the commit that last touched it,
+          # which a shallow checkout cannot answer: it would silently build a
+          # sitemap with no lastmod at all.
+          fetch-depth: 0
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
@@ -31,6 +36,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Same reason as the build job: the suite checks the dates the build
+          # put in the sitemap, so it needs the history they come from.
+          fetch-depth: 0
       - name: Setup node.js
         uses: actions/setup-node@v4
         with:
@@ -41,6 +50,11 @@ jobs:
         run: npm ci
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
+      # The sitemap is a build artifact rather than something the dev server
+      # serves, so the suite has nothing to read without this. The deploy builds
+      # separately, on its own runner.
+      - name: Build site
+        run: npm run build
       - name: Run Playwright tests
         run: npm run test
       - name: Upload test results

@@ -71,6 +71,32 @@ to configure. Add the old path to `redirects` in `astro.config.mjs` instead,
 which emits a stub carrying a canonical link to the new address, a meta refresh,
 and `noindex`.
 
+### What crawlers are told
+
+`public/robots.txt` allows everything and points at the sitemap. Read the file
+before adding a per-agent rule: the retrieval crawlers behind generated answers
+are different user agents from the training ones, and blocking the wrong half of
+that pair removes the site from the answers rather than from the training set.
+
+`@astrojs/sitemap` builds `/sitemap-index.xml` from the routes, minus the
+redirect stubs, which are `noindex` and exist only to forward a retired URL.
+
+Each entry's `lastmod` is the commit date of the file the page is built from,
+via `gitModifiedDate` in `src/utils/gitDate.ts`. Frontmatter records only when a
+post was published, so a post edited a year later would otherwise still look
+untouched, and nothing would re-read it. Asking git means there is no date for
+an author to remember to bump and none that can disagree with the commit that
+changed the prose.
+
+That makes history a build input: `.github/workflows/deploy.yml` checks out with
+`fetch-depth: 0`, and a shallow checkout builds a sitemap with no dates at all
+rather than failing. `tests/sitemap.test.ts` is what catches that, by reading
+`dist/` - so it needs a build, which the workflow runs before the suite.
+
+`src/utils/routes.ts` is what enumerates the site for all of this. It reads the
+filesystem, so it belongs to the build; it also cannot use the `~src` alias,
+because `astro.config.mjs` loads it before Vite resolves one.
+
 ### News posts are folders
 
 Every post is a folder holding the post and everything it uses:
@@ -179,7 +205,7 @@ cards too. They just have no accent, since accents are assigned to published
 posts, which are the ones that sit next to each other in a listing.
 
 That guarantee is the thing to preserve when adding a route. `pageRoute` in
-`src/utils/opengraph.ts` decides what counts as routable, and `tests/routes.ts`
+`src/utils/routes.ts` decides what counts as routable, and `src/utils/routes.ts`
 walks `src/pages` and `src/content/news` with it to enumerate what the site
 serves. `tests/opengraph.test.ts` fails if any page it finds does not serve a
 card; `tests/urls.test.ts` checks the same list for URL shape. A new _dynamic_ route is the

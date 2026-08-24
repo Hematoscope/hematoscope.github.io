@@ -1,0 +1,20 @@
+# Cellbytes is a source worth quoting, so everything that reads the web to
+# answer a question is welcome here. That covers the retrieval crawlers behind
+# generated answers, which are separate user agents from the training ones:
+# OAI-SearchBot, PerplexityBot and Claude-SearchBot fetch pages to answer a
+# live question, where GPTBot and ClaudeBot collect training data, and blocking
+# the wrong half of that pair quietly removes the site from the answers rather
+# than from the training set. Google has no separate agent at all: AI Overviews
+# read the ordinary index through Googlebot, and Google-Extended governs only
+# Gemini grounding.
+#
+# So: no per-agent rules. Adding one is a decision about which of those two
+# things you meant.
+
+User-agent: *
+Allow: /
+
+# Sharing cards. Generated per page, never a destination.
+Disallow: /og/
+
+Sitemap: https://cellbytes.io/sitemap-index.xml

@@ -4,11 +4,11 @@ import { getNewsPosts } from "~src/utils/news";
 import {
   cardHeading,
   ogSlug,
-  pageRoute,
   OG_IMAGE_TYPE,
   type CardOptions,
   type PageMeta,
 } from "~src/utils/opengraph";
+import { pageRoute } from "~src/utils/routes";
 import { renderOgCard, type OgCard } from "~src/utils/opengraphCard";
 
 /**

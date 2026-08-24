@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { test, expect, type Page } from "@playwright/test";
-import { newsSlugs, routedPaths } from "./routes";
+import { newsSlugs, routedPaths } from "~src/utils/routes";
 
 // Every page must advertise a card that actually exists at the advertised size,
 // since a crawler that cannot fetch or size the image falls back to no preview
