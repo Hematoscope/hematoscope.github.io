@@ -90,6 +90,11 @@ that pair removes the site from the answers rather than from the training set.
 `@astrojs/sitemap` builds `/sitemap-index.xml` from the routes, minus the
 redirect stubs, which are `noindex` and exist only to forward a retired URL.
 
+`src/pages/rss.xml.ts` publishes the news posts as a feed, advertised from every
+page's head. It sets `trailingSlash: false`, since the package would otherwise
+link every item at the one URL shape the site does not serve as canonical, and a
+reader stores that link as the post's identity.
+
 Each entry's `lastmod` is the commit date of the file the page is built from,
 via `gitModifiedDate` in `src/utils/gitDate.ts`. Frontmatter records only when a
 post was published, so a post edited a year later would otherwise still look

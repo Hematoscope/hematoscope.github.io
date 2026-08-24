@@ -69,6 +69,15 @@ const pageUrl = canonicalUrl(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={pageUrl} />
 
+    <!-- Advertised from every page, not only the listing: this is how
+      anything watching for new writing finds it without being asked. -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Cellbytes news"
+      href={new URL("/rss.xml", Astro.site ?? pageUrl.origin)}
+    />
+
     <meta property="og:url" content={pageUrl} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Cellbytes" />
