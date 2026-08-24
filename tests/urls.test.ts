@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { test, expect } from "@playwright/test";
 import config from "../astro.config.mjs";
 import { pageRoute, routedPaths } from "~src/utils/routes";
@@ -109,6 +110,36 @@ test.describe("retired URLs", () => {
       expect(routedPaths()).toContain(target);
     });
   }
+});
+
+test.describe("slashed URLs", () => {
+  // Read from dist rather than the dev server: what matters is the file
+  // GitHub Pages will find at the old directory path, and the dev server
+  // routes by URL rather than by output layout, so it cannot show that.
+  for (const path of routedPaths()) {
+    if (path === "/") continue;
+
+    test(`${path}/ forwards to ${path}`, async () => {
+      const stub = await readFile(`dist${path}/index.html`, "utf8").catch(
+        () => {
+          throw new Error(
+            `dist${path}/index.html is missing. Run \`npm run build\` first.`,
+          );
+        },
+      );
+
+      expect(stub).toContain(`<link rel="canonical" href="${SITE}${path}">`);
+      expect(stub).toContain(`content="0; url=${SITE}${path}"`);
+      // Without this the stub competes with the page it forwards to.
+      expect(stub).toContain('name="robots" content="noindex"');
+    });
+  }
+
+  test("the front page is itself, not a stub", async () => {
+    const home = await readFile("dist/index.html", "utf8");
+    expect(home).not.toContain('content="noindex"');
+    expect(home).toContain("<title>Cellbytes</title>");
+  });
 });
 
 test("a page file that is not routed serves nothing", () => {

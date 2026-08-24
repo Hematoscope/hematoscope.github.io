@@ -71,6 +71,15 @@ to configure. Add the old path to `redirects` in `astro.config.mjs` instead,
 which emits a stub carrying a canonical link to the new address, a meta refresh,
 and `noindex`.
 
+The slashed form of every page is a URL the site once published too, from when
+it built to directories, so `src/pages/[...path]/index.html.ts` emits the same
+kind of stub at `<page>/index.html`. `redirects` cannot express that: it
+normalizes a slashed key to the unslashed route and emits the stub _as_ that
+page, quietly replacing the real one. Serving both shapes is not a conflict,
+because GitHub Pages tries `<path>.html` before it considers a directory of the
+same name - which is why `/news` reaches the listing and not the stub, even
+though `news/` exists.
+
 ### What crawlers are told
 
 `public/robots.txt` allows everything and points at the sitemap. Read the file
