@@ -5,6 +5,10 @@ import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import { WIDTHS } from "~src/consts";
 import { imageNeedsFrame } from "~src/utils/image";
+import { postModifiedDate } from "~src/utils/news";
+import { blogPosting, breadcrumbs } from "~src/utils/structuredData";
+import { ogImagePath, ogSlug } from "~src/utils/opengraph";
+import { canonicalUrl } from "~src/utils/url";
 
 export async function getStaticPaths() {
   const posts = await getCollection("news");
@@ -22,6 +26,23 @@ const hasImage = Boolean(post.data.image);
 // it to keep a defined edge. See TextCard for the same guard.
 const framed = post.data.image ? await imageNeedsFrame(post.data.image) : false;
 
+const modified = postModifiedDate(post);
+
+const article = {
+  published: post.data.date,
+  modified,
+  author: post.data.author,
+  tags: post.data.tags,
+};
+
+// Derived the same way `Layout` derives them, so the structured data can never
+// name a different URL or a different card than the head does.
+const postUrl = canonicalUrl(Astro.url.pathname, Astro.site);
+const cardUrl = new URL(
+  ogImagePath(ogSlug(Astro.url.pathname)),
+  Astro.site ?? postUrl.origin,
+);
+
 function formatDate(date: Date) {
   return date.toLocaleDateString("en-GB", {
     year: "numeric",
@@ -35,6 +56,19 @@ function formatDate(date: Date) {
   title={`${post.data.title} | Cellbytes`}
   description={post.data.description}
   ogType="article"
+  article={article}
+  jsonLd={[
+    blogPosting(article, {
+      url: postUrl,
+      title: post.data.title,
+      description: post.data.description,
+      image: cardUrl,
+    }),
+    breadcrumbs(new URL(Astro.site ?? postUrl.origin), [
+      { name: "News", path: "/news" },
+      { name: post.data.title, path: postUrl.pathname },
+    ]),
+  ]}
 >
   <article>
     <div

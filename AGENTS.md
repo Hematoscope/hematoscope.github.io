@@ -106,6 +106,31 @@ rather than failing. `tests/sitemap.test.ts` is what catches that, by reading
 filesystem, so it belongs to the build; it also cannot use the `~src` alias,
 because `astro.config.mjs` loads it before Vite resolves one.
 
+### Structured data
+
+`src/utils/structuredData.ts` builds one `@graph` per page, emitted by
+`Layout`. The organization and the site are on every page; a page passes what
+it is on top of that as `jsonLd`.
+
+None of it is required to appear in a generated answer - those read the
+ordinary index, and no markup unlocks them. What it buys is rich results and
+one identity: "Cellbytes" is a coined compound, so nothing outside this site can
+infer that the company here, the one on LinkedIn and the one in a partner's
+announcement are the same thing. A stable `@id` plus `sameAs` says it once.
+
+The rule for adding to it: every value must be a fact the page already states.
+Structured data asserting something the page does not is worse than none,
+because it is a claim nobody can check against the page it sits on. That is why
+the product node carries no `offers` and a post gets no `dateModified` when git
+cannot answer. `tests/structuredData.test.ts` holds the graph to the page it
+sits on, comparing its dates and URLs against the head rather than against a
+copy of the same values.
+
+An article's dates come from `ArticleMeta`, which the post page fills from
+frontmatter (published) and git (modified), and which `Layout` also emits as the
+`article:*` OpenGraph properties. Both sides read one value, so they cannot
+disagree.
+
 ### News posts are folders
 
 Every post is a folder holding the post and everything it uses:

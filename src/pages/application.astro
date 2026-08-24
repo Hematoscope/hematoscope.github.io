@@ -12,6 +12,7 @@ import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
 import H from "~src/components/HeadingLink.astro";
 import Layout from "~src/layouts/Layout.astro";
+import { softwareApplication } from "~src/utils/structuredData";
 import type { PageMeta } from "~src/utils/opengraph";
 import WorkflowStep from "~src/components/WorkflowStep.astro";
 import ApplicationScroller from "~src/components/ApplicationScroller.astro";
@@ -37,7 +38,10 @@ export const meta = {
 } satisfies PageMeta;
 ---
 
-<Layout {...meta}>
+<Layout
+  {...meta}
+  jsonLd={[softwareApplication(new URL(Astro.site ?? "/"), meta.description)]}
+>
   <HeroSection>
     <Pair reversed>
       <Image

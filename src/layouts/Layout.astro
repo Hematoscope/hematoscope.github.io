@@ -11,6 +11,7 @@ import {
   type PageMeta,
 } from "~src/utils/opengraph";
 import { canonicalUrl } from "~src/utils/url";
+import { graph } from "~src/utils/structuredData";
 import "~src/styles/breathe.css";
 import "~src/styles/reset.css";
 import "~src/styles/theme.css";
@@ -20,10 +21,17 @@ import "~src/styles/artwork.css";
 // stays in its own file. `src/pages/og/[...slug].jpg.ts` reads the same export
 // to draw the card, and nobody has to name the card's URL: it follows from where
 // the page lives, which is what `ogSlug` derives below.
-type Props = PageMeta;
+interface Props extends PageMeta {
+  /**
+   * Structured-data nodes this page adds to the site-wide graph. The
+   * organization and the site itself are always there; a page declares only
+   * what it is on top of that.
+   */
+  jsonLd?: object[];
+}
 
 const meta = Astro.props;
-const { title, description, ogType = "website" } = meta;
+const { title, description, ogType = "website", article, jsonLd } = meta;
 
 // Crawlers only follow absolute image URLs, so resolve against the site origin.
 const ogImageUrl = new URL(ogImagePath(ogSlug(Astro.url.pathname)), Astro.site);
@@ -71,10 +79,38 @@ const pageUrl = canonicalUrl(Astro.url.pathname, Astro.site);
     <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
     <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
     <meta property="og:image:alt" content={cardHeading(meta)} />
+    {
+      article && (
+        <>
+          <meta
+            property="article:published_time"
+            content={article.published.toISOString()}
+          />
+          {article.modified && (
+            <meta
+              property="article:modified_time"
+              content={article.modified.toISOString()}
+            />
+          )}
+          {article.author && (
+            <meta property="article:author" content={article.author} />
+          )}
+          {article.tags?.map((tag) => (
+            <meta property="article:tag" content={tag} />
+          ))}
+        </>
+      )
+    }
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={graph(new URL(Astro.site ?? pageUrl.origin), jsonLd ?? [])}
+    />
 
     <!-- For a page whose largest paint is something the browser would not
       find until it reached the body, such as a hero image behind a video. -->

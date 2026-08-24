@@ -49,6 +49,25 @@ export interface CardOptions {
  * page keeps the copy next to the markup it belongs to, and exporting it lets
  * `src/pages/og/[...slug].png.ts` find it without a second copy elsewhere.
  */
+/**
+ * What a page that is an article says about itself beyond its title.
+ *
+ * `og:type=article` on its own is a claim with nothing behind it: the
+ * properties that go with it are what carry the dates, and a page with no
+ * published date reads as undated rather than as new.
+ */
+export interface ArticleMeta {
+  published: Date;
+  /**
+   * When the post last changed, from git rather than from frontmatter.
+   * Frontmatter records publication only, so an edited post would otherwise
+   * still look untouched. Absent when the history cannot answer.
+   */
+  modified?: Date | undefined;
+  author?: string | undefined;
+  tags?: string[] | undefined;
+}
+
 export interface PageMeta {
   /** Document title, used verbatim. */
   title: string;
@@ -57,6 +76,8 @@ export interface PageMeta {
   card?: CardOptions;
   /** OpenGraph type. News posts are articles, everything else a website. */
   ogType?: "website" | "article";
+  /** Set when `ogType` is `"article"`, and meaningless otherwise. */
+  article?: ArticleMeta;
 }
 
 const TITLE_SUFFIX = " | Cellbytes";
