@@ -1,5 +1,6 @@
 import type { ImageMetadata } from "astro";
 import type { Accent } from "~src/consts";
+import { canonicalPath } from "~src/utils/url";
 
 /**
  * The head metadata a page declares about itself, and how that turns into the
@@ -76,9 +77,13 @@ export function cardHeading(meta: PageMeta): string {
  * Card identifier for a page, derived from where the page lives. Both the page
  * (through `Layout`, from its own URL) and the endpoint that renders the cards
  * derive it the same way, so neither has to be told about the other.
+ *
+ * `Layout` hands it an output path, so the `.html` a flat build puts there is
+ * dropped first; otherwise `/company.html` would ask for a card at
+ * `/og/company.html.jpg` and every page would promise one that 404s.
  */
 export function ogSlug(pathname: string): string {
-  const trimmed = pathname.replace(/^\/+|\/+$/g, "");
+  const trimmed = canonicalPath(pathname).replace(/^\/+/, "");
   return trimmed === "" ? "index" : trimmed;
 }
 

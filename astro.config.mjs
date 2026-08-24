@@ -41,6 +41,16 @@ export default defineConfig({
   // `base` stays the default `/`: this is an org page served at the root, not a
   // project page under a repository path.
   site: "https://cellbytes.io",
+  // Flat `<page>.html` output rather than `<page>/index.html`, which is what
+  // lets GitHub Pages answer `/company` with the page itself. A directory build
+  // gives it nothing to match on the unslashed path, so it 301s to `/company/`
+  // and every internal link costs a redirect. `trailingSlash` only makes the
+  // dev server agree with that; the host decides in production.
+  //
+  // `Astro.url.pathname` is the output file's path under this format, so
+  // anything naming a page externally goes through `src/utils/url.ts`.
+  build: { format: "file" },
+  trailingSlash: "never",
   // MDX so a post can import its own colocated assets and components (see
   // src/content.config.ts). Plain `.md` posts are untouched by this: the
   // integration only adds a second content format alongside them.

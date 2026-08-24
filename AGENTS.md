@@ -45,6 +45,32 @@ as above.
   unicode arrows, or other special characters.
 - Keep components in Astro idiom; reach for client-side JS only where needed.
 
+### URLs have no trailing slash
+
+Every page is served at exactly one address: no `.html`, no trailing slash,
+`/company` and `/news/<slug>`. That shape is what `build.format: "file"` in
+`astro.config.mjs` buys. GitHub Pages resolves `/company` straight to
+`company.html`, where a directory build leaves it nothing to match on the
+unslashed path and answers with a 301 to `/company/`, so every internal click
+and every crawl of an internal link pays for a redirect. `trailingSlash: "never"`
+only makes the dev server agree; in production the host decides.
+
+The cost is that `Astro.url.pathname` is the output file's path during a build
+(`/company.html`, `/index.html`), not the URL a visitor sees. Anything naming a
+page to the outside world - the canonical link, `og:url`, a sharing card's
+address - goes through `canonicalPath` in `src/utils/url.ts`. Using
+`Astro.url` directly ships `.html` into the head, which is a second URL for the
+same page as far as an indexer is concerned.
+
+Write internal links without the slash. `tests/urls.test.ts` walks every page
+and fails on a link that carries one or that does not resolve directly, since
+the redirect it causes is invisible from the page itself.
+
+Retiring a URL is not an option: it was published, and GitHub Pages has no 301
+to configure. Add the old path to `redirects` in `astro.config.mjs` instead,
+which emits a stub carrying a canonical link to the new address, a meta refresh,
+and `noindex`.
+
 ### News posts are folders
 
 Every post is a folder holding the post and everything it uses:
@@ -153,9 +179,10 @@ cards too. They just have no accent, since accents are assigned to published
 posts, which are the ones that sit next to each other in a listing.
 
 That guarantee is the thing to preserve when adding a route. `pageRoute` in
-`src/utils/opengraph.ts` decides what counts as routable and is shared with
-`tests/opengraph.test.ts`, which walks `src/pages` and `src/content/news` and
-fails if any page it finds does not serve a card. A new _dynamic_ route is the
+`src/utils/opengraph.ts` decides what counts as routable, and `tests/routes.ts`
+walks `src/pages` and `src/content/news` with it to enumerate what the site
+serves. `tests/opengraph.test.ts` fails if any page it finds does not serve a
+card; `tests/urls.test.ts` checks the same list for URL shape. A new _dynamic_ route is the
 one case the walk cannot see: enumerate its entries in the endpoint the way
 news posts are, or its pages will promise cards that do not exist.
 

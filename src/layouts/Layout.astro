@@ -10,6 +10,7 @@ import {
   OG_IMAGE_WIDTH,
   type PageMeta,
 } from "~src/utils/opengraph";
+import { canonicalUrl } from "~src/utils/url";
 import "~src/styles/breathe.css";
 import "~src/styles/reset.css";
 import "~src/styles/theme.css";
@@ -26,6 +27,12 @@ const { title, description, ogType = "website" } = meta;
 
 // Crawlers only follow absolute image URLs, so resolve against the site origin.
 const ogImageUrl = new URL(ogImagePath(ogSlug(Astro.url.pathname)), Astro.site);
+
+// The address the page wants to be known by, which is not the one it was
+// requested at: a tracking parameter, a stray trailing slash and the `.html` a
+// flat build leaves on `Astro.url` are all the same page and must all point
+// here, or each becomes a separate URL to an indexer.
+const pageUrl = canonicalUrl(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -38,8 +45,9 @@ const ogImageUrl = new URL(ogImagePath(ogSlug(Astro.url.pathname)), Astro.site);
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
 
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={pageUrl} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Cellbytes" />
     <meta property="og:title" content={title} />

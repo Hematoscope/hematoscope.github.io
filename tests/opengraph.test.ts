@@ -1,8 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { readdirSync } from "node:fs";
-import { join, relative } from "node:path";
 import { test, expect, type Page } from "@playwright/test";
-import { pageRoute } from "~src/utils/opengraph";
+import { newsSlugs, routedPaths } from "./routes";
 
 // Every page must advertise a card that actually exists at the advertised size,
 // since a crawler that cannot fetch or size the image falls back to no preview
@@ -15,45 +13,6 @@ const OG_HEIGHT = 630;
 // and every other crawler pays for the bytes. Cards sit well under this; the
 // bound is here to catch a card going back to a format that does not compress.
 const MAX_CARD_BYTES = 300_000;
-
-function walk(dir: string): string[] {
-  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) =>
-    entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)],
-  );
-}
-
-/**
- * Slug of every news post. A post is either a flat `<slug>.md` or a folder
- * `<slug>/index.mdx` holding its own assets; both serve `/news/<slug>`, so the
- * trailing `index` goes.
- */
-function newsSlugs(): string[] {
-  return walk("src/content/news")
-    .filter((file) => /\.mdx?$/.test(file))
-    .map((file) =>
-      relative("src/content/news", file)
-        .replace(/\.mdx?$/, "")
-        .replace(/\/index$/, ""),
-    )
-    .sort();
-}
-
-/**
- * Every path the site routes, found the way the endpoint finds what to draw
- * rather than listed by hand. A hand-written list keeps passing after someone
- * adds a page and forgets the card; this one fails on the new page.
- */
-function routedPaths(): string[] {
-  const pages = walk("src/pages")
-    .filter((file) => /\.(astro|mdx?)$/.test(file))
-    .map((file) => pageRoute(relative("src/pages", file)))
-    .filter((route) => route !== undefined);
-
-  // Drafts are routed like any other post, so they need a card like any other.
-  const posts = newsSlugs().map((slug) => `/news/${slug}`);
-
-  return [...pages, ...posts].sort();
-}
 
 /** Content of a `<meta>` tag, by property or name. */
 function meta(page: Page, key: string) {
