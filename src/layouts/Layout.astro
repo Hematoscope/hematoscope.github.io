@@ -43,6 +43,20 @@ const pageUrl = canonicalUrl(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- The only webfont, and it is declared inside a stylesheet, so without
+      this the browser cannot start fetching it until it has parsed the CSS,
+      which it cannot do until it has parsed this document. On a page that is
+      mostly text that second round trip is the largest paint. `crossorigin` is
+      required even same-origin: fonts are fetched anonymously, and a preload
+      without it is a separate request the font never uses. -->
+    <link
+      rel="preload"
+      href="/lato.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={pageUrl} />
@@ -61,6 +75,10 @@ const pageUrl = canonicalUrl(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- For a page whose largest paint is something the browser would not
+      find until it reached the body, such as a hero image behind a video. -->
+    <slot name="head" />
   </head>
   <body>
     <Navbar />

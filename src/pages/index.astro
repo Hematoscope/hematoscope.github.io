@@ -1,9 +1,10 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import collaborating from "~src/assets/images/mockups/collaborating_erythroblasts.webp";
 import commenting from "~src/assets/images/mockups/comment-function.webp";
 import evidentMicroscope from "~src/assets/images/home/evident-vs200-logos-side.png";
 import microscope from "~src/assets/images/home/microscope.jpg";
+import bannerPoster from "~src/assets/images/home/banner-poster.jpeg";
 import BytesEdge from "~src/assets/backgrounds/bytes/in-element-edge.svg";
 import HusLogo from "~src/assets/icons/partners/hus.svg";
 import FimlabLogo from "~src/assets/icons/partners/fimlab.svg";
@@ -31,9 +32,29 @@ export const meta = {
     "AI solutions for hematopathologists, hematologists and researchers.",
   card: { variant: "brand" },
 } satisfies PageMeta;
+
+// The hero video's poster is what the page paints first and holds until the
+// stream has buffered, so it is the largest paint on the front page. Going
+// through the image pipeline rather than sitting in `public/` is what gets it
+// encoded and sized; served raw it was a 195 KB JPEG at full width.
+const poster = await getImage({
+  src: bannerPoster,
+  format: "avif",
+  width: 1200,
+});
 ---
 
 <Layout {...meta}>
+  <!-- The browser finds a `poster` only once it reaches the video element,
+    which is late for the element that decides the page's largest paint. -->
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href={poster.src}
+    fetchpriority="high"
+  />
+
   <HeroSection class="hero">
     <div class="hero-content">
       <h1>Cellbytes &ndash; precision hematology with digital microscopy</h1>
@@ -45,7 +66,7 @@ export const meta = {
           loop
           playsinline
           aria-label="Demonstration of Cellbytes's features"
-          poster="banner_image.jpeg"
+          poster={poster.src}
           data-hls-src="/banner/master.m3u8"
         >
         </video>
