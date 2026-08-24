@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import config from "../astro.config.mjs";
 import { pageRoute } from "~src/utils/opengraph";
 import { routedPaths } from "./routes";
 
@@ -82,6 +83,33 @@ test.describe("internal links", () => {
       ).toBeLessThan(300);
     }
   });
+});
+
+test.describe("retired URLs", () => {
+  // Read from the config rather than listed here, so an entry cannot be added
+  // without also being checked, and a typo in a target fails instead of
+  // shipping a stub that points nowhere.
+  const retired = Object.entries(config.redirects ?? {});
+
+  test("there is something to check", () => {
+    expect(retired.length).toBeGreaterThan(0);
+  });
+
+  for (const [from, to] of retired) {
+    test(`${from} still reaches a page`, async ({ page }) => {
+      const target = typeof to === "string" ? to : to.destination;
+
+      // Waited for rather than read straight after the navigation: a stub
+      // moves the reader with a meta refresh, which lands after `goto`
+      // resolves, so reading the URL there races the redirect.
+      await page.goto(from);
+      await page.waitForURL(target);
+
+      // A stub that lands on the 404 page is worse than the 404 it replaced,
+      // since it looks handled from the config alone.
+      expect(routedPaths()).toContain(target);
+    });
+  }
 });
 
 test("a page file that is not routed serves nothing", () => {

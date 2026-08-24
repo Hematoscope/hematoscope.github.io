@@ -51,6 +51,15 @@ export default defineConfig({
   // anything naming a page externally goes through `src/utils/url.ts`.
   build: { format: "file" },
   trailingSlash: "never",
+  // A published URL is a promise, and GitHub Pages has no way to keep one: it
+  // serves static files, so there is no 301 to configure. Astro emits a stub
+  // page for each entry here instead, carrying a canonical link to the new
+  // address and a meta refresh for the reader. Renaming a post means adding a
+  // line here, not retiring the URL it was announced under.
+  redirects: {
+    "/news/cellbytes-and-evident-join-forces":
+      "/news/cellbytes-and-evident-case-study",
+  },
   // MDX so a post can import its own colocated assets and components (see
   // src/content.config.ts). Plain `.md` posts are untouched by this: the
   // integration only adds a second content format alongside them.
