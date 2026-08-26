@@ -155,6 +155,32 @@ function formatDate(date: Date) {
     margin-block: 2em;
   }
 
+  /* An image in the prose, captioned (`![alt](./photo.jpg "caption")`) or not.
+     The reset gives every image `object-fit: cover`, which crops one whose box
+     is not its own shape; a picture in a post has to be shown whole. */
+  article :is(p, figure) > img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--small-border-radius);
+  }
+
+  /* Every figure in a post, whether `titleFigure` built it around an image or
+     `PostVideo` wrote it around a recording: the caption sits directly under
+     what it describes, and reads the same either way. */
+  article figure {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  article figcaption {
+    color: var(--text-color-body);
+    text-align: center;
+    font-size: var(--text-size-label);
+    font-style: italic;
+  }
+
   article sup + sup:before {
     content: ", ";
   }

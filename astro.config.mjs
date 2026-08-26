@@ -3,10 +3,12 @@ import { createHash } from "node:crypto";
 import { optimize } from "svgo";
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import { satteri } from "@astrojs/markdown-satteri";
 import sitemap from "@astrojs/sitemap";
 import { gitModifiedDate } from "./src/utils/gitDate.ts";
 import { canonicalPath } from "./src/utils/url.ts";
 import { routeSources } from "./src/utils/routes.ts";
+import { titleFigure } from "./src/utils/titleFigure.ts";
 
 // Astro inlines imported SVGs into the page DOM. Our asset SVGs all use
 // generic single-letter element ids (a, b, c, ... for their gradients), and
@@ -69,6 +71,10 @@ export default defineConfig({
   build: { format: "file" },
   trailingSlash: "never",
   redirects: RETIRED_URLS_MAP,
+  // Naming the default processor explicitly is what allows a plugin to be added
+  // to it. `@astrojs/mdx` picks the same one up, so a plugin listed here runs
+  // for `.md` and `.mdx` alike.
+  markdown: { processor: satteri({ hastPlugins: [titleFigure] }) },
   // MDX so a post can import its own colocated assets and components (see
   // src/content.config.ts). Plain `.md` posts are untouched by this: the
   // integration only adds a second content format alongside them.

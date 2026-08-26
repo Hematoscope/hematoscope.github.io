@@ -202,6 +202,32 @@ probe shows the capture is genuinely too big. Trimming survives a stream copy
 via an MP4 edit list, except that a cut can only start where a keyframe already
 is.
 
+### Images in a post get their caption from the title
+
+An image written with a markdown title renders as a `<figure>`, with the title
+as its `<figcaption>`:
+
+```md
+![What the image shows, for a reader who cannot see it](./photo.jpg "The caption printed under it.")
+```
+
+`titleFigure` in `src/utils/titleFigure.ts` does the rewriting, registered on
+the Markdown processor in `astro.config.mjs`. It converts only a paragraph that
+holds the image and nothing else, so an image inside a sentence is left where it
+is; an image with no title stays an ordinary `<img>`. Astro rewrites the `src`
+afterwards either way, so the file is still optimized and hashed.
+
+`alt` and the caption are not the same sentence. The caption is prose for
+everyone; `alt` describes the picture to whoever is not seeing it, so a caption
+repeated verbatim into `alt` says nothing new.
+
+The processor is Satteri, which does not run rehype plugins, hence a Satteri
+plugin rather than something off the shelf. Astro's default is named explicitly
+in `astro.config.mjs` for that reason, and `@astrojs/mdx` reads the same
+setting, so a plugin added there covers `.md` and `.mdx` alike. Rendered posts
+are cached under `.astro/`, which a change to a plugin does not invalidate:
+delete it to see one take effect.
+
 ### Head metadata and OpenGraph cards
 
 A page declares its own head metadata, in its own file, as an exported `meta`

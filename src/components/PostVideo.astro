@@ -62,12 +62,6 @@ const height = Astro.props.height ?? poster.height;
 </figure>
 
 <style>
-  .post-video {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
   /* Fluid, but the box is the recording's own shape from the first paint: the
      ratio is set inline from the declared size, so nothing below it moves when
      the poster arrives.
@@ -81,12 +75,5 @@ const height = Astro.props.height ?? poster.height;
 
     background-color: var(--primary-1);
     border-radius: var(--small-border-radius);
-  }
-
-  .post-video figcaption {
-    color: var(--text-color-body);
-    text-align: center;
-    font-size: var(--text-size-label);
-    font-style: italic;
   }
 </style>
