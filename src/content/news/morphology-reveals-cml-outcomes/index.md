@@ -8,7 +8,7 @@ image: ./hero.jpg
 imageAlt: "3D render image of a bunch of small green and teal pill shapes hanging out in clusters."
 ---
 
-## What Can Computational Cytopathology Tell Us About Treatment Outcomes of CML?
+## What can computational cytopathology tell us about treatment outcomes of CML?
 
 Bone marrow (BM) cytomorphology is routinely assessed in hematological malignancies. However, systematic and extensive quantification of morphological features from BM aspirate slides remains a laborious task for humans, limiting what we can learn from them. Cellbytes solves this by transforming digitized BM aspirate slides into a rich cytomorphological dataset, enabling researchers to investigate whether cytomorphological fingerprints are associated with clinical outcomes.
 
