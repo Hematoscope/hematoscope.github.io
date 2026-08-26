@@ -20,7 +20,8 @@ Treatment response is a central objective in the management of CML. Achieving a 
 
 In a 2026 study published in HemaSphere[^1], involving 598 patients from seven clinical sites, cytomorphological features were examined for their association with achievement of major molecular response (MMR) in tyrosine kinase inhibitor (TKI)-treated CML patients. Erythroid precursor enrichment, monocyte nuclear lobulation, and low peripheral leukocyte count were found to be associated with increased achievement of MMR. The monocyte finding in particular may point to a link between monocyte maturation and TKI efficacy. When combined with clinical information, these features formed a Morphoclinical model that outperformed the clinically used EUTOS long-term survival score at predicting MMR (AUROC 0.76 vs. 0.53).
 
-![Scientific illustration of monocytes with various nuclei perimeter sizes, from Wiley Online Library.](./Wiley_Luukkainen-K-et-al_figure1I.jpg "Adapted from Luukkainen[^1] from figure 1.")
+![Scientific illustration of monocytes with various nuclei perimeter sizes, from Wiley Online Library.](./Wiley_Luukkainen-K-et-al_figure1I.jpg)
+Adapted from Luukkainen[^1] from figure 1.
 
 ## Can morphology help predict treatment-free remission?
 
@@ -28,7 +29,8 @@ For chronic-phase (CP) CML patients who achieve DMR, treatment discontinuation c
 
 In a 2025 study published in Leukemia[^2], involving 113 CP-CML patients from seven clinical sites, BM morphology was examined for its association with TFR success. Neutrophil abundance and granulocytic maturation at diagnosis were found to be associated with sustained TFR: patients who remained in remission tended to show more mature, hypersegmented neutrophils at diagnosis, while relapsing patients had more immature granulocyte forms, such as promyelocytes and metamyelocytes.
 
-![Scientific illustration of metamyelocytes, promyelocytes and neutrophils with different types of nuclei, from Nature Journal.](./Nature_Purhonen-M-et-al_figure4.webp "Adapted from Purhonen[^2] from figure 4.")
+![Scientific illustration of metamyelocytes, promyelocytes and neutrophils with different types of nuclei, from Nature Journal.](./Nature_Purhonen-M-et-al_figure4.webp)
+Adapted from Purhonen[^2] from figure 4.
 
 Together, these findings show that computational BM cytopathology can move beyond automated cell counting to reveal biologically and clinically relevant morphological patterns. Both remain research findings that will need further validation before informing clinical decisions.
 
