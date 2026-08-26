@@ -202,24 +202,40 @@ probe shows the capture is genuinely too big. Trimming survives a stream copy
 via an MP4 edit list, except that a cut can only start where a keyframe already
 is.
 
-### Images in a post get their caption from the title
+### Images in a post can carry a caption
 
-An image written with a markdown title renders as a `<figure>`, with the title
-as its `<figcaption>`:
+An image alone in a paragraph renders as a `<figure>`, captioned by the line
+under it:
 
 ```md
-![What the image shows, for a reader who cannot see it](./photo.jpg "The caption printed under it.")
+![What the image shows, for a reader who cannot see it](./photo.jpg)
+Adapted from figure 1 of Luukkainen[^1].
 ```
 
-`titleFigure` in `src/utils/titleFigure.ts` does the rewriting, registered on
-the Markdown processor in `astro.config.mjs`. It converts only a paragraph that
-holds the image and nothing else, so an image inside a sentence is left where it
-is; an image with no title stays an ordinary `<img>`. Astro rewrites the `src`
-afterwards either way, so the file is still optimized and hashed.
+The caption is ordinary markdown by the time it is read, so a footnote
+reference in one is a real reference: numbered with the rest of them, and
+linked back to from the definition at the foot of the post.
+
+An image's title captions it too, for a caption with no markup in it:
+
+```md
+![What the image shows](./photo.jpg "Adapted from figure 1.")
+```
+
+A title is plain text by definition, so nothing written there can be a link,
+emphasis or a footnote reference; `[^1]` in a title stays four characters. Use
+the line below the image whenever the caption needs any of that.
 
 `alt` and the caption are not the same sentence. The caption is prose for
 everyone; `alt` describes the picture to whoever is not seeing it, so a caption
 repeated verbatim into `alt` says nothing new.
+
+`titleFigure` in `src/utils/titleFigure.ts` does the rewriting, registered on
+the Markdown processor in `astro.config.mjs`. It converts only a paragraph that
+starts with the image, and only across a line break, so an image inside a
+sentence stays where it is. An image with neither caption stays an ordinary
+`<img>`. Astro rewrites the `src` afterwards in every case, so the file is
+still optimized and hashed.
 
 The processor is Satteri, which does not run rehype plugins, hence a Satteri
 plugin rather than something off the shelf. Astro's default is named explicitly
