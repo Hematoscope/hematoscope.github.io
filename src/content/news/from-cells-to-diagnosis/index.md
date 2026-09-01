@@ -16,7 +16,7 @@ In recently published study in npj Digital Medicine, an interpretable multimodal
 
 The study included 45,248 May-Grünwald-Giemsa-stained smears acquired at 100x magnification and collected at the Helsinki University Hospital between 2009 and 2023, comprising 28,096 BMA and 17,152 PBS samples. The cohort encompassed major myeloid, lymphoid, and plasma-cell malignancies, as well as non-malignant conditions across multiple disease phases. Approximately 186 million nucleated cells were detected and encoded into morphological representations using the Cellbytes software. 
 
-![Process chart of the research, from cell detection and feature extraction to hematologic disease classification.](./npj_Wang_figure1a.png "Adapted from Wang 2026 from figure 1.")
+![Process chart of the research, from cell detection and feature extraction to hematologic disease classification.](./npj_Wang_figure1a.png "Adapted from Wang et al (npj Digital Medicine, 2026)")
 
 Across eight diagnostic categories, the model achieved AUROC values above 0.90 across eight diagnostic categories. The hierarchy-aware architecture provided the greatest benefit in more difficult diagnostic boundaries, improving F1 classification score from 0.86 to 0.91 for non-malignant samples and from 0.77 to 0.84 for myeloproliferative neoplasm.
 
