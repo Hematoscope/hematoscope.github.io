@@ -2,7 +2,7 @@
 # Base image #
 ##############
 FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04
-ENV NODE_VERSION=20.18.0
+ENV NODE_VERSION=24.20.0
 
 ARG DEBIAN_FRONTEND=noninteractive
 
