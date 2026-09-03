@@ -29,7 +29,7 @@ We collect data about the usage of our website in order to improve our services,
 
 ## How do we collect data?
 
-We collect anonymous analytics data of the usage of our website using Plausible Analytics (<https://plausible.io>), a privacy conscious analytics tool. When contacting us via embedded contact forms or direct e-mails, we collect only the information you provide to us via those communication channels. We do not use any “cookies” or similar tracking technologies, and we never share your data with third parties.
+We collect anonymous analytics data of the usage of our website using Plausible Analytics (<https://plausible.io>), a privacy conscious analytics tool. We run it ourselves, on our own servers inside the European Union, so this data reaches neither Plausible nor any other third party. When contacting us via embedded contact forms or direct e-mails, we collect only the information you provide to us via those communication channels. We do not use any “cookies” or similar tracking technologies, and we never share your data with third parties.
 
 ## How do we store data?
 
@@ -41,18 +41,18 @@ Any data we collect, both personal information and anonymous analytics, are stor
 
 <div style="overflow-x: auto">
 
-| Data point            | Example                           | Comment                                                                                                                                                                                                                   |
-| :-------------------- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Page URL              | _<https://cellbytes.io/contact>_  | We track the page URL of each page view on our website. We use this to analyze which pages have been viewed and how many times a particular page has been viewed.                                                         |
-| HTTP referer          | _<https://linkedin.com>_          | We use the referrer string to analyze the number of visitors referred to our website from links on other sites.                                                                                                           |
-| Browser               | _Chrome 86.0_                     | We use this to analyze what browsers and browser version numbers people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded.                                 |
-| Operating system      | _macOS 10.15_                     | We use this to analyze what operating systems people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded.                                                    |
-| Device type           | _Desktop_                         | We use this to analyze what devices people use when visiting our website. Devices are categorized into desktop, mobile or tablet. This is derived from the User-Agent HTTP header. The full User-Agent is discarded.      |
-| Country, region, city | _United Kingdom, England, London_ | We look up the visitor’s location using their IP address. We do not track anything more granular than the city level and the IP address of the visitor is discarded. We never store IP addresses in our database or logs. |
+| Data point       | Example                          | Comment                                                                                                                                                                                                              |
+| :--------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Page URL         | _<https://cellbytes.io/contact>_ | We track the page URL of each page view on our website. We use this to analyze which pages have been viewed and how many times a particular page has been viewed.                                                    |
+| HTTP referer     | _<https://linkedin.com>_         | We use the referrer string to analyze the number of visitors referred to our website from links on other sites.                                                                                                      |
+| Browser          | _Chrome 86.0_                    | We use this to analyze what browsers and browser version numbers people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded.                            |
+| Operating system | _macOS 10.15_                    | We use this to analyze what operating systems people use when visiting our website. This is derived from the User-Agent HTTP header. The full User-Agent is discarded.                                               |
+| Device type      | _Desktop_                        | We use this to analyze what devices people use when visiting our website. Devices are categorized into desktop, mobile or tablet. This is derived from the User-Agent HTTP header. The full User-Agent is discarded. |
+| Country          | _United Kingdom_                 | We look up the country using the IP address of the visitor. We do not track anything more granular than the country, and the IP address is discarded. We never store IP addresses in our database or logs.           |
 
 </div>
 
-For more information, see <https://plausible.io/data-policy>.
+For more information on what the software we run collects, see <https://plausible.io/data-policy>. Our instance is self-hosted and is configured for country-level location only, so none of this data is sent to Plausible.
 
 ### 2\. Personal information about communications with us
 

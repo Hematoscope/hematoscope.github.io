@@ -121,6 +121,31 @@ const pageUrl = canonicalUrl(Astro.url.pathname, Astro.site);
       set:html={graph(new URL(Astro.site ?? pageUrl.origin), jsonLd ?? [])}
     />
 
+    <!-- Pageview analytics from our own Plausible instance, which is why the
+      privacy policy can promise that nothing leaves our infrastructure. The
+      domain is what the instance keys events on: it must match the site
+      registered there exactly, or events are accepted and attributed to
+      nothing.
+
+      Production only. The Playwright suite runs against `npm run dev`, so a dev
+      server that sent events would file every test run and every local page
+      load as real traffic - and the suite would depend on a third-party request
+      resolving. The consequence is that no test asserting on the dev server can
+      see this tag; assert on `dist/` if it ever needs covering.
+
+      `is:inline` because the source is cross-origin: without it Astro tries to
+      process the script as a local module. -->
+    {
+      import.meta.env.PROD && (
+        <script
+          is:inline
+          defer
+          data-domain="cellbytes.io"
+          src="https://plausible.cellbytes.io/js/script.js"
+        />
+      )
+    }
+
     <!-- For a page whose largest paint is something the browser would not
       find until it reached the body, such as a hero image behind a video. -->
     <slot name="head" />
