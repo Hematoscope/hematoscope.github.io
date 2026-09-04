@@ -1,0 +1,495 @@
+---
+import LogoMark from "~src/assets/icons/logomark.svg";
+
+/**
+ * The formats the platform reads and the formats it writes.
+ *
+ * Everything in the diagram is generated from these two lists: the labels,
+ * the arrows that connect them to the logo, and the cells and pixels that
+ * travel along those arrows. Adding, removing or renaming a format is a
+ * one-line edit here and the geometry re-flows around it.
+ *
+ * A space in a label breaks it onto its own line, which is how the wordy
+ * "custom solution" still fits the label column on a phone.
+ */
+const INPUT_FORMATS = [".svs", ".vsi", ".czi", ".mrxs", ".tif", ".dcm"];
+const OUTPUT_FORMATS = [".csv", ".xlsx", ".sqlite3", ".pdf", "Custom solution"];
+
+/**
+ * A diagram geometry, in the user units of its own viewBox. The x values run
+ * left to right through the diagram: labels, then the converging curves, then
+ * the logo in the middle, then the diverging curves, then labels again.
+ *
+ * There are two of these rather than one that scales, because the labels have
+ * to stay readable. An SVG with a viewBox scales its text along with its
+ * artwork, so the only way for text to keep a sane size on a phone is for the
+ * diagram to be relatively narrower there: fewer user units across the same
+ * font size. The layouts are otherwise identical, and `build` below derives
+ * both from the same lists.
+ */
+type Layout = {
+  key: string;
+  width: number;
+  height: number;
+  fontSize: number;
+  logoSize: number;
+  /** Input labels are right-aligned to end here. */
+  inputLabelX: number;
+  /** Where the input curves leave the labels. */
+  inputStartX: number;
+  /** Where all input curves meet, on the center line. */
+  mergeX: number;
+  /** Where the output curves fan back out, on the center line. */
+  splitX: number;
+  /** Where the output curves end, just short of their arrow heads. */
+  outputEndX: number;
+  /** Output labels are left-aligned from here. */
+  outputLabelX: number;
+  inputRowGap: number;
+  outputRowGap: number;
+};
+
+const LAYOUTS: Layout[] = [
+  {
+    key: "wide",
+    width: 920,
+    height: 300,
+    fontSize: 20,
+    logoSize: 112,
+    inputLabelX: 104,
+    inputStartX: 124,
+    mergeX: 316,
+    splitX: 604,
+    outputEndX: 734,
+    outputLabelX: 766,
+    inputRowGap: 42,
+    outputRowGap: 52,
+  },
+  {
+    key: "narrow",
+    width: 440,
+    height: 260,
+    fontSize: 20,
+    logoSize: 72,
+    inputLabelX: 54,
+    inputStartX: 68,
+    mergeX: 152,
+    splitX: 286,
+    outputEndX: 336,
+    outputLabelX: 358,
+    inputRowGap: 36,
+    outputRowGap: 44,
+  },
+];
+
+/** Trim the generated path data to one decimal, so the markup stays readable. */
+const n = (value: number) => Math.round(value * 10) / 10;
+
+/** Row centers for `count` labels, spread evenly around the center line. */
+const rows = (count: number, gap: number, cy: number) =>
+  Array.from({ length: count }, (_, i) => cy + (i - (count - 1) / 2) * gap);
+
+/**
+ * A cubic from (sx, sy) to (ex, ey) that leaves and arrives horizontally, so
+ * every curve meets the center line flat and the arrow heads never need to be
+ * rotated to follow one.
+ *
+ * Both handles are exactly half the horizontal run, which puts them on the
+ * same vertical line at the midpoint. Any longer and they cross over each
+ * other, which bends the curve back on itself: on the narrow layout, where a
+ * curve climbs further than it runs, that reads as a hook at both ends.
+ */
+const curveTo = (sx: number, sy: number, ex: number, ey: number) => {
+  const k = (ex - sx) / 2;
+  return `C${n(sx + k)},${n(sy)} ${n(ex - k)},${n(ey)} ${n(ex)},${n(ey)}`;
+};
+
+const wire = (sx: number, sy: number, ex: number, ey: number) =>
+  `M${n(sx)},${n(sy)} ${curveTo(sx, sy, ex, ey)}`;
+
+/**
+ * An arrow head pointing right, with its tip at (x, y). The back edge curves
+ * inwards rather than closing flat, which is what keeps the arrows from
+ * reading like a flow chart.
+ */
+const head = (x: number, y: number, size: number) => {
+  const half = size * 0.42;
+  return `M${n(x)},${n(y)} L${n(x - size)},${n(y - half)} Q${n(x - size * 0.7)},${n(y)} ${n(x - size)},${n(y + half)} Z`;
+};
+
+/** How many cells / pixels are in flight along one arrow at a time. */
+const PARTICLES_PER_WIRE = 1;
+const BASE_DURATION = 5;
+
+/** Multipliers on the base cell and pixel sizes. */
+const SIZES = [1, 1.5, 1.2, 2];
+
+/** How many fills each side cycles through; the classes are in the style below. */
+const CELL_TONES = 3;
+const PIXEL_TONES = 5;
+
+/**
+ * Timings, tones and sizes for the particles on wire `index`. Durations differ
+ * per wire and the delays are negative, so the particles start mid-flight and
+ * never line up into a visible pulse.
+ *
+ * Tone and size run on separate cycles whose lengths share no factor, so a
+ * particle only repeats another's exact look every `tones * SIZES.length` of
+ * them: 12 for the cells and 20 for the pixels, both more than a layout draws.
+ */
+const particles = (index: number, tones: number) => {
+  const duration = BASE_DURATION + (index % 3) * 0.6;
+  return Array.from({ length: PARTICLES_PER_WIRE }, (_, k) => {
+    // Cycled rather than random, so a rebuild produces identical markup.
+    const seq = index * PARTICLES_PER_WIRE + k;
+    return {
+      duration,
+      delay: -(duration * (k / PARTICLES_PER_WIRE) + index * 0.53),
+      tone: seq % tones,
+      size: SIZES[seq % SIZES.length]!,
+    };
+  });
+};
+
+const build = (layout: Layout) => {
+  const cx = layout.width / 2;
+  const cy = layout.height / 2;
+  const logoLeft = cx - layout.logoSize / 2;
+  const logoRight = cx + layout.logoSize / 2;
+  const headSize = layout.fontSize * 0.75;
+  const lineHeight = layout.fontSize * 1.05;
+  // The stems stop short of the logo so nothing touches the mark.
+  const inputTipX = logoLeft - layout.fontSize * 0.45;
+  const inputStemEndX = inputTipX - headSize * 0.6;
+  const outputStemX = logoRight + layout.fontSize * 0.45;
+  const outputTipX = layout.outputEndX + headSize;
+
+  const label = (text: string, y: number) => {
+    const lines = text.split(" ");
+    return {
+      y,
+      lines: lines.map((line, k) => ({
+        line,
+        dy: k === 0 ? -((lines.length - 1) / 2) * lineHeight : lineHeight,
+      })),
+    };
+  };
+
+  const inputs = rows(INPUT_FORMATS.length, layout.inputRowGap, cy).map(
+    (y, i) => ({
+      ...label(INPUT_FORMATS[i]!, y),
+      wire: wire(layout.inputStartX, y, layout.mergeX, cy),
+      // The particles carry on past the merge point along the stem, and stop
+      // where it does. They are already faded out by then (see the keyframes),
+      // so a cell is gone well before it would reach the mark.
+      flow: `${wire(layout.inputStartX, y, layout.mergeX, cy)} L${n(inputStemEndX)},${n(cy)}`,
+      particles: particles(i, CELL_TONES),
+    }),
+  );
+
+  const outputs = rows(OUTPUT_FORMATS.length, layout.outputRowGap, cy).map(
+    (y, j) => ({
+      ...label(OUTPUT_FORMATS[j]!, y),
+      wire: wire(layout.splitX, cy, layout.outputEndX, y),
+      head: head(outputTipX, y, headSize),
+      // Pixels start where the stem starts, clear of the mark, and fade in
+      // over the run up to the split point rather than appearing on top of it.
+      flow: `M${n(outputStemX)},${n(cy)} L${n(layout.splitX)},${n(cy)} ${curveTo(layout.splitX, cy, layout.outputEndX, y)}`,
+      particles: particles(j, PIXEL_TONES),
+    }),
+  );
+
+  return {
+    ...layout,
+    cx,
+    cy,
+    inputs,
+    outputs,
+    inputStem: `M${n(layout.mergeX)},${n(cy)} L${n(inputStemEndX)},${n(cy)}`,
+    inputHead: head(inputTipX, cy, headSize),
+    outputStem: `M${n(outputStemX)},${n(cy)} L${n(layout.splitX)},${n(cy)}`,
+    cellRadius: layout.fontSize * 0.25,
+    pixelSize: layout.fontSize * 0.38,
+    logoWidth: `${n((layout.logoSize / layout.width) * 100)}%`,
+  };
+};
+
+const diagrams = LAYOUTS.map(build);
+
+// Only the visible diagram is in the accessibility tree: the other one is
+// display: none, which takes it out. Both carry the same description, so the
+// diagram reads as one image whichever layout the screen is showing.
+const description = `Cellbytes reads slides in ${INPUT_FORMATS.join(", ")} formats and exports results as ${OUTPUT_FORMATS.join(", ")}.`;
+---
+
+<div class="format-flow">
+  {
+    diagrams.map((d) => (
+      <div
+        class:list={["diagram", d.key]}
+        style={`--logo-width: ${d.logoWidth}`}
+      >
+        <svg
+          viewBox={`0 0 ${d.width} ${d.height}`}
+          style={`font-size: ${d.fontSize}px`}
+          role="img"
+          aria-label={description}
+        >
+          <defs>
+            <linearGradient
+              id={`format-flow-in-${d.key}`}
+              gradientUnits="userSpaceOnUse"
+              x1={d.inputStartX}
+              x2={d.mergeX}
+            >
+              <stop class="stop-far" offset="0" />
+              <stop class="stop-hub" offset="1" />
+            </linearGradient>
+            <linearGradient
+              id={`format-flow-out-${d.key}`}
+              gradientUnits="userSpaceOnUse"
+              x1={d.splitX}
+              x2={d.outputEndX}
+            >
+              <stop class="stop-hub" offset="0" />
+              <stop class="stop-out" offset="1" />
+            </linearGradient>
+          </defs>
+
+          {d.inputs.map((input) => (
+            <path
+              class="wire"
+              d={input.wire}
+              stroke={`url(#format-flow-in-${d.key})`}
+            />
+          ))}
+          <path
+            class="wire"
+            d={d.inputStem}
+            stroke={`url(#format-flow-in-${d.key})`}
+          />
+          <path class="head in" d={d.inputHead} />
+
+          <path
+            class="wire"
+            d={d.outputStem}
+            stroke={`url(#format-flow-out-${d.key})`}
+          />
+          {d.outputs.map((output) => (
+            <>
+              <path
+                class="wire"
+                d={output.wire}
+                stroke={`url(#format-flow-out-${d.key})`}
+              />
+              <path class="head out" d={output.head} />
+            </>
+          ))}
+
+          {d.inputs.map((input) =>
+            input.particles.map((p) => (
+              <circle
+                class:list={["particle", "cell", `tone-${p.tone}`]}
+                r={n(d.cellRadius * p.size)}
+                style={`--flow: path('${input.flow}'); animation-duration: ${p.duration}s; animation-delay: ${n(p.delay)}s`}
+              />
+            )),
+          )}
+          {d.outputs.map((output) =>
+            output.particles.map((p) => (
+              <rect
+                class:list={["particle", "pixel", `tone-${p.tone}`]}
+                x={n((-d.pixelSize * p.size) / 2)}
+                y={n((-d.pixelSize * p.size) / 2)}
+                width={n(d.pixelSize * p.size)}
+                height={n(d.pixelSize * p.size)}
+                style={`--flow: path('${output.flow}'); animation-duration: ${p.duration}s; animation-delay: ${n(p.delay)}s`}
+              />
+            )),
+          )}
+
+          {d.inputs.map((input) => (
+            <text class="label" y={input.y} text-anchor="end">
+              {input.lines.map((line) => (
+                <tspan x={d.inputLabelX} dy={n(line.dy)}>
+                  {line.line}
+                </tspan>
+              ))}
+            </text>
+          ))}
+          {d.outputs.map((output) => (
+            <text class="label" y={output.y} text-anchor="start">
+              {output.lines.map((line) => (
+                <tspan x={d.outputLabelX} dy={n(line.dy)}>
+                  {line.line}
+                </tspan>
+              ))}
+            </text>
+          ))}
+        </svg>
+
+        <LogoMark class="mark" aria-hidden="true" />
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .format-flow {
+    width: 100%;
+  }
+
+  .diagram {
+    position: relative;
+    width: 100%;
+    margin-inline: auto;
+  }
+  /* Never scaled up past its own user units: the labels are sized for these
+     widths, and a diagram stretched to fill a wide column would print them
+     larger than the headings next to it. */
+  .wide {
+    max-width: 920px;
+  }
+  .narrow {
+    display: none;
+    max-width: 440px;
+  }
+  @media screen and (width < 50em) {
+    .wide {
+      display: none;
+    }
+    .narrow {
+      display: block;
+    }
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* The mark sits on top of the diagram rather than inside the SVG, so it
+     keeps the colors it was exported with and covers the point where the
+     cells arrive and the pixels leave. Both coordinates line up because the
+     wrapper is exactly the SVG's box and the hub is at the center of the
+     viewBox. */
+  .mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: var(--logo-width);
+    height: auto;
+  }
+
+  .wire {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .stop-far {
+    stop-color: var(--bytes-magenta);
+  }
+  .stop-hub {
+    stop-color: var(--accent-1);
+  }
+  .stop-out {
+    stop-color: var(--accent-2);
+  }
+  .head.in {
+    fill: var(--accent-1);
+  }
+  .head.out {
+    fill: var(--accent-2);
+  }
+
+  .label {
+    fill: var(--text-color-heading);
+    dominant-baseline: middle;
+  }
+
+  /* Cells travel in, pixels travel out. Both are drawn around the origin so
+     the motion path can place them by their own center: offset-path moves the
+     element's transform origin onto the path, and for an SVG child that origin
+     is a point in the viewBox, not in the shape. */
+  .particle {
+    /* Without an animation (no support, or reduced motion) the particles are
+       simply not there and the diagram stays a static drawing. */
+    opacity: 0;
+  }
+  /* Cells keep to the pink end of the page palette. Pixels take the five
+     fills of the mark's own pixels, so what leaves the logo is made of what
+     the logo is made of, and the two flows stay apart at a glance even where
+     they are the same size. Only every third cell goes soft: the palest
+     tokens all but vanish against the section, so a longer turn at that end
+     would leave much of the flow invisible. */
+  .cell {
+    fill: var(--accent-1);
+  }
+  .cell.tone-1 {
+    fill: var(--bytes-magenta);
+  }
+
+  .pixel {
+    fill: var(--logo-purple);
+  }
+  .pixel.tone-1 {
+    fill: var(--logo-pink);
+  }
+  .pixel.tone-2 {
+    fill: var(--logo-blue);
+  }
+  .pixel.tone-3 {
+    fill: var(--logo-magenta);
+  }
+  .pixel.tone-4 {
+    fill: var(--logo-violet);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* The @supports guard keeps the animation and the motion path together.
+       A browser that took the animation without the path would park every
+       particle on the origin and blink them in the top left corner. */
+    @supports (offset-path: path("M 0 0")) {
+      .particle {
+        offset-path: var(--flow);
+        /* Pixels are squares, so let them keep their corners square instead
+           of banking into the curves. */
+        offset-rotate: 0deg;
+        transform-origin: 0 0;
+        animation-name: travel;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        /* Duration and delay are per particle, from the style attribute. */
+      }
+    }
+  }
+
+  /* The fades are what keeps the particles off the mark. A cell runs out of
+     path at the end of the input stem and a pixel picks its path up at the
+     start of the output one, but those stem ends are only a hair from the
+     logo, so the opacity has to be spent well before the path is: nothing is
+     drawn over the first 8% or the last 10% of any path, which on the wide
+     layout leaves about 30 user units of clear air around the mark. */
+  @keyframes travel {
+    from {
+      offset-distance: 0%;
+      opacity: 0;
+      transform: scale(0);
+    }
+    8% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    95% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      offset-distance: 100%;
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+</style>
