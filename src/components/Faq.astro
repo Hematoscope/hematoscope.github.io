@@ -1,0 +1,143 @@
+---
+import BytesCorner from "~src/assets/backgrounds/bytes/in-element-corner.svg";
+
+import H from "~src/components/HeadingLink.astro";
+import Card from "~src/components/Card.astro";
+import BytesSection from "~src/components/BytesSection.astro";
+---
+
+<BytesSection color="purple">
+  <BytesCorner class="art-bytes-in-element-corner bytes-corner" />
+
+  <H level="2">Frequently asked questions</H>
+  <div class="card-grid">
+    <Card class="card-item faq">
+      <H level="3">How can I use Cellbytes?</H>
+      <p>
+        Cellbytes can be used by uploading high-resolution images of bone marrow
+        aspirates or peripheral blood smears to the platform. The application
+        analyzes these images using advanced machine learning algorithms,
+        delivering quantitative results and visual annotations. It is accessible
+        via a secure web interface&mdash;no installation required.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3">Can I test Cellbytes?</H>
+      <p>
+        Yes, Cellbytes offers a trial version for institutions and professionals
+        interested in evaluating its capabilities. You can request trial access
+        by <a href="/contact">contacting the support team</a> through the website.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3">How robust are the algorithms?</H>
+      <p>
+        Cellbytes's algorithms have been trained on a comprehensive real-world
+        dataset comprising different pathologies and over 60,000 samples. The
+        system achieves high accuracy in detecting and classifying various blood
+        cell types and their abnormalities, with performance metrics benchmarked
+        against expert diagnoses.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3"> Will Cellbytes replace hematopathologists? </H>
+      <p>
+        No, Cellbytes is designed to assist hematopathologists. It serves as a
+        diagnostic aid that enhances efficiency and consistency. Final clinical
+        decisions should always be made by a qualified medical professional.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3">Why should I use Cellbytes?</H>
+      <p>
+        Cellbytes accelerates and enhances hematological analysis by providing
+        AI-assisted interpretation of bone marrow and peripheral blood cell
+        images. Cellbytes may facilitate remote working and consultation but
+        also reduce diagnostic turnaround time and improve standardization,
+        particularly in high-volume settings.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3">What type of images are supported?</H>
+      <p>
+        Cellbytes supports high-resolution digital images of May-Gr&uuml;nwald
+        Giemsa stained bone marrow aspirate and peripheral blood smear slides.
+        Whole-slide images should be captured at 10x magnification and
+        region-of-interest images should be acquired at 100x magnification.
+        Cellbytes supports multiple imaging formats, such as DZI, SVS, VSI, CZI,
+        MRXS, DICOM, and OME-TIFF.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3">Why is Cellbytes only cloud-based?</H>
+      <p>
+        Being cloud-based ensures scalable computing resources and consistent
+        algorithm performance across users. Software and algorithm updates can
+        be deployed without delays. It also allows for secure data storage and
+        easy collaboration between institutes, laboratories and specialists
+        across geographic locations.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3"> What is the price of the Cellbytes license? </H>
+      <p>
+        Pricing depends on your usage volume. Contact the support team to test a
+        trial version and discuss your needs. For research use, see the <a
+          href="/use-cases/research#pricing-for-research"
+        >
+          pricing models for research
+        </a>.
+      </p>
+    </Card>
+    <Card class="card-item faq">
+      <H level="3">Can I use the application for research?</H>
+      <p>
+        Absolutely. Cellbytes is increasingly used in research settings to study
+        hematologic disorders, develop new biomarkers, and support clinical
+        trials. It offers data export and integration with other medical data
+        domains. Read more about <a href="/use-cases/research">
+          how to use Cellbytes for research cases
+        </a> and <a href="/publications">
+          what research has already utilized Cellbytes
+        </a>.
+      </p>
+    </Card>
+  </div>
+</BytesSection>
+
+<style>
+  .card-grid {
+    place-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--element-padding);
+    max-width: 70em;
+    z-index: 1;
+  }
+  .card-item {
+    flex: 25rem 1 1;
+  }
+
+  .bytes-corner {
+    position: absolute;
+    bottom: -5%;
+    right: -10%;
+    height: 100%;
+
+    /* Retint this one instance of the artwork by overriding the token it
+       paints with, rather than by overwriting its fills from out here. */
+    --bytes-magenta: var(--bytes-light-magenta);
+  }
+
+  .faq {
+    display: grid;
+    gap: 0.5em;
+  }
+  /* An odd card left alone on the last row would otherwise stretch to the
+     full width and read as a different kind of block than the rest. */
+  @media (width > 61em) {
+    .faq:last-child {
+      max-width: calc(50% - (var(--element-padding) / 2));
+    }
+  }
+</style>

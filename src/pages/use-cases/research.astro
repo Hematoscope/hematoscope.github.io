@@ -1,0 +1,260 @@
+---
+import { Image } from "astro:assets";
+import research from "~src/assets/images/research/research.jpg";
+
+import { WIDTHS } from "~src/consts";
+import Section from "~src/components/Section.astro";
+import H from "~src/components/HeadingLink.astro";
+import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
+import Card from "~src/components/Card.astro";
+import ContentBlock from "~src/components/ContentBlock.astro";
+import DecoratedCard from "~src/components/DecoratedCard.astro";
+import BytesSection from "~src/components/BytesSection.astro";
+import FormatFlow from "~src/components/FormatFlow.astro";
+import HeroSection from "~src/components/HeroSection.astro";
+import LinkButton from "~src/components/LinkButton.astro";
+import Pair from "~src/components/Pair.astro";
+import PublicationCard from "~src/components/PublicationCard.astro";
+import { PUBLICATIONS } from "~src/utils/publications";
+
+export const meta = {
+  title: "Research | Cellbytes",
+  description:
+    "Cytomorphology data for research: morphology measurements, cell-level exports in the formats your analysis expects, and packages that scale from a proof of concept to a full cohort.",
+  card: { title: "Cellbytes for research", image: research },
+} satisfies PageMeta;
+
+/**
+ * Academic packages, smallest first. Prices are per package rather than per
+ * slide, which is what separates these from the clinical license.
+ */
+const PACKAGES = [
+  {
+    name: "Light",
+    blurb: "Simple and concise analysis of a small batch of samples.",
+    price: "5 000 €",
+    slides: "up to <strong>100</strong> slides",
+    includes: [
+      "1 Tb image storage for 1 year",
+      "Sample and image analysis viewing",
+      "Data exports at sample-level and cell-level",
+    ],
+  },
+  {
+    name: "Core",
+    blurb: "A sizable set of samples to analyze in one go.",
+    price: "10 000 €",
+    slides: "up to <strong>1 000</strong> slides",
+    includes: [
+      "10 Tb image storage for 1 year",
+      "Sample and image analysis viewing",
+      "Data exports at sample-level and cell-level",
+      "Possibility to finetune models",
+    ],
+  },
+  {
+    name: "Advanced",
+    blurb: "Expanding beyond routine sample analysis for bigger cohorts.",
+    price: "custom",
+    slides: "No sample limits",
+    includes: [
+      "Image storage for 1 year",
+      "Sample and image analysis viewing",
+      "Data exports at sample-level and cell-level",
+      "Possibility to finetune models",
+      "3 hours of direct support from a Cellbytes data analyst for preprocessing and analytical guidance",
+    ],
+  },
+];
+
+// The two most recent papers, so this page stays a pointer to /publications
+// rather than a second copy of the list.
+const latest = PUBLICATIONS.slice(0, 2);
+---
+
+<Layout {...meta}>
+  <HeroSection>
+    <Pair>
+      <Image
+        src={research}
+        alt="A man looking at a pinboard filled with research papers."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <h1>Research</h1>
+        <p class="ingress">
+          Cellbytes was founded by researchers with the passion to accelerate
+          new discoveries using advanced computational tools. Cytomorphology may
+          be a classic technique, but we believe to have barely surfaced its
+          full potential. Imagine identifying novel morphological fingerprints
+          of drug response, or uncovering how genetic alterations disrupt
+          hematopoiesis and normal cell morphology. With Cellbytes, those
+          answers are finally within reach.
+        </p>
+        <p>
+          We&apos;re eager to collaborate and help you make new discoveries.
+          Cellbytes&apos;s in-house R&D team has developed advanced algorithms
+          for investigational use. Let us know how we can support your research
+          work and push the boundaries of our understanding of hematopathology.
+        </p>
+      </ContentBlock>
+    </Pair>
+  </HeroSection>
+
+  <DecoratedCard variant="bytes" tag="section">
+    <H level="2">Morphology for research purposes</H>
+    <p class="ingress">
+      Of all the <a href="/application#cellbytes-features">
+        Cellbytes feature assessments
+      </a>, morphology is one of the more interesting ones for research.
+      Cellbytes offers data on the size of the cell and the nucleus, as well as
+      the shape of both.
+    </p>
+  </DecoratedCard>
+
+  <BytesSection class="formats">
+    <div class="formats-copy">
+      <ContentBlock>
+        <H level="2">Input formats</H>
+        <p>
+          Cellbytes supports whole-slide and single-cell image analysis across
+          most major microscopes and digital scanners. The platform seamlessly
+          processes diverse image formats. This allows laboratories to easily
+          integrate the software into their existing hardware setups without
+          needing complex installations or extra hardware.
+        </p>
+      </ContentBlock>
+    </div>
+    <FormatFlow />
+    <div class="formats-copy trailing">
+      <ContentBlock>
+        <H level="2">Output formats</H>
+        <p>
+          Cellbytes makes it simple to export your image analysis results in
+          various formats tailored for research and clinical studies. This
+          allows your team to integrate hematology insights into deeper
+          analysis.
+        </p>
+      </ContentBlock>
+    </div>
+  </BytesSection>
+
+  <Section>
+    <H level="2">Related publications</H>
+    <p>See the latest publications related to Cellbytes.</p>
+    {latest.map((publication) => <PublicationCard publication={publication} />)}
+    <LinkButton variant="default-arrow" href="/publications">
+      All publications
+    </LinkButton>
+  </Section>
+
+  <Section class="pricing">
+    <H level="2">Pricing for research</H>
+    <p class="ingress">
+      To support academic and industry projects of any scale, Cellbytes offers
+      flexible packages, which can be tailored to your specific volume needs.
+      Whether you are running a proof-of-concept study or a large-scale clinical
+      trial, you can choose a plan that fits your exact image processing
+      requirements ensuring clinical-grade and high-throughput AI analysis. We
+      also offer cost-effective extensions to existing packages to ensure if you
+      have a long-term need for data storage.
+    </p>
+
+    <div class="packages">
+      {
+        PACKAGES.map((tier) => (
+          <Card class="package">
+            <H level="3">{tier.name}</H>
+            <p class="blurb">{tier.blurb}</p>
+            <p class="price">{tier.price}</p>
+            <LinkButton href="/contact">Request an offer</LinkButton>
+
+            <p class="includes">Includes:</p>
+            <p class="slides" set:html={tier.slides} />
+            <ul>
+              {tier.includes.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </Card>
+        ))
+      }
+    </div>
+
+    <LinkButton variant="default-arrow" href="/contact">
+      Request a custom offer
+    </LinkButton>
+  </Section>
+</Layout>
+
+<style>
+  .ingress {
+    font-size: var(--text-size-ingress);
+    max-width: 60ch;
+  }
+
+  /* The diagram already carries its own whitespace, so it does not need the
+     full row gap between it and the copy it belongs to. */
+  .formats {
+    row-gap: calc(2 * var(--element-padding));
+  }
+
+  /* The copy brackets the diagram: inputs above it and to the left, outputs
+     below it and to the right, following the direction the flow runs. Both
+     bands are capped at the diagram's own width so they line up with the ends
+     of the arrows rather than with the page. Below the diagram's breakpoint
+     there is no room to hold a column to one side, so they simply stack. */
+  .formats-copy {
+    width: 100%;
+    max-width: 920px;
+    margin-inline: auto;
+  }
+  .formats-copy :global(.content-block) {
+    max-width: 27rem;
+  }
+  .formats-copy.trailing :global(.content-block) {
+    margin-inline-start: auto;
+  }
+
+  .packages {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: var(--element-padding);
+    width: 100%;
+  }
+
+  /* Doubled class to beat Card's own .card { display: flex } rule: the prod
+     build inlines some component styles after the page stylesheet, so equal
+     specificity rules lose nondeterministically. */
+  .package.package {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    flex: 20rem 1 0;
+    max-width: 24rem;
+  }
+
+  .price {
+    font-size: var(--text-size-heading-2);
+    font-weight: bold;
+    color: var(--text-color-heading);
+  }
+
+  /* What a package holds is the part a reader compares across cards, so the
+     lists start together rather than each one following its own blurb. */
+  .includes {
+    padding-block-start: var(--element-padding);
+  }
+
+  ul {
+    padding-inline-start: 1.25em;
+  }
+  li {
+    margin-block-end: 0.25em;
+  }
+</style>

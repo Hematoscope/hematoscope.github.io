@@ -46,6 +46,7 @@ const prefixIdsOptimizer = {
 const RETIRED_URLS_MAP = {
   "/news/cellbytes-and-evident-join-forces":
     "/news/cellbytes-and-evident-case-study",
+  "/research": "/publications",
 };
 const RETIRED_URLS = new Set(Object.keys(RETIRED_URLS_MAP));
 

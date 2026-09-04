@@ -1,0 +1,216 @@
+---
+import { Image } from "astro:assets";
+import collaborating from "~src/assets/images/mockups/collaborating_erythroblasts.webp";
+import remote from "~src/assets/images/contact/doctor-laptop.jpg";
+
+import { WIDTHS } from "~src/consts";
+import Section from "~src/components/Section.astro";
+import H from "~src/components/HeadingLink.astro";
+import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
+import Card from "~src/components/Card.astro";
+import CellsSection from "~src/components/CellsSection.astro";
+import ContentBlock from "~src/components/ContentBlock.astro";
+import DecoratedCard from "~src/components/DecoratedCard.astro";
+import HeroSection from "~src/components/HeroSection.astro";
+import LinkButton from "~src/components/LinkButton.astro";
+import Pair from "~src/components/Pair.astro";
+
+export const meta = {
+  title: "Clinical | Cellbytes",
+  description:
+    "Pre-classification of every cell, remote consultation and LIS integration for the diagnostic laboratory, priced per slide.",
+  card: { title: "Cellbytes in the clinic", image: collaborating },
+} satisfies PageMeta;
+
+/** What every clinical license carries, and what is negotiated per site. */
+const CORE_PACKAGE = [
+  "Up to 100 users",
+  "Customer support",
+  "Export tool for research",
+  "1-year storage (max 10 Gb per file)",
+  "Possibility to flag errors for model retraining",
+];
+const ADJUSTABLE = [
+  "LIS integration",
+  "Digital sample pool for many sites",
+  "Number of slides",
+  "Storage extension",
+];
+---
+
+<Layout {...meta}>
+  <HeroSection>
+    <Pair reversed>
+      <Image
+        src={collaborating}
+        alt="Two doctors analyzing the results of a slide using Cellbytes."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <h1>Clinical</h1>
+        <p class="ingress">
+          Cytomorphology can be both time consuming and subjective. Cellbytes
+          helps physicians to find common ground on ambiguous cases by
+          pre-classifying thousands of cells automatically, improving your
+          laboratory&apos;s throughput and reliability. Cellbytes is also
+          scanner-agnostic. If you have a digital microscope in your lab,
+          you&apos;re ready to modernize your workflows with Cellbytes.
+        </p>
+        <p>
+          With the experience of working in the hospital, we wanted to eliminate
+          the struggle of learning new software. Every mouse click and mental
+          load has been carefully minimized so you can focus on analysis, not
+          navigation.
+        </p>
+        <p>
+          Cellbytes offers industry-leading tools to augment analysis with
+          features such as bulk relabeling based on cell similarity, and
+          automatic cell cluster detection for not missing focal malignant cells
+          when evaluating residual disease.
+        </p>
+      </ContentBlock>
+    </Pair>
+  </HeroSection>
+
+  <Pair tag="section">
+    <Image
+      src={remote}
+      alt="A doctor reviewing a slide on a laptop away from the laboratory."
+      widths={WIDTHS}
+      height="300"
+    />
+    <ContentBlock>
+      <H level="2">Remote working capabilities</H>
+      <p>
+        Cellbytes is cloud-based, meaning that it adapts to your needs. Ask for
+        a second opinion from around the world? Analyze samples from home?
+        Consult your lab while your car is at the mechanic? With Cellbytes all
+        of this is possible and more.
+      </p>
+    </ContentBlock>
+  </Pair>
+
+  <CellsSection>
+    <H level="2">Collaboration</H>
+
+    <Pair>
+      <ContentBlock>
+        <H level="3">Consult with ease</H>
+        <p>
+          Assessing cell morphology can sometimes be challenging. With
+          Cellbytes, you can mark areas or cells from a slide, and share these
+          with your colleague for a second opinion or simply to show an
+          interesting case for educational purposes.
+        </p>
+      </ContentBlock>
+      <ContentBlock>
+        <H level="3">External collaboration</H>
+        <p>
+          To serve hospital networks, Cellbytes enables slides scanned across
+          multiple locations to be aggregated into a single, shared digital
+          pool. This flexible model helps institutions easily distribute the
+          workload during sudden sample surges or staffing shortages.
+        </p>
+      </ContentBlock>
+    </Pair>
+  </CellsSection>
+
+  <DecoratedCard variant="bytes" tag="section">
+    <H level="2">Integrated with your systems</H>
+    <p class="ingress">
+      Need integration to your LIS, PACS, or EHR? Cellbytes makes it simple to
+      share results with your patient registry. Analyzing a slide is just one
+      click away. <a href="/contact">Contact us</a> for more information.
+    </p>
+  </DecoratedCard>
+
+  <Section>
+    <H level="2">More control on AI</H>
+    <p class="ingress">
+      No AI is perfect, which is why routine validation and reclassification
+      remain essential. Cellbytes can be calibrated with your lab&apos;s own
+      samples prior to clinical adoption. Moreover, any errors flagged during
+      daily use are fed back into model fine-tuning, ensuring your system
+      continually adapts to your specific diagnostic needs.
+    </p>
+  </Section>
+
+  <Section class="pricing">
+    <H level="2">Pricing for clinical use</H>
+    <p class="ingress">
+      We would love to set a clear price for clinical use, but the needs between
+      sample number, database integration needs, storage needs and model
+      retraining requirements vary.
+    </p>
+
+    <Card class="package">
+      <H level="3">Clinical package</H>
+      <p>Exact price depends on usage volume and additional services.</p>
+      <p class="price">3&ndash;15 &euro;<span class="unit">/slide</span></p>
+      <LinkButton href="/contact">Contact us for an offer</LinkButton>
+
+      <div class="lists">
+        <div>
+          <H level="4">Core package</H>
+          <ul>
+            {CORE_PACKAGE.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <H level="4">Adjustable</H>
+          <ul>
+            {ADJUSTABLE.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Card>
+  </Section>
+</Layout>
+
+<style>
+  .ingress {
+    font-size: var(--text-size-ingress);
+    max-width: 60ch;
+  }
+
+  /* Doubled class to beat Card's own .card { display: flex } rule: the prod
+     build inlines some component styles after the page stylesheet, so equal
+     specificity rules lose nondeterministically. */
+  .package.package {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    max-width: 45rem;
+    background-color: var(--support-pink);
+  }
+
+  .price {
+    font-size: var(--text-size-heading-1);
+    font-weight: bold;
+    color: var(--text-color-heading);
+  }
+  .unit {
+    font-size: var(--text-size-body);
+    font-weight: normal;
+  }
+
+  .lists {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--element-padding);
+    padding-block-start: var(--element-padding);
+  }
+  .lists > div {
+    flex: 18rem 1 1;
+  }
+
+  ul {
+    padding-inline-start: 1.25em;
+  }
+  li {
+    margin-block-end: 0.25em;
+  }
+</style>

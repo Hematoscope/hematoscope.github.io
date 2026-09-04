@@ -80,6 +80,19 @@ because GitHub Pages tries `<path>.html` before it considers a directory of the
 same name - which is why `/news` reaches the listing and not the stub, even
 though `news/` exists.
 
+### The navigation is a flat list with one group
+
+`links` in `Navbar.astro` is the whole main navigation. An entry carrying
+`children` instead of an `href` is a disclosure rather than a destination: it
+renders as a button that reveals its pages, because the group has no page of
+its own to link to. Giving it an `href` would advertise a URL the site does not
+route.
+
+The group's pages are hidden until it is opened, so a test counting navigation
+links counts the top-level entries only. The mobile menu overlays the page
+using a negative margin sized from `--links`, which is why an open group adds
+`--sublinks` to that count rather than pushing the page down.
+
 ### What crawlers are told
 
 `public/robots.txt` allows everything and points at the sitemap. Read the file
@@ -372,8 +385,8 @@ purpose, since the partner logos are third-party trademarks and the logotype has
 to match `public/favicon.svg`, which is loaded through `<link rel="icon">` and
 cannot see the page's custom properties at all. `icons/logomark.svg` is that
 same mark without the wordmark, for places that need the ring and pixels alone
-(the hub of the formats diagram on the front page); it is the favicon's art
-verbatim, so the three move together or not at all.
+(the hub of the formats diagram on `/use-cases/research`); it is the favicon's
+art verbatim, so the three move together or not at all.
 
 The mark's five pixel fills are also declared as `--logo-*` tokens in
 `theme.css`, for elements that echo the mark rather than repaint it (the pixels

@@ -152,6 +152,20 @@ p {
   font-size: var(--text-size-body);
 }
 
+/* A link written into body copy, as opposed to one that is a button, a card or
+   a navigation item - those carry their own class and style themselves. The
+   browser default is the only other thing that would apply here, and its blue
+   belongs to no palette on the page. */
+p a:not([class]) {
+  color: var(--text-color-heading);
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+p a:not([class]):hover {
+  text-decoration-thickness: 2px;
+}
+
 .visually-hidden {
   position: absolute !important;
   width: 1px !important;

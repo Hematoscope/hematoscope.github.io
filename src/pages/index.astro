@@ -23,9 +23,9 @@ import ApplicationFrame from "~src/components/ApplicationFrame.astro";
 import Layout from "~src/layouts/Layout.astro";
 import type { PageMeta } from "~src/utils/opengraph";
 import BytesSection from "~src/components/BytesSection.astro";
-import FormatFlow from "~src/components/FormatFlow.astro";
 import HeroSection from "~src/components/HeroSection.astro";
 import NewsHighlights from "~src/components/NewsHighlights.astro";
+import Faq from "~src/components/Faq.astro";
 
 export const meta = {
   title: "Cellbytes",
@@ -78,9 +78,10 @@ const poster = await getImage({
   <Section>
     <H level="2">The future is now</H>
     <p class="ingress">
-      Cellbytes is the new standard in hematopathology. With cloud-native
-      analysis and support for the digital microscope you already have, it's
-      easier than ever to modernize your diagnostic workflows.
+      Cellbytes is the new standard in hematopathology. By integrating the
+      entire cytomorphological analysis for both bone marrow and peripheral
+      blood smears in one software, it's easier than ever to modernize your
+      diagnostic workflows.
     </p>
   </Section>
 
@@ -119,10 +120,11 @@ const poster = await getImage({
       <ContentBlock>
         <H level="2">Real-time analysis</H>
         <p>
-          Cloud-based computing is available wherever you are, 24/7. Cellbytes
-          is designed for high throughput, parallelized batch analysis serving
-          both small and large laboratories ensuring diagnostics will keep pace
-          with demand.
+          Cellbytes is designed for high throughput analysis serving both small
+          and large laboratories ensuring diagnostics will keep pace with your
+          clinical need. The secure cloud-based computing is available wherever
+          you are and 24/7. You can also retrieve historical slides in seconds
+          to effortlessly track patient progression over time.
         </p>
         <LinkButton
           href="/application#comprehensive-ai-powered-analysis"
@@ -133,31 +135,6 @@ const poster = await getImage({
       </ContentBlock>
     </Pair>
   </CellsSection>
-
-  <BytesSection class="formats">
-    <div class="formats-copy">
-      <ContentBlock>
-        <H level="2">Input formats</H>
-        <p>
-          Slides arrive in whatever your scanner already writes. Cellbytes reads
-          the vendor formats directly and converts them for viewing and
-          analysis, so nobody in the laboratory has to prepare a file by hand.
-        </p>
-      </ContentBlock>
-    </div>
-    <FormatFlow />
-    <div class="formats-copy trailing">
-      <ContentBlock>
-        <H level="2">Output formats</H>
-        <p>
-          Results leave in the shape your workflow needs. Cell differentials,
-          morphology measurements and quality metrics export as ready-made
-          tables, and a standardized report integrates straight into your
-          laboratory information system.
-        </p>
-      </ContentBlock>
-    </div>
-  </BytesSection>
 
   <Pair tag="section">
     <a
@@ -173,12 +150,13 @@ const poster = await getImage({
       />
     </a>
     <ContentBlock>
-      <H level="2">Leading hardware loves leading software</H>
+      <H level="2">Precision software optimized with industry-leading imaging</H
+      >
       <p>
-        Out of all the supported scanners, the Evident SLIDEVIEW VS200 is a
-        perfect match for Cellbytes. Partnering with industry leading image
-        quality and automated imaging of over 200 slides enables you to focus on
-        what matters most.
+        Out of all the supported scanners, the Evident SLIDEVIEW VS200 and
+        Pramana HT Series are perfect matches for Cellbytes. Partnering with
+        industry leading image quality and automated imaging enables you to
+        focus on what matters most.
       </p>
       <p>
         Our platform natively supports most major scanners with output images in
@@ -226,8 +204,8 @@ const poster = await getImage({
       <H level="2">Safe and secure</H>
       <p>
         We are committed to data security. By strictly adhering to international
-        standards and data privacy regulations, we can guarantee users to retain
-        complete control over their data.
+        standards and data privacy regulations (HIPAA, GDPR), we can guarantee
+        users to retain complete control over their data.
       </p>
       <LinkButton href="/compliance" variant="default-arrow">
         Security
@@ -236,6 +214,8 @@ const poster = await getImage({
   </BytesSection>
 
   <NewsHighlights />
+
+  <Faq />
 
   <CallToAction title="Ready to digitize your hematology laboratory?" />
 
@@ -314,29 +294,6 @@ const poster = await getImage({
   .imagelink {
     display: flex;
     justify-content: center;
-  }
-
-  /* The diagram already carries its own whitespace, so it does not need the
-     full row gap between it and the copy it belongs to. */
-  .formats {
-    row-gap: calc(2 * var(--element-padding));
-  }
-
-  /* The copy brackets the diagram: inputs above it and to the left, outputs
-     below it and to the right, following the direction the flow runs. Both
-     bands are capped at the diagram's own width so they line up with the ends
-     of the arrows rather than with the page. Below the diagram's breakpoint
-     there is no room to hold a column to one side, so they simply stack. */
-  .formats-copy {
-    width: 100%;
-    max-width: 920px;
-    margin-inline: auto;
-  }
-  .formats-copy :global(.content-block) {
-    max-width: 27rem;
-  }
-  .formats-copy.trailing :global(.content-block) {
-    margin-inline-start: auto;
   }
 
   .tall {

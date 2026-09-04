@@ -1,0 +1,69 @@
+---
+import { Image } from "astro:assets";
+import research from "~src/assets/images/research/research.jpg";
+
+import { WIDTHS } from "~src/consts";
+import Section from "~src/components/Section.astro";
+import H from "~src/components/HeadingLink.astro";
+import Layout from "~src/layouts/Layout.astro";
+import type { PageMeta } from "~src/utils/opengraph";
+import PublicationCard from "~src/components/PublicationCard.astro";
+import ContentBlock from "~src/components/ContentBlock.astro";
+import HeroSection from "~src/components/HeroSection.astro";
+import { PUBLICATIONS } from "~src/utils/publications";
+import Pair from "~src/components/Pair.astro";
+
+export const meta = {
+  title: "Publications | Cellbytes",
+  description:
+    "Clinically validated models built with hematology laboratories, and the published research behind Cellbytes cytomorphology analysis.",
+  card: { title: "Innovation powered by research", image: research },
+} satisfies PageMeta;
+---
+
+<Layout {...meta}>
+  <HeroSection>
+    <Pair>
+      <Image
+        src={research}
+        alt="A man looking at a pinboard filled with research papers."
+        widths={WIDTHS}
+        height="300"
+      />
+      <ContentBlock>
+        <h1>Innovation powered by research</h1>
+        <p>
+          At Cellbytes, our mission is to provide the ultimate digital colleague
+          for your diagnostic needs. Cellbytes delivers a comprehensive
+          cytomorphological assessment, including whole-slide analysis, cell
+          classification, and dysplasia detection. Every algorithm is built on
+          high-quality data covering normal and pathological varieties,
+          cutting-edge research and validated by robust scientific and clinical
+          metrics.
+        </p>
+        <p>
+          Our team is deeply rooted in academia, constantly advancing the
+          frontiers of deep learning and computational hematology. Our research
+          explores the intricate connections between cell morphology, disease
+          genetics, and clinical outcomes, with the goal of improving the
+          understanding and management of blood disorders.
+        </p>
+        <p>
+          We&apos;re eager to collaborate and help you make new discoveries.
+          Cellbytes&apos;s in-house R&D team has developed advanced algorithms
+          for investigational use. Let us know how we can support your research
+          work and push the boundaries of our understanding of hematopathology.
+        </p>
+      </ContentBlock>
+    </Pair>
+  </HeroSection>
+
+  <Section>
+    <H level="2">Selected publications</H>
+    {
+      PUBLICATIONS.map((publication) => (
+        <PublicationCard publication={publication} />
+      ))
+    }
+  </Section>
+</Layout>

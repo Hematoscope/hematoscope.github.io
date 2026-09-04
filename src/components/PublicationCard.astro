@@ -1,0 +1,24 @@
+---
+import H from "~src/components/HeadingLink.astro";
+import LinkButton from "~src/components/LinkButton.astro";
+import TextCard from "~src/components/TextCard.astro";
+import type { Publication } from "~src/utils/publications";
+
+interface Props {
+  publication: Publication;
+}
+const { publication } = Astro.props;
+---
+
+<TextCard
+  image={publication.image}
+  alt={publication.alt}
+  accent={publication.accent}
+>
+  <H level="3">{publication.title}</H>
+  <p>{publication.authors}</p>
+  <p>{publication.source}</p>
+  <LinkButton href={publication.url} variant="external">
+    Publication's page
+  </LinkButton>
+</TextCard>

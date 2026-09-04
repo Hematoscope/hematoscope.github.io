@@ -4,17 +4,34 @@ import Logotype from "~src/assets/icons/logotype.svg";
 
 const currentPath = Astro.url.pathname;
 
+/**
+ * A link with `children` is a disclosure rather than a destination: the parent
+ * has no page of its own, so it renders as a button that reveals the group.
+ */
 const links = [
   { name: "Application", href: "/application" },
+  {
+    name: "Use-cases",
+    children: [
+      { name: "Clinical", href: "/use-cases/clinical" },
+      { name: "Research", href: "/use-cases/research" },
+    ],
+  },
   { name: "Compliance", href: "/compliance" },
-  { name: "Research", href: "/research" },
+  { name: "Publications", href: "/publications" },
   // { name: "Documentation", href: "/documentation" },
   { name: "Company", href: "/company" },
   { name: "News", href: "/news" },
 ];
+
+const subLinks = links.flatMap((link) => link.children ?? []);
+
+/** Highlights the disclosure while the reader is on one of its pages. */
+const inGroup = (children: { href: string }[]) =>
+  children.some((child) => currentPath.startsWith(child.href));
 ---
 
-<header style={`--links: ${links.length}`}>
+<header style={`--links: ${links.length}; --sublinks: ${subLinks.length}`}>
   <div class="header-contents">
     <a href="/" class="logo-link" aria-label="Back to front page">
       <Logotype />
@@ -44,16 +61,47 @@ const links = [
     <nav id="navigation" aria-label="Main navigation">
       <ul role="list">
         {
-          links.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                aria-current={currentPath.startsWith(link.href) && "page"}
-              >
-                {link.name}
-              </a>
-            </li>
-          ))
+          links.map((link) =>
+            link.children ? (
+              <li class="group">
+                <button
+                  class="group-button"
+                  aria-expanded="false"
+                  aria-current={inGroup(link.children) && "page"}
+                >
+                  {link.name}
+
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" aria-hidden>
+                    <path d="M6 9L12 15L18 9" />
+                  </svg>
+                </button>
+
+                <ul role="list" class="group-links">
+                  {link.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.href}
+                        aria-current={
+                          currentPath.startsWith(child.href) && "page"
+                        }
+                      >
+                        {child.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={currentPath.startsWith(link.href!) && "page"}
+                >
+                  {link.name}
+                </a>
+              </li>
+            ),
+          )
         }
       </ul>
 
@@ -92,10 +140,40 @@ const links = [
     navButton.focus(),
   );
 
+  const groupButtons =
+    disclosure.querySelectorAll<HTMLButtonElement>(".group-button");
+
+  function closeGroups(except?: Element) {
+    for (const button of groupButtons) {
+      if (button !== except) button.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  for (const button of groupButtons) {
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") === "true";
+      closeGroups(button);
+      button.setAttribute("aria-expanded", open ? "false" : "true");
+    });
+  }
+
+  // A group left open covers the page below it, so anything that moves the
+  // reader on - a click elsewhere, focus leaving the header - closes it.
+  document.addEventListener("click", (e) => {
+    if (!disclosure.contains(e.target as Node)) closeGroups();
+  });
+  disclosure.addEventListener("focusout", () => {
+    // Focus lands on the new element only after this event, so read it late.
+    requestAnimationFrame(() => {
+      if (!disclosure.contains(document.activeElement)) closeGroups();
+    });
+  });
+
   // Close the disclosure if a user presses the escape key
   window.addEventListener("keyup", (e) => {
     if (e.key === "Escape") {
       navButton.focus();
+      closeGroups();
       closeNavigation();
     }
   });
@@ -119,7 +197,8 @@ const links = [
     text-decoration: none;
     font-weight: bold;
   }
-  a[aria-current="page"] {
+  a[aria-current="page"],
+  .group-button[aria-current="page"] {
     border-radius: var(--small-border-radius);
     background-color: var(--bytes-purple);
   }
@@ -187,6 +266,39 @@ const links = [
     text-decoration: underline;
   }
 
+  /* Use-cases group */
+  .group-button {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+
+    font: inherit;
+    font-weight: bold;
+    color: var(--text-color-heading);
+
+    padding: 0.5em 1em;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .group-button:hover {
+    text-decoration: underline;
+  }
+  .group-button svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: rotate 150ms ease-out;
+  }
+  .group-button[aria-expanded="true"] svg {
+    rotate: 180deg;
+  }
+  .group-button[aria-expanded="false"] + .group-links {
+    display: none;
+  }
+
   #menuButton {
     grid-area: menu;
     display: flex;
@@ -220,14 +332,38 @@ const links = [
     #menuButton {
       display: none;
     }
+    /* The group hangs over the page rather than displacing the header. */
+    .group-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      flex-direction: column;
+      gap: 0.25em;
+      min-width: max-content;
+      padding: 0.5em;
+      border-radius: var(--small-border-radius);
+      background-color: var(--background);
+      box-shadow: var(--shadow-sm);
+    }
   }
   @media screen and (width < 68em) {
-    header:has(button[aria-expanded="true"]) {
+    /* The open menu overlays the page instead of pushing it down, so the
+       header pulls back the height its own rows added. An open group adds
+       its links to that count. */
+    header:has(#menuButton[aria-expanded="true"]) {
       padding-block-end: 2rem;
       margin-block-end: calc(var(--links) * -3rem - 1.5rem);
     }
-    button[aria-expanded="false"] + nav {
+    header:has(#menuButton[aria-expanded="true"]):has(
+        .group-button[aria-expanded="true"]
+      ) {
+      margin-block-end: calc((var(--links) + var(--sublinks)) * -3rem - 1.5rem);
+    }
+    #menuButton[aria-expanded="false"] + nav {
       display: none;
+    }
+    .group-links {
+      padding-inline-start: 1em;
     }
     nav {
       grid-area: dropdown;

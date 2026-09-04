@@ -6,7 +6,6 @@ import networking from "~src/assets/images/application/networking.jpg";
 import textureMask from "~src/assets/images/application/app-texture-mask.png";
 import physicianReview from "~src/assets/images/application/physician-review.webp";
 import report from "~src/assets/images/application/report.jpg";
-import BytesCorner from "~src/assets/backgrounds/bytes/in-element-corner.svg";
 
 import { WIDTHS } from "~src/consts";
 import Section from "~src/components/Section.astro";
@@ -16,6 +15,8 @@ import { softwareApplication } from "~src/utils/structuredData";
 import type { PageMeta } from "~src/utils/opengraph";
 import WorkflowStep from "~src/components/WorkflowStep.astro";
 import ApplicationScroller from "~src/components/ApplicationScroller.astro";
+import CallToAction from "~src/components/CallToAction.astro";
+import CellbytesFeatures from "~src/components/CellbytesFeatures.astro";
 import ContentBlock from "~src/components/ContentBlock.astro";
 import DecoratedCard from "~src/components/DecoratedCard.astro";
 import Pair from "~src/components/Pair.astro";
@@ -27,7 +28,6 @@ import Report from "~src/assets/icons/keyFeatures/report.svg";
 import SingleCell from "~src/assets/icons/keyFeatures/singlecell.svg";
 import Triage from "~src/assets/icons/keyFeatures/triage.svg";
 import Card from "~src/components/Card.astro";
-import BytesSection from "~src/components/BytesSection.astro";
 import HeroSection from "~src/components/HeroSection.astro";
 
 export const meta = {
@@ -89,7 +89,7 @@ export const meta = {
       <WorkflowStep
         image={physicianReview}
         alt="A physician reviewing cells using Cellbytes."
-        heading="Physician review"
+        heading="Sample review"
         text="Review pre-classification results."
       />
       <WorkflowStep
@@ -146,98 +146,11 @@ export const meta = {
     </div>
   </DecoratedCard>
 
+  <CellbytesFeatures />
+
   <ApplicationScroller />
 
-  <BytesSection color="purple">
-    <BytesCorner class="art-bytes-in-element-corner bytes-corner" />
-
-    <H level="2">Frequently asked questions</H>
-    <div class="card-grid">
-      <Card class="card-item faq">
-        <H level="3">How can I use Cellbytes?</H>
-        <p>
-          Cellbytes can be used by uploading high-resolution images of bone
-          marrow aspirates to the platform. The application analyzes these
-          images using advanced machine learning algorithms, delivering
-          quantitative results and visual annotations. It is accessible via a
-          secure web interface—no installation required.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3">Can I test Cellbytes?</H>
-        <p>
-          Yes, Cellbytes offers a trial version for institutions and
-          professionals interested in evaluating its capabilities. You can
-          request trial access by contacting the support team through the
-          website.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3">How robust are the algorithms?</H>
-        <p>
-          Cellbytes's algorithms have been trained on a comprehensive real-world
-          dataset comprising different pathologies and over 60,000 samples. The
-          system achieves high accuracy in detecting and classifying various
-          blood cell types and their abnormalities, with performance metrics
-          benchmarked against expert diagnoses.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3"> Will Cellbytes replace hematopathologists? </H>
-        <p>
-          No, Cellbytes is designed to assist hematopathologists. It serves as a
-          diagnostic aid that enhances efficiency and consistency. Final
-          clinical decisions should always be made by a qualified medical
-          professional.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3">Why should I use Cellbytes?</H>
-        <p>
-          Cellbytes accelerates and enhances hematological analysis by providing
-          AI-assisted interpretation of bone marrow cell images. Cellbytes will
-          facilitate remote working and consultation but also reduce diagnostic
-          turnaround time and improve standardization, particularly in
-          high-volume settings.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3">What types of images are supported?</H>
-        <p>
-          Cellbytes supports high-resolution digital images of May-Grünwald
-          Giemsa stained bone marrow aspirate slides. Whole-slide images should
-          be captured at 10x magnification and region-of-interest images should
-          be acquired at 100x magnification. Cellbytes supports multiple imaging
-          formats, such as DZI, SVS, VSI, CZI, MRXS, DICOM, and OME-TIFF.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3">Why is Cellbytes only cloud-based?</H>
-        <p>
-          Being cloud-based ensures seamless updates, scalable computing
-          resources, and consistent algorithm performance across users. It also
-          allows for secure data storage and easy collaboration between
-          institutes, laboratories and specialists across geographic locations.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3"> What is the price of the Cellbytes license? </H>
-        <p>
-          Pricing depends on your usage volume. Contact the support team to test
-          a trial version and discuss your needs.
-        </p>
-      </Card>
-      <Card class="card-item faq">
-        <H level="3">Can I use the application for research?</H>
-        <p>
-          Absolutely. Cellbytes is increasingly used in research settings to
-          study hematologic disorders, develop new biomarkers, and support
-          clinical trials. It offers data export and integration with other
-          medical data domains.
-        </p>
-      </Card>
-    </div>
-  </BytesSection>
+  <CallToAction title="Ready to digitize your hematology laboratory?" />
 </Layout>
 
 <style>
@@ -319,25 +232,5 @@ export const meta = {
     place-self: center;
     width: 100%;
     height: auto;
-  }
-
-  .bytes-corner {
-    position: absolute;
-    bottom: -5%;
-    right: -10%;
-    height: 100%;
-
-    /* Retint this one instance of the artwork by overriding the token it
-       paints with, rather than by overwriting its fills from out here. */
-    --bytes-magenta: var(--bytes-light-magenta);
-  }
-  .faq {
-    display: grid;
-    gap: 0.5em;
-  }
-  @media (width > 61em) {
-    .faq:last-child {
-      max-width: calc(50% - (var(--element-padding) / 2));
-    }
   }
 </style>

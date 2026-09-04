@@ -11,9 +11,34 @@ test.describe("desktop", { tag: "@desktop" }, () => {
   test("navigation is visible", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("navigation")).toBeVisible();
+    // Use-cases is a disclosure button rather than a destination, and the
+    // two pages under it stay out of the tree until it is opened.
     await expect(
       page.getByRole("navigation").getByRole("list").getByRole("link"),
     ).toHaveCount(5);
+  });
+
+  test("the use-cases disclosure reveals its pages", async ({ page }) => {
+    await page.goto("/");
+    const nav = page.getByRole("navigation");
+    const useCases = nav.getByRole("button", { name: "Use-cases" });
+    await expect(useCases).toHaveAttribute("aria-expanded", "false");
+
+    await useCases.click();
+    await expect(useCases).toHaveAttribute("aria-expanded", "true");
+    // Scoped to the navigation and exact: the FAQ links out to both of these
+    // pages, so an unscoped name matches body copy too.
+    await expect(
+      nav.getByRole("link", { name: "Clinical", exact: true }),
+    ).toBeVisible();
+    await expect(
+      nav.getByRole("link", { name: "Research", exact: true }),
+    ).toBeVisible();
+
+    // A group left open would cover the page below it. `.first()` because the
+    // dev toolbar the tests run against contributes headings of its own.
+    await page.locator("h1").first().click();
+    await expect(useCases).toHaveAttribute("aria-expanded", "false");
   });
 });
 
