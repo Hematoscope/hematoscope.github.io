@@ -357,7 +357,7 @@ const poster = await getImage({
     } else if (Hls.isSupported()) {
       // 8 Mbps initial bandwidth estimate biases the first segment toward the
       // highest rendition; hls.js will downshift if real throughput is lower.
-      // Without this the player starts on the lowest tier and the 60s loop
+      // Without this the player starts on the lowest tier and the short loop
       // often ends before it has ramped up to high.
       const hls = new Hls({ abrEwmaDefaultEstimate: 8_000_000 });
       hls.loadSource(src);
