@@ -46,7 +46,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run dev",
+    command: "npm run dev -- --ignore-lock",
     url: "http://127.0.0.1:4321",
     reuseExistingServer: !process.env.CI,
   },
