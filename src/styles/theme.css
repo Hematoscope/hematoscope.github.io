@@ -194,7 +194,7 @@ p a:not([class]):hover {
   gap: 1rem;
 }
 
-.text>p {
+.text > p {
   max-width: 55ch;
 }
 
