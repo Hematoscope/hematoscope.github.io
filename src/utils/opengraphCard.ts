@@ -418,6 +418,9 @@ async function headlineCard(card: OgCard): Promise<OgNode> {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        // satori follows the CSS default of content-box, which would add the
+        // padding to the card size and push the text block off the bottom.
+        boxSizing: "border-box",
         padding: PADDING,
       },
       children: [
