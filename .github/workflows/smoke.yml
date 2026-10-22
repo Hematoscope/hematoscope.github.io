@@ -14,7 +14,7 @@ jobs:
         id: deployment
         # Pinned to an untagged master commit on purpose: the latest tag,
         # v1.0.7, still declares the removed node12 runtime.
-        uses: dorshinar/get-deployment-url@f607ab4ab091084cc08272a71919291e71e6d800 # master
+        uses: dorshinar/get-deployment-url@a0291e800a64091afcd15f1ea62f96f2f4a0ca65 # master
         timeout-minutes: 5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
