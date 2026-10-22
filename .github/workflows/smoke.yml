@@ -9,15 +9,41 @@ jobs:
     timeout-minutes: 5
     runs-on: ubuntu-latest
     if: contains(github.event.deployment.environment, 'Production')
+    permissions:
+      contents: read
+      deployments: read
     steps:
+      # The deployment event fires when the deploy job starts, before Pages
+      # has published anything, so the URL only exists once that job reports
+      # its final status. Poll this event's own deployment until its newest
+      # status carries one.
       - name: Get deployment URL
         id: deployment
-        # Pinned to an untagged master commit on purpose: the latest tag,
-        # v1.0.7, still declares the removed node12 runtime.
-        uses: dorshinar/get-deployment-url@f607ab4ab091084cc08272a71919291e71e6d800 # master
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         timeout-minutes: 5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const deploymentId = context.payload.deployment.id;
+            for (;;) {
+              const { data: statuses } =
+                await github.rest.repos.listDeploymentStatuses({
+                  ...context.repo,
+                  deployment_id: deploymentId,
+                  per_page: 1,
+                });
+              const latest = statuses[0];
+              if (latest?.environment_url) {
+                core.setOutput("deployment", latest.environment_url);
+                core.info(`Deployment URL: ${latest.environment_url}`);
+                return;
+              }
+              if (["error", "failure", "inactive"].includes(latest?.state)) {
+                core.setFailed(`Deployment ended as ${latest.state}`);
+                return;
+              }
+              core.info(`No URL yet (${latest?.state ?? "no status"}), retrying`);
+              await new Promise((resolve) => setTimeout(resolve, 10000));
+            }
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup node.js
